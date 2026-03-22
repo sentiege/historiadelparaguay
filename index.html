@@ -8,12 +8,10 @@
 </head>
 <body>
 
-  <div class="watermark">EXPLORACIONES Y DESCUBRIMIENTOS</div>
-
   <header class="topbar">
     <div class="topbar-inner">
-      <div class="topbar-title">
-        <span class="mini-tag">Historia del Paraguay</span>
+      <div>
+        <p class="mini-tag">Historia del Paraguay</p>
         <h1>Unidad 1: Exploraciones y descubrimientos</h1>
       </div>
       <div class="badge-counter">
@@ -24,16 +22,15 @@
 
   <div class="dots-wrap" id="dotsWrap"></div>
 
-  <main class="slider-shell">
+  <div class="slider-shell">
     <div class="slider" id="slider">
 
-      <!-- PORTADA -->
-      <article class="slide">
-        <div class="card intro-card">
-          <img src="img/europa-xv.jpg" alt="Europa en el siglo XV" class="card-hero-img" />
+      <!-- SLIDE 1 -->
+      <div class="slide">
+        <div class="card">
           <p class="kicker">Inicio</p>
           <h2>¿Por qué Europa se lanzó al océano?</h2>
-          <p class="lead">En el siglo XV Europa necesitaba riqueza, nuevas rutas y mejores herramientas de navegación. Esas necesidades impulsaron exploraciones que cambiaron la historia del mundo.</p>
+          <p class="lead">En el siglo XV Europa necesitaba riqueza, nuevas rutas y mejores herramientas. Esas necesidades impulsaron exploraciones que cambiaron la historia del mundo.</p>
           <div class="pill-row">
             <span>💰 Riqueza</span>
             <span>🧭 Tecnología</span>
@@ -41,80 +38,62 @@
           </div>
           <button class="btn-primary" onclick="nextSlide()">Comenzar →</button>
         </div>
-      </article>
+      </div>
 
-      <!-- CARTILLA 1: Europa siglo XV -->
-      <article class="slide">
+      <!-- SLIDE 2 -->
+      <div class="slide">
         <div class="card">
           <p class="kicker">Cartilla 1</p>
           <h2>Europa en el siglo XV</h2>
           <p class="lead">Tocá cada motivo para ver su explicación.</p>
-
           <div class="motivos-grid">
             <button class="motivo-card" onclick="showMotivo('oro', this)">
-              <img src="img/oroyplata.jpg" alt="Oro y plata" />
-              <span>Falta de oro y plata</span>
+              <img src="img/oroyplata.jpg" alt="Oro y plata" onerror="this.style.display='none'" />
+              <span>💰 Falta de oro y plata</span>
             </button>
             <button class="motivo-card" onclick="showMotivo('asia', this)">
-              <img src="img/comerciocon.jpg" alt="Comercio con Asia" />
-              <span>Comercio con Asia difícil</span>
+              <img src="img/comerciocon.jpg" alt="Comercio con Asia" onerror="this.style.display='none'" />
+              <span>🌏 Comercio con Asia difícil</span>
             </button>
             <button class="motivo-card" onclick="showMotivo('constantinopla', this)">
-              <img src="img/constantinopla.jpg" alt="Caída de Constantinopla" />
-              <span>Caída de Constantinopla</span>
+              <img src="img/constantinopla.jpg" alt="Caída de Constantinopla" onerror="this.style.display='none'" />
+              <span>🏰 Caída de Constantinopla</span>
             </button>
           </div>
-
-          <div id="motivoBox" class="info-panel hidden">
-            <span id="motivoTexto"></span>
-          </div>
+          <div id="motivoBox" class="info-panel" style="display:none"></div>
         </div>
-      </article>
+      </div>
 
-      <!-- CARTILLA 2: Ciencia y tecnología -->
-      <article class="slide">
+      <!-- SLIDE 3 -->
+      <div class="slide">
         <div class="card">
           <p class="kicker">Cartilla 2</p>
           <h2>Ciencia y tecnología</h2>
           <p class="lead">Europa no solo quería explorar: también desarrolló los instrumentos para hacerlo.</p>
-
-          <div class="two-img-row">
-            <img src="img/brujula.jpg" alt="Brújula" />
-            <img src="img/imprenta.jpg" alt="Imprenta" />
-          </div>
-
           <div class="btn-group centered">
-            <button class="tool-btn" onclick="showInfo('infoTool','🧭 Brújula: permitía orientarse en mar abierto y navegar lejos de la costa.')">Brújula</button>
-            <button class="tool-btn" onclick="showInfo('infoTool','⭐ Navegación astronómica: se calculaba la posición observando los astros.')">Navegación astronómica</button>
-            <button class="tool-btn" onclick="showInfo('infoTool','📖 Imprenta (Gutenberg, ~1440): difundió mapas, teorías y conocimientos científicos con rapidez.')">Imprenta</button>
+            <button class="tool-btn" onclick="showInfo('infoTool','🧭 Brújula: permitía orientarse en mar abierto, lejos de la costa.')">Brújula</button>
+            <button class="tool-btn" onclick="showInfo('infoTool','⭐ Navegación astronómica: se calculaba la posición observando los astros.')">Nav. astronómica</button>
+            <button class="tool-btn" onclick="showInfo('infoTool','📖 Imprenta (Gutenberg, ~1440): difundió mapas y conocimientos científicos.')">Imprenta</button>
           </div>
-
-          <div id="infoTool" class="info-panel">Seleccioná una herramienta para ver su descripción.</div>
-
+          <div id="infoTool" class="info-panel">Seleccioná una herramienta.</div>
           <div class="quiz-box">
             <p class="quiz-q">¿Qué instrumento permitió navegar lejos de la costa?</p>
-            <div class="options centered">
-              <button onclick="checkAnswer(this, false)">Espadas</button>
-              <button onclick="checkAnswer(this, true)">Brújula</button>
-              <button onclick="checkAnswer(this, false)">Caballos</button>
+            <div class="options">
+              <button onclick="checkAnswer(this,false)">Espadas</button>
+              <button onclick="checkAnswer(this,true)">Brújula</button>
+              <button onclick="checkAnswer(this,false)">Caballos</button>
             </div>
             <p class="feedback"></p>
           </div>
         </div>
-      </article>
+      </div>
 
-      <!-- CARTILLA 3: Portugal -->
-      <article class="slide">
+      <!-- SLIDE 4 -->
+      <div class="slide">
         <div class="card">
           <p class="kicker">Cartilla 3</p>
           <h2>Los primeros: Portugal</h2>
-          <p class="lead">Los portugueses fueron los primeros en realizar exploraciones atlánticas sistemáticas. Enrique el Navegante fundó una escuela de navegación e impulsó el avance por las costas de África.</p>
-
-          <div class="two-img-row">
-            <img src="img/enrique-navegante.jpg" alt="Enrique el Navegante" />
-            <img src="img/carabela.jpg" alt="Carabela portuguesa" />
-          </div>
-
+          <p class="lead">Los portugueses fueron los primeros en realizar exploraciones atlánticas. Enrique el Navegante impulsó el avance por las costas de África.</p>
           <div class="timeline">
             <div class="tl-item">
               <div class="tl-num">1</div>
@@ -122,35 +101,31 @@
             </div>
             <div class="tl-item">
               <div class="tl-num">2</div>
-              <div><strong>Cabo Verde</strong> — Punto estratégico para continuar la navegación hacia el sur.</div>
+              <div><strong>Cabo Verde</strong> — Punto estratégico para continuar hacia el sur.</div>
             </div>
             <div class="tl-item">
               <div class="tl-num">3</div>
-              <div><strong>Cabo de Buena Esperanza</strong> — Bartolomé Díaz llegó allí en 1488, abriendo la ruta al océano Índico.</div>
+              <div><strong>Cabo de Buena Esperanza</strong> — Bartolomé Díaz llegó en 1488, abriendo la ruta al Índico.</div>
             </div>
           </div>
-
           <div class="quiz-box">
             <p class="quiz-q">¿Quién impulsó las exploraciones portuguesas?</p>
             <div class="options">
-              <button onclick="checkAnswer(this, true)">Enrique el Navegante</button>
-              <button onclick="checkAnswer(this, false)">Cristóbal Colón</button>
-              <button onclick="checkAnswer(this, false)">Alejandro VI</button>
+              <button onclick="checkAnswer(this,true)">Enrique el Navegante</button>
+              <button onclick="checkAnswer(this,false)">Cristóbal Colón</button>
+              <button onclick="checkAnswer(this,false)">Alejandro VI</button>
             </div>
             <p class="feedback"></p>
           </div>
         </div>
-      </article>
+      </div>
 
-      <!-- CARTILLA 4: Alcazovas -->
-      <article class="slide">
+      <!-- SLIDE 5 -->
+      <div class="slide">
         <div class="card">
           <p class="kicker">Cartilla 4</p>
           <h2>Tratado de Alcazovas-Toledo</h2>
-          <p class="lead">Firmado en 1479-1480, este tratado puso fin a la Guerra de Sucesión Castellana y repartió las zonas de influencia atlántica entre Portugal y Castilla.</p>
-
-          <img src="img/alcazovas.jpg" alt="Tratado de Alcazovas" class="card-section-img" />
-
+          <p class="lead">Firmado en 1479-1480, repartió las zonas de influencia atlántica entre Portugal y Castilla.</p>
           <div class="duel-row">
             <div class="duel-card green">
               <h3>🟢 Portugal</h3>
@@ -161,277 +136,182 @@
               <p>Control de las Islas Canarias.</p>
             </div>
           </div>
-
           <div class="quiz-box">
             <p class="quiz-q">Según Alcazovas-Toledo, ¿quién controlaba África?</p>
             <div class="options">
-              <button onclick="checkAnswer(this, false)">Castilla</button>
-              <button onclick="checkAnswer(this, true)">Portugal</button>
+              <button onclick="checkAnswer(this,false)">Castilla</button>
+              <button onclick="checkAnswer(this,true)">Portugal</button>
             </div>
             <p class="feedback"></p>
           </div>
         </div>
-      </article>
+      </div>
 
-      <!-- CARTILLA 5: Colón -->
-      <article class="slide">
-        <div class="card two-col-card">
-          <div class="col-text">
-            <p class="kicker">Cartilla 5</p>
-            <h2>Cristóbal Colón</h2>
-            <p class="lead">Colón nació en Génova en 1451. Propuso llegar a Asia navegando hacia el oeste, apoyándose en la idea de que la Tierra es redonda. Su proyecto fue rechazado por Portugal y finalmente aceptado por Castilla en 1492.</p>
-
-            <div class="highlight-box">
-              <strong>Idea central:</strong> llegar al Oriente por el oeste.
-            </div>
-
-            <div class="note-box">
-              Colón falleció en Valladolid en 1506 sin reconocer plenamente que había llegado a un continente desconocido para Europa.
-            </div>
+      <!-- SLIDE 6 -->
+      <div class="slide">
+        <div class="card">
+          <p class="kicker">Cartilla 5</p>
+          <h2>Cristóbal Colón</h2>
+          <p class="lead">Colón nació en Génova en 1451. Propuso llegar a Asia navegando hacia el oeste, basándose en que la Tierra es redonda. Su proyecto fue rechazado por Portugal y aceptado por Castilla en 1492.</p>
+          <div class="highlight-box">
+            <strong>Idea central:</strong> llegar al Oriente navegando por el oeste.
           </div>
-          <div class="col-img">
-            <img src="img/colon.jpg" alt="Cristóbal Colón" />
+          <div class="note-box">
+            Colón falleció en 1506 sin reconocer plenamente que había llegado a un continente desconocido para Europa.
           </div>
         </div>
-      </article>
+      </div>
 
-      <!-- CARTILLA 6: Viajes de Colón -->
-      <article class="slide">
+      <!-- SLIDE 7 -->
+      <div class="slide">
         <div class="card">
           <p class="kicker">Cartilla 6</p>
           <h2>Los viajes de Colón</h2>
-          <p class="lead">Colón realizó cuatro viajes entre 1492 y 1504. Cada uno tuvo un objetivo distinto.</p>
-
-          <img src="img/viajes-colon.jpg" alt="Viajes de Colón" class="card-section-img" />
-
+          <p class="lead">Colón realizó cuatro viajes entre 1492 y 1504, cada uno con un objetivo distinto.</p>
           <div class="viajes-grid">
             <div class="viaje-card">
-              <span class="viaje-num">1</span>
-              <div>
-                <strong>1492</strong>
-                <p>Descubre América. Llega a las Bahamas, Cuba y La Española.</p>
-              </div>
+              <div class="viaje-num">1</div>
+              <div><strong>1492</strong><p>Descubre América. Llega a Bahamas, Cuba y La Española.</p></div>
             </div>
             <div class="viaje-card">
-              <span class="viaje-num">2</span>
-              <div>
-                <strong>1493–1496</strong>
-                <p>Impulsa la colonización. Explora Puerto Rico y Jamaica.</p>
-              </div>
+              <div class="viaje-num">2</div>
+              <div><strong>1493–1496</strong><p>Impulsa la colonización. Explora Puerto Rico y Jamaica.</p></div>
             </div>
             <div class="viaje-card">
-              <span class="viaje-num">3</span>
-              <div>
-                <strong>1498–1500</strong>
-                <p>Llega al continente. Descubre Venezuela y el río Orinoco.</p>
-              </div>
+              <div class="viaje-num">3</div>
+              <div><strong>1498–1500</strong><p>Llega al continente. Descubre Venezuela y el Orinoco.</p></div>
             </div>
             <div class="viaje-card">
-              <span class="viaje-num">4</span>
-              <div>
-                <strong>1502–1504</strong>
-                <p>Busca un paso al Pacífico explorando América Central.</p>
-              </div>
+              <div class="viaje-num">4</div>
+              <div><strong>1502–1504</strong><p>Busca un paso al Pacífico por América Central.</p></div>
             </div>
           </div>
-
           <div class="quiz-box">
-            <p class="quiz-q">¿En qué viaje llegó Colón al continente americano?</p>
+            <p class="quiz-q">¿En qué viaje llegó Colón al continente?</p>
             <div class="options">
-              <button onclick="checkAnswer(this, false)">Primer viaje</button>
-              <button onclick="checkAnswer(this, false)">Segundo viaje</button>
-              <button onclick="checkAnswer(this, true)">Tercer viaje</button>
-              <button onclick="checkAnswer(this, false)">Cuarto viaje</button>
+              <button onclick="checkAnswer(this,false)">Primer viaje</button>
+              <button onclick="checkAnswer(this,false)">Segundo viaje</button>
+              <button onclick="checkAnswer(this,true)">Tercer viaje</button>
+              <button onclick="checkAnswer(this,false)">Cuarto viaje</button>
             </div>
             <p class="feedback"></p>
           </div>
         </div>
-      </article>
+      </div>
 
-      <!-- CARTILLA 7: Bulas Alejandrinas -->
-      <article class="slide">
+      <!-- SLIDE 8 -->
+      <div class="slide">
         <div class="card">
           <p class="kicker">Cartilla 7</p>
           <h2>Bulas Alejandrinas</h2>
-          <p class="lead">En 1493 el papa Alejandro VI emitió documentos oficiales llamados "bulas" que otorgaban a Castilla derechos sobre las tierras descubiertas por Colón. Para evitar conflictos con Portugal, trazó una línea imaginaria de norte a sur en el Atlántico.</p>
-
-          <img src="img/bulas-alejandrinas.jpg" alt="Bulas Alejandrinas" class="card-section-img" />
-
+          <p class="lead">En 1493 el papa Alejandro VI emitió documentos otorgando a Castilla derechos sobre las tierras descubiertas. Trazó una línea imaginaria en el Atlántico.</p>
           <div class="explain-box">
             <ul>
-              <li>Todo lo que quedara al <strong>oeste</strong> de esa línea sería para <strong>Castilla</strong>.</li>
-              <li>Todo lo que quedara al <strong>este</strong> sería para <strong>Portugal</strong>.</li>
-              <li>La línea se ubicó a <strong>100 leguas</strong> al oeste de las islas Azores y Cabo Verde.</li>
+              <li>Todo al <strong>oeste</strong> de la línea → <strong>Castilla</strong></li>
+              <li>Todo al <strong>este</strong> de la línea → <strong>Portugal</strong></li>
+              <li>La línea se ubicó a <strong>100 leguas</strong> al oeste de Azores y Cabo Verde</li>
             </ul>
           </div>
-
           <div class="line-visual">
-            <div class="line-side left">
+            <div class="line-side">
               <span class="flag">🏰</span>
               <strong>Oeste</strong>
               <p>Castilla</p>
             </div>
             <div class="line-divider"></div>
-            <div class="line-side right">
+            <div class="line-side">
               <span class="flag">⚓</span>
               <strong>Este</strong>
               <p>Portugal</p>
             </div>
           </div>
-
           <div class="note-box">
-            Portugal no quedó conforme con ese reparto porque dejaba poco margen de expansión. Eso llevó a una nueva negociación: el Tratado de Tordesillas.
+            Portugal no quedó conforme. Eso llevó a negociar el Tratado de Tordesillas.
           </div>
         </div>
-      </article>
+      </div>
 
-      <!-- CARTILLA 8: Tordesillas -->
-      <article class="slide">
-        <div class="card two-col-card">
-          <div class="col-text">
-            <p class="kicker">Cartilla 8</p>
-            <h2>Tratado de Tordesillas</h2>
-            <p class="lead">Firmado en 1494, este tratado modificó el reparto de las Bulas Alejandrinas moviendo la línea de demarcación a <strong>370 leguas</strong> al oeste de Cabo Verde, en vez de 100.</p>
-
-            <div class="compare-table">
-              <div class="cmp-row header">
-                <span>Acuerdo</span>
-                <span>Línea</span>
-              </div>
-              <div class="cmp-row">
-                <span>Bulas Alejandrinas</span>
-                <span>100 leguas</span>
-              </div>
-              <div class="cmp-row highlight-row">
-                <span>Tordesillas</span>
-                <span>370 leguas</span>
-              </div>
-            </div>
-
-            <div class="bars-visual">
-              <div class="bar-item">
-                <div class="bar short-bar">100</div>
-                <p>Bulas</p>
-              </div>
-              <div class="bar-item">
-                <div class="bar long-bar">370</div>
-                <p>Tordesillas</p>
-              </div>
-            </div>
-
-            <div class="note-box">
-              Ese desplazamiento fue clave: permitió a Portugal reclamar la costa oriental de Brasil.
-            </div>
+      <!-- SLIDE 9 -->
+      <div class="slide">
+        <div class="card">
+          <p class="kicker">Cartilla 8</p>
+          <h2>Tratado de Tordesillas</h2>
+          <p class="lead">Firmado en 1494, movió la línea a <strong>370 leguas</strong> al oeste de Cabo Verde en vez de 100.</p>
+          <div class="compare-table">
+            <div class="cmp-row header"><span>Acuerdo</span><span>Línea</span></div>
+            <div class="cmp-row"><span>Bulas Alejandrinas</span><span>100 leguas</span></div>
+            <div class="cmp-row highlight-row"><span>Tordesillas</span><span>370 leguas</span></div>
           </div>
-          <div class="col-img">
-            <img src="img/tordesillas-mapa.jpg" alt="Mapa del Tratado de Tordesillas" />
+          <div class="bars-visual">
+            <div class="bar-item"><div class="bar short-bar">100</div><p>Bulas</p></div>
+            <div class="bar-item"><div class="bar long-bar">370</div><p>Tordesillas</p></div>
+          </div>
+          <div class="note-box">
+            Ese desplazamiento fue clave: permitió a Portugal reclamar la costa oriental de Brasil.
           </div>
         </div>
-      </article>
+      </div>
 
-      <!-- CARTILLA 9: Repaso -->
-      <article class="slide">
+      <!-- SLIDE 10 -->
+      <div class="slide">
         <div class="card">
           <p class="kicker">Cartilla 9</p>
           <h2>Repaso rápido</h2>
-          <p class="lead">Los cinco conceptos clave de esta unidad.</p>
-
-          <img src="img/repaso.jpg" alt="Repaso" class="card-section-img" />
-
           <div class="repaso-grid">
-            <div class="repaso-card">
-              <span>💰</span>
-              <p>Europa necesitaba riqueza y nuevas rutas comerciales.</p>
-            </div>
-            <div class="repaso-card">
-              <span>🧭</span>
-              <p>La brújula y la navegación astronómica permitieron explorar el océano.</p>
-            </div>
-            <div class="repaso-card">
-              <span>⚓</span>
-              <p>Portugal fue el primer reino en explorar sistemáticamente.</p>
-            </div>
-            <div class="repaso-card">
-              <span>🌍</span>
-              <p>Colón llegó a América en 1492 navegando hacia el oeste.</p>
-            </div>
-            <div class="repaso-card">
-              <span>📜</span>
-              <p>Las Bulas y Tordesillas dividieron el mundo entre Castilla y Portugal.</p>
-            </div>
+            <div class="repaso-card"><span>💰</span><p>Europa necesitaba riqueza y nuevas rutas comerciales.</p></div>
+            <div class="repaso-card"><span>🧭</span><p>La brújula permitió explorar el océano abierto.</p></div>
+            <div class="repaso-card"><span>⚓</span><p>Portugal fue el primer reino en explorar sistemáticamente.</p></div>
+            <div class="repaso-card"><span>🌍</span><p>Colón llegó a América en 1492 navegando hacia el oeste.</p></div>
+            <div class="repaso-card"><span>📜</span><p>Las Bulas y Tordesillas dividieron el mundo entre Castilla y Portugal.</p></div>
           </div>
         </div>
-      </article>
+      </div>
 
-      <!-- CARTILLA 10: Quiz final -->
-      <article class="slide">
+      <!-- SLIDE 11 -->
+      <div class="slide">
         <div class="card">
-          <p class="kicker">Cartilla 10</p>
+          <p class="kicker">Cartilla 10 — Quiz final</p>
           <h2>Quiz final</h2>
-          <p class="lead">Respondé las 10 preguntas y tocá "Ver resultado" al final.</p>
-
           <form id="quizForm">
-            <div class="q-block">
-              <p>1. ¿Qué necesitaba Europa para acuñar moneda?</p>
+            <div class="q-block"><p>1. ¿Qué necesitaba Europa para acuñar moneda?</p>
               <label><input type="radio" name="q1" value="c" /> Oro y plata</label>
-              <label><input type="radio" name="q1" value="w" /> Seda y algodón</label>
-            </div>
-            <div class="q-block">
-              <p>2. ¿Por qué era difícil el comercio con Asia?</p>
+              <label><input type="radio" name="q1" value="w" /> Seda y algodón</label></div>
+            <div class="q-block"><p>2. ¿Por qué era difícil el comercio con Asia?</p>
               <label><input type="radio" name="q2" value="c" /> Las rutas eran largas, caras y peligrosas</label>
-              <label><input type="radio" name="q2" value="w" /> Asia no tenía productos para vender</label>
-            </div>
-            <div class="q-block">
-              <p>3. ¿Qué evento bloqueó las rutas tradicionales a Oriente?</p>
+              <label><input type="radio" name="q2" value="w" /> Asia no tenía productos para vender</label></div>
+            <div class="q-block"><p>3. ¿Qué evento bloqueó las rutas a Oriente?</p>
               <label><input type="radio" name="q3" value="c" /> La caída de Constantinopla</label>
-              <label><input type="radio" name="q3" value="w" /> La caída del Imperio Romano</label>
-            </div>
-            <div class="q-block">
-              <p>4. ¿Qué instrumento ayudó a navegar en mar abierto?</p>
+              <label><input type="radio" name="q3" value="w" /> La caída del Imperio Romano</label></div>
+            <div class="q-block"><p>4. ¿Qué instrumento ayudó a navegar en mar abierto?</p>
               <label><input type="radio" name="q4" value="c" /> La brújula</label>
-              <label><input type="radio" name="q4" value="w" /> El telescopio</label>
-            </div>
-            <div class="q-block">
-              <p>5. ¿Quién impulsó las exploraciones portuguesas?</p>
+              <label><input type="radio" name="q4" value="w" /> El telescopio</label></div>
+            <div class="q-block"><p>5. ¿Quién impulsó las exploraciones portuguesas?</p>
               <label><input type="radio" name="q5" value="c" /> Enrique el Navegante</label>
-              <label><input type="radio" name="q5" value="w" /> Alejandro VI</label>
-            </div>
-            <div class="q-block">
-              <p>6. ¿Qué obtuvo Castilla en el Tratado de Alcazovas?</p>
+              <label><input type="radio" name="q5" value="w" /> Alejandro VI</label></div>
+            <div class="q-block"><p>6. ¿Qué obtuvo Castilla en el Tratado de Alcazovas?</p>
               <label><input type="radio" name="q6" value="c" /> Las Islas Canarias</label>
-              <label><input type="radio" name="q6" value="w" /> África y Guinea</label>
-            </div>
-            <div class="q-block">
-              <p>7. ¿Cuál era la idea central de Colón?</p>
+              <label><input type="radio" name="q6" value="w" /> África y Guinea</label></div>
+            <div class="q-block"><p>7. ¿Cuál era la idea central de Colón?</p>
               <label><input type="radio" name="q7" value="c" /> Llegar a Asia navegando hacia el oeste</label>
-              <label><input type="radio" name="q7" value="w" /> Rodear África para llegar a Asia</label>
-            </div>
-            <div class="q-block">
-              <p>8. ¿En qué año llegó Colón a América?</p>
+              <label><input type="radio" name="q7" value="w" /> Rodear África para llegar a Asia</label></div>
+            <div class="q-block"><p>8. ¿En qué año llegó Colón a América?</p>
               <label><input type="radio" name="q8" value="c" /> 1492</label>
-              <label><input type="radio" name="q8" value="w" /> 1488</label>
-            </div>
-            <div class="q-block">
-              <p>9. ¿Qué hicieron las Bulas Alejandrinas?</p>
-              <label><input type="radio" name="q9" value="c" /> Dividieron el mundo con una línea entre Castilla y Portugal</label>
-              <label><input type="radio" name="q9" value="w" /> Nombraron a Colón gobernador de América</label>
-            </div>
-            <div class="q-block">
-              <p>10. ¿Qué tratado permitió a Portugal colonizar Brasil?</p>
+              <label><input type="radio" name="q8" value="w" /> 1488</label></div>
+            <div class="q-block"><p>9. ¿Qué establecieron las Bulas Alejandrinas?</p>
+              <label><input type="radio" name="q9" value="c" /> Una línea entre Castilla y Portugal</label>
+              <label><input type="radio" name="q9" value="w" /> Nombraron a Colón gobernador</label></div>
+            <div class="q-block"><p>10. ¿Qué tratado permitió a Portugal colonizar Brasil?</p>
               <label><input type="radio" name="q10" value="c" /> Tratado de Tordesillas</label>
-              <label><input type="radio" name="q10" value="w" /> Tratado de Alcazovas</label>
-            </div>
-
+              <label><input type="radio" name="q10" value="w" /> Tratado de Alcazovas</label></div>
             <button type="button" class="btn-primary" onclick="gradeQuiz()">Ver resultado</button>
           </form>
-
-          <div id="quizResult" class="quiz-result hidden"></div>
-          <button type="button" id="retryBtn" class="btn-secondary hidden" onclick="resetQuiz()">Volver a intentar</button>
+          <div id="quizResult" class="quiz-result" style="display:none"></div>
+          <button type="button" id="retryBtn" class="btn-secondary" style="display:none" onclick="resetQuiz()">Volver a intentar</button>
         </div>
-      </article>
+      </div>
 
     </div>
-  </main>
+  </div>
 
   <nav class="nav-controls">
     <button class="nav-btn" onclick="prevSlide()">← Anterior</button>

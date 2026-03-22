@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Historia del Paraguay - Unidad 1</title>
-  <meta name="description" content="Lección interactiva en cartillas sobre exploraciones y descubrimientos." />
+  <meta name="description" content="Lección interactiva sobre exploraciones y descubrimientos." />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -24,11 +24,16 @@
 
   <main class="slider-shell">
     <section class="slider" id="slider">
+
       <article class="slide active">
         <div class="slide-content intro">
+          <img src="img/europa-xv.jpg" alt="Europa en el siglo XV" class="hero-image" />
           <p class="slide-kicker">Inicio</p>
           <h2>¿Por qué Europa se lanzó al océano?</h2>
-          <p class="lead">En el siglo XV, Europa buscaba riqueza, rutas comerciales y más poder. Esta unidad explica cómo esas necesidades impulsaron exploraciones, tratados y viajes que cambiaron el mundo.</p>
+          <p class="lead">
+            En el siglo XV, Europa necesitaba riqueza, nuevas rutas comerciales y mejores medios de navegación.
+            Eso impulsó exploraciones que cambiaron la historia.
+          </p>
 
           <div class="hero-questions">
             <span>💰 Dinero</span>
@@ -44,12 +49,23 @@
         <div class="slide-content">
           <p class="slide-kicker">Cartilla 1</p>
           <h2>Europa en el siglo XV</h2>
-          <p class="lead">Elegí un motivo y leé una breve explicación.</p>
+          <p class="lead">Elegí un motivo para ver su imagen y una breve explicación.</p>
 
-          <div class="motives-grid centered-grid">
-            <button class="option-card" type="button" onclick="showMotivo('oro')">Falta de oro y plata</button>
-            <button class="option-card" type="button" onclick="showMotivo('asia')">Comercio con Asia difícil</button>
-            <button class="option-card" type="button" onclick="showMotivo('constantinopla')">Caída de Constantinopla</button>
+          <div class="motives-grid">
+            <button class="option-card" type="button" onclick="showMotivo('oro')">
+              <img src="img/oroyplata.jpg" alt="Oro y plata" />
+              <span>Falta de oro y plata</span>
+            </button>
+
+            <button class="option-card" type="button" onclick="showMotivo('asia')">
+              <img src="img/comerciocon.jpg" alt="Comercio con Asia" />
+              <span>Comercio con Asia difícil</span>
+            </button>
+
+            <button class="option-card" type="button" onclick="showMotivo('constantinopla')">
+              <img src="img/constantinopla.jpg" alt="Caída de Constantinopla" />
+              <span>Caída de Constantinopla</span>
+            </button>
           </div>
 
           <div id="motivoBox" class="info-panel">
@@ -62,12 +78,19 @@
         <div class="slide-content">
           <p class="slide-kicker">Cartilla 2</p>
           <h2>Ciencia y tecnología</h2>
-          <p class="lead">Europa no solo quería explorar: también desarrolló herramientas para hacerlo.</p>
+          <p class="lead">
+            La exploración fue posible gracias a avances como la brújula, la observación astronómica y la imprenta [file:1].
+          </p>
+
+          <div class="double-image">
+            <img src="img/brujula.jpg" alt="Brújula" />
+            <img src="img/imprenta.jpg" alt="Imprenta" />
+          </div>
 
           <div class="tools-grid centered-grid">
-            <button class="tool-btn" type="button" onclick="showInfo('infoHerramienta', 'Brújula: ayudaba a orientarse en mar abierto y a alejarse de la costa.')">Brújula</button>
-            <button class="tool-btn" type="button" onclick="showInfo('infoHerramienta', 'Navegación astronómica: permitía calcular la posición observando los astros.')">Navegación astronómica</button>
-            <button class="tool-btn" type="button" onclick="showInfo('infoHerramienta', 'Imprenta: difundió mapas, conocimientos y teorías con mucha más rapidez.')">Imprenta</button>
+            <button class="tool-btn" type="button" onclick="showInfo('infoHerramienta', 'Brújula: ayudaba a orientarse en mar abierto.')">Brújula</button>
+            <button class="tool-btn" type="button" onclick="showInfo('infoHerramienta', 'Navegación astronómica: permitía ubicarse observando los astros.')">Navegación astronómica</button>
+            <button class="tool-btn" type="button" onclick="showInfo('infoHerramienta', 'Imprenta: permitió difundir mapas, conocimientos y teorías.')">Imprenta</button>
           </div>
 
           <div id="infoHerramienta" class="info-panel">Seleccioná una herramienta.</div>
@@ -75,9 +98,9 @@
           <div class="quiz-box centered-quiz">
             <p>¿Qué permitió navegar lejos de la costa?</p>
             <div class="options center-options">
-              <button type="button" onclick="checkAnswer(this, false)">Espadas</button>
-              <button type="button" onclick="checkAnswer(this, true)">Brújula</button>
               <button type="button" onclick="checkAnswer(this, false)">Caballos</button>
+              <button type="button" onclick="checkAnswer(this, true)">Brújula</button>
+              <button type="button" onclick="checkAnswer(this, false)">Espadas</button>
             </div>
             <p class="feedback"></p>
           </div>
@@ -88,20 +111,27 @@
         <div class="slide-content">
           <p class="slide-kicker">Cartilla 3</p>
           <h2>Los primeros: Portugal</h2>
-          <p class="lead">Portugal fue el reino que comenzó antes las exploraciones atlánticas. Enrique el Navegante impulsó la expansión por las costas africanas y la formación náutica [file:1].</p>
+          <p class="lead">
+            Los portugueses iniciaron primero las exploraciones atlánticas. Enrique el Navegante impulsó el avance por las costas de África [file:1].
+          </p>
+
+          <div class="double-image">
+            <img src="img/enrique-navegante.jpg" alt="Enrique el Navegante" />
+            <img src="img/carabela.jpg" alt="Carabela portuguesa" />
+          </div>
 
           <div class="timeline-box">
             <div class="timeline-item">
               <span class="timeline-number">1</span>
-              <div><strong>Azores</strong><br />Archipiélago ocupado por los portugueses durante su expansión atlántica.</div>
+              <div><strong>Azores</strong><br />Punto importante en la expansión atlántica.</div>
             </div>
             <div class="timeline-item">
               <span class="timeline-number">2</span>
-              <div><strong>Cabo Verde</strong><br />Punto estratégico para avanzar en navegación y comercio.</div>
+              <div><strong>Cabo Verde</strong><br />Escala estratégica para la navegación portuguesa.</div>
             </div>
             <div class="timeline-item">
               <span class="timeline-number">3</span>
-              <div><strong>Cabo de Buena Esperanza</strong><br />Bartolomé Díaz llegó allí en 1488, abriendo la ruta hacia el océano Índico [file:1].</div>
+              <div><strong>Cabo de Buena Esperanza</strong><br />Bartolomé Díaz llegó allí en 1488 [file:1].</div>
             </div>
           </div>
 
@@ -121,16 +151,20 @@
         <div class="slide-content">
           <p class="slide-kicker">Cartilla 4</p>
           <h2>Tratado de Alcazovas-Toledo</h2>
-          <p class="lead">Este acuerdo de 1479-1480 repartió áreas de influencia atlántica entre Portugal y Castilla. Portugal conservó la navegación y expansión en África, mientras Castilla quedó con Canarias [file:1].</p>
+          <p class="lead">
+            Este acuerdo de 1479-1480 repartió áreas de influencia en el Atlántico entre Portugal y Castilla [file:1].
+          </p>
+
+          <img src="img/alcazovas.jpg" alt="Tratado de Alcazovas-Toledo" class="section-image" />
 
           <div class="duel-grid">
             <div class="duel-card portugal">
               <h3>Portugal</h3>
-              <p>África, Guinea, Azores, Madeira y Cabo Verde [file:1].</p>
+              <p>África, Guinea, Azores, Madeira y Cabo Verde.</p>
             </div>
             <div class="duel-card castilla">
               <h3>Castilla</h3>
-              <p>Islas Canarias [file:1].</p>
+              <p>Islas Canarias.</p>
             </div>
           </div>
 
@@ -150,23 +184,21 @@
           <div class="text-col">
             <p class="slide-kicker">Cartilla 5</p>
             <h2>Cristóbal Colón</h2>
-            <p class="lead">Colón fue un navegante al servicio de Castilla que propuso llegar a Asia navegando hacia el oeste. Su proyecto se apoyaba en la idea de la esfericidad de la Tierra, aunque calculó mal su tamaño real [file:1][page:0].</p>
+            <p class="lead">
+              Colón propuso llegar a Asia navegando hacia el oeste. Su idea principal era que la Tierra es redonda [file:1].
+            </p>
 
             <div class="highlight">
-              <strong>Idea central:</strong> llegar al Oriente por el oeste.
+              <strong>Idea central:</strong> llegar al Oriente navegando por el oeste.
             </div>
 
             <div class="mini-note">
-              La propuesta fue rechazada en Portugal y luego aceptada por Castilla en 1492 [page:0].
+              Ese proyecto terminó conectando a Europa con un continente desconocido para ella.
             </div>
           </div>
 
           <div class="image-col">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/7/76/Cristobal_Colon.jpg"
-              alt="Cristóbal Colón"
-            />
-            <p class="image-caption">Imagen de Cristóbal Colón disponible en Wikimedia Commons vinculada desde Wikipedia [web:66][web:72].</p>
+            <img src="img/colon.jpg" alt="Cristóbal Colón" />
           </div>
         </div>
       </article>
@@ -175,28 +207,28 @@
         <div class="slide-content">
           <p class="slide-kicker">Cartilla 6</p>
           <h2>Los viajes de Colón</h2>
-          <p class="lead">En vez de memorizar una lista, asociá cada viaje con su logro principal.</p>
+          <p class="lead">
+            En vez de memorizar fechas sueltas, relacioná cada viaje con su logro principal [file:1].
+          </p>
+
+          <img src="img/viajes-colon.jpg" alt="Viajes de Colón" class="section-image" />
 
           <div class="matching-grid">
             <div class="match-card">
               <h3>1.er viaje</h3>
-              <p>1492</p>
-              <p class="match-answer">Descubre América.</p>
+              <p>Descubre América en 1492.</p>
             </div>
             <div class="match-card">
               <h3>2.do viaje</h3>
-              <p>1493-1496</p>
-              <p class="match-answer">Impulsa la colonización.</p>
+              <p>Impulsa la colonización.</p>
             </div>
             <div class="match-card">
               <h3>3.er viaje</h3>
-              <p>1498-1500</p>
-              <p class="match-answer">Llega al continente.</p>
+              <p>Llega al continente.</p>
             </div>
             <div class="match-card">
               <h3>4.to viaje</h3>
-              <p>1502-1504</p>
-              <p class="match-answer">Busca paso al Pacífico [file:1].</p>
+              <p>Busca paso al Pacífico.</p>
             </div>
           </div>
 
@@ -217,35 +249,37 @@
         <div class="slide-content">
           <p class="slide-kicker">Cartilla 7</p>
           <h2>Bulas Alejandrinas</h2>
-          <p class="lead">Las Bulas Alejandrinas fueron documentos emitidos en 1493 por el papa Alejandro VI para otorgar a Castilla derechos sobre las tierras descubiertas por Colón [file:1].</p>
+          <p class="lead">
+            Fueron documentos emitidos en 1493 por el papa Alejandro VI. Dieron a Castilla derechos sobre las tierras descubiertas por Colón [file:1].
+          </p>
+
+          <img src="img/bulas-alejandrinas.jpg" alt="Bulas Alejandrinas" class="section-image" />
 
           <div class="explain-box">
-            <p>La idea principal era trazar una línea imaginaria de norte a sur.</p>
+            <p>La idea principal era dividir el mundo con una línea imaginaria:</p>
             <ul>
-              <li>Lo situado al oeste sería para Castilla [file:1][page:1].</li>
-              <li>Lo situado al este quedaría para Portugal [file:1][page:1].</li>
-              <li>Esa primera línea se ubicó a 100 leguas al oeste de Azores y Cabo Verde [file:1][web:74].</li>
+              <li>Oeste: Castilla.</li>
+              <li>Este: Portugal.</li>
+              <li>La línea se ubicó a 100 leguas al oeste de Azores y Cabo Verde [file:1].</li>
             </ul>
           </div>
 
-          <div class="line-demo bulas-line">
+          <div class="line-demo">
             <span class="west-side">Oeste → Castilla</span>
             <div class="line-center"></div>
             <span class="east-side">Este → Portugal</span>
-          </div>
-
-          <div class="mini-note">
-            El problema fue que Portugal consideró insuficiente ese reparto y buscó modificarlo después [page:1][web:76].
           </div>
         </div>
       </article>
 
       <article class="slide">
-        <div class="slide-content image-layout map-layout">
+        <div class="slide-content image-layout">
           <div class="text-col">
             <p class="slide-kicker">Cartilla 8</p>
             <h2>Tratado de Tordesillas</h2>
-            <p class="lead">El Tratado de Tordesillas, firmado en 1494, movió la línea de demarcación a 370 leguas al oeste de Cabo Verde, corrigiendo el reparto anterior [file:1][page:1].</p>
+            <p class="lead">
+              Este tratado modificó el reparto anterior y movió la línea a 370 leguas al oeste de Cabo Verde [file:1].
+            </p>
 
             <div class="compare-box">
               <div class="compare-item">
@@ -263,15 +297,13 @@
               <div class="distance long">370</div>
             </div>
 
-            <p class="mini-note">Ese desplazamiento permitió que Portugal quedara con espacio para ocupar la parte oriental de Brasil [file:1][page:1][web:76].</p>
+            <p class="mini-note">
+              Ese cambio permitió a Portugal ocupar parte de Brasil [file:1].
+            </p>
           </div>
 
           <div class="image-col">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/8/88/Tordesillas.jpg"
-              alt="Mapa ilustrativo del Tratado de Tordesillas"
-            />
-            <p class="image-caption">Mapa ilustrativo asociado al Tratado de Tordesillas en Wikimedia/Wikipedia [web:70][page:1].</p>
+            <img src="img/tordesillas-mapa.jpg" alt="Mapa del Tratado de Tordesillas" />
           </div>
         </div>
       </article>
@@ -280,12 +312,15 @@
         <div class="slide-content">
           <p class="slide-kicker">Cartilla 9</p>
           <h2>Repaso rápido</h2>
+
+          <img src="img/repaso.jpg" alt="Repaso final" class="section-image" />
+
           <div class="summary-grid">
             <div class="summary-card">Europa necesitaba riqueza.</div>
-            <div class="summary-card">Los avances permitieron navegar mejor.</div>
+            <div class="summary-card">La brújula ayudó a navegar en mar abierto.</div>
             <div class="summary-card">Portugal exploró primero.</div>
             <div class="summary-card">Colón llegó a América.</div>
-            <div class="summary-card">El mundo se dividió entre potencias.</div>
+            <div class="summary-card">Bulas y Tordesillas dividieron zonas de influencia.</div>
           </div>
         </div>
       </article>
@@ -295,37 +330,76 @@
           <p class="slide-kicker">Cartilla 10</p>
           <h2>Quiz final</h2>
 
+          <img src="img/quiz.jpg" alt="Quiz final" class="section-image" />
+
           <form id="finalQuiz">
             <div class="question">
-              <p>1. ¿Por qué Europa buscaba nuevas rutas?</p>
-              <label><input type="radio" name="q1" value="correct" /> Porque el comercio con Asia era difícil.</label>
-              <label><input type="radio" name="q1" value="wrong" /> Porque quería abandonar el mar.</label>
+              <p>1. ¿Qué necesitaba Europa para acuñar moneda?</p>
+              <label><input type="radio" name="q1" value="correct" /> Oro y plata</label>
+              <label><input type="radio" name="q1" value="wrong" /> Seda y algodón</label>
             </div>
 
             <div class="question">
-              <p>2. ¿Qué permitió navegar en mar abierto?</p>
-              <label><input type="radio" name="q2" value="correct" /> La brújula.</label>
-              <label><input type="radio" name="q2" value="wrong" /> Los caballos.</label>
+              <p>2. ¿Qué buscaba Europa hacia Asia?</p>
+              <label><input type="radio" name="q2" value="correct" /> Nuevas rutas comerciales</label>
+              <label><input type="radio" name="q2" value="wrong" /> Nuevas montañas</label>
             </div>
 
             <div class="question">
-              <p>3. ¿Quién impulsó las exploraciones portuguesas?</p>
-              <label><input type="radio" name="q3" value="correct" /> Enrique el Navegante.</label>
-              <label><input type="radio" name="q3" value="wrong" /> Alejandro VI.</label>
+              <p>3. ¿Qué complicó las rutas tradicionales a Oriente?</p>
+              <label><input type="radio" name="q3" value="correct" /> La caída de Constantinopla</label>
+              <label><input type="radio" name="q3" value="wrong" /> La caída de Roma</label>
             </div>
 
             <div class="question">
-              <p>4. ¿Qué tratado permitió a Portugal colonizar Brasil?</p>
-              <label><input type="radio" name="q4" value="correct" /> Tratado de Tordesillas.</label>
-              <label><input type="radio" name="q4" value="wrong" /> Tratado de Alcazovas.</label>
+              <p>4. ¿Qué instrumento ayudó a navegar en mar abierto?</p>
+              <label><input type="radio" name="q4" value="correct" /> La brújula</label>
+              <label><input type="radio" name="q4" value="wrong" /> La espada</label>
             </div>
 
-            <button type="button" class="btn" onclick="gradeQuiz()">Ver resultado</button>
+            <div class="question">
+              <p>5. ¿Quién impulsó las exploraciones portuguesas?</p>
+              <label><input type="radio" name="q5" value="correct" /> Enrique el Navegante</label>
+              <label><input type="radio" name="q5" value="wrong" /> Alejandro VI</label>
+            </div>
+
+            <div class="question">
+              <p>6. ¿Qué reino controló África en Alcazovas-Toledo?</p>
+              <label><input type="radio" name="q6" value="correct" /> Portugal</label>
+              <label><input type="radio" name="q6" value="wrong" /> Castilla</label>
+            </div>
+
+            <div class="question">
+              <p>7. ¿Qué idea defendía Colón?</p>
+              <label><input type="radio" name="q7" value="correct" /> Llegar a Asia navegando hacia el oeste</label>
+              <label><input type="radio" name="q7" value="wrong" /> Llegar a Asia cruzando el desierto</label>
+            </div>
+
+            <div class="question">
+              <p>8. ¿En qué viaje llegó Colón al continente?</p>
+              <label><input type="radio" name="q8" value="correct" /> Tercer viaje</label>
+              <label><input type="radio" name="q8" value="wrong" /> Primer viaje</label>
+            </div>
+
+            <div class="question">
+              <p>9. ¿Qué establecieron las Bulas Alejandrinas?</p>
+              <label><input type="radio" name="q9" value="correct" /> Una línea de reparto entre Castilla y Portugal</label>
+              <label><input type="radio" name="q9" value="wrong" /> Una nueva capital en América</label>
+            </div>
+
+            <div class="question">
+              <p>10. ¿Qué tratado permitió a Portugal colonizar Brasil?</p>
+              <label><input type="radio" name="q10" value="correct" /> Tratado de Tordesillas</label>
+              <label><input type="radio" name="q10" value="wrong" /> Tratado de Alcazovas</label>
+            </div>
+
+            <button type="button" class="btn" onclick="gradeQuiz()">Mostrar resultado</button>
           </form>
 
           <p id="quizResult" class="result"></p>
         </div>
       </article>
+
     </section>
   </main>
 

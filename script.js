@@ -1,5 +1,8 @@
 function scrollToSection(id) {
-  document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+  const target = document.getElementById(id);
+  if (target) {
+    target.scrollIntoView({ behavior: "smooth" });
+  }
 }
 
 function toggleCard(card) {
@@ -7,7 +10,10 @@ function toggleCard(card) {
 }
 
 function showInfo(id, text) {
-  document.getElementById(id).textContent = text;
+  const element = document.getElementById(id);
+  if (element) {
+    element.textContent = text;
+  }
 }
 
 function checkAnswer(button, isCorrect) {
@@ -15,7 +21,7 @@ function checkAnswer(button, isCorrect) {
   const feedback = container.querySelector(".feedback");
   const buttons = container.querySelectorAll(".options button");
 
-  buttons.forEach(btn => {
+  buttons.forEach((btn) => {
     btn.disabled = true;
     btn.style.opacity = "0.85";
   });
@@ -82,13 +88,17 @@ function updateProgressBar() {
   const scrollTop = window.scrollY;
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
   const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-  document.getElementById("progressBar").style.width = `${progress}%`;
+  const bar = document.getElementById("progressBar");
+
+  if (bar) {
+    bar.style.width = `${progress}%`;
+  }
 }
 
 function revealSections() {
   const reveals = document.querySelectorAll(".reveal");
 
-  reveals.forEach(section => {
+  reveals.forEach((section) => {
     const windowHeight = window.innerHeight;
     const elementTop = section.getBoundingClientRect().top;
     const visiblePoint = 100;

@@ -116,12 +116,11 @@ body {
 .slide-content {
   width: 100%;
   min-height: 74vh;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.94);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 2rem;
-  backdrop-filter: blur(4px);
   position: relative;
 }
 
@@ -130,6 +129,16 @@ body {
   flex-direction: column;
   justify-content: center;
   text-align: center;
+}
+
+.hero-image,
+.section-image {
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-bottom: 1.2rem;
+  box-shadow: var(--shadow);
 }
 
 .slide-kicker {
@@ -148,8 +157,8 @@ body {
 
 .lead {
   color: var(--muted);
-  max-width: 860px;
-  margin-bottom: 1.4rem;
+  max-width: 900px;
+  margin-bottom: 1.2rem;
 }
 
 .hero-questions {
@@ -157,7 +166,7 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   gap: 0.9rem;
-  margin: 1.5rem 0 2rem;
+  margin: 1.4rem 0 2rem;
 }
 
 .hero-questions span {
@@ -190,22 +199,64 @@ body {
   align-self: center;
 }
 
-.centered-grid,
-.center-options {
-  justify-content: center;
+.motives-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
 }
 
-.motives-grid,
+.option-card {
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+  text-align: left;
+  border: 1px solid var(--border);
+}
+
+.option-card img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  display: block;
+}
+
+.option-card span {
+  display: block;
+  padding: 1rem;
+  font-weight: 800;
+  color: #221b45;
+}
+
+.double-image {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.double-image img,
+.image-col img {
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
 .tools-grid,
 .options,
-.summary-grid,
-.matching-grid {
+.summary-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
 }
 
-.option-card,
+.centered-grid,
+.center-options {
+  justify-content: center;
+}
+
 .tool-btn {
   min-width: 210px;
   padding: 1rem 1.1rem;
@@ -214,15 +265,6 @@ body {
   color: #221b45;
   font-weight: 700;
   box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.option-card:hover,
-.tool-btn:hover,
-.nav-btn:hover,
-.options button:hover,
-.btn:hover {
-  transform: translateY(-2px);
 }
 
 .info-panel,
@@ -243,10 +285,6 @@ body {
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
-}
-
-.quiz-box p {
-  margin-bottom: 0.8rem;
 }
 
 .options button {
@@ -302,10 +340,6 @@ body {
   box-shadow: var(--shadow);
 }
 
-.duel-card h3 {
-  margin-bottom: 0.4rem;
-}
-
 .portugal {
   background: linear-gradient(135deg, #065f46, #0f766e);
 }
@@ -316,28 +350,15 @@ body {
 
 .image-layout {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 1.1fr 0.9fr;
   gap: 1.5rem;
   align-items: center;
-}
-
-.image-col img {
-  width: 100%;
-  max-height: 420px;
-  object-fit: cover;
-  border-radius: 20px;
-  box-shadow: var(--shadow);
-}
-
-.image-caption {
-  margin-top: 0.7rem;
-  color: var(--muted);
-  font-size: 0.92rem;
 }
 
 .matching-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
   margin-top: 1rem;
 }
 
@@ -347,16 +368,6 @@ body {
   border-radius: 18px;
   padding: 1rem;
   box-shadow: 0 10px 22px rgba(0, 0, 0, 0.05);
-}
-
-.match-card h3 {
-  margin-bottom: 0.35rem;
-}
-
-.match-answer {
-  margin-top: 0.6rem;
-  font-weight: 700;
-  color: var(--secondary);
 }
 
 .line-demo {
@@ -421,10 +432,6 @@ body {
   background: #0f766e;
 }
 
-.summary-grid {
-  margin-top: 1rem;
-}
-
 .summary-card {
   padding: 1rem 1.1rem;
   background: white;
@@ -479,8 +486,10 @@ body {
 }
 
 @media (max-width: 900px) {
-  .image-layout,
+  .motives-grid,
+  .double-image,
   .duel-grid,
+  .image-layout,
   .matching-grid {
     grid-template-columns: 1fr;
   }

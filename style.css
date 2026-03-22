@@ -19,7 +19,6 @@
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* ── CLAVE: página NO scrollea ── */
 html, body {
   height: 100%;
   overflow: hidden;
@@ -29,7 +28,6 @@ html, body {
   background: linear-gradient(160deg, #f9f6f0 0%, #ede8de 100%);
 }
 
-/* ── TOPBAR: altura fija ── */
 .topbar {
   height: 68px;
   padding: 0 1.4rem;
@@ -76,7 +74,6 @@ html, body {
   flex-shrink: 0;
 }
 
-/* ── DOTS: altura fija ── */
 .dots-wrap {
   height: 28px;
   display: flex;
@@ -97,8 +94,6 @@ html, body {
 
 .dot.active { background: var(--primary); transform: scale(1.45); }
 
-/* ── SLIDER SHELL: ocupa EXACTAMENTE lo que queda ──
-   68px topbar + 28px dots + 64px nav = 160px */
 .slider-shell {
   height: calc(100vh - 160px);
   overflow: hidden;
@@ -112,24 +107,23 @@ html, body {
   transition: transform 0.42s cubic-bezier(0.4,0,0.2,1);
 }
 
-/* ── SLIDE: cada uno ocupa 100% del espacio y scrollea si necesita ── */
 .slide {
   min-width: 100%;
-  flex-shrink: 0;        /* nunca se comprime */
+  flex-shrink: 0;
   height: 100%;
-  overflow-y: auto;      /* scroll AQUÍ si el contenido es largo */
+  overflow-y: auto;
   overflow-x: hidden;
   padding: 0.6rem 0 0.4rem;
-  display: block;        /* NO flex — el card no se estira */
+  display: block;
 }
 
 .slide::-webkit-scrollbar { width: 4px; }
 .slide::-webkit-scrollbar-thumb { background: #d0c8bc; border-radius: 4px; }
 
-/* ── CARD: altura AUTOMÁTICA, nunca forzada ── */
+/* ── CARD: altura automática, hijos no se estiran ── */
 .card {
   width: 100%;
-  height: auto;          /* ← LA CLAVE: sin min-height, sin height: 100% */
+  height: auto;
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -137,12 +131,12 @@ html, body {
   padding: 1.6rem 1.8rem;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 0.85rem;
   position: relative;
   overflow: hidden;
 }
 
-/* Barra superior degradada */
 .card::before {
   content: '';
   position: absolute;
@@ -168,9 +162,8 @@ html, body {
   line-height: 1.15;
 }
 
-.lead { color: var(--muted); font-size: 0.96rem; }
+.lead { color: var(--muted); font-size: 0.96rem; width: 100%; }
 
-/* PILLS */
 .pill-row { display: flex; flex-wrap: wrap; gap: 0.65rem; }
 .pill-row span {
   padding: 0.6rem 1rem;
@@ -180,7 +173,6 @@ html, body {
   font-size: 0.93rem;
 }
 
-/* BOTONES */
 .btn-primary {
   display: inline-block;
   padding: 0.78rem 1.4rem;
@@ -193,7 +185,6 @@ html, body {
   cursor: pointer;
   box-shadow: 0 6px 18px rgba(217,119,6,0.28);
   transition: transform 0.2s, filter 0.2s;
-  align-self: flex-start;
 }
 
 .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.05); }
@@ -232,17 +223,21 @@ html, body {
 .btn-group { display: flex; flex-wrap: wrap; gap: 0.7rem; }
 .btn-group.centered { justify-content: center; }
 
-/* INFO PANEL */
 .info-panel {
   background: #faf7f2;
   border-left: 4px solid var(--primary);
   border-radius: var(--radius-xs);
   padding: 0.8rem 1rem;
   font-size: 0.94rem;
+  width: 100%;
 }
 
-/* MOTIVOS */
-.motivos-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.8rem; }
+.motivos-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 0.8rem;
+  width: 100%;
+}
 
 .motivo-card {
   border: 1.5px solid var(--border);
@@ -263,8 +258,7 @@ html, body {
 .motivo-card img { width: 100%; height: 110px; object-fit: cover; display: block; }
 .motivo-card span { display: block; padding: 0.7rem 0.8rem; font-weight: 700; font-size: 0.88rem; color: #1e1b4b; }
 
-/* QUIZ */
-.quiz-box { background: #faf6f0; border: 1px dashed #d6cdc1; border-radius: var(--radius-sm); padding: 0.9rem 1rem; }
+.quiz-box { background: #faf6f0; border: 1px dashed #d6cdc1; border-radius: var(--radius-sm); padding: 0.9rem 1rem; width: 100%; }
 .quiz-q { font-weight: 700; margin-bottom: 0.7rem; font-size: 0.95rem; }
 .options { display: flex; flex-wrap: wrap; gap: 0.55rem; }
 
@@ -283,27 +277,23 @@ html, body {
 .options button:hover:not(:disabled) { background: var(--primary-light); border-color: #c4b5fd; }
 .feedback { margin-top: 0.6rem; font-weight: 800; font-size: 0.9rem; min-height: 18px; }
 
-/* TIMELINE */
-.timeline { display: flex; flex-direction: column; gap: 0.7rem; }
+.timeline { display: flex; flex-direction: column; gap: 0.7rem; width: 100%; }
 .tl-item { display: flex; align-items: flex-start; gap: 0.85rem; font-size: 0.95rem; }
 .tl-num { min-width: 32px; height: 32px; border-radius: 50%; background: var(--primary-light); color: var(--primary); font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.9rem; }
 
-/* DUEL */
-.duel-row { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.85rem; }
+.duel-row { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.85rem; width: 100%; }
 .duel-card { border-radius: var(--radius-sm); padding: 1rem 1.1rem; color: white; box-shadow: var(--shadow-md); }
 .duel-card h3 { margin-bottom: 0.35rem; font-size: 1rem; }
 .duel-card p { font-size: 0.92rem; opacity: 0.92; }
 .duel-card.green { background: linear-gradient(135deg,#064e3b,#0f766e); }
 .duel-card.orange { background: linear-gradient(135deg,#78350f,#d97706); }
 
-/* CAJAS */
-.highlight-box { background: var(--accent-light); border: 1px solid #f3d58f; border-radius: var(--radius-xs); padding: 0.75rem 1rem; font-size: 0.94rem; }
-.note-box { background: #f0fdf4; border-left: 4px solid var(--secondary); border-radius: var(--radius-xs); padding: 0.7rem 1rem; font-size: 0.91rem; color: #064e3b; }
-.explain-box { background: #faf7f2; border-radius: var(--radius-sm); padding: 0.85rem 1.1rem; border: 1px solid var(--border); }
+.highlight-box { background: var(--accent-light); border: 1px solid #f3d58f; border-radius: var(--radius-xs); padding: 0.75rem 1rem; font-size: 0.94rem; width: 100%; }
+.note-box { background: #f0fdf4; border-left: 4px solid var(--secondary); border-radius: var(--radius-xs); padding: 0.7rem 1rem; font-size: 0.91rem; color: #064e3b; width: 100%; }
+.explain-box { background: #faf7f2; border-radius: var(--radius-sm); padding: 0.85rem 1.1rem; border: 1px solid var(--border); width: 100%; }
 .explain-box ul { padding-left: 1.2rem; }
 .explain-box li { margin-bottom: 0.4rem; font-size: 0.94rem; }
 
-/* LÍNEA VISUAL */
 .line-visual { display: flex; align-items: center; justify-content: center; gap: 1.5rem; padding: 0.5rem 0; }
 .line-side { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; text-align: center; }
 .line-side .flag { font-size: 1.5rem; }
@@ -311,14 +301,12 @@ html, body {
 .line-side p { font-size: 0.85rem; color: var(--muted); }
 .line-divider { width: 5px; height: 80px; background: linear-gradient(180deg, var(--primary), var(--accent)); border-radius: 999px; flex-shrink: 0; }
 
-/* TABLA */
-.compare-table { border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border); font-size: 0.93rem; }
+.compare-table { border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border); font-size: 0.93rem; width: 100%; }
 .cmp-row { display: grid; grid-template-columns: 1fr 1fr; padding: 0.65rem 1rem; border-bottom: 1px solid var(--border); }
 .cmp-row:last-child { border-bottom: none; }
 .cmp-row.header { background: linear-gradient(135deg,#312e81,#0f766e); color: white; font-weight: 700; }
 .cmp-row.highlight-row { background: var(--primary-light); font-weight: 700; color: #3b0764; }
 
-/* BARRAS */
 .bars-visual { display: flex; align-items: flex-end; gap: 1.4rem; padding: 0.3rem 0; }
 .bar-item { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
 .bar-item p { font-size: 0.8rem; color: var(--muted); font-weight: 600; }
@@ -326,27 +314,68 @@ html, body {
 .short-bar { height: 55px; background: #8b5cf6; }
 .long-bar  { height: 140px; background: var(--secondary); }
 
-/* VIAJES */
-.viajes-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.8rem; }
+.viajes-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.8rem; width: 100%; }
 .viaje-card { display: flex; gap: 0.75rem; background: #faf7f2; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.85rem; }
 .viaje-num { min-width: 32px; height: 32px; border-radius: 50%; background: var(--primary); color: white; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.88rem; }
 .viaje-card strong { display: block; margin-bottom: 0.2rem; font-size: 0.93rem; }
 .viaje-card p { font-size: 0.88rem; color: var(--muted); }
 
-/* REPASO */
-.repaso-grid { display: flex; flex-direction: column; gap: 0.7rem; }
-.repaso-card { display: flex; align-items: center; gap: 0.65rem; background: white; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.75rem 1rem; box-shadow: var(--shadow-sm); font-size: 0.93rem; font-weight: 600; }
+/* ── REPASO: sin estiramiento ── */
+.repaso-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  width: 100%;
+}
+
+.repaso-card {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+  font-size: 0.93rem;
+  font-weight: 600;
+}
+
 .repaso-card span { font-size: 1.3rem; flex-shrink: 0; }
 
-/* QUIZ FINAL */
-#quizForm { display: flex; flex-direction: column; gap: 0.7rem; }
-.q-block { background: #faf7f2; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.85rem 1rem; }
+/* ── QUIZ FINAL: sin estiramiento ── */
+#quizForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  width: 100%;
+}
+
+.q-block {
+  background: #faf7f2;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+  width: 100%;
+}
+
 .q-block p { font-weight: 700; margin-bottom: 0.5rem; font-size: 0.94rem; }
 .q-block label { display: block; margin-bottom: 0.35rem; cursor: pointer; font-size: 0.91rem; }
 .q-block input[type="radio"] { margin-right: 0.45rem; accent-color: var(--primary); }
-.quiz-result { background: var(--primary-light); border-radius: var(--radius-sm); padding: 0.85rem 1rem; font-weight: 800; font-size: 0.98rem; color: #3b0764; border-left: 4px solid var(--primary); margin-top: 0.4rem; }
 
-/* NAV FIJO */
+.quiz-result {
+  background: var(--primary-light);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+  font-weight: 800;
+  font-size: 0.98rem;
+  color: #3b0764;
+  border-left: 4px solid var(--primary);
+  margin-top: 0.4rem;
+  width: 100%;
+}
+
 .nav-controls {
   position: fixed;
   bottom: 0; left: 0; right: 0;
@@ -378,7 +407,6 @@ html, body {
 .nav-btn:hover { transform: translateY(-2px); }
 .nav-btn.primary { background: linear-gradient(135deg, var(--primary), #5b21b6); color: white; }
 
-/* RESPONSIVE */
 @media (max-width: 800px) {
   .motivos-grid { grid-template-columns: 1fr; }
   .viajes-grid { grid-template-columns: 1fr; }

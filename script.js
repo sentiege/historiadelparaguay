@@ -34,9 +34,9 @@ function showMotivo(tipo) {
   const box = document.getElementById("motivoBox");
 
   const textos = {
-    oro: "Europa necesitaba oro y plata para acuñar monedas y fortalecer su economía comercial.",
-    asia: "El comercio con Asia era difícil y caro, por eso buscaban rutas nuevas para llegar a especias y productos de lujo.",
-    constantinopla: "La caída de Constantinopla complicó las rutas tradicionales hacia Oriente y empujó a buscar caminos alternativos."
+    oro: "Europa necesitaba oro y plata para acuñar monedas y fortalecer su economía.",
+    asia: "El comercio con Asia era difícil y caro, por eso buscaban nuevas rutas marítimas.",
+    constantinopla: "La caída de Constantinopla bloqueó rutas tradicionales y obligó a buscar caminos alternativos."
   };
 
   box.textContent = textos[tipo] || "Seleccioná una opción.";
@@ -70,17 +70,19 @@ function gradeQuiz() {
   const result = document.getElementById("quizResult");
   let score = 0;
 
-  for (let i = 1; i <= 4; i++) {
+  for (let i = 1; i <= 10; i++) {
     const checked = form.querySelector(`input[name="q${i}"]:checked`);
     if (checked && checked.value === "correct") score++;
   }
 
-  if (score === 4) {
-    result.textContent = `🎉 Excelente: obtuviste ${score}/4.`;
-  } else if (score >= 2) {
-    result.textContent = `👏 Muy bien: obtuviste ${score}/4.`;
+  if (score === 10) {
+    result.textContent = `🎉 Excelente: obtuviste ${score}/10.`;
+  } else if (score >= 7) {
+    result.textContent = `👏 Muy bien: obtuviste ${score}/10.`;
+  } else if (score >= 5) {
+    result.textContent = `📘 Bien: obtuviste ${score}/10. Repasá un poco más.`;
   } else {
-    result.textContent = `📘 Obtuviste ${score}/4. Conviene repasar las cartillas.`;
+    result.textContent = `📚 Obtuviste ${score}/10. Conviene volver a mirar las cartillas.`;
   }
 }
 

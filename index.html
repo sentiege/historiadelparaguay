@@ -4,7 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Historia del Paraguay - Unidad 1</title>
-  <meta name="description" content="Lección interactiva sobre exploraciones y descubrimientos: Europa del siglo XV, Portugal, Colón, Bulas Alejandrinas y Tordesillas.">
+  <meta
+    name="description"
+    content="Lección interactiva sobre exploraciones y descubrimientos: Europa del siglo XV, Portugal, Colón, Bulas Alejandrinas y Tordesillas."
+  />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -72,9 +75,9 @@
       <div class="quiz-mini">
         <p>¿Qué permitió navegar lejos de la costa?</p>
         <div class="options">
-          <button onclick="checkAnswer(this, false)">Espadas</button>
-          <button onclick="checkAnswer(this, true)">Brújula</button>
-          <button onclick="checkAnswer(this, false)">Caballos</button>
+          <button type="button" onclick="checkAnswer(this, false)">Espadas</button>
+          <button type="button" onclick="checkAnswer(this, true)">Brújula</button>
+          <button type="button" onclick="checkAnswer(this, false)">Caballos</button>
         </div>
         <p class="feedback"></p>
       </div>
@@ -89,9 +92,9 @@
 
       <p class="section-intro">Tocá en orden la secuencia de avances portugueses.</p>
       <div class="sequence">
-        <button onclick="markSequence(this, 1)">Azores</button>
-        <button onclick="markSequence(this, 2)">Cabo Verde</button>
-        <button onclick="markSequence(this, 3)">Cabo de Buena Esperanza</button>
+        <button type="button" onclick="markSequence(this, 1)">Azores</button>
+        <button type="button" onclick="markSequence(this, 2)">Cabo Verde</button>
+        <button type="button" onclick="markSequence(this, 3)">Cabo de Buena Esperanza</button>
       </div>
       <p id="sequenceMessage" class="sequence-message">Tocá en orden para completar la secuencia.</p>
     </section>
@@ -125,8 +128,8 @@
       <div class="quiz-mini">
         <p>¿Quién controlaba África?</p>
         <div class="options">
-          <button onclick="checkAnswer(this, false)">Castilla</button>
-          <button onclick="checkAnswer(this, true)">Portugal</button>
+          <button type="button" onclick="checkAnswer(this, false)">Castilla</button>
+          <button type="button" onclick="checkAnswer(this, true)">Portugal</button>
         </div>
         <p class="feedback"></p>
       </div>
@@ -173,10 +176,10 @@
       <div class="quiz-mini">
         <p>¿En qué viaje llegó al continente?</p>
         <div class="options">
-          <button onclick="checkAnswer(this, false)">1</button>
-          <button onclick="checkAnswer(this, false)">2</button>
-          <button onclick="checkAnswer(this, true)">3</button>
-          <button onclick="checkAnswer(this, false)">4</button>
+          <button type="button" onclick="checkAnswer(this, false)">1</button>
+          <button type="button" onclick="checkAnswer(this, false)">2</button>
+          <button type="button" onclick="checkAnswer(this, true)">3</button>
+          <button type="button" onclick="checkAnswer(this, false)">4</button>
         </div>
         <p class="feedback"></p>
       </div>
@@ -224,9 +227,9 @@
       <div class="quiz-mini">
         <p>¿Qué permitió a Portugal colonizar Brasil?</p>
         <div class="options">
-          <button onclick="checkAnswer(this, true)">Tratado de Tordesillas</button>
-          <button onclick="checkAnswer(this, false)">Tratado de Alcazovas</button>
-          <button onclick="checkAnswer(this, false)">Primer viaje de Colón</button>
+          <button type="button" onclick="checkAnswer(this, true)">Tratado de Tordesillas</button>
+          <button type="button" onclick="checkAnswer(this, false)">Tratado de Alcazovas</button>
+          <button type="button" onclick="checkAnswer(this, false)">Primer viaje de Colón</button>
         </div>
         <p class="feedback"></p>
       </div>
@@ -255,32 +258,32 @@
       <form id="finalQuiz">
         <div class="question">
           <p>1. ¿Por qué Europa buscaba nuevas rutas?</p>
-          <label><input type="radio" name="q1" value="correct"> Porque el comercio con Asia era difícil.</label>
-          <label><input type="radio" name="q1" value="wrong"> Porque querían abandonar Europa.</label>
+          <label><input type="radio" name="q1" value="correct" /> Porque el comercio con Asia era difícil.</label>
+          <label><input type="radio" name="q1" value="wrong" /> Porque querían abandonar Europa.</label>
         </div>
 
         <div class="question">
           <p>2. ¿Qué permitió navegar en mar abierto?</p>
-          <label><input type="radio" name="q2" value="correct"> La brújula.</label>
-          <label><input type="radio" name="q2" value="wrong"> Los caballos.</label>
+          <label><input type="radio" name="q2" value="correct" /> La brújula.</label>
+          <label><input type="radio" name="q2" value="wrong" /> Los caballos.</label>
         </div>
 
         <div class="question">
           <p>3. ¿Quién impulsó las exploraciones portuguesas?</p>
-          <label><input type="radio" name="q3" value="correct"> Enrique el Navegante.</label>
-          <label><input type="radio" name="q3" value="wrong"> Alejandro VI.</label>
+          <label><input type="radio" name="q3" value="correct" /> Enrique el Navegante.</label>
+          <label><input type="radio" name="q3" value="wrong" /> Alejandro VI.</label>
         </div>
 
         <div class="question">
           <p>4. ¿Qué hizo Colón?</p>
-          <label><input type="radio" name="q4" value="correct"> Llegó a América navegando hacia el oeste.</label>
-          <label><input type="radio" name="q4" value="wrong"> Rodeó África por primera vez.</label>
+          <label><input type="radio" name="q4" value="correct" /> Llegó a América navegando hacia el oeste.</label>
+          <label><input type="radio" name="q4" value="wrong" /> Rodeó África por primera vez.</label>
         </div>
 
         <div class="question">
           <p>5. ¿Qué tratado permitió a Portugal colonizar Brasil?</p>
-          <label><input type="radio" name="q5" value="correct"> Tratado de Tordesillas.</label>
-          <label><input type="radio" name="q5" value="wrong"> Bulas Alejandrinas.</label>
+          <label><input type="radio" name="q5" value="correct" /> Tratado de Tordesillas.</label>
+          <label><input type="radio" name="q5" value="wrong" /> Bulas Alejandrinas.</label>
         </div>
 
         <button type="button" class="btn" onclick="gradeQuiz()">Ver resultado</button>

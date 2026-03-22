@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Herramienta de Repaso — Historia del Paraguay</title>
+  <link rel="stylesheet" href="index-style.css" />
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="hero-tag">Herramienta de Repaso</span>
+      <h1>Historia del Paraguay</h1>
+      <p class="hero-sub">Facilitada por la <strong>Dra. Beatriz Espinola Zaracho</strong></p>
+      <p class="hero-desc">Seleccioná una unidad para comenzar el repaso interactivo.</p>
+    </div>
+  </header>
+
+  <!-- UNIDADES -->
+  <main class="main">
+
+    <!-- UNIDAD I -->
+    <div class="unit-card available" onclick="window.location.href='unidad1/index.html'">
+      <div class="unit-header">
+        <div class="unit-num">I</div>
+        <div>
+          <p class="unit-label">Unidad I</p>
+          <h2 class="unit-title">Exploraciones y descubrimientos</h2>
+        </div>
+        <span class="unit-badge available-badge">Disponible</span>
+      </div>
+      <ul class="unit-topics">
+        <li>Los motivos de Europa en el siglo XV</li>
+        <li>Ciencia y tecnología naval</li>
+        <li>Las exploraciones portuguesas</li>
+        <li>Cristóbal Colón y sus cuatro viajes</li>
+        <li>Bulas Alejandrinas y Tratado de Tordesillas</li>
+      </ul>
+      <div class="unit-footer">
+        <span class="chip">10 cartillas</span>
+        <span class="chip">Quiz final</span>
+        <span class="btn-go">Comenzar →</span>
+      </div>
+    </div>
+
+    <!-- UNIDAD II -->
+    <div class="unit-card soon">
+      <div class="unit-header">
+        <div class="unit-num">II</div>
+        <div>
+          <p class="unit-label">Unidad II</p>
+          <h2 class="unit-title">La población precolombina del Paraguay</h2>
+        </div>
+        <span class="unit-badge soon-badge">Próximamente</span>
+      </div>
+      <ul class="unit-topics">
+        <li>Pueblos de cultura paleolítica: etnias chaqueñas</li>
+        <li>Organización política, social y económica chaqueña</li>
+        <li>Pueblos de cultura neolítica: Los Guaraní</li>
+        <li>Principales parcialidades guaraníes</li>
+        <li>Rito de la antropofagia y cultura material</li>
+      </ul>
+      <div class="unit-footer">
+        <span class="chip muted">En preparación</span>
+      </div>
+    </div>
+
+    <!-- UNIDAD III -->
+    <div class="unit-card soon">
+      <div class="unit-header">
+        <div class="unit-num">III</div>
+        <div>
+          <p class="unit-label">Unidad III</p>
+          <h2 class="unit-title">Exploraciones y conquista del Río de la Plata y el Paraguay</h2>
+        </div>
+        <span class="unit-badge soon-badge">Próximamente</span>
+      </div>
+      <ul class="unit-topics">
+        <li>Descubrimiento del Mar del Sur y del Río de la Plata</li>
+        <li>Viajes de Magallanes, El Cano, Alejo García y Gaboto</li>
+        <li>Don Pedro de Mendoza: objetivos y exploraciones</li>
+        <li>Fundación de Asunción — Real Provisión 1537</li>
+        <li>Domingo Martínez de Irala: gobierno y legado</li>
+        <li>Fundaciones desde Asunción: Santa Fe, Buenos Aires y otras</li>
+      </ul>
+      <div class="unit-footer">
+        <span class="chip muted">En preparación</span>
+      </div>
+    </div>
+
+    <!-- UNIDAD IV -->
+    <div class="unit-card soon">
+      <div class="unit-header">
+        <div class="unit-num">IV</div>
+        <div>
+          <p class="unit-label">Unidad IV</p>
+          <h2 class="unit-title">El Paraguay colonial</h2>
+        </div>
+        <span class="unit-badge soon-badge">Próximamente</span>
+      </div>
+      <ul class="unit-topics">
+        <li>Gobierno de Hernandarias: obra educativa y Ordenanzas de Alfaro</li>
+        <li>División de la Provincia del Paraguay</li>
+        <li>La sociedad colonial: clases sociales</li>
+        <li>Economía colonial: yerba mate, tabaco, maderas, cueros</li>
+        <li>La Real Hacienda y los gravámenes</li>
+      </ul>
+      <div class="unit-footer">
+        <span class="chip muted">En preparación</span>
+      </div>
+    </div>
+
+    <!-- UNIDAD V -->
+    <div class="unit-card soon">
+      <div class="unit-header">
+        <div class="unit-num">V</div>
+        <div>
+          <p class="unit-label">Unidad V</p>
+          <h2 class="unit-title">La labor misionera de las órdenes religiosas</h2>
+        </div>
+        <span class="unit-badge soon-badge">Próximamente</span>
+      </div>
+      <ul class="unit-topics">
+        <li>Los Mercedarios y Dominicos</li>
+        <li>Los Franciscanos: pueblos y organización</li>
+        <li>Los Jesuitas: las reducciones y su organización</li>
+        <li>Arte, artesanía e imprenta jesuítica</li>
+        <li>Economía de las misiones: la yerba mate</li>
+      </ul>
+      <div class="unit-footer">
+        <span class="chip muted">En preparación</span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>Herramienta de repaso académico · Historia del Paraguay</p>
+    <p>Facilitada por la <strong>Dra. Beatriz Espinola Zaracho</strong></p>
+  </footer>
+
+</body>
+</html>

@@ -1,25 +1,51 @@
-function scrollToSection(id) {
-  const target = document.getElementById(id);
-  if (target) {
-    target.scrollIntoView({ behavior: "smooth" });
+const slider = document.getElementById("slider");
+const slides = document.querySelectorAll(".slide");
+const currentCard = document.getElementById("currentCard");
+const totalCards = document.getElementById("totalCards");
+
+let currentIndex = 0;
+totalCards.textContent = slides.length;
+
+function updateSlider() {
+  slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+  currentCard.textContent = currentIndex + 1;
+}
+
+function nextSlide() {
+  if (currentIndex < slides.length - 1) {
+    currentIndex++;
+    updateSlider();
   }
 }
 
-function toggleCard(card) {
-  card.classList.toggle("active");
+function prevSlide() {
+  if (currentIndex > 0) {
+    currentIndex--;
+    updateSlider();
+  }
 }
 
 function showInfo(id, text) {
-  const element = document.getElementById(id);
-  if (element) {
-    element.textContent = text;
-  }
+  const box = document.getElementById(id);
+  if (box) box.textContent = text;
+}
+
+function showMotivo(tipo) {
+  const box = document.getElementById("motivoBox");
+
+  const textos = {
+    oro: "Europa necesitaba oro y plata para acuñar monedas y fortalecer su economía comercial.",
+    asia: "El comercio con Asia era difícil y caro, por eso buscaban rutas nuevas para llegar a especias y productos de lujo.",
+    constantinopla: "La caída de Constantinopla complicó las rutas tradicionales hacia Oriente y empujó a buscar caminos alternativos."
+  };
+
+  box.textContent = textos[tipo] || "Seleccioná una opción.";
 }
 
 function checkAnswer(button, isCorrect) {
-  const container = button.closest(".quiz-mini");
-  const feedback = container.querySelector(".feedback");
-  const buttons = container.querySelectorAll(".options button");
+  const box = button.closest(".quiz-box");
+  const feedback = box.querySelector(".feedback");
+  const buttons = box.querySelectorAll(".options button");
 
   buttons.forEach((btn) => {
     btn.disabled = true;
@@ -39,79 +65,28 @@ function checkAnswer(button, isCorrect) {
   }
 }
 
-let currentStep = 1;
-
-function markSequence(button, step) {
-  const message = document.getElementById("sequenceMessage");
-
-  if (button.classList.contains("correct")) return;
-
-  if (step === currentStep) {
-    button.classList.add("correct");
-    currentStep++;
-
-    if (currentStep === 4) {
-      message.textContent = "✅ Secuencia completada correctamente.";
-      message.style.color = "#15803d";
-    } else {
-      message.textContent = "✅ Bien. SeguÍ con el siguiente.";
-      message.style.color = "#15803d";
-    }
-  } else {
-    message.textContent = "❌ Ese no sigue todavía. Probá otra vez.";
-    message.style.color = "#b91c1c";
-  }
-}
-
 function gradeQuiz() {
   const form = document.getElementById("finalQuiz");
   const result = document.getElementById("quizResult");
   let score = 0;
 
-  for (let i = 1; i <= 5; i++) {
-    const answer = form.querySelector(`input[name="q${i}"]:checked`);
-    if (answer && answer.value === "correct") {
-      score++;
-    }
+  for (let i = 1; i <= 4; i++) {
+    const checked = form.querySelector(`input[name="q${i}"]:checked`);
+    if (checked && checked.value === "correct") score++;
   }
 
-  if (score === 5) {
-    result.textContent = `🎉 Excelente: obtuviste ${score}/5.`;
-  } else if (score >= 3) {
-    result.textContent = `👏 Muy bien: obtuviste ${score}/5.`;
+  if (score === 4) {
+    result.textContent = `🎉 Excelente: obtuviste ${score}/4.`;
+  } else if (score >= 2) {
+    result.textContent = `👏 Muy bien: obtuviste ${score}/4.`;
   } else {
-    result.textContent = `📘 Obtuviste ${score}/5. Conviene repasar y volver a intentar.`;
+    result.textContent = `📘 Obtuviste ${score}/4. Conviene repasar las cartillas.`;
   }
 }
 
-function updateProgressBar() {
-  const scrollTop = window.scrollY;
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-  const bar = document.getElementById("progressBar");
-
-  if (bar) {
-    bar.style.width = `${progress}%`;
-  }
-}
-
-function revealSections() {
-  const reveals = document.querySelectorAll(".reveal");
-
-  reveals.forEach((section) => {
-    const windowHeight = window.innerHeight;
-    const elementTop = section.getBoundingClientRect().top;
-    const visiblePoint = 100;
-
-    if (elementTop < windowHeight - visiblePoint) {
-      section.classList.add("visible");
-    }
-  });
-}
-
-window.addEventListener("scroll", updateProgressBar);
-window.addEventListener("scroll", revealSections);
-window.addEventListener("load", () => {
-  updateProgressBar();
-  revealSections();
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight") nextSlide();
+  if (e.key === "ArrowLeft") prevSlide();
 });
+
+updateSlider();

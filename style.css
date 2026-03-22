@@ -122,17 +122,14 @@ html, body {
   min-width: 100%;
   flex-shrink: 0;
   height: 100%;
-
-  /* padding horizontal aquí, NO en .slider-shell */
   padding: 0.6rem 1rem 0.4rem;
 
-  /* flex column: hijos ocupan ancho completo
-     pero NO se estiran en altura */
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;      /* ← centra horizontalmente */
+  justify-content: center;  /* ← centra verticalmente */
 
-  overflow-y: auto;   /* scroll si el card es muy largo */
+  overflow-y: auto;
   overflow-x: hidden;
 }
 
@@ -142,7 +139,8 @@ html, body {
 /* ── CARD: altura 100% natural, sin estirar ── */
 .card {
   width: 100%;
-  height: auto;        /* tamaño del contenido, nunca forzado */
+  max-width: 860px;          /* ← límite de ancho */
+  height: auto;
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -404,7 +402,6 @@ html, body {
   z-index: 100;
   padding: 0 1rem;
 }
-
 .nav-btn {
   padding: 0.72rem 1.5rem;
   border: none;

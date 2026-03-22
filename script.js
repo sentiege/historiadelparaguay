@@ -20,7 +20,6 @@ function goTo(index) {
   curEl.textContent = current + 1;
   document.querySelectorAll(".dot").forEach((d, i) =>
     d.classList.toggle("active", i === current));
-  // Scroll al inicio del slide al cambiar
   slides[current].scrollTop = 0;
 }
 
@@ -75,15 +74,54 @@ function gradeQuiz() {
   const form   = document.getElementById("quizForm");
   const result = document.getElementById("quizResult");
   const retry  = document.getElementById("retryBtn");
+
   let score = 0;
   for (let i = 1; i <= 10; i++) {
     const sel = form.querySelector(`input[name="q${i}"]:checked`);
     if (sel && sel.value === "c") score++;
   }
-  const msgs = ["📚 Repasá el contenido.", "📘 Bien, seguí repasando.", "👏 Muy bien.", "🥇 Excelente.", "🎉 ¡Perfecto!"];
-  result.textContent = `${msgs[Math.floor(score/2.5)]} Obtuviste ${score}/10.`;
+
+  // Mensaje según puntaje
+  let emoji, titulo, detalle, recomendacion;
+
+  if (score === 10) {
+    emoji = "🎉";
+    titulo = "¡Perfecto! Obtuviste 10/10.";
+    detalle = "Dominás el contenido de esta unidad.";
+    recomendacion = "📖 Recomendamos pasar 2 veces más por esta lección y luego avanzar a la siguiente.";
+  } else if (score >= 7) {
+    emoji = "👏";
+    titulo = `¡Muy bien! Obtuviste ${score}/10.`;
+    detalle = "Casi lo tenés dominado.";
+    recomendacion = "📖 Recomendamos pasar 2 veces más por esta lección y luego avanzar a la siguiente.";
+  } else if (score >= 5) {
+    emoji = "📘";
+    titulo = `Bien. Obtuviste ${score}/10.`;
+    detalle = "Hay algunos conceptos para repasar.";
+    recomendacion = "🔄 Recomendamos repasar toda la lección antes de avanzar a la siguiente.";
+  } else {
+    emoji = "📚";
+    titulo = `Obtuviste ${score}/10.`;
+    detalle = "Necesitás repasar el contenido con más detalle.";
+    recomendacion = "🔄 Recomendamos repasar toda la lección desde el inicio antes de avanzar.";
+  }
+
+  result.innerHTML = `
+    <div style="font-size:2rem;margin-bottom:0.4rem">${emoji}</div>
+    <div style="font-size:1.05rem;font-weight:800;margin-bottom:0.2rem">${titulo}</div>
+    <div style="font-size:0.93rem;font-weight:400;color:#4c1d95;margin-bottom:0.6rem">${detalle}</div>
+    <div style="background:#ddd6fe;border-radius:8px;padding:0.65rem 0.9rem;font-size:0.92rem;font-weight:700;color:#3b0764;border-left:4px solid #7c3aed">
+      ${recomendacion}
+    </div>
+  `;
+
   result.style.display = "block";
   retry.style.display  = "inline-block";
+
+  // Scroll automático al resultado
+  setTimeout(() => {
+    result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, 100);
 }
 
 function resetQuiz() {

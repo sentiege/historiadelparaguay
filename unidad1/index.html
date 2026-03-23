@@ -3,349 +3,611 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Historia del Paraguay — Unidad 1</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Unidad I — Exploraciones y Descubrimientos</title>
+  <style>
+    :root {
+      --primary: #7c3aed;
+      --primary-light: #ede9fe;
+      --secondary: #0f766e;
+      --accent: #d97706;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --bg: #f5f0e8;
+      --card-bg: #ffffff;
+      --border: #e2d9cc;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow: 0 8px 32px rgba(0,0,0,0.10);
+      --shadow-sm: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+
+    .hero { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #0f766e 100%); color: white; padding: 2rem 1.5rem 1.8rem; text-align: center; }
+    .hero-inner { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+    .hero-tag { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; padding: 0.3rem 0.9rem; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
+    .hero h1 { font-size: clamp(1.4rem, 4vw, 2.2rem); font-weight: 900; line-height: 1.15; }
+    .hero-sub { font-size: 0.9rem; color: rgba(255,255,255,0.75); }
+    .hero-sub strong { color: #fde68a; }
+
+    .progress-wrap { background: white; border-bottom: 1px solid var(--border); padding: 0.75rem 1.5rem; display: flex; align-items: center; gap: 1rem; position: sticky; top: 0; z-index: 10; box-shadow: var(--shadow-sm); }
+    .progress-label { font-size: 0.8rem; font-weight: 700; color: var(--primary); white-space: nowrap; }
+    .progress-bar-bg { flex: 1; height: 8px; background: var(--primary-light); border-radius: 999px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); border-radius: 999px; transition: width 0.4s ease; }
+    .progress-count { font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
+
+    .main { flex: 1; max-width: 820px; width: 100%; margin: 0 auto; padding: 2rem 1.2rem 1rem; }
+
+    .cartilla { display: none; flex-direction: column; gap: 1.2rem; animation: fadeIn 0.35s ease; }
+    .cartilla.active { display: flex; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+    .card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 1.6rem 1.8rem; position: relative; overflow: hidden; }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--primary), var(--secondary)); }
+
+    .card-tag { display: inline-block; background: var(--primary-light); color: var(--primary); border-radius: 999px; padding: 0.2rem 0.75rem; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.7rem; }
+    .card-tag.green  { background: #dcfce7; color: #15803d; }
+    .card-tag.amber  { background: #fef3c7; color: #92400e; }
+    .card-tag.blue   { background: #dbeafe; color: #1d4ed8; }
+    .card-tag.red    { background: #fee2e2; color: #b91c1c; }
+
+    .card h2 { font-size: clamp(1.1rem, 2.5vw, 1.4rem); font-weight: 900; color: #1e1b4b; line-height: 1.25; margin-bottom: 0.8rem; }
+    .card p { font-size: 0.95rem; color: var(--text); line-height: 1.75; margin-bottom: 0.6rem; }
+    .card ul, .card ol { padding-left: 1.3rem; display: flex; flex-direction: column; gap: 0.45rem; margin-top: 0.4rem; }
+    .card li { font-size: 0.93rem; line-height: 1.6; color: var(--text); }
+    .card li strong { color: #1e1b4b; }
+
+    .highlight-box { background: linear-gradient(135deg, #f5f3ff, #ede9fe); border: 1.5px solid #c4b5fd; border-radius: var(--radius-md); padding: 1rem 1.2rem; margin-top: 0.8rem; }
+    .highlight-box p { margin: 0; font-size: 0.9rem; }
+    .highlight-box .label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 0.3rem; }
+
+    .dato-box { background: #fefce8; border: 1.5px solid #fde68a; border-radius: var(--radius-md); padding: 0.9rem 1.1rem; margin-top: 0.8rem; }
+    .dato-box p { margin: 0; font-size: 0.88rem; color: #78350f; }
+    .dato-box .label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #92400e; margin-bottom: 0.25rem; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.6rem; }
+    .mini-card { background: #f9f7f4; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.9rem 1rem; }
+    .mini-card h4 { font-size: 0.88rem; font-weight: 800; color: #1e1b4b; margin-bottom: 0.35rem; }
+    .mini-card p  { font-size: 0.82rem; color: var(--muted); line-height: 1.55; margin: 0; }
+
+    .quiz-wrap { display: flex; flex-direction: column; gap: 1.4rem; }
+    .quiz-header { text-align: center; margin-bottom: 0.5rem; }
+    .quiz-header h2 { font-size: 1.6rem; font-weight: 900; color: #1e1b4b; }
+    .quiz-header p  { font-size: 0.9rem; color: var(--muted); margin-top: 0.3rem; }
+
+    .q-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 1.3rem 1.5rem; }
+    .q-num  { font-size: 0.72rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem; }
+    .q-text { font-size: 0.97rem; font-weight: 700; color: #1e1b4b; margin-bottom: 0.9rem; line-height: 1.4; }
+    .options { display: flex; flex-direction: column; gap: 0.5rem; }
+    .opt { display: flex; align-items: center; gap: 0.65rem; padding: 0.6rem 0.9rem; border: 1.5px solid var(--border); border-radius: var(--radius-md); cursor: pointer; font-size: 0.9rem; transition: all 0.18s; background: #fafaf9; }
+    .opt:hover:not(.locked) { border-color: var(--primary); background: var(--primary-light); }
+    .opt .letter { min-width: 24px; height: 24px; border-radius: 50%; background: var(--primary-light); color: var(--primary); font-size: 0.75rem; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+    .opt.correct { border-color: #16a34a; background: #dcfce7; }
+    .opt.correct .letter { background: #16a34a; color: white; }
+    .opt.wrong   { border-color: #dc2626; background: #fee2e2; }
+    .opt.wrong .letter   { background: #dc2626; color: white; }
+    .feedback { margin-top: 0.6rem; font-size: 0.83rem; font-weight: 600; padding: 0.45rem 0.8rem; border-radius: 8px; display: none; }
+    .feedback.show { display: block; }
+    .feedback.ok { background: #dcfce7; color: #15803d; }
+    .feedback.ko { background: #fee2e2; color: #b91c1c; }
+
+    .quiz-result { display: none; background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow); padding: 2rem; text-align: center; flex-direction: column; align-items: center; gap: 0.7rem; }
+    .quiz-result.show { display: flex; }
+    .result-emoji { font-size: 3rem; }
+    .result-score { font-size: 2.5rem; font-weight: 900; color: var(--primary); }
+    .result-msg   { font-size: 1rem; color: var(--muted); }
+
+    .nav { position: sticky; bottom: 0; background: white; border-top: 1px solid var(--border); padding: 0.9rem 1.5rem; display: flex; gap: 0.7rem; justify-content: center; align-items: center; box-shadow: 0 -4px 16px rgba(0,0,0,0.06); flex-wrap: wrap; }
+    .nav-btn { border: none; border-radius: 999px; padding: 0.55rem 1.3rem; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: all 0.18s; background: #f3f4f6; color: var(--text); }
+    .nav-btn:hover    { background: #e5e7eb; transform: translateY(-1px); }
+    .nav-btn.primary  { background: linear-gradient(135deg, var(--primary), #5b21b6); color: white; box-shadow: 0 4px 14px rgba(124,58,237,0.3); }
+    .nav-btn.primary:hover { box-shadow: 0 6px 18px rgba(124,58,237,0.4); }
+    .nav-btn.home     { background: #f0fdf4; color: #15803d; border: 1.5px solid #86efac; }
+    .nav-btn.home:hover { background: #dcfce7; }
+    .nav-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+    footer { text-align: center; padding: 1.2rem 1rem 1.5rem; font-size: 0.8rem; color: var(--muted); border-top: 1px solid var(--border); line-height: 1.8; }
+    footer strong { color: var(--primary); }
+
+    @media (max-width: 540px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .card   { padding: 1.2rem 1.1rem; }
+      .nav    { padding: 0.7rem 0.8rem; }
+    }
+  </style>
 </head>
 <body>
 
-  <div class="app">
-
-    <!-- TOPBAR -->
-    <header class="topbar">
-      <div class="topbar-left">
-        <span class="mini-tag">Historia del Paraguay</span>
-        <h1>Unidad 1: Exploraciones y descubrimientos</h1>
-      </div>
-      <div class="counter" id="counter">1 / 11</div>
-    </header>
-
-    <!-- DOTS -->
-    <div class="dots" id="dots"></div>
-
-    <!-- SLIDES -->
-    <main class="stage" id="stage">
-
-     <!-- SLIDE 1 -->
-<div class="slide active">
-  <div class="card" style="text-align:center; align-items:center;">
-    <p class="kicker">Introducción</p>
-    <h2>¿Por qué Europa se lanzó al océano?</h2>
-    <p class="lead" style="text-align:center;">En el siglo XV Europa necesitaba riqueza, nuevas rutas y mejores herramientas. Esas necesidades impulsaron exploraciones que cambiaron la historia del mundo.</p>
-    <div class="pill-row">
-      <span>
-        💰 Riqueza
-        <small>Europa necesitaba metales preciosos para sostener su economía y el comercio.</small>
-      </span>
-      <span>
-        🧭 Tecnología
-        <small>La brújula y la astronomía permitieron navegar en mar abierto con precisión.</small>
-      </span>
-      <span>
-        ⚔️ Poder
-        <small>Los reinos competían por dominar nuevas rutas y expandir su influencia.</small>
-      </span>
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="hero-tag">Unidad I · Historia del Paraguay</span>
+      <h1>Exploraciones y Descubrimientos</h1>
+      <p class="hero-sub">Facilitada por la <strong>Dra. Beatriz Espinola Zaracho</strong></p>
     </div>
-    <button class="btn-accent" onclick="goTo(1)">Comenzar →</button>
+  </header>
+
+  <div class="progress-wrap">
+    <span class="progress-label">Progreso</span>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:9%"></div></div>
+    <span class="progress-count" id="progressCount">1 / 11</span>
   </div>
-</div>
 
-      <!-- SLIDE 2 -->
-      <div class="slide">
-        <div class="card">
-          <p class="kicker">Cartilla 1</p>
-          <h2>Europa en el siglo XV</h2>
-          <p class="lead">Tocá cada motivo para ver su explicación.</p>
-          <div class="motivos-grid">
-            <button class="motivo-card" onclick="showMotivo('oro', this)">
-              <img src="img/oroyplata.jpg" alt="Oro" onerror="this.style.display='none'"/>
-              <span>💰 Falta de oro y plata</span>
-            </button>
-            <button class="motivo-card" onclick="showMotivo('asia', this)">
-              <img src="img/comerciocon.jpg" alt="Asia" onerror="this.style.display='none'"/>
-              <span>🌏 Comercio con Asia difícil</span>
-            </button>
-            <button class="motivo-card" onclick="showMotivo('constantinopla', this)">
-              <img src="img/constantinopla.jpg" alt="Constantinopla" onerror="this.style.display='none'"/>
-              <span>🏰 Caída de Constantinopla</span>
-            </button>
+  <main class="main">
+
+    <!-- ══ CARTILLA 1 ══ -->
+    <section class="cartilla active" id="slide-0">
+      <div class="card">
+        <span class="card-tag blue">Contexto económico</span>
+        <h2>Situación de Europa en el siglo XV</h2>
+        <p>En el siglo XV, Europa vivía una profunda transformación económica que impulsó la búsqueda de nuevas rutas comerciales hacia Asia y África.</p>
+        <ul>
+          <li><strong>Transición económica:</strong> Del feudalismo al capitalismo comercial; auge del comercio y las ciudades.</li>
+          <li><strong>Necesidad de metales:</strong> Se requería oro y plata para la acuñación de moneda y el sostenimiento del comercio internacional.</li>
+          <li><strong>Rutas bloqueadas:</strong> La caída de Constantinopla (1453) en manos otomanas encareció y dificultó las rutas tradicionales hacia Asia.</li>
+          <li><strong>Demanda de especias:</strong> Pimienta, canela, clavo y otros productos orientales eran indispensables y muy costosos en Europa.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">⚠️ Dato clave</p>
+          <p>La caída de Constantinopla en <strong>1453</strong> fue el detonante directo que obligó a europeos a buscar rutas alternativas hacia Oriente, acelerando la era de los descubrimientos.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 2 ══ -->
+    <section class="cartilla" id="slide-1">
+      <div class="card">
+        <span class="card-tag blue">Contexto científico</span>
+        <h2>Motivaciones científicas y tecnológicas</h2>
+        <p>El avance científico y tecnológico fue indispensable para que las exploraciones fueran posibles. Sin nuevos instrumentos y conocimientos, los viajes oceánicos habrían sido imposibles.</p>
+        <div class="grid-2">
+          <div class="mini-card">
+            <h4>🧭 Brújula y astrolabio</h4>
+            <p>Permitían navegar de altura (lejos de la costa), midiendo la posición de los barcos mediante los astros.</p>
           </div>
-          <div id="motivoBox" class="info-panel" style="display:none"></div>
-          <div class="quiz-box">
-            <p class="quiz-q">¿Cuál fue el principal bloqueo de rutas comerciales?</p>
-            <div class="options">
-              <button onclick="checkQ(this, false)">Guerras internas</button>
-              <button onclick="checkQ(this, true)">Caída de Constantinopla</button>
-              <button onclick="checkQ(this, false)">Falta de barcos</button>
-            </div>
-            <p class="feedback"></p>
+          <div class="mini-card">
+            <h4>⛵ Carabela</h4>
+            <p>Embarcación ligera y maniobrable, capaz de navegar contra el viento, ideal para exploraciones oceánicas.</p>
+          </div>
+          <div class="mini-card">
+            <h4>🗺️ Cartografía</h4>
+            <p>Los estudios geográficos y astronómicos mejoraron los mapas, permitiendo planificar rutas con mayor precisión.</p>
+          </div>
+          <div class="mini-card">
+            <h4>📰 Imprenta</h4>
+            <p>Inventada por Gutenberg (~1440), permitió difundir rápidamente mapas, teorías y conocimientos científicos por toda Europa.</p>
+          </div>
+        </div>
+        <div class="highlight-box">
+          <p class="label">💡 Revolución de la información</p>
+          <p>La imprenta fue tan revolucionaria para los descubrimientos como la brújula: permitió que el conocimiento geográfico se multiplicara y llegara a todos los navegantes europeos.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 3 ══ -->
+    <section class="cartilla" id="slide-2">
+      <div class="card">
+        <span class="card-tag amber">Exploraciones portuguesas</span>
+        <h2>Los portugueses y Enrique el Navegante</h2>
+        <p>Portugal fue el primer país europeo en emprender exploraciones sistemáticas. Su posición geográfica en el extremo occidental de Europa y su tradición marinera lo convirtieron en el pionero de los descubrimientos.</p>
+        <ul>
+          <li><strong>Enrique el Navegante (1394–1460):</strong> Príncipe portugués que impulsó y financió las exploraciones por la costa occidental de África. Fundó una escuela de navegación en el Cabo de San Vicente.</li>
+          <li><strong>Islas descubiertas:</strong> Azores, Cabo Verde, Madeira — bases clave para futuras expediciones atlánticas.</li>
+          <li><strong>Objetivo:</strong> Encontrar una ruta marítima hacia Asia bordeando África, evitando las rutas terrestres controladas por los otomanos.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">📅 Cronología portuguesa</p>
+          <p>Bajo el impulso de Enrique el Navegante, Portugal exploró metódicamente la costa africana durante décadas, sentando las bases para los grandes descubrimientos del siglo XV.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 4 ══ -->
+    <section class="cartilla" id="slide-3">
+      <div class="card">
+        <span class="card-tag amber">Exploraciones portuguesas</span>
+        <h2>Bartolomé Díaz y el Cabo de Buena Esperanza</h2>
+        <p>El navegante Bartolomé Díaz dio un paso decisivo al rodear por primera vez el extremo sur del continente africano, abriendo la ruta marítima hacia el océano Índico y Asia.</p>
+        <ul>
+          <li><strong>Expedición (1487–1488):</strong> Partió de Lisboa con la misión de explorar la costa africana más allá de lo conocido.</li>
+          <li><strong>Cabo Tormentoso:</strong> Díaz llegó al extremo sur de África y lo denominó "Cabo Tormentoso" por las violentas tormentas que allí encontró.</li>
+          <li><strong>Renombramiento:</strong> El rey Juan II de Portugal lo rebautizó como <em>Cabo de Buena Esperanza</em>, pues abría la esperanza de llegar a la India por mar.</li>
+          <li><strong>Importancia:</strong> Demostró que África era circunnavegable, sentando las bases para el viaje de Vasco de Gama a la India (1498).</li>
+        </ul>
+        <div class="highlight-box">
+          <p class="label">💡 Consecuencia histórica</p>
+          <p>El descubrimiento del Cabo de Buena Esperanza fue el antecedente directo del viaje de Vasco de Gama, quien en <strong>1498</strong> llegó efectivamente a la India bordeando África.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 5 ══ -->
+    <section class="cartilla" id="slide-4">
+      <div class="card">
+        <span class="card-tag red">Acuerdo político</span>
+        <h2>Tratado de Alcazobas-Toledo (1479–1480)</h2>
+        <p>Antes de los grandes descubrimientos, Portugal y Castilla ya se repartían las zonas de influencia atlántica mediante acuerdos diplomáticos que prefiguraron el reparto del mundo.</p>
+        <ul>
+          <li><strong>Contexto:</strong> Firmado para poner fin a la Guerra de Sucesión Castellana entre Portugal y Castilla.</li>
+          <li><strong>Reparto:</strong> Dividió las zonas de influencia en el Atlántico entre ambas potencias.</li>
+          <li><strong>Portugal obtuvo:</strong> Control exclusivo de la navegación y conquista en África (Guinea, Azores, Madeira, Cabo Verde).</li>
+          <li><strong>Castilla obtuvo:</strong> Las Islas Canarias, punto de partida clave para futuras expediciones hacia América.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">📅 Importancia</p>
+          <p>Este tratado estableció el precedente del reparto del mundo entre potencias europeas, que luego se ampliaría con las <strong>Bulas Alejandrinas (1493)</strong> y el <strong>Tratado de Tordesillas (1494)</strong>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 6 ══ -->
+    <section class="cartilla" id="slide-5">
+      <div class="card">
+        <span class="card-tag">Cristóbal Colón</span>
+        <h2>Vida y proyecto de Colón</h2>
+        <p>Cristóbal Colón fue el navegante genovés cuyo proyecto de llegar a Asia navegando hacia el oeste cambió para siempre la historia de la humanidad.</p>
+        <ul>
+          <li><strong>Nacimiento:</strong> Génova, 1451, en el seno de una familia humilde. Sus padres fueron Domingo Colón y Susana Fontanarrosa.</li>
+          <li><strong>Formación:</strong> Desde joven navegó y adquirió experiencia en el Mediterráneo y el Atlántico.</li>
+          <li><strong>Matrimonio:</strong> Se casó con Felipa de Perestrello, contacto que lo vinculó a cartógrafos y navegantes portugueses.</li>
+          <li><strong>Su teoría:</strong> La Tierra es redonda → se puede llegar a Asia navegando hacia el oeste por el Atlántico.</li>
+          <li><strong>Apoyo:</strong> Tras ser rechazado por Portugal, obtuvo el respaldo de los Reyes Católicos de España en las Capitulaciones de Santa Fe (1492).</li>
+          <li><strong>Muerte:</strong> Falleció en Valladolid en <strong>1506</strong>, sin reconocer plenamente que había descubierto un nuevo continente.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 7 ══ -->
+    <section class="cartilla" id="slide-6">
+      <div class="card">
+        <span class="card-tag green">Viajes de Colón</span>
+        <h2>Primer y Segundo Viaje (1492–1496)</h2>
+        <p>Los dos primeros viajes de Colón establecieron el contacto entre Europa y el continente americano, abriendo una nueva era en la historia mundial.</p>
+        <ul>
+          <li><strong>Primer viaje (1492–1493):</strong> Salió de Puerto de Palos el <strong>3 de agosto de 1492</strong> con tres naves: La Pinta, La Niña y la Santa María. El <strong>12 de octubre de 1492</strong> avistaron tierra en Guanahaní (Bahamas), a la que llamaron San Salvador. Exploraron Cuba y La Española, fundando el fuerte "La Navidad".</li>
+          <li><strong>Segundo viaje (1493–1496):</strong> Regresó con 17 naves y más de 1.200 hombres. Descubrió Puerto Rico y Jamaica. Fundó la Villa Isabela en La Española, el primer asentamiento europeo permanente en América.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">📅 Fecha memorable</p>
+          <p><strong>12 de octubre de 1492</strong>: fecha del primer contacto europeo con América. Hoy se conmemora como Día del Descubrimiento de América o Día de la Diversidad Cultural.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 8 ══ -->
+    <section class="cartilla" id="slide-7">
+      <div class="card">
+        <span class="card-tag green">Viajes de Colón</span>
+        <h2>Tercer y Cuarto Viaje (1498–1504)</h2>
+        <p>Los dos últimos viajes de Colón ampliaron el conocimiento del continente americano, aunque terminaron en dificultades personales y políticas para el descubridor.</p>
+        <ul>
+          <li><strong>Tercer viaje (1498–1500):</strong> Descubrió la isla Trinidad y la desembocadura del río Orinoco (Venezuela), siendo <em>la primera vez que los europeos pisaron tierra firme del continente americano</em>. Debido a conflictos y mala gestión de la colonia, Colón fue arrestado y devuelto a España encadenado.</li>
+          <li><strong>Cuarto viaje (1502–1504):</strong> Exploró las costas de América Central (Honduras, Costa Rica, Panamá) buscando un paso hacia el Océano Pacífico y Asia. Terminó sin encontrar la ruta y en precarias condiciones físicas y políticas.</li>
+        </ul>
+        <div class="highlight-box">
+          <p class="label">💡 Paradoja histórica</p>
+          <p>Colón murió en 1506 creyendo haber llegado a Asia. Fue Américo Vespucio quien demostró que se trataba de un continente nuevo, que terminaría llevando su nombre: América.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 9 ══ -->
+    <section class="cartilla" id="slide-8">
+      <div class="card">
+        <span class="card-tag red">Marco jurídico</span>
+        <h2>Las Bulas Alejandrinas (1493)</h2>
+        <p>Las Bulas Alejandrinas fueron documentos papales que legitimaron la conquista española de América, otorgando derechos exclusivos a la Corona de Castilla sobre las tierras descubiertas.</p>
+        <ul>
+          <li><strong>Emisor:</strong> Papa Alejandro VI (Rodrigo de Borja), a petición de los Reyes Católicos de España.</li>
+          <li><strong>Fecha:</strong> 1493, un año después del descubrimiento de América.</li>
+          <li><strong>Contenido:</strong> Concedieron a Castilla el derecho exclusivo de conquista y dominio sobre las tierras descubiertas al oeste.</li>
+          <li><strong>Línea Alejandrina:</strong> Establecieron una demarcación a <strong>100 leguas</strong> al oeste de las Azores y Cabo Verde; lo descubierto al oeste sería castellano y al este, portugués.</li>
+          <li><strong>Condición:</strong> España debía evangelizar a los pueblos indígenas.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">⚠️ Conflicto</p>
+          <p>Portugal no aceptó la Línea Alejandrina y negoció su modificación, lo que llevó al Tratado de Tordesillas en <strong>1494</strong>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 10 ══ -->
+    <section class="cartilla" id="slide-9">
+      <div class="card">
+        <span class="card-tag red">Marco jurídico</span>
+        <h2>Tratado de Tordesillas (1494)</h2>
+        <p>El Tratado de Tordesillas fue el acuerdo definitivo que dividió el mundo entre España y Portugal, con consecuencias territoriales que se sienten hasta hoy en América Latina.</p>
+        <ul>
+          <li><strong>Firmantes:</strong> Los Reyes Católicos de Castilla y el rey Juan II de Portugal.</li>
+          <li><strong>La línea:</strong> Se desplazó la demarcación a <strong>370 leguas</strong> al oeste de las islas de Cabo Verde.</li>
+          <li><strong>Reparto:</strong> Las tierras al <em>oeste</em> de la línea serían para Castilla; las del <em>este</em>, para Portugal.</li>
+          <li><strong>Consecuencia para América:</strong> Brasil quedó del lado portugués, lo que explica que Brasil hable portugués hoy. El resto de América del Sur y Central quedó bajo dominio español.</li>
+        </ul>
+        <div class="grid-2">
+          <div class="mini-card">
+            <h4>🇪🇸 España obtiene</h4>
+            <p>Todo el continente americano al oeste de la línea: México, América Central, el Caribe y la mayor parte de América del Sur.</p>
+          </div>
+          <div class="mini-card">
+            <h4>🇵🇹 Portugal obtiene</h4>
+            <p>Brasil (al este de la línea) y el control de las rutas africanas e índicas ya establecidas.</p>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- SLIDE 3 -->
-      <div class="slide">
-        <div class="card">
-          <p class="kicker">Cartilla 2</p>
-          <h2>Ciencia y tecnología</h2>
-          <p class="lead">Europa desarrolló los instrumentos necesarios para explorar el océano abierto.</p>
-          <div class="btn-group centered">
-            <button class="tool-btn" onclick="showInfo('infoTool', '🧭 Brújula: permitía orientarse en mar abierto, lejos de la costa.')">Brújula</button>
-            <button class="tool-btn" onclick="showInfo('infoTool', '⭐ Navegación astronómica: se calculaba la posición observando los astros.')">Nav. astronómica</button>
-            <button class="tool-btn" onclick="showInfo('infoTool', '📖 Imprenta (Gutenberg, ~1440): difundió mapas y conocimientos científicos.')">Imprenta</button>
+    <!-- ══ QUIZ ══ -->
+    <section class="cartilla" id="slide-10">
+      <div class="quiz-wrap">
+        <div class="quiz-header">
+          <h2>🎯 Quiz Final</h2>
+          <p>Unidad I · 8 preguntas · Seleccioná la respuesta correcta</p>
+        </div>
+
+        <!-- Q1 -->
+        <div class="q-card" id="q0">
+          <p class="q-num">Pregunta 1</p>
+          <p class="q-text">¿Cuál fue la principal causa económica que impulsó las exploraciones europeas en el siglo XV?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(0,0,2)"><span class="letter">A</span> La necesidad de poblar nuevos territorios</div>
+            <div class="opt" onclick="answer(0,1,2)"><span class="letter">B</span> El deseo de evangelizar pueblos africanos</div>
+            <div class="opt" onclick="answer(0,2,2)"><span class="letter">C</span> La búsqueda de rutas alternativas a Asia tras el bloqueo otomano</div>
+            <div class="opt" onclick="answer(0,3,2)"><span class="letter">D</span> La expansión del feudalismo europeo</div>
           </div>
-          <div id="infoTool" class="info-panel">Seleccioná una herramienta para ver su descripción.</div>
-          <div class="quiz-box">
-            <p class="quiz-q">¿Qué instrumento permitió navegar lejos de la costa?</p>
-            <div class="options">
-              <button onclick="checkQ(this, false)">Telescopio</button>
-              <button onclick="checkQ(this, true)">Brújula</button>
-              <button onclick="checkQ(this, false)">Imprenta</button>
-            </div>
-            <p class="feedback"></p>
+          <div class="feedback" id="fb0"></div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="q-card" id="q1">
+          <p class="q-num">Pregunta 2</p>
+          <p class="q-text">¿Qué institución fundó Enrique el Navegante para impulsar las exploraciones?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(1,0,1)"><span class="letter">A</span> Una universidad de geografía en Lisboa</div>
+            <div class="opt" onclick="answer(1,1,1)"><span class="letter">B</span> Una escuela de navegación en el Cabo de San Vicente</div>
+            <div class="opt" onclick="answer(1,2,1)"><span class="letter">C</span> Un observatorio astronómico en las Azores</div>
+            <div class="opt" onclick="answer(1,3,1)"><span class="letter">D</span> Una compañía comercial para el comercio africano</div>
           </div>
+          <div class="feedback" id="fb1"></div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="q-card" id="q2">
+          <p class="q-num">Pregunta 3</p>
+          <p class="q-text">¿Cómo llamó originalmente Bartolomé Díaz al extremo sur de África?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(2,0,0)"><span class="letter">A</span> Cabo Tormentoso</div>
+            <div class="opt" onclick="answer(2,1,0)"><span class="letter">B</span> Cabo de Buena Esperanza</div>
+            <div class="opt" onclick="answer(2,2,0)"><span class="letter">C</span> Cabo Verde</div>
+            <div class="opt" onclick="answer(2,3,0)"><span class="letter">D</span> Cabo Africano</div>
+          </div>
+          <div class="feedback" id="fb2"></div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="q-card" id="q3">
+          <p class="q-num">Pregunta 4</p>
+          <p class="q-text">En el Tratado de Alcazobas-Toledo, ¿qué obtuvo Castilla?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(3,0,2)"><span class="letter">A</span> Las islas Azores</div>
+            <div class="opt" onclick="answer(3,1,2)"><span class="letter">B</span> El control de Guinea y Cabo Verde</div>
+            <div class="opt" onclick="answer(3,2,2)"><span class="letter">C</span> Las Islas Canarias</div>
+            <div class="opt" onclick="answer(3,3,2)"><span class="letter">D</span> La isla de Madeira</div>
+          </div>
+          <div class="feedback" id="fb3"></div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="q-card" id="q4">
+          <p class="q-num">Pregunta 5</p>
+          <p class="q-text">¿En qué fecha salió Colón de Puerto de Palos en su primer viaje?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(4,0,0)"><span class="letter">A</span> 3 de agosto de 1492</div>
+            <div class="opt" onclick="answer(4,1,0)"><span class="letter">B</span> 12 de octubre de 1492</div>
+            <div class="opt" onclick="answer(4,2,0)"><span class="letter">C</span> 1 de enero de 1493</div>
+            <div class="opt" onclick="answer(4,3,0)"><span class="letter">D</span> 15 de agosto de 1492</div>
+          </div>
+          <div class="feedback" id="fb4"></div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="q-card" id="q5">
+          <p class="q-num">Pregunta 6</p>
+          <p class="q-text">¿Qué nombre le dio Colón a la primera tierra que avistó el 12 de octubre de 1492?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(5,0,1)"><span class="letter">A</span> La Española</div>
+            <div class="opt" onclick="answer(5,1,1)"><span class="letter">B</span> San Salvador</div>
+            <div class="opt" onclick="answer(5,2,1)"><span class="letter">C</span> Cuba</div>
+            <div class="opt" onclick="answer(5,3,1)"><span class="letter">D</span> La Navidad</div>
+          </div>
+          <div class="feedback" id="fb5"></div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="q-card" id="q6">
+          <p class="q-num">Pregunta 7</p>
+          <p class="q-text">¿En qué viaje fue la primera vez que Colón pisó tierra firme del continente americano?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(6,0,2)"><span class="letter">A</span> Primer viaje</div>
+            <div class="opt" onclick="answer(6,1,2)"><span class="letter">B</span> Segundo viaje</div>
+            <div class="opt" onclick="answer(6,2,2)"><span class="letter">C</span> Tercer viaje (Venezuela/Orinoco)</div>
+            <div class="opt" onclick="answer(6,3,2)"><span class="letter">D</span> Cuarto viaje</div>
+          </div>
+          <div class="feedback" id="fb6"></div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="q-card" id="q7">
+          <p class="q-num">Pregunta 8</p>
+          <p class="q-text">¿A cuántas leguas al oeste de Cabo Verde fijó el Tratado de Tordesillas la línea divisoria?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(7,0,1)"><span class="letter">A</span> 100 leguas</div>
+            <div class="opt" onclick="answer(7,1,1)"><span class="letter">B</span> 370 leguas</div>
+            <div class="opt" onclick="answer(7,2,1)"><span class="letter">C</span> 250 leguas</div>
+            <div class="opt" onclick="answer(7,3,1)"><span class="letter">D</span> 500 leguas</div>
+          </div>
+          <div class="feedback" id="fb7"></div>
+        </div>
+
+        <div class="quiz-result" id="quizResult">
+          <div class="result-emoji" id="resultEmoji"></div>
+          <div class="result-score" id="resultScore"></div>
+          <p class="result-msg" id="resultMsg"></p>
+          <button class="nav-btn primary" onclick="retryQuiz()">🔄 Intentar de nuevo</button>
         </div>
       </div>
+    </section>
 
-      <!-- SLIDE 4 -->
-      <div class="slide">
-        <div class="card">
-          <p class="kicker">Cartilla 3</p>
-          <h2>Los primeros: Portugal</h2>
-          <p class="lead">Los portugueses fueron los primeros en realizar exploraciones atlánticas sistemáticas. Enrique el Navegante fundó una escuela de navegación e impulsó el avance por las costas de África.</p>
-          <div class="timeline">
-            <div class="tl-item">
-              <div class="tl-num">1</div>
-              <div><strong>Azores</strong> — Archipiélago incorporado durante la expansión atlántica portuguesa.</div>
-            </div>
-            <div class="tl-item">
-              <div class="tl-num">2</div>
-              <div><strong>Cabo Verde</strong> — Punto estratégico para continuar la navegación hacia el sur.</div>
-            </div>
-            <div class="tl-item">
-              <div class="tl-num">3</div>
-              <div><strong>Cabo de Buena Esperanza</strong> — Bartolomé Díaz llegó allí en 1488, abriendo la ruta al océano Índico.</div>
-            </div>
-          </div>
-          <div class="quiz-box">
-            <p class="quiz-q">¿Quién impulsó las exploraciones portuguesas?</p>
-            <div class="options">
-              <button onclick="checkQ(this, true)">Enrique el Navegante</button>
-              <button onclick="checkQ(this, false)">Cristóbal Colón</button>
-              <button onclick="checkQ(this, false)">Alejandro VI</button>
-            </div>
-            <p class="feedback"></p>
-          </div>
-        </div>
-      </div>
+  </main>
 
-      <!-- SLIDE 5 -->
-      <div class="slide">
-        <div class="card">
-          <p class="kicker">Cartilla 4</p>
-          <h2>Tratado de Alcazovas-Toledo</h2>
-          <p class="lead">Firmado en 1479-1480, fue el primer acuerdo internacional que repartió las zonas de influencia atlántica entre Portugal y Castilla.</p>
-          <div class="duel-row">
-            <div class="duel-card green">
-              <h3>🟢 Portugal</h3>
-              <p>Control de África: Guinea, Azores, Madeira y Cabo Verde.</p>
-            </div>
-            <div class="duel-card orange">
-              <h3>🟠 Castilla</h3>
-              <p>Control de las Islas Canarias.</p>
-            </div>
-          </div>
-          <div class="quiz-box">
-            <p class="quiz-q">Según Alcazovas-Toledo, ¿quién controlaba África?</p>
-            <div class="options">
-              <button onclick="checkQ(this, false)">Castilla</button>
-              <button onclick="checkQ(this, true)">Portugal</button>
-            </div>
-            <p class="feedback"></p>
-          </div>
-        </div>
-      </div>
+  <nav class="nav">
+    <button class="nav-btn home"    onclick="goHome()">🏠 Inicio</button>
+    <button class="nav-btn"         onclick="prev()" id="btnPrev" disabled>← Anterior</button>
+    <button class="nav-btn primary" onclick="next()" id="btnNext">Siguiente →</button>
+  </nav>
 
-      <!-- SLIDE 6 -->
-      <div class="slide">
-        <div class="card">
-          <p class="kicker">Cartilla 5</p>
-          <h2>Cristóbal Colón</h2>
-          <p class="lead">Colón nació en Génova en 1451. Propuso llegar a Asia navegando hacia el oeste, basándose en que la Tierra es redonda. Su proyecto fue rechazado por Portugal y aceptado por Castilla en 1492.</p>
-          <div class="highlight-box">
-            <strong>Idea central:</strong> llegar al Oriente navegando por el oeste del Atlántico.
-          </div>
-          <div class="note-box">
-            Colón falleció en 1506 sin reconocer plenamente que había llegado a un continente desconocido para los europeos.
-          </div>
-          <div class="quiz-box">
-            <p class="quiz-q">¿Qué reino aceptó el proyecto de Colón?</p>
-            <div class="options">
-              <button onclick="checkQ(this, false)">Portugal</button>
-              <button onclick="checkQ(this, true)">Castilla</button>
-              <button onclick="checkQ(this, false)">Francia</button>
-            </div>
-            <p class="feedback"></p>
-          </div>
-        </div>
-      </div>
+  <footer>
+    <p>Unidad I · Historia del Paraguay</p>
+    <p>Facilitada por la <strong>Dra. Beatriz Espinola Zaracho</strong></p>
+  </footer>
 
-      <!-- SLIDE 7 -->
-      <div class="slide">
-        <div class="card">
-          <p class="kicker">Cartilla 6</p>
-          <h2>Los cuatro viajes de Colón</h2>
-          <p class="lead">Entre 1492 y 1504 Colón realizó cuatro viajes, cada uno con objetivos distintos.</p>
-          <div class="viajes-grid">
-            <div class="viaje-card">
-              <div class="viaje-num">1</div>
-              <div><strong>1492</strong><p>Descubre América. Llega a Bahamas, Cuba y La Española.</p></div>
-            </div>
-            <div class="viaje-card">
-              <div class="viaje-num">2</div>
-              <div><strong>1493–1496</strong><p>Impulsa la colonización. Explora Puerto Rico y Jamaica.</p></div>
-            </div>
-            <div class="viaje-card">
-              <div class="viaje-num">3</div>
-              <div><strong>1498–1500</strong><p>Llega al continente. Descubre Venezuela y el Orinoco.</p></div>
-            </div>
-            <div class="viaje-card">
-              <div class="viaje-num">4</div>
-              <div><strong>1502–1504</strong><p>Busca un paso al Pacífico por América Central.</p></div>
-            </div>
-          </div>
-          <div class="quiz-box">
-            <p class="quiz-q">¿En qué viaje llegó Colón al continente americano?</p>
-            <div class="options">
-              <button onclick="checkQ(this, false)">Primer viaje</button>
-              <button onclick="checkQ(this, false)">Segundo viaje</button>
-              <button onclick="checkQ(this, true)">Tercer viaje</button>
-              <button onclick="checkQ(this, false)">Cuarto viaje</button>
-            </div>
-            <p class="feedback"></p>
-          </div>
-        </div>
-      </div>
+  <script>
+    const TOTAL = 11;
+    let current = 0;
 
-      <!-- SLIDE 8 -->
-      <div class="slide">
-        <div class="card">
-          <p class="kicker">Cartilla 7</p>
-          <h2>Bulas Alejandrinas</h2>
-          <p class="lead">En 1493 el papa Alejandro VI emitió documentos otorgando a Castilla derechos sobre las tierras descubiertas al oeste. Trazó una línea imaginaria en el Atlántico.</p>
-          <div class="explain-box">
-            <ul>
-              <li>Todo al <strong>oeste</strong> de la línea → <strong>Castilla</strong></li>
-              <li>Todo al <strong>este</strong> de la línea → <strong>Portugal</strong></li>
-              <li>La línea se ubicó a <strong>100 leguas</strong> al oeste de Azores y Cabo Verde</li>
-            </ul>
-          </div>
-          <div class="line-visual">
-            <div class="line-side">
-              <span class="flag">🏰</span>
-              <strong>Oeste — Castilla</strong>
-            </div>
-            <div class="line-divider"></div>
-            <div class="line-side">
-              <span class="flag">⚓</span>
-              <strong>Este — Portugal</strong>
-            </div>
-          </div>
-          <div class="note-box">Portugal no quedó conforme, lo que llevó a negociar el Tratado de Tordesillas.</div>
-        </div>
-      </div>
+    const correctAnswers = [2, 1, 0, 2, 0, 1, 2, 1];
+    const feedbacks = [
+      [
+        "Incorrecto. Las exploraciones no buscaban poblar; buscaban rutas comerciales.",
+        "Incorrecto. La evangelización fue un objetivo secundario, no el motor económico.",
+        "✔ Correcto. La caída de Constantinopla (1453) bloqueó las rutas a Asia, forzando la búsqueda de alternativas.",
+        "Incorrecto. El feudalismo estaba en declive; el capitalismo comercial era el motor de la época."
+      ],
+      [
+        "Incorrecto. Enrique fundó una escuela de navegación, no una universidad de geografía.",
+        "✔ Correcto. Enrique el Navegante fundó una escuela de navegación en el Cabo de San Vicente, Portugal.",
+        "Incorrecto. No hay registro de un observatorio en las Azores vinculado a Enrique.",
+        "Incorrecto. Eso corresponde a organizaciones comerciales posteriores."
+      ],
+      [
+        "✔ Correcto. Díaz lo llamó 'Cabo Tormentoso' por las violentas tormentas. El rey Juan II lo rebautizó como Cabo de Buena Esperanza.",
+        "Incorrecto. Ese fue el nombre que le dio el rey Juan II, no Díaz.",
+        "Incorrecto. Cabo Verde es un archipiélago, no el extremo sur de África.",
+        "Incorrecto. Ese nombre no existe."
+      ],
+      [
+        "Incorrecto. Las Azores quedaron del lado de Portugal.",
+        "Incorrecto. Guinea y Cabo Verde también quedaron para Portugal.",
+        "✔ Correcto. Castilla obtuvo las Islas Canarias, punto clave para futuras expediciones hacia América.",
+        "Incorrecto. Madeira quedó bajo dominio portugués."
+      ],
+      [
+        "✔ Correcto. Colón zarpó de Puerto de Palos el 3 de agosto de 1492 con La Pinta, La Niña y la Santa María.",
+        "Incorrecto. El 12 de octubre es cuando avistaron tierra, no cuando partieron.",
+        "Incorrecto. Para enero de 1493, Colón ya estaba regresando a España.",
+        "Incorrecto. El 15 de agosto de 1537 corresponde a la fundación de Asunción."
+      ],
+      [
+        "Incorrecto. La Española fue descubierta en el mismo viaje, pero no fue la primera tierra avistada.",
+        "✔ Correcto. Colón llamó San Salvador a la isla Guanahaní (Bahamas), la primera tierra avistada el 12 de octubre de 1492.",
+        "Incorrecto. Cuba fue explorada después, en el mismo viaje.",
+        "Incorrecto. La Navidad fue un fuerte fundado en La Española."
+      ],
+      [
+        "Incorrecto. En el primer viaje solo llegó a islas del Caribe.",
+        "Incorrecto. En el segundo viaje exploró más islas caribeñas.",
+        "✔ Correcto. En el tercer viaje (1498) Colón llegó a la desembocadura del Orinoco en Venezuela, pisando tierra firme por primera vez.",
+        "Incorrecto. En el cuarto viaje exploró Centroamérica buscando un paso al Pacífico."
+      ],
+      [
+        "Incorrecto. Las 100 leguas correspondían a la Línea Alejandrina de las Bulas Papales.",
+        "✔ Correcto. El Tratado de Tordesillas estableció la línea a 370 leguas al oeste de Cabo Verde.",
+        "Incorrecto. Esa distancia no fue acordada en ningún tratado.",
+        "Incorrecto. 500 leguas no corresponde a ninguno de los tratados firmados."
+      ]
+    ];
 
-      <!-- SLIDE 9 -->
-      <div class="slide">
-        <div class="card">
-          <p class="kicker">Cartilla 8</p>
-          <h2>Tratado de Tordesillas</h2>
-          <p class="lead">Firmado en 1494, movió la línea divisoria a <strong>370 leguas</strong> al oeste de Cabo Verde, en lugar de las 100 originales de las Bulas.</p>
-          <div class="compare-table">
-            <div class="cmp-row header"><span>Acuerdo</span><span>Distancia de la línea</span></div>
-            <div class="cmp-row"><span>Bulas Alejandrinas (1493)</span><span>100 leguas</span></div>
-            <div class="cmp-row highlight-row"><span>Tratado de Tordesillas (1494)</span><span>370 leguas</span></div>
-          </div>
-          <div class="note-box">
-            Ese desplazamiento fue clave: permitió a Portugal reclamar la costa oriental de Brasil.
-          </div>
-          <div class="quiz-box">
-            <p class="quiz-q">¿A cuántas leguas se fijó la línea en Tordesillas?</p>
-            <div class="options">
-              <button onclick="checkQ(this, false)">100 leguas</button>
-              <button onclick="checkQ(this, false)">250 leguas</button>
-              <button onclick="checkQ(this, true)">370 leguas</button>
-            </div>
-            <p class="feedback"></p>
-          </div>
-        </div>
-      </div>
+    let quizAnswered = new Array(8).fill(false);
+    let quizScore = 0;
+    let quizDone = false;
 
-      <!-- SLIDE 10 -->
-      <div class="slide">
-        <div class="card">
-          <p class="kicker">Cartilla 9 — Repaso</p>
-          <h2>Repaso rápido</h2>
-          <div class="repaso-grid">
-            <div class="repaso-card"><span>💰</span><p>Europa necesitaba riqueza y nuevas rutas comerciales.</p></div>
-            <div class="repaso-card"><span>🧭</span><p>La brújula y la astronomía permitieron explorar el océano.</p></div>
-            <div class="repaso-card"><span>⚓</span><p>Portugal fue el primer reino en explorar sistemáticamente.</p></div>
-            <div class="repaso-card"><span>🌍</span><p>Colón llegó a América en 1492 navegando hacia el oeste.</p></div>
-            <div class="repaso-card"><span>📜</span><p>Las Bulas y Tordesillas dividieron el mundo entre Castilla y Portugal.</p></div>
-          </div>
-        </div>
-      </div>
+    function updateProgress() {
+      const pct = ((current + 1) / TOTAL) * 100;
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('progressCount').textContent = (current + 1) + ' / ' + TOTAL;
+      document.getElementById('btnPrev').disabled = current === 0;
+      if (current === TOTAL - 1) {
+        document.getElementById('btnNext').textContent = '✓ Fin';
+        document.getElementById('btnNext').disabled = true;
+      } else {
+        document.getElementById('btnNext').textContent = 'Siguiente →';
+        document.getElementById('btnNext').disabled = false;
+      }
+    }
 
-      <!-- SLIDE 11 -->
-      <div class="slide">
-        <div class="card">
-          <p class="kicker">Cartilla 10 — Quiz final</p>
-          <h2>Quiz final</h2>
-          <form id="quizForm">
-            <div class="q-block"><p>1. ¿Qué necesitaba Europa para acuñar moneda?</p>
-              <label><input type="radio" name="q1" value="c"/> Oro y plata</label>
-              <label><input type="radio" name="q1" value="w"/> Seda y algodón</label></div>
-            <div class="q-block"><p>2. ¿Por qué era difícil el comercio con Asia?</p>
-              <label><input type="radio" name="q2" value="c"/> Las rutas eran largas, caras y peligrosas</label>
-              <label><input type="radio" name="q2" value="w"/> Asia no tenía productos para vender</label></div>
-            <div class="q-block"><p>3. ¿Qué evento bloqueó las rutas a Oriente?</p>
-              <label><input type="radio" name="q3" value="c"/> La caída de Constantinopla</label>
-              <label><input type="radio" name="q3" value="w"/> La caída del Imperio Romano</label></div>
-            <div class="q-block"><p>4. ¿Qué instrumento ayudó a navegar en mar abierto?</p>
-              <label><input type="radio" name="q4" value="c"/> La brújula</label>
-              <label><input type="radio" name="q4" value="w"/> El telescopio</label></div>
-            <div class="q-block"><p>5. ¿Quién impulsó las exploraciones portuguesas?</p>
-              <label><input type="radio" name="q5" value="c"/> Enrique el Navegante</label>
-              <label><input type="radio" name="q5" value="w"/> Alejandro VI</label></div>
-            <div class="q-block"><p>6. ¿Qué obtuvo Castilla en el Tratado de Alcazovas?</p>
-              <label><input type="radio" name="q6" value="c"/> Las Islas Canarias</label>
-              <label><input type="radio" name="q6" value="w"/> África y Guinea</label></div>
-            <div class="q-block"><p>7. ¿Cuál era la idea central de Colón?</p>
-              <label><input type="radio" name="q7" value="c"/> Llegar a Asia navegando hacia el oeste</label>
-              <label><input type="radio" name="q7" value="w"/> Rodear África para llegar a Asia</label></div>
-            <div class="q-block"><p>8. ¿En qué año llegó Colón a América?</p>
-              <label><input type="radio" name="q8" value="c"/> 1492</label>
-              <label><input type="radio" name="q8" value="w"/> 1488</label></div>
-            <div class="q-block"><p>9. ¿Qué establecieron las Bulas Alejandrinas?</p>
-              <label><input type="radio" name="q9" value="c"/> Una línea divisoria entre Castilla y Portugal</label>
-              <label><input type="radio" name="q9" value="w"/> Nombraron a Colón gobernador</label></div>
-            <div class="q-block"><p>10. ¿Qué tratado permitió a Portugal colonizar Brasil?</p>
-              <label><input type="radio" name="q10" value="c"/> Tratado de Tordesillas</label>
-              <label><input type="radio" name="q10" value="w"/> Tratado de Alcazovas</label></div>
-            <button type="button" class="btn-accent" onclick="gradeQuiz()">Ver resultado</button>
-          </form>
-          <div id="quizResult" style="display:none"></div>
-          <button type="button" id="retryBtn" class="btn-outline" style="display:none" onclick="resetQuiz()">🔄 Intentar de nuevo</button>
-        </div>
-      </div>
+    function showSlide(idx) {
+      document.querySelectorAll('.cartilla').forEach(s => s.classList.remove('active'));
+      document.getElementById('slide-' + idx).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      updateProgress();
+    }
 
-    </main>
+    function next() { if (current < TOTAL - 1) { current++; showSlide(current); } }
+    function prev() { if (current > 0) { current--; showSlide(current); } }
+    function goHome() { window.location.href = '../index.html'; }
 
-    <!-- NAV -->
-<nav class="nav">
-  <button class="nav-btn" onclick="window.location.href='../index.html'">🏠 Inicio</button>  <!-- ← nuevo -->
-  <button class="nav-btn" onclick="prev()">← Anterior</button>
-  <button class="nav-btn primary" onclick="next()">Siguiente →</button>
-</nav>
-  <script src="script.js"></script>
+    function answer(qIdx, optIdx, correct) {
+      if (quizAnswered[qIdx]) return;
+      quizAnswered[qIdx] = true;
+      const card = document.getElementById('q' + qIdx);
+      const opts = card.querySelectorAll('.opt');
+      opts.forEach(o => o.classList.add('locked'));
+      opts[optIdx].classList.add(optIdx === correct ? 'correct' : 'wrong');
+      if (optIdx !== correct) opts[correct].classList.add('correct');
+      const fb = document.getElementById('fb' + qIdx);
+      fb.classList.add('show');
+      if (optIdx === correct) {
+        quizScore++;
+        fb.classList.add('ok');
+        fb.textContent = feedbacks[qIdx][correct];
+      } else {
+        fb.classList.add('ko');
+        fb.textContent = feedbacks[qIdx][optIdx];
+      }
+      if (quizAnswered.every(a => a) && !quizDone) {
+        quizDone = true;
+        setTimeout(showResult, 600);
+      }
+    }
+
+    function showResult() {
+      const pct = Math.round((quizScore / 8) * 100);
+      let emoji, msg;
+      if (pct >= 90)      { emoji = '🏆'; msg = '¡Excelente! Dominás la Unidad I.'; }
+      else if (pct >= 70) { emoji = '🎉'; msg = '¡Muy bien! Repasá los detalles menores.'; }
+      else if (pct >= 50) { emoji = '📖'; msg = 'Bien, pero vale la pena repasar las cartillas.'; }
+      else                { emoji = '💪'; msg = 'Revisá las cartillas y volvé a intentarlo.'; }
+      document.getElementById('resultEmoji').textContent = emoji;
+      document.getElementById('resultScore').textContent = quizScore + ' / 8 (' + pct + '%)';
+      document.getElementById('resultMsg').textContent = msg;
+      document.getElementById('quizResult').classList.add('show');
+      document.getElementById('quizResult').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function retryQuiz() {
+      quizAnswered = new Array(8).fill(false);
+      quizScore = 0;
+      quizDone = false;
+      document.getElementById('quizResult').classList.remove('show');
+      for (let i = 0; i < 8; i++) {
+        document.getElementById('q' + i).querySelectorAll('.opt').forEach(o => o.classList.remove('correct','wrong','locked'));
+        const fb = document.getElementById('fb' + i);
+        fb.classList.remove('show','ok','ko');
+        fb.textContent = '';
+      }
+      document.getElementById('slide-10').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    updateProgress();
+  </script>
 </body>
 </html>

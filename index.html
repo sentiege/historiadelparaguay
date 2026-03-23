@@ -9,7 +9,6 @@
       --primary: #7c3aed;
       --primary-light: #ede9fe;
       --secondary: #0f766e;
-      --accent: #d97706;
       --text: #1f2937;
       --muted: #6b7280;
       --bg: #f5f0e8;
@@ -65,21 +64,9 @@
       line-height: 1.1;
     }
 
-    .hero-sub {
-      font-size: 1rem;
-      color: rgba(255,255,255,0.8);
-    }
-
-    .hero-sub strong {
-      color: #fde68a;
-      font-weight: 700;
-    }
-
-    .hero-desc {
-      font-size: 0.92rem;
-      color: rgba(255,255,255,0.65);
-      margin-top: 0.2rem;
-    }
+    .hero-sub { font-size: 1rem; color: rgba(255,255,255,0.8); }
+    .hero-sub strong { color: #fde68a; font-weight: 700; }
+    .hero-desc { font-size: 0.92rem; color: rgba(255,255,255,0.65); margin-top: 0.2rem; }
 
     .main {
       max-width: 860px;
@@ -113,25 +100,11 @@
       border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     }
 
-    .unit-card.available {
-      cursor: pointer;
-      border-color: #c4b5fd;
-    }
+    .unit-card.available { cursor: pointer; border-color: #c4b5fd; }
+    .unit-card.available:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .unit-card.soon { opacity: 0.72; }
 
-    .unit-card.available:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow);
-    }
-
-    .unit-card.soon {
-      opacity: 0.72;
-    }
-
-    .unit-header {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-    }
+    .unit-header { display: flex; align-items: flex-start; gap: 1rem; }
 
     .unit-num {
       min-width: 42px;
@@ -174,17 +147,8 @@
       white-space: nowrap;
     }
 
-    .available-badge {
-      background: #dcfce7;
-      color: #15803d;
-      border: 1px solid #86efac;
-    }
-
-    .soon-badge {
-      background: #f3f4f6;
-      color: var(--muted);
-      border: 1px solid #e5e7eb;
-    }
+    .available-badge { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+    .soon-badge { background: #f3f4f6; color: var(--muted); border: 1px solid #e5e7eb; }
 
     .unit-topics {
       list-style: none;
@@ -218,19 +182,8 @@
       border-top: 1px solid var(--border);
     }
 
-    .chip {
-      background: var(--primary-light);
-      color: var(--primary);
-      border-radius: 999px;
-      padding: 0.2rem 0.7rem;
-      font-size: 0.78rem;
-      font-weight: 700;
-    }
-
-    .chip.muted {
-      background: #f3f4f6;
-      color: var(--muted);
-    }
+    .chip { background: var(--primary-light); color: var(--primary); border-radius: 999px; padding: 0.2rem 0.7rem; font-size: 0.78rem; font-weight: 700; }
+    .chip.muted { background: #f3f4f6; color: var(--muted); }
 
     .btn-go {
       margin-left: auto;
@@ -251,7 +204,6 @@
       border-top: 1px solid var(--border);
       line-height: 1.8;
     }
-
     .footer strong { color: var(--primary); }
 
     @media (max-width: 520px) {
@@ -268,7 +220,7 @@
     <div class="hero-inner">
       <span class="hero-tag">Herramienta de Repaso</span>
       <h1>Historia del Paraguay</h1>
-      <p class="hero-sub">Herramienta desarrollada con material didactico de la <strong>Dra. Beatriz Espinola Zaracho</strong></p>
+      <p class="hero-sub">Facilitada por la <strong>Dra. Beatriz Espinola Zaracho</strong></p>
       <p class="hero-desc">Seleccioná una unidad para comenzar el repaso interactivo.</p>
     </div>
   </header>
@@ -324,7 +276,7 @@
       </div>
     </div>
 
-    <!-- UNIDAD III ← NUEVA -->
+    <!-- UNIDAD III -->
     <div class="unit-card available" onclick="window.location.href='unidad3/index.html'">
       <div class="unit-header">
         <div class="unit-num">III</div>
@@ -350,14 +302,14 @@
     </div>
 
     <!-- UNIDAD IV -->
-    <div class="unit-card soon">
+    <div class="unit-card available" onclick="window.location.href='unidad4/index.html'">
       <div class="unit-header">
         <div class="unit-num">IV</div>
         <div>
           <p class="unit-label">Unidad IV</p>
           <h2 class="unit-title">El Paraguay colonial</h2>
         </div>
-        <span class="unit-badge soon-badge">Próximamente</span>
+        <span class="unit-badge available-badge">Disponible</span>
       </div>
       <ul class="unit-topics">
         <li>Gobierno de Hernandarias: obra educativa y Ordenanzas de Alfaro</li>
@@ -367,7 +319,9 @@
         <li>La Real Hacienda y los gravámenes</li>
       </ul>
       <div class="unit-footer">
-        <span class="chip muted">En preparación</span>
+        <span class="chip">10 cartillas</span>
+        <span class="chip">Quiz final</span>
+        <span class="btn-go">Comenzar →</span>
       </div>
     </div>
 

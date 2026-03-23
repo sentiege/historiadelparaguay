@@ -1,119 +1,378 @@
-const slides  = document.querySelectorAll('.slide');
-const dotsEl  = document.getElementById('dots');
-const counter = document.getElementById('counter');
-const total   = slides.length;
-let current   = 0;
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unidad 2 — Historia del Paraguay</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
 
-slides.forEach((_, i) => {
-  const btn = document.createElement('button');
-  btn.className = 'dot' + (i === 0 ? ' active' : '');
-  btn.setAttribute('aria-label', `Ir a cartilla ${i + 1}`);
-  btn.addEventListener('click', () => goTo(i));
-  dotsEl.appendChild(btn);
-});
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="mini-tag">Historia del Paraguay</span>
+        <h1>Unidad 2: Población Precolombina del Paraguay</h1>
+      </div>
+      <div class="counter" id="counter">1 / 11</div>
+    </header>
 
-function goTo(index) {
-  if (index < 0 || index >= total) return;
-  slides[current].classList.remove('active');
-  document.querySelectorAll('.dot')[current].classList.remove('active');
-  current = index;
-  slides[current].classList.add('active');
-  slides[current].scrollTop = 0;
-  document.querySelectorAll('.dot')[current].classList.add('active');
-  counter.textContent = `${current + 1} / ${total}`;
-}
+    <!-- DOTS -->
+    <div class="dots" id="dots"></div>
 
-function next() { goTo(current + 1); }
-function prev() { goTo(current - 1); }
+    <!-- SLIDES -->
+    <main class="stage" id="stage">
 
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowRight') next();
-  if (e.key === 'ArrowLeft')  prev();
-});
+      <!-- SLIDE 1 — Introducción -->
+      <div class="slide active">
+        <div class="card" style="text-align:center; align-items:center;">
+          <p class="kicker">Introducción</p>
+          <h2>¿Quiénes habitaban el Paraguay antes de la conquista?</h2>
+          <p class="lead" style="text-align:center;">Antes de la llegada de los españoles, el territorio paraguayo estaba habitado por diversas naciones aborígenes con culturas, lenguas y formas de vida propias.</p>
+          <div class="pill-row">
+            <span>🏹 Cazadores
+              <small>Pueblos nómadas del Chaco que vivían de la caza y pesca.</small>
+            </span>
+            <span>🌿 Agricultores
+              <small>Los Guaraníes desarrollaron una vida semi-sedentaria con agricultura.</small>
+            </span>
+            <span>🗣️ Lenguas
+              <small>Cada etnia tenía diferencias culturales y lingüísticas propias.</small>
+            </span>
+          </div>
+          <button class="btn-accent" onclick="goTo(1)">Comenzar →</button>
+        </div>
+      </div>
 
-const motivoTextos = {
-  guaycuru: '⚔️ Los Guaycurúes: incluían los Mbayá, Payaguá, Toba y Abipon. Eran guerreros nómadas del Chaco, temidos por su agresividad.',
-  mataco:   '🌿 Los Mataco: incluían los Chulupi y Choroti. Habitaban el Chaco central y vivían principalmente de la recolección y pesca.',
-  zamuco:   '🏕️ Los Zámucos: habitaban el Chaco boreal. Eran cazadores y recolectores con costumbres y lengua propias distintas al resto.'
-};
+      <!-- SLIDE 2 — Divisiones de la Historia -->
+      <div class="slide">
+        <div class="card">
+          <p class="kicker">Cartilla 1</p>
+          <h2>Divisiones de la Historia Paraguaya</h2>
+          <p class="lead">La historia paraguaya se divide en grandes períodos que permiten organizar y comprender su evolución.</p>
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-num">1</div>
+              <div><strong>Precolonial</strong> — Desde los aborígenes hasta la fundación de Asunción.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-num">2</div>
+              <div><strong>La Conquista</strong> — Desde la fundación de Asunción hasta la división de la Provincia Gigante.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-num">3</div>
+              <div><strong>Colonial</strong> — Comprende el período de colonización española.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-num">4</div>
+              <div><strong>La Independencia</strong> — Desde el movimiento de mayo hasta la muerte del Dr. Francia.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-num">5</div>
+              <div><strong>Organización Nacional</strong> — Carlos A. López, Francisco Solano López y la Guerra de la Triple Alianza.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-num">6</div>
+              <div><strong>Constitucional</strong> — Reconstrucción post-guerra hasta la deposición de Eusebio Ayala (1936).</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-num">7</div>
+              <div><strong>Actual</strong> — Desde la firma del Tratado de Paz del Chaco hasta hoy.</div>
+            </div>
+          </div>
+          <div class="quiz-box">
+            <p class="quiz-q">¿Hasta cuándo se extiende el período Precolonial?</p>
+            <div class="options">
+              <button onclick="checkQ(this, false)">Hasta la llegada de Colón</button>
+              <button onclick="checkQ(this, true)">Hasta la fundación de Asunción</button>
+              <button onclick="checkQ(this, false)">Hasta la Independencia</button>
+            </div>
+            <p class="feedback"></p>
+          </div>
+        </div>
+      </div>
 
-function showMotivo(tipo, btn) {
-  const box = document.getElementById('motivoBox');
-  document.querySelectorAll('.motivo-card').forEach(c => c.classList.remove('active'));
-  btn.classList.add('active');
-  box.textContent = motivoTextos[tipo];
-  box.style.display = 'block';
-}
+      <!-- SLIDE 3 — Edad de Piedra -->
+      <div class="slide">
+        <div class="card">
+          <p class="kicker">Cartilla 2</p>
+          <h2>La Edad de Piedra</h2>
+          <p class="lead">La prehistoria se divide en la Edad de Piedra y la Edad de los Metales. La Edad de Piedra tiene tres etapas fundamentales.</p>
+          <div class="duel-row" style="grid-template-columns:1fr 1fr 1fr; gap:0.7rem;">
+            <div class="duel-card green">
+              <h3>🪨 Paleolítico</h3>
+              <p>Piedra tallada. Nómadas cazadores-recolectores. Vivían en cuevas y dominaron el fuego.</p>
+            </div>
+            <div class="duel-card orange">
+              <h3>⚱️ Mesolítico</h3>
+              <p>Piedra media. Período de transición con cambios climáticos y caza especializada.</p>
+            </div>
+            <div class="duel-card" style="background:linear-gradient(135deg,#1e3a5f,#1d4ed8);">
+              <h3>🌾 Neolítico</h3>
+              <p>Piedra pulida. Aparece la agricultura, ganadería y el sedentarismo.</p>
+            </div>
+          </div>
+          <div class="highlight-box">
+            <strong>Edad de los Metales:</strong> Desarrollo de la metalurgia (cobre, bronce, hierro), complejización social, invención de la rueda y el comercio.
+          </div>
+          <div class="quiz-box">
+            <p class="quiz-q">¿En qué etapa aparece la agricultura y el sedentarismo?</p>
+            <div class="options">
+              <button onclick="checkQ(this, false)">Paleolítico</button>
+              <button onclick="checkQ(this, false)">Mesolítico</button>
+              <button onclick="checkQ(this, true)">Neolítico</button>
+            </div>
+            <p class="feedback"></p>
+          </div>
+        </div>
+      </div>
 
-function showInfo(id, text) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = text;
-}
+      <!-- SLIDE 4 — Etnias Chaqueñas -->
+      <div class="slide">
+        <div class="card">
+          <p class="kicker">Cartilla 3</p>
+          <h2>Etnias Chaqueñas</h2>
+          <p class="lead">A la llegada de los españoles, varias naciones aborígenes habitaban el Chaco paraguayo. Practicaban una economía de recolección, caza y pesca, y cada etnia se distinguía por diferencias culturales y lingüísticas.</p>
+          <div class="motivos-grid">
+            <button class="motivo-card" onclick="showMotivo('guaycuru', this)">
+              <span>⚔️ Los Guaycurúes</span>
+            </button>
+            <button class="motivo-card" onclick="showMotivo('mataco', this)">
+              <span>🌿 Los Mataco</span>
+            </button>
+            <button class="motivo-card" onclick="showMotivo('zamuco', this)">
+              <span>🏕️ Los Zámucos</span>
+            </button>
+          </div>
+          <div id="motivoBox" class="info-panel" style="display:none"></div>
+          <div class="quiz-box">
+            <p class="quiz-q">¿A qué grupo pertenecían los Payaguá y los Toba?</p>
+            <div class="options">
+              <button onclick="checkQ(this, false)">Los Mataco</button>
+              <button onclick="checkQ(this, true)">Los Guaycurúes</button>
+              <button onclick="checkQ(this, false)">Los Zámucos</button>
+            </div>
+            <p class="feedback"></p>
+          </div>
+        </div>
+      </div>
 
-function checkQ(btn, isCorrect) {
-  const box = btn.closest('.quiz-box');
-  const feedback = box.querySelector('.feedback');
-  box.querySelectorAll('.options button').forEach(b => {
-    b.disabled = true;
-    b.style.opacity = '0.75';
-  });
-  if (isCorrect) {
-    btn.style.background  = '#dcfce7';
-    btn.style.borderColor = '#86efac';
-    btn.style.opacity     = '1';
-    feedback.textContent  = '✅ ¡Correcto!';
-    feedback.style.color  = '#15803d';
-  } else {
-    btn.style.background  = '#fee2e2';
-    btn.style.borderColor = '#fca5a5';
-    btn.style.opacity     = '1';
-    feedback.textContent  = '❌ Incorrecto';
-    feedback.style.color  = '#b91c1c';
-  }
-}
+      <!-- SLIDE 5 — Organización Chaqueña -->
+      <div class="slide">
+        <div class="card">
+          <p class="kicker">Cartilla 4</p>
+          <h2>Organización Política, Social y Económica Chaqueña</h2>
+          <p class="lead">Los pueblos chaqueños tenían una organización simple, basada en agrupaciones familiares.</p>
+          <div class="compare-table">
+            <div class="cmp-row header"><span>Aspecto</span><span>Descripción</span></div>
+            <div class="cmp-row"><span>🏛️ Política</span><span>Sin tribu organizada. Agrupaciones de 50 a 200 personas. En guerras elegían capitanes y un consejo de ancianos.</span></div>
+            <div class="cmp-row highlight-row"><span>👥 Social</span><span>Jefe y consejo de ancianos, guerreros, comunes y esclavos.</span></div>
+            <div class="cmp-row"><span>🎣 Económica</span><span>Principalmente caza y pesca. Economía de subsistencia.</span></div>
+          </div>
+          <div class="quiz-box">
+            <p class="quiz-q">¿Cuántas personas conformaban típicamente las agrupaciones chaqueñas?</p>
+            <div class="options">
+              <button onclick="checkQ(this, false)">10 a 30 personas</button>
+              <button onclick="checkQ(this, true)">50 a 200 personas</button>
+              <button onclick="checkQ(this, false)">Más de 500 personas</button>
+            </div>
+            <p class="feedback"></p>
+          </div>
+        </div>
+      </div>
 
-function gradeQuiz() {
-  const form   = document.getElementById('quizForm');
-  const result = document.getElementById('quizResult');
-  const retry  = document.getElementById('retryBtn');
-  let score = 0;
-  for (let i = 1; i <= 10; i++) {
-    const sel = form.querySelector(`input[name="q${i}"]:checked`);
-    if (sel && sel.value === 'c') score++;
-  }
-  let emoji, titulo, msg, rec;
-  if (score === 10) {
-    emoji = '🎉'; titulo = '¡Perfecto! 10 / 10';
-    msg = 'Dominás el contenido de esta unidad completamente.';
-    rec = '📖 Recomendamos pasar 2 veces más por esta lección y luego avanzar a la siguiente.';
-  } else if (score >= 7) {
-    emoji = '👏'; titulo = `¡Muy bien! ${score} / 10`;
-    msg = 'Casi lo tenés dominado, hay pequeños detalles para repasar.';
-    rec = '📖 Recomendamos pasar 2 veces más por esta lección y luego avanzar a la siguiente.';
-  } else if (score >= 5) {
-    emoji = '📘'; titulo = `Bien. ${score} / 10`;
-    msg = 'Hay varios conceptos para repasar antes de continuar.';
-    rec = '🔄 Recomendamos repasar toda la lección antes de avanzar a la siguiente.';
-  } else {
-    emoji = '📚'; titulo = `${score} / 10`;
-    msg = 'Necesitás repasar el contenido con más detalle.';
-    rec = '🔄 Recomendamos repasar toda la lección desde el inicio antes de avanzar.';
-  }
-  result.innerHTML = `
-    <div style="font-size:2rem;margin-bottom:0.4rem">${emoji}</div>
-    <div class="result-score">${titulo}</div>
-    <div class="result-msg">${msg}</div>
-    <div class="result-rec">${rec}</div>
-  `;
-  result.style.display = 'block';
-  retry.style.display  = 'inline-block';
-  setTimeout(() => result.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 150);
-}
+      <!-- SLIDE 6 — Los Guaraníes -->
+      <div class="slide">
+        <div class="card">
+          <p class="kicker">Cartilla 5</p>
+          <h2>Los Guaraníes — Pueblo Neolítico</h2>
+          <p class="lead">Los Guaraníes son un grupo de pueblos indígenas sudamericanos que habitaban principalmente Paraguay, Argentina, Brasil y Bolivia. Eran de cultura neolítica, con agricultura y vida semi-sedentaria.</p>
+          <div class="repaso-grid">
+            <div class="repaso-card"><span>🏘️</span><p><strong>Vivienda:</strong> Vivían en tabas (pueblos) con hasta 7 cabañas comunales de ramas y hojas de palmeras.</p></div>
+            <div class="repaso-card"><span>🌽</span><p><strong>Economía:</strong> Agricultura (maíz, mandioca), caza, pesca y recolección.</p></div>
+            <div class="repaso-card"><span>🗣️</span><p><strong>Idioma:</strong> El guaraní, lengua que hoy sigue siendo oficial en Paraguay.</p></div>
+          </div>
+          <div class="quiz-box">
+            <p class="quiz-q">¿Cómo se llamaban los pueblos o aldeas guaraníes?</p>
+            <div class="options">
+              <button onclick="checkQ(this, false)">Malocas</button>
+              <button onclick="checkQ(this, true)">Tabas</button>
+              <button onclick="checkQ(this, false)">Caseríos</button>
+            </div>
+            <p class="feedback"></p>
+          </div>
+        </div>
+      </div>
 
-function resetQuiz() {
-  document.getElementById('quizForm').reset();
-  document.getElementById('quizResult').style.display = 'none';
-  document.getElementById('retryBtn').style.display   = 'none';
-}
+      <!-- SLIDE 7 — Etnias Nativas -->
+      <div class="slide">
+        <div class="card">
+          <p class="kicker">Cartilla 6</p>
+          <h2>Las Principales Parcialidades Guaraníes</h2>
+          <p class="lead">Los Guaraníes se dividían en varias parcialidades, cada una ubicada en distintas zonas del territorio.</p>
+          <div class="viajes-grid">
+            <div class="viaje-card">
+              <div class="viaje-num">🏙️</div>
+              <div><strong>Los Carios</strong><p>En las inmediaciones de Asunción. Los más relacionados con los conquistadores.</p></div>
+            </div>
+            <div class="viaje-card">
+              <div class="viaje-num">🌿</div>
+              <div><strong>Los Itatines</strong><p>Al norte del Paraguay y sur de Mato Grosso.</p></div>
+            </div>
+            <div class="viaje-card">
+              <div class="viaje-num">🌊</div>
+              <div><strong>Los Omaguas</strong><p>Al norte, en las riberas del Amazonas.</p></div>
+            </div>
+            <div class="viaje-card">
+              <div class="viaje-num">⛰️</div>
+              <div><strong>Los Chiriguanos</strong><p>Hacia Bolivia, en las estribaciones andinas.</p></div>
+            </div>
+            <div class="viaje-card">
+              <div class="viaje-num">🌾</div>
+              <div><strong>Los Chiripas</strong><p>En la región del Guairá.</p></div>
+            </div>
+            <div class="viaje-card">
+              <div class="viaje-num">🏔️</div>
+              <div><strong>Los Guarayos</strong><p>En Santa Cruz de la Sierra.</p></div>
+            </div>
+          </div>
+          <div class="quiz-box">
+            <p class="quiz-q">¿Qué parcialidad guaraní habitaba cerca de Asunción?</p>
+            <div class="options">
+              <button onclick="checkQ(this, true)">Los Carios</button>
+              <button onclick="checkQ(this, false)">Los Itatines</button>
+              <button onclick="checkQ(this, false)">Los Omaguas</button>
+            </div>
+            <p class="feedback"></p>
+          </div>
+        </div>
+      </div>
 
-goTo(0);
+      <!-- SLIDE 8 — Familia y Organización Guaraní -->
+      <div class="slide">
+        <div class="card">
+          <p class="kicker">Cartilla 7</p>
+          <h2>La Familia y Organización Guaraní</h2>
+          <p class="lead">La familia era el núcleo fundamental de la sociedad guaraní, con roles claros y normas sociales particulares.</p>
+          <div class="btn-group centered">
+            <button class="tool-btn" onclick="showInfo('infoOrg', '👨‍👩‍👧 El padre era la cabeza de la familia. Se practicaba la poligamia y el hombre solo se casaba luego de participar en una guerra.')">La Familia</button>
+            <button class="tool-btn" onclick="showInfo('infoOrg', '👑 Cada taba era independiente con gobierno propio. Reconocían la autoridad de un Rubicha elegido por el consejo de ancianos.')">Organización Política</button>
+            <button class="tool-btn" onclick="showInfo('infoOrg', '⚔️ Ocasionalmente se organizaban en tribus para la guerra. El divorcio era conocido siendo suficiente el deseo de separarse de uno de los esposos.')">Guerra y Sociedad</button>
+          </div>
+          <div id="infoOrg" class="info-panel">Seleccioná un tema para ver su descripción.</div>
+          <div class="note-box">
+            Cada taba estaba integrada por cincuenta o más familias, con economía particular y gobierno propio.
+          </div>
+          <div class="quiz-box">
+            <p class="quiz-q">¿Cómo se llamaba el líder de cada taba guaraní?</p>
+            <div class="options">
+              <button onclick="checkQ(this, false)">Cacique</button>
+              <button onclick="checkQ(this, true)">Rubicha</button>
+              <button onclick="checkQ(this, false)">Avá Pajé</button>
+            </div>
+            <p class="feedback"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 9 — Religión y Antropofagia -->
+      <div class="slide">
+        <div class="card">
+          <p class="kicker">Cartilla 8</p>
+          <h2>Religión y Rito de la Antropofagia</h2>
+          <p class="lead">Los Guaraníes tenían un rico mundo espiritual con deidades, magia y rituales que estructuraban su visión del universo.</p>
+          <div class="explain-box">
+            <ul>
+              <li><strong>Tupã</strong> era el Ser Supremo, que se manifestaba ruidosamente con el trueno.</li>
+              <li>Después de la muerte, el <strong>ãnga</strong> (alma) iba al <strong>yvaga</strong> (paraíso) o al <strong>añaretã</strong> (infierno) según su comportamiento.</li>
+              <li>El <strong>avá pajé</strong> (mago/shamán) practicaba una mezcla de hechicerías y religión.</li>
+              <li>Vivían en un mundo mágico, creían en genios y seres legendarios.</li>
+            </ul>
+          </div>
+          <div class="highlight-box">
+            <strong>🍖 Antropofagia ritual:</strong> Se practicaba como un modo de heredar las cualidades heroicas del enemigo. No era un acto de hambre, sino un rito espiritual.
+          </div>
+          <div class="quiz-box">
+            <p class="quiz-q">¿Cuál era el propósito del rito de la antropofagia guaraní?</p>
+            <div class="options">
+              <button onclick="checkQ(this, false)">Alimentarse en épocas de escasez</button>
+              <button onclick="checkQ(this, true)">Heredar las cualidades heroicas del enemigo</button>
+              <button onclick="checkQ(this, false)">Castigar a los prisioneros</button>
+            </div>
+            <p class="feedback"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 10 — Cultura Material -->
+      <div class="slide">
+        <div class="card">
+          <p class="kicker">Cartilla 9 — Repaso</p>
+          <h2>Cultura Material y Repaso</h2>
+          <p class="lead">Los Guaraníes desarrollaron una notable adaptación armónica a la selva, con manifestaciones culturales diversas.</p>
+          <div class="repaso-grid">
+            <div class="repaso-card"><span>🏺</span><p><strong>Alfarería:</strong> Cántaros y urnas funerarias de cerámica, usando arcilla y barro.</p></div>
+            <div class="repaso-card"><span>🧵</span><p><strong>Tejidos:</strong> Hamacas y telas de fibras naturales.</p></div>
+            <div class="repaso-card"><span>🧺</span><p><strong>Cestería:</strong> Fabricación de cestos y utensilios del hogar.</p></div>
+            <div class="repaso-card"><span>🏹</span><p><strong>Armas:</strong> Arcos, lanzas y mazas de madera.</p></div>
+            <div class="repaso-card"><span>🌿</span><p><strong>Vida semi-sedentaria:</strong> Casas comunales usando recursos naturales para herramientas y arte funcional.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 11 — Quiz Final -->
+      <div class="slide">
+        <div class="card">
+          <p class="kicker">Cartilla 10 — Quiz Final</p>
+          <h2>Quiz Final</h2>
+          <form id="quizForm">
+            <div class="q-block"><p>1. ¿Qué período comprende la etapa Precolonial?</p>
+              <label><input type="radio" name="q1" value="c"/> Desde los aborígenes hasta la fundación de Asunción</label>
+              <label><input type="radio" name="q1" value="w"/> Desde la conquista hasta la independencia</label></div>
+            <div class="q-block"><p>2. ¿En qué etapa de la Edad de Piedra aparece la agricultura?</p>
+              <label><input type="radio" name="q2" value="w"/> Paleolítico</label>
+              <label><input type="radio" name="q2" value="c"/> Neolítico</label></div>
+            <div class="q-block"><p>3. ¿A qué grupo chaqueño pertenecían los Mbayá y los Payaguá?</p>
+              <label><input type="radio" name="q3" value="c"/> Los Guaycurúes</label>
+              <label><input type="radio" name="q3" value="w"/> Los Mataco</label></div>
+            <div class="q-block"><p>4. ¿De cuántas personas se componían las agrupaciones chaqueñas?</p>
+              <label><input type="radio" name="q4" value="w"/> 10 a 30 personas</label>
+              <label><input type="radio" name="q4" value="c"/> 50 a 200 personas</label></div>
+            <div class="q-block"><p>5. ¿Cómo se llamaban los pueblos o aldeas de los Guaraníes?</p>
+              <label><input type="radio" name="q5" value="c"/> Tabas</label>
+              <label><input type="radio" name="q5" value="w"/> Malocas</label></div>
+            <div class="q-block"><p>6. ¿Qué parcialidad guaraní habitaba cerca de Asunción?</p>
+              <label><input type="radio" name="q6" value="c"/> Los Carios</label>
+              <label><input type="radio" name="q6" value="w"/> Los Chiriguanos</label></div>
+            <div class="q-block"><p>7. ¿Cómo se llamaba el líder de cada taba guaraní?</p>
+              <label><input type="radio" name="q7" value="w"/> Cacique</label>
+              <label><input type="radio" name="q7" value="c"/> Rubicha</label></div>
+            <div class="q-block"><p>8. ¿Cuál era el Ser Supremo de la religión guaraní?</p>
+              <label><input type="radio" name="q8" value="c"/> Tupã</label>
+              <label><input type="radio" name="q8" value="w"/> Añaretã</label></div>
+            <div class="q-block"><p>9. ¿Qué significaba el rito de la antropofagia para los Guaraníes?</p>
+              <label><input type="radio" name="q9" value="c"/> Heredar las cualidades heroicas del enemigo</label>
+              <label><input type="radio" name="q9" value="w"/> Un acto de castigo a los prisioneros</label></div>
+            <div class="q-block"><p>10. ¿Qué tipo de objetos producían en alfarería?</p>
+              <label><input type="radio" name="q10" value="c"/> Cántaros y urnas funerarias de cerámica</label>
+              <label><input type="radio" name="q10" value="w"/> Esculturas de piedra tallada</label></div>
+            <button type="button" class="btn-accent" onclick="gradeQuiz()">Ver resultado</button>
+          </form>
+          <div id="quizResult" style="display:none"></div>
+          <button type="button" id="retryBtn" class="btn-outline" style="display:none" onclick="resetQuiz()">🔄 Intentar de nuevo</button>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- NAV -->
+    <nav class="nav">
+      <button class="nav-btn" onclick="prev()">← Anterior</button>
+      <button class="nav-btn primary" onclick="next()">Siguiente →</button>
+    </nav>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

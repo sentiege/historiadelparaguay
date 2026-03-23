@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unidad V — La Labor Misionera de las Órdenes Religiosas</title>
+  <style>
+    :root {
+      --primary: #7c3aed;
+      --primary-light: #ede9fe;
+      --secondary: #0f766e;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --bg: #f5f0e8;
+      --card-bg: #ffffff;
+      --border: #e2d9cc;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow: 0 8px 32px rgba(0,0,0,0.10);
+      --shadow-sm: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+
+    .hero { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #0f766e 100%); color: white; padding: 2rem 1.5rem 1.8rem; text-align: center; }
+    .hero-inner { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+    .hero-tag { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; padding: 0.3rem 0.9rem; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
+    .hero h1 { font-size: clamp(1.4rem, 4vw, 2.2rem); font-weight: 900; line-height: 1.15; }
+    .hero-sub { font-size: 0.9rem; color: rgba(255,255,255,0.75); }
+    .hero-sub strong { color: #fde68a; }
+
+    .progress-wrap { background: white; border-bottom: 1px solid var(--border); padding: 0.75rem 1.5rem; display: flex; align-items: center; gap: 1rem; position: sticky; top: 0; z-index: 10; box-shadow: var(--shadow-sm); }
+    .progress-label { font-size: 0.8rem; font-weight: 700; color: var(--primary); white-space: nowrap; }
+    .progress-bar-bg { flex: 1; height: 8px; background: var(--primary-light); border-radius: 999px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); border-radius: 999px; transition: width 0.4s ease; }
+    .progress-count { font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
+
+    .main { flex: 1; max-width: 820px; width: 100%; margin: 0 auto; padding: 2rem 1.2rem 1rem; }
+
+    .cartilla { display: none; flex-direction: column; gap: 1.2rem; animation: fadeIn 0.35s ease; }
+    .cartilla.active { display: flex; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+    .card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 1.6rem 1.8rem; position: relative; overflow: hidden; }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--primary), var(--secondary)); }
+
+    .card-tag { display: inline-block; background: var(--primary-light); color: var(--primary); border-radius: 999px; padding: 0.2rem 0.75rem; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.7rem; }
+    .card-tag.green { background: #dcfce7; color: #15803d; }
+    .card-tag.amber { background: #fef3c7; color: #92400e; }
+    .card-tag.blue  { background: #dbeafe; color: #1d4ed8; }
+    .card-tag.red   { background: #fee2e2; color: #b91c1c; }
+
+    .card h2 { font-size: clamp(1.1rem, 2.5vw, 1.4rem); font-weight: 900; color: #1e1b4b; line-height: 1.25; margin-bottom: 0.8rem; }
+    .card p  { font-size: 0.95rem; color: var(--text); line-height: 1.75; margin-bottom: 0.6rem; }
+    .card ul, .card ol { padding-left: 1.3rem; display: flex; flex-direction: column; gap: 0.45rem; margin-top: 0.4rem; }
+    .card li { font-size: 0.93rem; line-height: 1.6; }
+    .card li strong { color: #1e1b4b; }
+
+    .highlight-box { background: linear-gradient(135deg, #f5f3ff, #ede9fe); border: 1.5px solid #c4b5fd; border-radius: var(--radius-md); padding: 1rem 1.2rem; margin-top: 0.8rem; }
+    .highlight-box p { margin: 0; font-size: 0.9rem; }
+    .highlight-box .label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 0.3rem; }
+
+    .dato-box { background: #fefce8; border: 1.5px solid #fde68a; border-radius: var(--radius-md); padding: 0.9rem 1.1rem; margin-top: 0.8rem; }
+    .dato-box p { margin: 0; font-size: 0.88rem; color: #78350f; }
+    .dato-box .label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #92400e; margin-bottom: 0.25rem; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.6rem; }
+    .mini-card { background: #f9f7f4; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.9rem 1rem; }
+    .mini-card h4 { font-size: 0.88rem; font-weight: 800; color: #1e1b4b; margin-bottom: 0.35rem; }
+    .mini-card p  { font-size: 0.82rem; color: var(--muted); line-height: 1.55; margin: 0; }
+
+    .quiz-wrap { display: flex; flex-direction: column; gap: 1.4rem; }
+    .quiz-header { text-align: center; margin-bottom: 0.5rem; }
+    .quiz-header h2 { font-size: 1.6rem; font-weight: 900; color: #1e1b4b; }
+    .quiz-header p  { font-size: 0.9rem; color: var(--muted); margin-top: 0.3rem; }
+
+    .q-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 1.3rem 1.5rem; }
+    .q-num  { font-size: 0.72rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem; }
+    .q-text { font-size: 0.97rem; font-weight: 700; color: #1e1b4b; margin-bottom: 0.9rem; line-height: 1.4; }
+    .options { display: flex; flex-direction: column; gap: 0.5rem; }
+    .opt { display: flex; align-items: center; gap: 0.65rem; padding: 0.6rem 0.9rem; border: 1.5px solid var(--border); border-radius: var(--radius-md); cursor: pointer; font-size: 0.9rem; transition: all 0.18s; background: #fafaf9; }
+    .opt:hover:not(.locked) { border-color: var(--primary); background: var(--primary-light); }
+    .opt .letter { min-width: 24px; height: 24px; border-radius: 50%; background: var(--primary-light); color: var(--primary); font-size: 0.75rem; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+    .opt.correct { border-color: #16a34a; background: #dcfce7; }
+    .opt.correct .letter { background: #16a34a; color: white; }
+    .opt.wrong   { border-color: #dc2626; background: #fee2e2; }
+    .opt.wrong .letter   { background: #dc2626; color: white; }
+    .feedback { margin-top: 0.6rem; font-size: 0.83rem; font-weight: 600; padding: 0.45rem 0.8rem; border-radius: 8px; display: none; }
+    .feedback.show { display: block; }
+    .feedback.ok { background: #dcfce7; color: #15803d; }
+    .feedback.ko { background: #fee2e2; color: #b91c1c; }
+
+    .quiz-result { display: none; background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow); padding: 2rem; text-align: center; flex-direction: column; align-items: center; gap: 0.7rem; }
+    .quiz-result.show { display: flex; }
+    .result-emoji { font-size: 3rem; }
+    .result-score { font-size: 2.5rem; font-weight: 900; color: var(--primary); }
+    .result-msg   { font-size: 1rem; color: var(--muted); }
+
+    .nav { position: sticky; bottom: 0; background: white; border-top: 1px solid var(--border); padding: 0.9rem 1.5rem; display: flex; gap: 0.7rem; justify-content: center; align-items: center; box-shadow: 0 -4px 16px rgba(0,0,0,0.06); flex-wrap: wrap; }
+    .nav-btn { border: none; border-radius: 999px; padding: 0.55rem 1.3rem; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: all 0.18s; background: #f3f4f6; color: var(--text); }
+    .nav-btn:hover    { background: #e5e7eb; transform: translateY(-1px); }
+    .nav-btn.primary  { background: linear-gradient(135deg, var(--primary), #5b21b6); color: white; box-shadow: 0 4px 14px rgba(124,58,237,0.3); }
+    .nav-btn.primary:hover { box-shadow: 0 6px 18px rgba(124,58,237,0.4); }
+    .nav-btn.home     { background: #f0fdf4; color: #15803d; border: 1.5px solid #86efac; }
+    .nav-btn.home:hover { background: #dcfce7; }
+    .nav-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+    footer { text-align: center; padding: 1.2rem 1rem 1.5rem; font-size: 0.8rem; color: var(--muted); border-top: 1px solid var(--border); line-height: 1.8; }
+    footer strong { color: var(--primary); }
+
+    @media (max-width: 540px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .card   { padding: 1.2rem 1.1rem; }
+      .nav    { padding: 0.7rem 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="hero-tag">Unidad V · Historia del Paraguay</span>
+      <h1>La Labor Misionera de las Órdenes Religiosas</h1>
+      <p class="hero-sub">Facilitada por la <strong>Dra. Beatriz Espinola Zaracho</strong></p>
+    </div>
+  </header>
+
+  <div class="progress-wrap">
+    <span class="progress-label">Progreso</span>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:9%"></div></div>
+    <span class="progress-count" id="progressCount">1 / 11</span>
+  </div>
+
+  <main class="main">
+
+    <!-- ══ CARTILLA 1 ══ -->
+    <section class="cartilla active" id="slide-0">
+      <div class="card">
+        <span class="card-tag blue">Primeras órdenes</span>
+        <h2>Los Mercedarios en el Paraguay</h2>
+        <p>La Orden de Nuestra Señora de la Merced fue posiblemente la primera orden religiosa en enviar misioneros al Río de la Plata, aunque su labor fue más educativa y espiritual que misional propiamente dicha.</p>
+        <ul>
+          <li><strong>Rol principal:</strong> No realizaron labor misional directa con los indígenas; se dedicaron a la enseñanza y a la asistencia espiritual de la población colonial.</li>
+          <li><strong>Primer convento:</strong> Fundaron el convento <em>San José del Paraguay</em>, el primero de la provincia.</li>
+          <li><strong>Capilla de Areguá:</strong> Fundaron una capilla en Areguá atendida por negros y mulatos, evidenciando la diversidad étnica de la colonia.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">📌 Dato clave</p>
+          <p>Los Mercedarios fueron los primeros religiosos en llegar al Paraguay, pero no dejaron el mismo impacto misional que los Franciscanos o los Jesuitas, quienes sí trabajaron directamente con los pueblos indígenas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 2 ══ -->
+    <section class="cartilla" id="slide-1">
+      <div class="card">
+        <span class="card-tag blue">Primeras órdenes</span>
+        <h2>Los Dominicos en el Paraguay</h2>
+        <p>Los Dominicos llegaron al Paraguay en el último tercio del siglo XVI, acompañando a las expediciones coloniales y estableciendo su presencia institucional en Asunción.</p>
+        <ul>
+          <li><strong>Llegada:</strong> Llegaron con <strong>Alonso Guerra</strong> en <strong>1583</strong>, como parte de la organización eclesiástica de la provincia.</li>
+          <li><strong>Convento fundado:</strong> Establecieron el convento llamado <em>Santa Catalina Virgen y Mártir</em> en Asunción.</li>
+          <li><strong>Labor:</strong> Al igual que los Mercedarios, su acción estuvo más enfocada en la vida conventual y la asistencia espiritual a la población colonial que en la evangelización masiva de los indígenas.</li>
+        </ul>
+        <div class="highlight-box">
+          <p class="label">💡 Contexto general</p>
+          <p>Tanto Mercedarios como Dominicos sentaron las bases de la vida religiosa institucional en Asunción, preparando el terreno para la llegada de órdenes más enfocadas en la labor misional indígena: los Franciscanos y los Jesuitas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 3 ══ -->
+    <section class="cartilla" id="slide-2">
+      <div class="card">
+        <span class="card-tag amber">Franciscanos</span>
+        <h2>Los Franciscanos: llegada y primeras reducciones</h2>
+        <p>Los Franciscanos fueron la orden que inició la evangelización sistemática de los guaraníes en el Paraguay, estableciendo las primeras reducciones indígenas de la provincia.</p>
+        <ul>
+          <li><strong>Llegada:</strong> Vinieron con la expedición de <strong>Juan Ortiz de Zárate</strong> en <strong>1575</strong>.</li>
+          <li><strong>Reducciones fundadas:</strong> Altos, Atyrá, Yaguarón y Caazapá — pueblos que perduran hasta hoy.</li>
+          <li><strong>Fray Luis de Bolaños:</strong> La figura más destacada. Se encargó de crear las primeras reducciones, desarrolló la grafía del guaraní y elaboró el primer catecismo en lengua nativa.</li>
+          <li><strong>Legado lingüístico:</strong> Las misiones franciscanas fueron fundamentales para la preservación y sistematización de la lengua guaraní.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">🌿 Legado actual</p>
+          <p>Los Franciscanos siguen presentes en Paraguay hasta hoy, trabajando en parroquias, escuelas y centros de ayuda social. Yaguarón conserva una iglesia franciscana colonial declarada Patrimonio Cultural.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 4 ══ -->
+    <section class="cartilla" id="slide-3">
+      <div class="card">
+        <span class="card-tag amber">Franciscanos</span>
+        <h2>Figuras franciscanas representativas</h2>
+        <p>La labor franciscana en el Paraguay fue obra de misioneros comprometidos que trabajaron directamente con las comunidades guaraníes, aprendiendo su lengua y adaptando el mensaje cristiano a su cultura.</p>
+        <div class="grid-2">
+          <div class="mini-card">
+            <h4>✝️ Fray Luis de Bolaños</h4>
+            <p>Padre de las misiones franciscanas. Creó la grafía guaraní y el catecismo en lengua nativa. Figura clave de la evangelización.</p>
+          </div>
+          <div class="mini-card">
+            <h4>✝️ Fray Alonso de San Buenaventura</h4>
+            <p>Compañero de Bolaños. Colaboró activamente en la evangelización de los guaraníes y en la organización de las reducciones.</p>
+          </div>
+          <div class="mini-card">
+            <h4>✝️ Fray Gabriel de la Anunciación</h4>
+            <p>Participó en la fundación y consolidación de las reducciones franciscanas en la región del Guairá.</p>
+          </div>
+          <div class="mini-card">
+            <h4>✝️ Fray Francisco de Guzmán</h4>
+            <p>Otra figura representativa de la orden que contribuyó a la labor educativa y espiritual en las misiones franciscanas.</p>
+          </div>
+        </div>
+        <div class="highlight-box">
+          <p class="label">💡 Precursores de los jesuitas</p>
+          <p>Los franciscanos precedieron a los jesuitas en la labor misional paraguaya. Fray Luis de Bolaños incluso colaboró con los primeros jesuitas al llegar, compartiendo su experiencia con la lengua y cultura guaraní.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 5 ══ -->
+    <section class="cartilla" id="slide-4">
+      <div class="card">
+        <span class="card-tag">Jesuitas</span>
+        <h2>La llegada de los Jesuitas al Paraguay</h2>
+        <p>Los Jesuitas llegaron al Paraguay a pedido expreso de Hernandarias, con la misión de evangelizar a los pueblos indígenas mediante la persuasión religiosa en lugar de la fuerza militar.</p>
+        <ul>
+          <li><strong>Pedido de Hernandarias:</strong> Solicitó al Rey la venida de los jesuitas para reducir a los indígenas a la civilización por medio de la religión.</li>
+          <li><strong>Fundador de la Compañía de Jesús:</strong> <strong>Ignacio de Loyola</strong>, en <strong>1534</strong>.</li>
+          <li><strong>Primer jesuita en Paraguay:</strong> El Padre <strong>Diego de Torres</strong> fue el primer jesuita en llegar al Paraguay.</li>
+          <li><strong>Cédula de 1608:</strong> Por cédula real, los jesuitas recibieron autorización oficial para establecerse en el Río de la Plata.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">📅 Dato clave</p>
+          <p>La Compañía de Jesús fue fundada en <strong>1534</strong> por Ignacio de Loyola. Era una orden militarmente disciplinada, con alta formación intelectual, lo que la convirtió en la más eficaz para la empresa misional.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 6 ══ -->
+    <section class="cartilla" id="slide-5">
+      <div class="card">
+        <span class="card-tag">Jesuitas</span>
+        <h2>Organización territorial de las misiones</h2>
+        <p>Las misiones jesuíticas del Paraguay fueron las más famosas del continente americano, abarcando un extenso territorio que hoy se reparte entre tres países.</p>
+        <ul>
+          <li><strong>Territorio:</strong> Ocupaban las tierras entre los ríos Tebicuarý, Paraná y Uruguay — hoy correspondientes al sur del Paraguay, nordeste argentino y sur de Brasil.</li>
+          <li><strong>Reducciones originales en Paraguay:</strong> San Ignacio Guasú, San Cosme, Itapúa, Corpus, Candelaria, Santa Ana, Loreto, San Ignacio Miní, Santa María de Fe y Santiago.</li>
+          <li><strong>Reducciones agregadas luego:</strong> Santa Rosa de Lima, Jesús y Trinidad, San Joaquín, San Estanislao y Belén.</li>
+        </ul>
+        <div class="highlight-box">
+          <p class="label">💡 Patrimonio mundial</p>
+          <p>Las ruinas de <strong>Jesús y Trinidad</strong> en Paraguay son hoy Patrimonio de la Humanidad declarado por la UNESCO, testimonio del esplendor arquitectónico y cultural de las misiones jesuíticas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 7 ══ -->
+    <section class="cartilla" id="slide-6">
+      <div class="card">
+        <span class="card-tag green">Organización</span>
+        <h2>Organización física de las reducciones</h2>
+        <p>Cada reducción jesuítica respondía a un modelo urbanístico cuidadosamente planificado, que combinaba función religiosa, civil y productiva en un mismo espacio.</p>
+        <ul>
+          <li><strong>Iglesia:</strong> Primera construcción del pueblo, centro de la vida comunitaria.</li>
+          <li><strong>Coty Guazú:</strong> Casa de las viudas y huérfanas.</li>
+          <li><strong>Colegio o casa de los padres:</strong> Residencia y centro administrativo de los jesuitas.</li>
+          <li><strong>Cabildo:</strong> Sede del gobierno local indígena.</li>
+          <li><strong>Talleres y almacén:</strong> Producción artesanal y depósito de bienes comunitarios.</li>
+          <li><strong>Tambo:</strong> Alojamiento para visitantes y viajeros de paso.</li>
+          <li><strong>Plaza central:</strong> Frente a la iglesia, con la imagen del patrón o patrona del pueblo en el centro.</li>
+          <li><strong>Casas de los indios:</strong> Alineadas a los lados de la plaza.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 8 ══ -->
+    <section class="cartilla" id="slide-7">
+      <div class="card">
+        <span class="card-tag green">Organización</span>
+        <h2>Estructura política y social de las misiones</h2>
+        <p>Las reducciones tenían una estructura de gobierno dual: los jesuitas ejercían la autoridad religiosa y administrativa superior, mientras que los indígenas ocupaban los cargos civiles locales.</p>
+        <ul>
+          <li><strong>El Rector:</strong> Máxima autoridad de la misión.</li>
+          <li><strong>El Doctrinero:</strong> Propagaba la doctrina cristiana entre los indígenas.</li>
+          <li><strong>El Despensero:</strong> Atendía el aprovisionamiento y distribución de bienes del pueblo.</li>
+          <li><strong>El Auxiliar:</strong> Asistente del Rector para el trato directo con los indios.</li>
+          <li><strong>Corregidor español:</strong> Cada pueblo tenía un corregidor que representaba al Gobernador de la Provincia.</li>
+          <li><strong>Autoridades indígenas:</strong> El Alcalde (administraba justicia en el Cabildo) y el Capitán (comandaba el ejército indígena).</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">⚖️ Gobierno mixto</p>
+          <p>Las misiones funcionaban como un <strong>estado dentro del estado</strong>: los jesuitas controlaban lo religioso y económico, pero los indígenas tenían sus propias autoridades civiles y militares elegidas entre ellos mismos.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 9 ══ -->
+    <section class="cartilla" id="slide-8">
+      <div class="card">
+        <span class="card-tag amber">Economía y cultura</span>
+        <h2>El sistema económico de las misiones</h2>
+        <p>La economía misionera era de base <strong>colectivista</strong>, con una división particular de la tierra que combinaba la propiedad individual con la comunitaria.</p>
+        <ul>
+          <li><strong>Abá-Mbaé (cosa del indio):</strong> Parcela de tierra asignada a cada familia indígena. La producción pertenecía al indio, pero era controlada por la comunidad.</li>
+          <li><strong>Tupá-Mbaé (cosa de Dios):</strong> Tierra común trabajada por toda la comunidad dos días a la semana. Su producción se destinaba a: la iglesia, las viudas y huérfanos, y los necesitados.</li>
+        </ul>
+        <div class="grid-2">
+          <div class="mini-card">
+            <h4>🌿 Abá-Mbaé</h4>
+            <p>«Cosa del indio». Producción familiar propia, controlada comunitariamente. Base del sustento de cada familia.</p>
+          </div>
+          <div class="mini-card">
+            <h4>⛪ Tupá-Mbaé</h4>
+            <p>«Cosa de Dios». Trabajo colectivo dos días por semana. Los frutos se repartían entre la iglesia y los más vulnerables.</p>
+          </div>
+        </div>
+        <div class="highlight-box">
+          <p class="label">💡 ¿Socialismo avant la lettre?</p>
+          <p>Muchos historiadores señalan que el sistema económico jesuítico fue una de las primeras experiencias de economía mixta y redistribución social en América, siglos antes de que esas ideas se teorizaran en Europa.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 10 ══ -->
+    <section class="cartilla" id="slide-9">
+      <div class="card">
+        <span class="card-tag red">Cultura y fin</span>
+        <h2>Arte, cultura y expulsión de los Jesuitas</h2>
+        <p>Las misiones jesuíticas dejaron un legado artístico y cultural extraordinario, antes de ser abruptamente desmanteladas por decreto real en 1767.</p>
+        <ul>
+          <li><strong>Primera imprenta misionera (1700):</strong> Instalada en Santa María. Los primeros libros impresos fueron <em>Martirologio Romano</em> y <em>De la diferencia entre lo temporal y lo eterno</em>.</li>
+          <li><strong>Oficios enseñados:</strong> Carpintería, talla de madera, albañilería, música, tejidos, herrería, pintura, escultura, relojería e imprenta.</li>
+          <li><strong>Arte sacro:</strong> Los propios indios fabricaron las famosas imágenes sagradas y los elementos de culto, de notable calidad artística.</li>
+          <li><strong>Conflictos con autoridades:</strong> Las relaciones entre los jesuitas y las autoridades provinciales fueron casi siempre conflictivas.</li>
+          <li><strong>Expulsión (1767):</strong> El Rey de España Carlos III decretó la expulsión de los jesuitas de todos sus dominios, desmantelando de golpe más de 150 años de labor misional.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">⚠️ Consecuencias de la expulsión</p>
+          <p>Tras la expulsión de 1767, las reducciones entraron en rápida decadencia. Muchos indígenas se dispersaron y las estructuras sociales y económicas que los jesuitas habían construido se desmoronaron en pocas décadas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ QUIZ ══ -->
+    <section class="cartilla" id="slide-10">
+      <div class="quiz-wrap">
+        <div class="quiz-header">
+          <h2>🎯 Quiz Final</h2>
+          <p>Unidad V · 8 preguntas · Seleccioná la respuesta correcta</p>
+        </div>
+
+        <!-- Q1 -->
+        <div class="q-card" id="q0">
+          <p class="q-num">Pregunta 1</p>
+          <p class="q-text">¿Cuál fue la primera orden religiosa en llegar al Río de la Plata y qué convento fundó en Paraguay?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(0,0,0)"><span class="letter">A</span> Los Mercedarios · convento San José del Paraguay</div>
+            <div class="opt" onclick="answer(0,1,0)"><span class="letter">B</span> Los Franciscanos · convento Santa Catalina</div>
+            <div class="opt" onclick="answer(0,2,0)"><span class="letter">C</span> Los Jesuitas · Colegio de Asunción</div>
+            <div class="opt" onclick="answer(0,3,0)"><span class="letter">D</span> Los Dominicos · convento San José</div>
+          </div>
+          <div class="feedback" id="fb0"></div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="q-card" id="q1">
+          <p class="q-num">Pregunta 2</p>
+          <p class="q-text">¿Con qué expedición llegaron los Franciscanos al Paraguay y en qué año?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(1,0,2)"><span class="letter">A</span> Con Alonso Guerra · 1583</div>
+            <div class="opt" onclick="answer(1,1,2)"><span class="letter">B</span> Con Pedro de Mendoza · 1535</div>
+            <div class="opt" onclick="answer(1,2,2)"><span class="letter">C</span> Con Juan Ortiz de Zárate · 1575</div>
+            <div class="opt" onclick="answer(1,3,2)"><span class="letter">D</span> Con Hernandarias · 1592</div>
+          </div>
+          <div class="feedback" id="fb1"></div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="q-card" id="q2">
+          <p class="q-num">Pregunta 3</p>
+          <p class="q-text">¿Cuál fue el aporte más importante de Fray Luis de Bolaños a la cultura paraguaya?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(2,0,1)"><span class="letter">A</span> Fundó la primera imprenta en Paraguay</div>
+            <div class="opt" onclick="answer(2,1,1)"><span class="letter">B</span> Creó la grafía guaraní y el catecismo en lengua nativa</div>
+            <div class="opt" onclick="answer(2,2,1)"><span class="letter">C</span> Fundó la Universidad de Córdoba</div>
+            <div class="opt" onclick="answer(2,3,1)"><span class="letter">D</span> Organizó el sistema económico del Abá-Mbaé</div>
+          </div>
+          <div class="feedback" id="fb2"></div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="q-card" id="q3">
+          <p class="q-num">Pregunta 4</p>
+          <p class="q-text">¿Quién fundó la Compañía de Jesús y en qué año?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(3,0,0)"><span class="letter">A</span> Ignacio de Loyola · 1534</div>
+            <div class="opt" onclick="answer(3,1,0)"><span class="letter">B</span> Diego de Torres · 1608</div>
+            <div class="opt" onclick="answer(3,2,0)"><span class="letter">C</span> Francisco de Javier · 1540</div>
+            <div class="opt" onclick="answer(3,3,0)"><span class="letter">D</span> Hernandarias · 1600</div>
+          </div>
+          <div class="feedback" id="fb3"></div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="q-card" id="q4">
+          <p class="q-num">Pregunta 5</p>
+          <p class="q-text">¿Qué era el Tupá-Mbaé en el sistema económico de las misiones?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(4,0,1)"><span class="letter">A</span> La tierra asignada a cada familia indígena para su sustento</div>
+            <div class="opt" onclick="answer(4,1,1)"><span class="letter">B</span> La tierra común trabajada colectivamente, cuyos frutos se destinaban a la iglesia y los necesitados</div>
+            <div class="opt" onclick="answer(4,2,1)"><span class="letter">C</span> El sistema de pago de impuestos a la Corona española</div>
+            <div class="opt" onclick="answer(4,3,1)"><span class="letter">D</span> El almacén donde se guardaban los productos de exportación</div>
+          </div>
+          <div class="feedback" id="fb4"></div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="q-card" id="q5">
+          <p class="q-num">Pregunta 6</p>
+          <p class="q-text">¿Quién tenía la máxima autoridad dentro de una reducción jesuítica?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(5,0,2)"><span class="letter">A</span> El Corregidor español</div>
+            <div class="opt" onclick="answer(5,1,2)"><span class="letter">B</span> El Alcalde indígena</div>
+            <div class="opt" onclick="answer(5,2,2)"><span class="letter">C</span> El Rector</div>
+            <div class="opt" onclick="answer(5,3,2)"><span class="letter">D</span> El Doctrinero</div>
+          </div>
+          <div class="feedback" id="fb5"></div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="q-card" id="q6">
+          <p class="q-num">Pregunta 7</p>
+          <p class="q-text">¿En qué ciudad y en qué año se instaló la primera imprenta misionera del Paraguay?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(6,0,0)"><span class="letter">A</span> Santa María · 1700</div>
+            <div class="opt" onclick="answer(6,1,0)"><span class="letter">B</span> Asunción · 1683</div>
+            <div class="opt" onclick="answer(6,2,0)"><span class="letter">C</span> Trinidad · 1720</div>
+            <div class="opt" onclick="answer(6,3,0)"><span class="letter">D</span> San Ignacio Guasú · 1695</div>
+          </div>
+          <div class="feedback" id="fb6"></div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="q-card" id="q7">
+          <p class="q-num">Pregunta 8</p>
+          <p class="q-text">¿Quién decretó la expulsión de los jesuitas y en qué año?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(7,0,3)"><span class="letter">A</span> Hernandarias · 1609</div>
+            <div class="opt" onclick="answer(7,1,3)"><span class="letter">B</span> El Papa Clemente XIV · 1773</div>
+            <div class="opt" onclick="answer(7,2,3)"><span class="letter">C</span> El Gobernador del Paraguay · 1750</div>
+            <div class="opt" onclick="answer(7,3,3)"><span class="letter">D</span> El Rey Carlos III de España · 1767</div>
+          </div>
+          <div class="feedback" id="fb7"></div>
+        </div>
+
+        <!-- Resultado -->
+        <div class="quiz-result" id="quizResult">
+          <div class="result-emoji" id="resultEmoji"></div>
+          <div class="result-score" id="resultScore"></div>
+          <p class="result-msg" id="resultMsg"></p>
+          <button class="nav-btn primary" onclick="retryQuiz()">🔄 Intentar de nuevo</button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="nav">
+    <button class="nav-btn home"    onclick="goHome()">🏠 Inicio</button>
+    <button class="nav-btn"         onclick="prev()" id="btnPrev" disabled>← Anterior</button>
+    <button class="nav-btn primary" onclick="next()" id="btnNext">Siguiente →</button>
+  </nav>
+
+  <footer>
+    <p>Unidad V · Historia del Paraguay</p>
+    <p>Facilitada por la <strong>Dra. Beatriz Espinola Zaracho</strong></p>
+  </footer>
+
+  <script>
+    const TOTAL = 11;
+    let current = 0;
+
+    const correctAnswers = [0, 2, 1, 0, 1, 2, 0, 3];
+    const feedbacks = [
+      [
+        "✔ Correcto. Los Mercedarios fueron posiblemente los primeros en llegar al Río de la Plata y fundaron el convento San José del Paraguay.",
+        "Incorrecto. Los Franciscanos fundaron reducciones, no el convento Santa Catalina. Ese fue de los Dominicos.",
+        "Incorrecto. Los Jesuitas llegaron después, en 1608, a pedido de Hernandarias.",
+        "Incorrecto. Los Dominicos fundaron el convento Santa Catalina Virgen y Mártir, no el San José."
+      ],
+      [
+        "Incorrecto. Alonso Guerra llegó en 1583, pero con los Dominicos, no los Franciscanos.",
+        "Incorrecto. Con Pedro de Mendoza llegaron las primeras expediciones de conquista, no los Franciscanos.",
+        "✔ Correcto. Los Franciscanos llegaron con la expedición de Juan Ortiz de Zárate en 1575, iniciando la evangelización sistemática.",
+        "Incorrecto. Hernandarias fue gobernador; pidió la venida de los Jesuitas, no de los Franciscanos."
+      ],
+      [
+        "Incorrecto. La primera imprenta fue instalada por los Jesuitas en Santa María en 1700, no por Bolaños.",
+        "✔ Correcto. Fray Luis de Bolaños creó la grafía del guaraní y el primer catecismo en lengua nativa, fundamental para la evangelización y la preservación del idioma.",
+        "Incorrecto. La Universidad de Córdoba fue fundada por Hernando de Trejo y Sanabria.",
+        "Incorrecto. El sistema económico del Abá-Mbaé fue organizado por los Jesuitas, no por Bolaños."
+      ],
+      [
+        "✔ Correcto. La Compañía de Jesús fue fundada por Ignacio de Loyola en 1534.",
+        "Incorrecto. Diego de Torres fue el primer jesuita en llegar al Paraguay, no el fundador de la Compañía.",
+        "Incorrecto. Francisco Javier fue misionero jesuita en Asia, no el fundador de la Compañía.",
+        "Incorrecto. Hernandarias fue gobernador del Paraguay; pidió la venida de los jesuitas, pero no los fundó."
+      ],
+      [
+        "Incorrecto. Esa es la descripción del Abá-Mbaé (cosa del indio), no del Tupá-Mbaé.",
+        "✔ Correcto. El Tupá-Mbaé ('cosa de Dios') era la tierra común trabajada colectivamente; sus frutos se destinaban a la iglesia, viudas, huérfanos y necesitados.",
+        "Incorrecto. El pago de impuestos a la Corona era un sistema diferente, no parte del Tupá-Mbaé.",
+        "Incorrecto. El almacén o depósito era el 'tambo', no el Tupá-Mbaé."
+      ],
+      [
+        "Incorrecto. El Corregidor español representaba al Gobernador, pero no tenía la máxima autoridad interna de la misión.",
+        "Incorrecto. El Alcalde indígena administraba justicia local, pero estaba subordinado a los jesuitas.",
+        "✔ Correcto. El Rector tenía la máxima autoridad dentro de una reducción jesuítica.",
+        "Incorrecto. El Doctrinero propagaba la doctrina cristiana, pero estaba bajo las órdenes del Rector."
+      ],
+      [
+        "✔ Correcto. La primera imprenta misionera fue instalada en Santa María en el año 1700.",
+        "Incorrecto. La imprenta no se instaló en Asunción ni en 1683; fue en Santa María en 1700.",
+        "Incorrecto. Trinidad es famosa por sus ruinas, pero no fue sede de la primera imprenta misionera.",
+        "Incorrecto. San Ignacio Guasú fue una de las primeras reducciones, pero no fue sede de la imprenta."
+      ],
+      [
+        "Incorrecto. Hernandarias terminó su gobierno en 1609 y fue quien invitó a los jesuitas, no quien los expulsó.",
+        "Incorrecto. El Papa Clemente XIV suprimió la Compañía de Jesús en 1773, pero la expulsión de los dominios españoles la decretó Carlos III en 1767.",
+        "Incorrecto. La expulsión fue un decreto del rey, no del gobernador local.",
+        "✔ Correcto. El Rey Carlos III de España decretó la expulsión de los jesuitas de todos sus dominios en 1767."
+      ]
+    ];
+
+    let quizAnswered = new Array(8).fill(false);
+    let quizScore = 0;
+    let quizDone = false;
+
+    function updateProgress() {
+      const pct = ((current + 1) / TOTAL) * 100;
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('progressCount').textContent = (current + 1) + ' / ' + TOTAL;
+      document.getElementById('btnPrev').disabled = current === 0;
+      if (current === TOTAL - 1) {
+        document.getElementById('btnNext').textContent = '✓ Fin';
+        document.getElementById('btnNext').disabled = true;
+      } else {
+        document.getElementById('btnNext').textContent = 'Siguiente →';
+        document.getElementById('btnNext').disabled = false;
+      }
+    }
+
+    function showSlide(idx) {
+      document.querySelectorAll('.cartilla').forEach(s => s.classList.remove('active'));
+      document.getElementById('slide-' + idx).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      updateProgress();
+    }
+
+    function next() { if (current < TOTAL - 1) { current++; showSlide(current); } }
+    function prev() { if (current > 0) { current--; showSlide(current); } }
+    function goHome() { window.location.href = '../index.html'; }
+
+    function answer(qIdx, optIdx, correct) {
+      if (quizAnswered[qIdx]) return;
+      quizAnswered[qIdx] = true;
+      const card = document.getElementById('q' + qIdx);
+      const opts = card.querySelectorAll('.opt');
+      opts.forEach(o => o.classList.add('locked'));
+      opts[optIdx].classList.add(optIdx === correct ? 'correct' : 'wrong');
+      if (optIdx !== correct) opts[correct].classList.add('correct');
+      const fb = document.getElementById('fb' + qIdx);
+      fb.classList.add('show');
+      if (optIdx === correct) {
+        quizScore++;
+        fb.classList.add('ok');
+        fb.textContent = feedbacks[qIdx][correct];
+      } else {
+        fb.classList.add('ko');
+        fb.textContent = feedbacks[qIdx][optIdx];
+      }
+      if (quizAnswered.every(a => a) && !quizDone) {
+        quizDone = true;
+        setTimeout(showResult, 600);
+      }
+    }
+
+    function showResult() {
+      const pct = Math.round((quizScore / 8) * 100);
+      let emoji, msg;
+      if (pct >= 90)      { emoji = '🏆'; msg = '¡Excelente! Dominás la Unidad V.'; }
+      else if (pct >= 70) { emoji = '🎉'; msg = '¡Muy bien! Repasá los detalles menores.'; }
+      else if (pct >= 50) { emoji = '📖'; msg = 'Bien, pero vale la pena repasar las cartillas.'; }
+      else                { emoji = '💪'; msg = 'Revisá las cartillas y volvé a intentarlo.'; }
+      document.getElementById('resultEmoji').textContent = emoji;
+      document.getElementById('resultScore').textContent = quizScore + ' / 8 (' + pct + '%)';
+      document.getElementById('resultMsg').textContent = msg;
+      document.getElementById('quizResult').classList.add('show');
+      document.getElementById('quizResult').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function retryQuiz() {
+      quizAnswered = new Array(8).fill(false);
+      quizScore = 0;
+      quizDone = false;
+      document.getElementById('quizResult').classList.remove('show');
+      for (let i = 0; i < 8; i++) {
+        document.getElementById('q' + i).querySelectorAll('.opt').forEach(o => o.classList.remove('correct','wrong','locked'));
+        const fb = document.getElementById('fb' + i);
+        fb.classList.remove('show','ok','ko');
+        fb.textContent = '';
+      }
+      document.getElementById('slide-10').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    updateProgress();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unidad III — Exploraciones y Conquista</title>
+  <style>
+    :root {
+      --primary: #7c3aed;
+      --primary-light: #ede9fe;
+      --secondary: #0f766e;
+      --accent: #d97706;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --bg: #f5f0e8;
+      --card-bg: #ffffff;
+      --border: #e2d9cc;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow: 0 8px 32px rgba(0,0,0,0.10);
+      --shadow-sm: 0 2px 10px rgba(0,0,0,0.06);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #0f766e 100%);
+      color: white;
+      padding: 2rem 1.5rem 1.8rem;
+      text-align: center;
+    }
+    .hero-inner { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+    .hero-tag {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+    .hero h1 { font-size: clamp(1.4rem, 4vw, 2.2rem); font-weight: 900; line-height: 1.15; }
+    .hero-sub { font-size: 0.9rem; color: rgba(255,255,255,0.75); }
+    .hero-sub strong { color: #fde68a; }
+
+    /* ── PROGRESS ── */
+    .progress-wrap {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: var(--shadow-sm);
+    }
+    .progress-label { font-size: 0.8rem; font-weight: 700; color: var(--primary); white-space: nowrap; }
+    .progress-bar-bg {
+      flex: 1;
+      height: 8px;
+      background: var(--primary-light);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 999px;
+      transition: width 0.4s ease;
+    }
+    .progress-count { font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
+
+    /* ── MAIN ── */
+    .main {
+      flex: 1;
+      max-width: 820px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem 1.2rem 1rem;
+    }
+
+    /* ── CARTILLA ── */
+    .cartilla {
+      display: none;
+      flex-direction: column;
+      gap: 1.2rem;
+      animation: fadeIn 0.35s ease;
+    }
+    .cartilla.active { display: flex; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: 1.6rem 1.8rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+
+    .card-tag {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: 999px;
+      padding: 0.2rem 0.75rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.7rem;
+    }
+    .card-tag.green  { background: #dcfce7; color: #15803d; }
+    .card-tag.amber  { background: #fef3c7; color: #92400e; }
+    .card-tag.blue   { background: #dbeafe; color: #1d4ed8; }
+    .card-tag.red    { background: #fee2e2; color: #b91c1c; }
+
+    .card h2 {
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      font-weight: 900;
+      color: #1e1b4b;
+      line-height: 1.25;
+      margin-bottom: 0.8rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.75;
+      margin-bottom: 0.6rem;
+    }
+
+    .card ul, .card ol {
+      padding-left: 1.3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-top: 0.4rem;
+    }
+    .card li { font-size: 0.93rem; line-height: 1.6; color: var(--text); }
+    .card li strong { color: #1e1b4b; }
+
+    .highlight-box {
+      background: linear-gradient(135deg, #f5f3ff, #ede9fe);
+      border: 1.5px solid #c4b5fd;
+      border-radius: var(--radius-md);
+      padding: 1rem 1.2rem;
+      margin-top: 0.8rem;
+    }
+    .highlight-box p { margin: 0; font-size: 0.9rem; }
+    .highlight-box .label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+    }
+
+    .dato-box {
+      background: #fefce8;
+      border: 1.5px solid #fde68a;
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1.1rem;
+      margin-top: 0.8rem;
+    }
+    .dato-box p { margin: 0; font-size: 0.88rem; color: #78350f; }
+    .dato-box .label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #92400e; margin-bottom: 0.25rem; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 0.6rem;
+    }
+    .mini-card {
+      background: #f9f7f4;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1rem;
+    }
+    .mini-card h4 { font-size: 0.88rem; font-weight: 800; color: #1e1b4b; margin-bottom: 0.35rem; }
+    .mini-card p  { font-size: 0.82rem; color: var(--muted); line-height: 1.55; margin: 0; }
+
+    /* ── QUIZ ── */
+    .quiz-wrap { display: flex; flex-direction: column; gap: 1.4rem; }
+
+    .quiz-header { text-align: center; margin-bottom: 0.5rem; }
+    .quiz-header h2 { font-size: 1.6rem; font-weight: 900; color: #1e1b4b; }
+    .quiz-header p  { font-size: 0.9rem; color: var(--muted); margin-top: 0.3rem; }
+
+    .q-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: 1.3rem 1.5rem;
+    }
+    .q-num  { font-size: 0.72rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem; }
+    .q-text { font-size: 0.97rem; font-weight: 700; color: #1e1b4b; margin-bottom: 0.9rem; line-height: 1.4; }
+
+    .options { display: flex; flex-direction: column; gap: 0.5rem; }
+    .opt {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.6rem 0.9rem;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.18s;
+      background: #fafaf9;
+    }
+    .opt:hover:not(.locked) { border-color: var(--primary); background: var(--primary-light); }
+    .opt .letter {
+      min-width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .opt.correct  { border-color: #16a34a; background: #dcfce7; }
+    .opt.correct .letter  { background: #16a34a; color: white; }
+    .opt.wrong    { border-color: #dc2626; background: #fee2e2; }
+    .opt.wrong .letter    { background: #dc2626; color: white; }
+
+    .feedback {
+      margin-top: 0.6rem;
+      font-size: 0.83rem;
+      font-weight: 600;
+      padding: 0.45rem 0.8rem;
+      border-radius: 8px;
+      display: none;
+    }
+    .feedback.show { display: block; }
+    .feedback.ok  { background: #dcfce7; color: #15803d; }
+    .feedback.ko  { background: #fee2e2; color: #b91c1c; }
+
+    .quiz-result {
+      display: none;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      text-align: center;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .quiz-result.show { display: flex; }
+    .result-emoji { font-size: 3rem; }
+    .result-score { font-size: 2.5rem; font-weight: 900; color: var(--primary); }
+    .result-msg   { font-size: 1rem; color: var(--muted); }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky;
+      bottom: 0;
+      background: white;
+      border-top: 1px solid var(--border);
+      padding: 0.9rem 1.5rem;
+      display: flex;
+      gap: 0.7rem;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.06);
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 0.55rem 1.3rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.18s;
+      background: #f3f4f6;
+      color: var(--text);
+    }
+    .nav-btn:hover    { background: #e5e7eb; transform: translateY(-1px); }
+    .nav-btn.primary  { background: linear-gradient(135deg, var(--primary), #5b21b6); color: white; box-shadow: 0 4px 14px rgba(124,58,237,0.3); }
+    .nav-btn.primary:hover { box-shadow: 0 6px 18px rgba(124,58,237,0.4); }
+    .nav-btn.home     { background: #f0fdf4; color: #15803d; border: 1.5px solid #86efac; }
+    .nav-btn.home:hover { background: #dcfce7; }
+    .nav-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 1.2rem 1rem 1.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      line-height: 1.8;
+    }
+    footer strong { color: var(--primary); }
+
+    @media (max-width: 540px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .card   { padding: 1.2rem 1.1rem; }
+      .nav    { padding: 0.7rem 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="hero-tag">Unidad III · Historia del Paraguay</span>
+      <h1>Exploraciones y Conquista del Río de la Plata y el Paraguay</h1>
+      <p class="hero-sub">Facilitada por la <strong>Dra. Beatriz Espinola Zaracho</strong></p>
+    </div>
+  </header>
+
+  <div class="progress-wrap">
+    <span class="progress-label">Progreso</span>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progressFill" style="width:9%"></div>
+    </div>
+    <span class="progress-count" id="progressCount">1 / 11</span>
+  </div>
+
+  <main class="main">
+
+    <!-- ══ CARTILLA 1 ══ -->
+    <section class="cartilla active" id="slide-0">
+      <div class="card">
+        <span class="card-tag blue">Contexto</span>
+        <h2>El Mar del Sur y el Río de la Plata</h2>
+        <p>A inicios del siglo XVI, los exploradores europeos buscaban una ruta hacia Asia bordeando el continente americano. En ese contexto se produjeron dos descubrimientos fundamentales para la historia del Paraguay.</p>
+        <ul>
+          <li><strong>Mar del Sur (1513):</strong> Vasco Núñez de Balboa cruzó el istmo de Panamá y avistó el océano Pacífico, abriendo nuevas perspectivas de navegación hacia el oeste.</li>
+          <li><strong>Río de la Plata (1516):</strong> Juan Díaz de Solís exploró la costa atlántica y llegó al gran estuario que llamó <em>Mar Dulce</em>, muerto allí mismo por indígenas charrúas.</li>
+          <li><strong>Importancia:</strong> Estos hallazgos motivaron nuevas expediciones hacia el interior del continente en busca de riquezas y una vía hacia el Pacífico.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">📅 Fecha clave</p>
+          <p>Solís llegó al Río de la Plata en <strong>1516</strong>. Murió asesinado cuando desembarcó. Sus sobrevivientes regresaron a España con noticias del vasto estuario.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 2 ══ -->
+    <section class="cartilla" id="slide-1">
+      <div class="card">
+        <span class="card-tag">Magallanes y El Cano</span>
+        <h2>La primera vuelta al mundo (1519–1522)</h2>
+        <p>Fernando de Magallanes, navegante portugués al servicio de España, lideró la expedición que demostró la esfericidad de la Tierra y encontró el paso al Pacífico.</p>
+        <ul>
+          <li><strong>Partida:</strong> Salió de Sevilla en 1519 con cinco naves y unos 270 hombres.</li>
+          <li><strong>Estrecho de Magallanes (1520):</strong> Descubrió el paso austral entre el Atlántico y el Pacífico, en el extremo sur de América.</li>
+          <li><strong>Muerte de Magallanes:</strong> Murió en la batalla de Mactán (Filipinas, 1521) durante un conflicto entre tribus locales.</li>
+          <li><strong>Juan Sebastián El Cano:</strong> Completó el viaje de regreso, llegando a Sevilla en 1522 con solo 18 hombres y una nave: la <em>Victoria</em>.</li>
+        </ul>
+        <div class="highlight-box">
+          <p class="label">💡 Significado histórico</p>
+          <p>La expedición probó definitivamente que la Tierra era redonda y que América era un continente separado de Asia, transformando la visión geográfica del mundo.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 3 ══ -->
+    <section class="cartilla" id="slide-2">
+      <div class="card">
+        <span class="card-tag amber">Exploradores internos</span>
+        <h2>Alejo García: primer europeo en el Paraguay</h2>
+        <p>Alejo García fue un náufrago portugués que vivió entre los indígenas guaraníes y encabezó una expedición tierra adentro, convirtiéndose en el primer europeo en pisar el territorio paraguayo.</p>
+        <ul>
+          <li><strong>Origen:</strong> Sobreviviente del naufragio de la expedición de Solís (1516), se refugió en la costa brasileña entre los guaraníes.</li>
+          <li><strong>Expedición (c. 1524):</strong> Reunió a miles de guerreros guaraníes y marchó hacia el occidente, atravesando el Chaco hasta las fronteras del Imperio Inca (Sierra de la Plata).</li>
+          <li><strong>Botín:</strong> Regresó con abundante plata y noticias de grandes riquezas, alimentando la leyenda del <em>Rey Blanco</em> o <em>El Dorado</em>.</li>
+          <li><strong>Muerte:</strong> Fue asesinado en 1525 por indígenas en el Chaco antes de regresar a la costa.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">⚠️ Dato importante</p>
+          <p>Sus noticias sobre la "Sierra de la Plata" y el "Rey Blanco" fueron el principal incentivo para que España enviara expediciones al Río de la Plata.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 4 ══ -->
+    <section class="cartilla" id="slide-3">
+      <div class="card">
+        <span class="card-tag amber">Exploradores internos</span>
+        <h2>Sebastián Gaboto y la búsqueda de la plata</h2>
+        <p>Sebastián Gaboto era un piloto mayor de España que, desobedeciendo sus instrucciones originales de navegar hacia Asia, optó por explorar el Río de la Plata atraído por los relatos de riquezas.</p>
+        <ul>
+          <li><strong>Llegada:</strong> Llegó al Río de la Plata en 1526, ascendió por los ríos Paraná y Paraguay.</li>
+          <li><strong>Fundación del Fuerte Sancti Spiritu (1527):</strong> Primer asentamiento europeo permanente en la cuenca del Plata, en las costas del Paraná.</li>
+          <li><strong>Hallazgos:</strong> Recibió objetos de plata de los indígenas, confirmando los relatos de Alejo García; de ahí el nombre de <em>Río de la Plata</em>.</li>
+          <li><strong>Fin de la expedición:</strong> El fuerte fue destruido por los indígenas timbúes en 1529; Gaboto regresó a España.</li>
+        </ul>
+        <div class="highlight-box">
+          <p class="label">💡 Consecuencia</p>
+          <p>Los informes de Gaboto convencieron a la corona española de organizar una gran expedición hacia el Plata, liderada por Pedro de Mendoza.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 5 ══ -->
+    <section class="cartilla" id="slide-4">
+      <div class="card">
+        <span class="card-tag red">Conquista</span>
+        <h2>Pedro de Mendoza: la gran expedición</h2>
+        <p>Don Pedro de Mendoza organizó la expedición más grande enviada hasta entonces al Río de la Plata, con el objetivo de establecer una presencia permanente y encontrar las riquezas del interior.</p>
+        <ul>
+          <li><strong>Capitulación de 1534:</strong> La corona autorizó a Mendoza a conquistar y poblar las tierras del Plata con amplios poderes de gobernador.</li>
+          <li><strong>Expedición (1535):</strong> Partió con 11 naves y más de 2.000 hombres, la mayor flota enviada al Plata.</li>
+          <li><strong>Objetivos:</strong> Frenar el avance portugués, encontrar la Sierra de la Plata, establecer colonias permanentes.</li>
+          <li><strong>Primera fundación de Buenos Aires (1536):</strong> Fundó el <em>Puerto de Nuestra Señora del Buen Ayre</em>, pero fue asediado por los querandíes y el hambre diezmó a los pobladores.</li>
+          <li><strong>Muerte:</strong> Enfermo de sífilis, regresó a España en 1537 y murió en alta mar.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 6 ══ -->
+    <section class="cartilla" id="slide-5">
+      <div class="card">
+        <span class="card-tag green">Fundación</span>
+        <h2>Fundación de Asunción (1537)</h2>
+        <p>Ante las dificultades en Buenos Aires, los expedicionarios buscaron alianzas con los guaraníes río arriba. Esto condujo directamente a la fundación de la ciudad que sería la "Madre de Ciudades".</p>
+        <ul>
+          <li><strong>15 de agosto de 1537:</strong> Juan de Salazar y Espinosa fundó el <em>Puerto de Nuestra Señora de la Asunción</em> en el día de la Asunción de la Virgen María.</li>
+          <li><strong>Alianza con los guaraníes:</strong> Los conquistadores establecieron el sistema del <em>cuñadasgo</em>, alianza mediante el matrimonio con mujeres guaraníes, base del mestizaje paraguayo.</li>
+          <li><strong>Abandono de Buenos Aires:</strong> En 1541, Domingo de Irala ordenó el traslado de los habitantes de Buenos Aires a Asunción, convirtiéndola en centro de la región.</li>
+        </ul>
+        <div class="highlight-box">
+          <p class="label">📜 Fundador</p>
+          <p><strong>Juan de Salazar y Espinosa</strong> es reconocido como el fundador oficial de Asunción. La fecha de fundación, <strong>15 de agosto</strong>, es hoy el día de la fundación de la ciudad.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 7 ══ -->
+    <section class="cartilla" id="slide-6">
+      <div class="card">
+        <span class="card-tag blue">Marco legal</span>
+        <h2>Real Provisión de 1537</h2>
+        <p>La Real Provisión del 12 de septiembre de 1537 fue un documento legal fundamental que organizó el gobierno de los nuevos territorios del Río de la Plata y estableció principios que definirían la colonización.</p>
+        <ul>
+          <li><strong>Cabildo Abierto:</strong> Autorizó a los vecinos de Asunción a elegir a su propio gobernador cuando el puesto quedara vacante, un antecedente democrático único en América.</li>
+          <li><strong>Resultado inmediato:</strong> En base a esta provisión, los conquistadores eligieron a <strong>Domingo Martínez de Irala</strong> como gobernador en 1539.</li>
+          <li><strong>Importancia:</strong> Fue la primera experiencia de autogobierno colonial en América del Sur, reconocida como antecedente histórico del proceso democrático regional.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">📅 Fecha</p>
+          <p><strong>12 de septiembre de 1537.</strong> Expedida por la reina Juana I de Castilla ("Juana la Loca") en la ciudad de Valladolid.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 8 ══ -->
+    <section class="cartilla" id="slide-7">
+      <div class="card">
+        <span class="card-tag">Gobierno</span>
+        <h2>Domingo Martínez de Irala: el gobernador</h2>
+        <p>Domingo Martínez de Irala fue el verdadero organizador y consolidador de la conquista del Paraguay, gobernando de forma intermitente pero ejerciendo siempre una influencia decisiva.</p>
+        <ul>
+          <li><strong>Origen:</strong> Navegante vasco, llegó con la expedición de Pedro de Mendoza en 1535.</li>
+          <li><strong>Elección popular (1539):</strong> Primer gobernador elegido por cabildo abierto en América, gracias a la Real Provisión de 1537.</li>
+          <li><strong>Gobierno:</strong> Organizó la colonia, distribuyó tierras y encomiendas, reguló las relaciones con los guaraníes.</li>
+          <li><strong>Expedición al Perú (1547–1548):</strong> Intentó encontrar una ruta hacia el Pacífico y el Imperio Inca, pero fracasó y regresó a Asunción.</li>
+          <li><strong>Muerte:</strong> Murió en Asunción en <strong>1556</strong>, siendo el gobernador más longevo de la región.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 9 ══ -->
+    <section class="cartilla" id="slide-8">
+      <div class="card">
+        <span class="card-tag green">Legado</span>
+        <h2>Legado de Irala en el Paraguay</h2>
+        <p>Irala dejó una marca profunda y duradera en la sociedad paraguaya, tanto en su estructura social como en su identidad cultural.</p>
+        <div class="grid-2">
+          <div class="mini-card">
+            <h4>🌱 Mestizaje</h4>
+            <p>Institucionalizó el <em>cuñadasgo</em>, el matrimonio con mujeres guaraníes, creando la base del pueblo mestizo paraguayo y consolidando el uso del guaraní.</p>
+          </div>
+          <div class="mini-card">
+            <h4>📋 Ordenanzas</h4>
+            <p>Dictó las <strong>Ordenanzas de 1556</strong>, primer cuerpo legal específico para la región, regulando el trabajo indígena y la encomienda.</p>
+          </div>
+          <div class="mini-card">
+            <h4>🏛️ Autogobierno</h4>
+            <p>Su elección popular sentó un precedente de participación ciudadana sin precedentes en las colonias hispanoamericanas.</p>
+          </div>
+          <div class="mini-card">
+            <h4>🗺️ Exploración</h4>
+            <p>Organizó varias entradas al interior del continente, ampliando el conocimiento geográfico de la cuenca del Plata y el Chaco.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 10 ══ -->
+    <section class="cartilla" id="slide-9">
+      <div class="card">
+        <span class="card-tag amber">Expansión</span>
+        <h2>Fundaciones desde Asunción</h2>
+        <p>Asunción se convirtió en el centro de irradiación de la conquista del Cono Sur. Desde ella se fundaron las principales ciudades de la región, lo que le valió el título de <em>"Madre de Ciudades"</em>.</p>
+        <ul>
+          <li><strong>Santa Fe (1573):</strong> Fundada por Juan de Garay, fue la primera ciudad estable en la actual Argentina.</li>
+          <li><strong>Buenos Aires (2.ª fundación, 1580):</strong> Juan de Garay la refundó definitivamente con pobladores venidos de Asunción.</li>
+          <li><strong>Corrientes (1588):</strong> Fundada por Juan de Torres de Vera y Aragón.</li>
+          <li><strong>Otras:</strong> Concepción del Bermejo (1585), Villa Rica del Espíritu Santo (1570, actual territorio paraguayo).</li>
+        </ul>
+        <div class="highlight-box">
+          <p class="label">🏙️ "Madre de Ciudades"</p>
+          <p>Asunción recibió este título porque fue el punto de partida de las expediciones que fundaron las principales ciudades del Cono Sur durante los siglos XVI y XVII.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ QUIZ ══ -->
+    <section class="cartilla" id="slide-10">
+      <div class="quiz-wrap">
+        <div class="quiz-header">
+          <h2>🎯 Quiz Final</h2>
+          <p>Unidad III · 8 preguntas · Seleccioná la respuesta correcta</p>
+        </div>
+
+        <!-- Q1 -->
+        <div class="q-card" id="q0">
+          <p class="q-num">Pregunta 1</p>
+          <p class="q-text">¿Quién descubrió el Mar del Sur (Océano Pacífico) en 1513?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(0,0,1)"><span class="letter">A</span> Juan Díaz de Solís</div>
+            <div class="opt" onclick="answer(0,1,1)"><span class="letter">B</span> Vasco Núñez de Balboa</div>
+            <div class="opt" onclick="answer(0,2,1)"><span class="letter">C</span> Fernando de Magallanes</div>
+            <div class="opt" onclick="answer(0,3,1)"><span class="letter">D</span> Alejo García</div>
+          </div>
+          <div class="feedback" id="fb0"></div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="q-card" id="q1">
+          <p class="q-num">Pregunta 2</p>
+          <p class="q-text">¿En qué año llegó Juan Díaz de Solís al Río de la Plata?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(1,0,1)"><span class="letter">A</span> 1492</div>
+            <div class="opt" onclick="answer(1,1,1)"><span class="letter">B</span> 1513</div>
+            <div class="opt" onclick="answer(1,2,1)"><span class="letter">C</span> 1516</div>
+            <div class="opt" onclick="answer(1,3,1)"><span class="letter">D</span> 1524</div>
+          </div>
+          <div class="feedback" id="fb1"></div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="q-card" id="q2">
+          <p class="q-num">Pregunta 3</p>
+          <p class="q-text">¿Quién completó la primera vuelta al mundo tras la muerte de Magallanes?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(2,0,2)"><span class="letter">A</span> Sebastián Gaboto</div>
+            <div class="opt" onclick="answer(2,1,2)"><span class="letter">B</span> Juan de Salazar</div>
+            <div class="opt" onclick="answer(2,2,2)"><span class="letter">C</span> Juan Sebastián El Cano</div>
+            <div class="opt" onclick="answer(2,3,2)"><span class="letter">D</span> Alejo García</div>
+          </div>
+          <div class="feedback" id="fb2"></div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="q-card" id="q3">
+          <p class="q-num">Pregunta 4</p>
+          <p class="q-text">¿Cuál fue el aporte de Alejo García a la conquista del Paraguay?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(3,0,1)"><span class="letter">A</span> Fundó Asunción en 1537</div>
+            <div class="opt" onclick="answer(3,1,1)"><span class="letter">B</span> Fue el primer europeo en llegar al territorio paraguayo</div>
+            <div class="opt" onclick="answer(3,2,1)"><span class="letter">C</span> Descubrió el estrecho que lleva su nombre</div>
+            <div class="opt" onclick="answer(3,3,1)"><span class="letter">D</span> Gobernó Asunción durante 20 años</div>
+          </div>
+          <div class="feedback" id="fb3"></div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="q-card" id="q4">
+          <p class="q-num">Pregunta 5</p>
+          <p class="q-text">¿En qué fecha exacta fue fundada la ciudad de Asunción?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(4,0,0)"><span class="letter">A</span> 15 de agosto de 1537</div>
+            <div class="opt" onclick="answer(4,1,0)"><span class="letter">B</span> 12 de septiembre de 1537</div>
+            <div class="opt" onclick="answer(4,2,0)"><span class="letter">C</span> 3 de febrero de 1536</div>
+            <div class="opt" onclick="answer(4,3,0)"><span class="letter">D</span> 1 de enero de 1540</div>
+          </div>
+          <div class="feedback" id="fb4"></div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="q-card" id="q5">
+          <p class="q-num">Pregunta 6</p>
+          <p class="q-text">¿Qué estableció la Real Provisión de 1537 con respecto al gobierno colonial?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(5,0,1)"><span class="letter">A</span> Que el rey nombraría directamente a todos los gobernadores</div>
+            <div class="opt" onclick="answer(5,1,1)"><span class="letter">B</span> Que los vecinos podían elegir a su gobernador si el cargo quedaba vacante</div>
+            <div class="opt" onclick="answer(5,2,1)"><span class="letter">C</span> Que las misiones jesuíticas tendrían autonomía total</div>
+            <div class="opt" onclick="answer(5,3,1)"><span class="letter">D</span> Que la encomienda quedaba abolida en el Paraguay</div>
+          </div>
+          <div class="feedback" id="fb5"></div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="q-card" id="q6">
+          <p class="q-num">Pregunta 7</p>
+          <p class="q-text">¿Por qué se llama a Asunción "Madre de Ciudades"?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(6,0,2)"><span class="letter">A</span> Porque fue la primera ciudad de América del Sur</div>
+            <div class="opt" onclick="answer(6,1,2)"><span class="letter">B</span> Porque fue la capital del virreinato del Río de la Plata</div>
+            <div class="opt" onclick="answer(6,2,2)"><span class="letter">C</span> Porque desde ella se fundaron las principales ciudades del Cono Sur</div>
+            <div class="opt" onclick="answer(6,3,2)"><span class="letter">D</span> Porque fue fundada por la reina Juana I</div>
+          </div>
+          <div class="feedback" id="fb6"></div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="q-card" id="q7">
+          <p class="q-num">Pregunta 8</p>
+          <p class="q-text">¿Quién fundó la segunda y definitiva Buenos Aires en 1580?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(7,0,0)"><span class="letter">A</span> Juan de Garay</div>
+            <div class="opt" onclick="answer(7,1,0)"><span class="letter">B</span> Pedro de Mendoza</div>
+            <div class="opt" onclick="answer(7,2,0)"><span class="letter">C</span> Domingo Martínez de Irala</div>
+            <div class="opt" onclick="answer(7,3,0)"><span class="letter">D</span> Juan de Salazar</div>
+          </div>
+          <div class="feedback" id="fb7"></div>
+        </div>
+
+        <!-- Resultado -->
+        <div class="quiz-result" id="quizResult">
+          <div class="result-emoji" id="resultEmoji"></div>
+          <div class="result-score" id="resultScore"></div>
+          <p class="result-msg" id="resultMsg"></p>
+          <button class="nav-btn primary" onclick="retryQuiz()">🔄 Intentar de nuevo</button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="nav">
+    <button class="nav-btn home"    onclick="goHome()">🏠 Inicio</button>
+    <button class="nav-btn"         onclick="prev()" id="btnPrev" disabled>← Anterior</button>
+    <button class="nav-btn primary" onclick="next()" id="btnNext">Siguiente →</button>
+  </nav>
+
+  <footer>
+    <p>Unidad III · Historia del Paraguay</p>
+    <p>Facilitada por la <strong>Dra. Beatriz Espinola Zaracho</strong></p>
+  </footer>
+
+  <script>
+    const TOTAL = 11; // 10 cartillas + 1 quiz
+    let current = 0;
+
+    // Respuestas correctas del quiz (índice 0-based de la opción correcta)
+    const correctAnswers = [1, 2, 2, 1, 0, 1, 2, 0];
+    const feedbacks = [
+      ["Solís llegó al Río de la Plata, no al Mar del Sur.", "✔ Correcto. Vasco Núñez de Balboa cruzó Panamá y avistó el Pacífico en 1513.", "Magallanes encontró el estrecho que lleva su nombre en 1520.", "García exploró el Paraguay, no el Pacífico."],
+      ["1492 fue la llegada de Colón al Caribe.", "1513 fue el descubrimiento del Mar del Sur.", "✔ Correcto. Solís llegó al Río de la Plata en 1516 y murió allí.", "1524 fue la expedición de Alejo García al interior."],
+      ["Gaboto exploró el Río de la Plata, no completó la vuelta al mundo.", "Salazar fundó Asunción, no completó la vuelta al mundo.", "✔ Correcto. Juan Sebastián El Cano llegó a Sevilla en 1522 con la nave Victoria.", "García murió en el Chaco en 1525."],
+      ["Salazar fundó Asunción; García murió antes de ver la ciudad.", "✔ Correcto. García fue el primer europeo en pisar el territorio paraguayo (c. 1524).", "Magallanes descubrió el estrecho que lleva su nombre.", "Irala gobernó Asunción, no García."],
+      ["✔ Correcto. Juan de Salazar fundó Asunción el 15 de agosto de 1537, día de la Asunción de la Virgen.", "El 12 de septiembre de 1537 es la fecha de la Real Provisión, no la fundación de Asunción.", "Esa fecha corresponde a la primera fundación de Buenos Aires.", "Fecha incorrecta."],
+      ["Eso no es lo que establece la Real Provisión.", "✔ Correcto. La Real Provisión autorizó a los vecinos a elegir gobernador, lo que fue inédito en América.", "Las misiones jesuíticas surgieron en el siglo XVII.", "La encomienda no fue abolida; fue regulada más tarde."],
+      ["Asunción no fue la primera ciudad; fue fundada en 1537.", "Asunción no fue capital del Virreinato del Río de la Plata; ese título fue de Buenos Aires.", "✔ Correcto. Desde Asunción se fundaron Santa Fe (1573), la 2.ª Buenos Aires (1580), Corrientes (1588) y otras.", "La reina Juana I emitió la Real Provisión, pero no fundó Asunción."],
+      ["✔ Correcto. Juan de Garay refundó Buenos Aires en 1580 con pobladores llegados desde Asunción.", "Mendoza hizo la primera y fallida fundación en 1536.", "Irala gobernó Asunción; no fundó Buenos Aires.", "Salazar fundó Asunción, no Buenos Aires."]
+    ];
+
+    let quizAnswered = new Array(8).fill(false);
+    let quizScore = 0;
+    let quizDone = false;
+
+    function updateProgress() {
+      const pct = ((current + 1) / TOTAL) * 100;
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('progressCount').textContent = (current + 1) + ' / ' + TOTAL;
+      document.getElementById('btnPrev').disabled = current === 0;
+      document.getElementById('btnNext').disabled = current === TOTAL - 1;
+
+      if (current === TOTAL - 1) {
+        document.getElementById('btnNext').textContent = '✓ Fin';
+        document.getElementById('btnNext').disabled = true;
+      } else {
+        document.getElementById('btnNext').textContent = 'Siguiente →';
+        document.getElementById('btnNext').disabled = false;
+      }
+    }
+
+    function showSlide(idx) {
+      document.querySelectorAll('.cartilla').forEach(s => s.classList.remove('active'));
+      document.getElementById('slide-' + idx).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      updateProgress();
+    }
+
+    function next() { if (current < TOTAL - 1) { current++; showSlide(current); } }
+    function prev() { if (current > 0) { current--; showSlide(current); } }
+    function goHome() { window.location.href = '../index.html'; }
+
+    function answer(qIdx, optIdx, correct) {
+      if (quizAnswered[qIdx]) return;
+      quizAnswered[qIdx] = true;
+
+      const card = document.getElementById('q' + qIdx);
+      const opts = card.querySelectorAll('.opt');
+      opts.forEach(o => o.classList.add('locked'));
+      opts[optIdx].classList.add(optIdx === correct ? 'correct' : 'wrong');
+      if (optIdx !== correct) opts[correct].classList.add('correct');
+
+      const fb = document.getElementById('fb' + qIdx);
+      fb.classList.add('show');
+      if (optIdx === correct) {
+        quizScore++;
+        fb.classList.add('ok');
+        fb.textContent = feedbacks[qIdx][correct];
+      } else {
+        fb.classList.add('ko');
+        fb.textContent = feedbacks[qIdx][optIdx];
+      }
+
+      if (quizAnswered.every(a => a) && !quizDone) {
+        quizDone = true;
+        setTimeout(showResult, 600);
+      }
+    }
+
+    function showResult() {
+      const res = document.getElementById('quizResult');
+      const pct = Math.round((quizScore / 8) * 100);
+      let emoji, msg;
+      if (pct >= 90)     { emoji = '🏆'; msg = '¡Excelente! Dominás la Unidad III.'; }
+      else if (pct >= 70){ emoji = '🎉'; msg = '¡Muy bien! Repasá los detalles menores.'; }
+      else if (pct >= 50){ emoji = '📖'; msg = 'Bien, pero vale la pena repasar las cartillas.'; }
+      else               { emoji = '💪'; msg = 'Revisá las cartillas y volvé a intentarlo.'; }
+      document.getElementById('resultEmoji').textContent = emoji;
+      document.getElementById('resultScore').textContent = quizScore + ' / 8 (' + pct + '%)';
+      document.getElementById('resultMsg').textContent = msg;
+      res.classList.add('show');
+      res.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function retryQuiz() {
+      quizAnswered = new Array(8).fill(false);
+      quizScore = 0;
+      quizDone = false;
+      document.getElementById('quizResult').classList.remove('show');
+      for (let i = 0; i < 8; i++) {
+        const card = document.getElementById('q' + i);
+        card.querySelectorAll('.opt').forEach(o => {
+          o.classList.remove('correct', 'wrong', 'locked');
+        });
+        const fb = document.getElementById('fb' + i);
+        fb.classList.remove('show', 'ok', 'ko');
+        fb.textContent = '';
+      }
+      document.getElementById('slide-10').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    updateProgress();
+  </script>
+
+</body>
+</html>

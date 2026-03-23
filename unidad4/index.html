@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unidad IV — El Paraguay Colonial</title>
+  <style>
+    :root {
+      --primary: #7c3aed;
+      --primary-light: #ede9fe;
+      --secondary: #0f766e;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --bg: #f5f0e8;
+      --card-bg: #ffffff;
+      --border: #e2d9cc;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow: 0 8px 32px rgba(0,0,0,0.10);
+      --shadow-sm: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+
+    .hero { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #0f766e 100%); color: white; padding: 2rem 1.5rem 1.8rem; text-align: center; }
+    .hero-inner { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+    .hero-tag { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; padding: 0.3rem 0.9rem; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
+    .hero h1 { font-size: clamp(1.4rem, 4vw, 2.2rem); font-weight: 900; line-height: 1.15; }
+    .hero-sub { font-size: 0.9rem; color: rgba(255,255,255,0.75); }
+    .hero-sub strong { color: #fde68a; }
+
+    .progress-wrap { background: white; border-bottom: 1px solid var(--border); padding: 0.75rem 1.5rem; display: flex; align-items: center; gap: 1rem; position: sticky; top: 0; z-index: 10; box-shadow: var(--shadow-sm); }
+    .progress-label { font-size: 0.8rem; font-weight: 700; color: var(--primary); white-space: nowrap; }
+    .progress-bar-bg { flex: 1; height: 8px; background: var(--primary-light); border-radius: 999px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); border-radius: 999px; transition: width 0.4s ease; }
+    .progress-count { font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
+
+    .main { flex: 1; max-width: 820px; width: 100%; margin: 0 auto; padding: 2rem 1.2rem 1rem; }
+
+    .cartilla { display: none; flex-direction: column; gap: 1.2rem; animation: fadeIn 0.35s ease; }
+    .cartilla.active { display: flex; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+    .card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 1.6rem 1.8rem; position: relative; overflow: hidden; }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--primary), var(--secondary)); }
+
+    .card-tag { display: inline-block; background: var(--primary-light); color: var(--primary); border-radius: 999px; padding: 0.2rem 0.75rem; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.7rem; }
+    .card-tag.green { background: #dcfce7; color: #15803d; }
+    .card-tag.amber { background: #fef3c7; color: #92400e; }
+    .card-tag.blue  { background: #dbeafe; color: #1d4ed8; }
+    .card-tag.red   { background: #fee2e2; color: #b91c1c; }
+
+    .card h2 { font-size: clamp(1.1rem, 2.5vw, 1.4rem); font-weight: 900; color: #1e1b4b; line-height: 1.25; margin-bottom: 0.8rem; }
+    .card p  { font-size: 0.95rem; color: var(--text); line-height: 1.75; margin-bottom: 0.6rem; }
+    .card ul, .card ol { padding-left: 1.3rem; display: flex; flex-direction: column; gap: 0.45rem; margin-top: 0.4rem; }
+    .card li { font-size: 0.93rem; line-height: 1.6; }
+    .card li strong { color: #1e1b4b; }
+
+    .highlight-box { background: linear-gradient(135deg, #f5f3ff, #ede9fe); border: 1.5px solid #c4b5fd; border-radius: var(--radius-md); padding: 1rem 1.2rem; margin-top: 0.8rem; }
+    .highlight-box p { margin: 0; font-size: 0.9rem; }
+    .highlight-box .label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 0.3rem; }
+
+    .dato-box { background: #fefce8; border: 1.5px solid #fde68a; border-radius: var(--radius-md); padding: 0.9rem 1.1rem; margin-top: 0.8rem; }
+    .dato-box p { margin: 0; font-size: 0.88rem; color: #78350f; }
+    .dato-box .label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #92400e; margin-bottom: 0.25rem; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.6rem; }
+    .mini-card { background: #f9f7f4; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.9rem 1rem; }
+    .mini-card h4 { font-size: 0.88rem; font-weight: 800; color: #1e1b4b; margin-bottom: 0.35rem; }
+    .mini-card p  { font-size: 0.82rem; color: var(--muted); line-height: 1.55; margin: 0; }
+
+    .quiz-wrap { display: flex; flex-direction: column; gap: 1.4rem; }
+    .quiz-header { text-align: center; margin-bottom: 0.5rem; }
+    .quiz-header h2 { font-size: 1.6rem; font-weight: 900; color: #1e1b4b; }
+    .quiz-header p  { font-size: 0.9rem; color: var(--muted); margin-top: 0.3rem; }
+
+    .q-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 1.3rem 1.5rem; }
+    .q-num  { font-size: 0.72rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem; }
+    .q-text { font-size: 0.97rem; font-weight: 700; color: #1e1b4b; margin-bottom: 0.9rem; line-height: 1.4; }
+    .options { display: flex; flex-direction: column; gap: 0.5rem; }
+    .opt { display: flex; align-items: center; gap: 0.65rem; padding: 0.6rem 0.9rem; border: 1.5px solid var(--border); border-radius: var(--radius-md); cursor: pointer; font-size: 0.9rem; transition: all 0.18s; background: #fafaf9; }
+    .opt:hover:not(.locked) { border-color: var(--primary); background: var(--primary-light); }
+    .opt .letter { min-width: 24px; height: 24px; border-radius: 50%; background: var(--primary-light); color: var(--primary); font-size: 0.75rem; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+    .opt.correct { border-color: #16a34a; background: #dcfce7; }
+    .opt.correct .letter { background: #16a34a; color: white; }
+    .opt.wrong   { border-color: #dc2626; background: #fee2e2; }
+    .opt.wrong .letter   { background: #dc2626; color: white; }
+    .feedback { margin-top: 0.6rem; font-size: 0.83rem; font-weight: 600; padding: 0.45rem 0.8rem; border-radius: 8px; display: none; }
+    .feedback.show { display: block; }
+    .feedback.ok { background: #dcfce7; color: #15803d; }
+    .feedback.ko { background: #fee2e2; color: #b91c1c; }
+
+    .quiz-result { display: none; background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow); padding: 2rem; text-align: center; flex-direction: column; align-items: center; gap: 0.7rem; }
+    .quiz-result.show { display: flex; }
+    .result-emoji { font-size: 3rem; }
+    .result-score { font-size: 2.5rem; font-weight: 900; color: var(--primary); }
+    .result-msg   { font-size: 1rem; color: var(--muted); }
+
+    .nav { position: sticky; bottom: 0; background: white; border-top: 1px solid var(--border); padding: 0.9rem 1.5rem; display: flex; gap: 0.7rem; justify-content: center; align-items: center; box-shadow: 0 -4px 16px rgba(0,0,0,0.06); flex-wrap: wrap; }
+    .nav-btn { border: none; border-radius: 999px; padding: 0.55rem 1.3rem; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: all 0.18s; background: #f3f4f6; color: var(--text); }
+    .nav-btn:hover    { background: #e5e7eb; transform: translateY(-1px); }
+    .nav-btn.primary  { background: linear-gradient(135deg, var(--primary), #5b21b6); color: white; box-shadow: 0 4px 14px rgba(124,58,237,0.3); }
+    .nav-btn.primary:hover { box-shadow: 0 6px 18px rgba(124,58,237,0.4); }
+    .nav-btn.home     { background: #f0fdf4; color: #15803d; border: 1.5px solid #86efac; }
+    .nav-btn.home:hover { background: #dcfce7; }
+    .nav-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+    footer { text-align: center; padding: 1.2rem 1rem 1.5rem; font-size: 0.8rem; color: var(--muted); border-top: 1px solid var(--border); line-height: 1.8; }
+    footer strong { color: var(--primary); }
+
+    @media (max-width: 540px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .card   { padding: 1.2rem 1.1rem; }
+      .nav    { padding: 0.7rem 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="hero-tag">Unidad IV · Historia del Paraguay</span>
+      <h1>El Paraguay Colonial</h1>
+      <p class="hero-sub">Facilitada por la <strong>Dra. Beatriz Espinola Zaracho</strong></p>
+    </div>
+  </header>
+
+  <div class="progress-wrap">
+    <span class="progress-label">Progreso</span>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:9%"></div></div>
+    <span class="progress-count" id="progressCount">1 / 11</span>
+  </div>
+
+  <main class="main">
+
+    <!-- ══ CARTILLA 1 ══ -->
+    <section class="cartilla active" id="slide-0">
+      <div class="card">
+        <span class="card-tag blue">Gobierno colonial</span>
+        <h2>Hernando Arias de Saavedra — Hernandarias</h2>
+        <p>Hernandarias fue el primer gobernador criollo de América y una de las figuras más importantes del Paraguay colonial, destacándose por su defensa de los pueblos indígenas y su obra educativa.</p>
+        <ul>
+          <li><strong>Nacimiento:</strong> Asunción, presumiblemente en 1564. Hijo del Cap. Martín Suárez de Toledo y Doña María de Sanabria.</li>
+          <li><strong>Carrera militar:</strong> Desde joven acompañó a los gobernadores en expediciones de conquista, fundaciones y represión de levantamientos indígenas.</li>
+          <li><strong>Primer criollo gobernador:</strong> En 1592, el Cabildo lo designó Gobernador interino, siendo el primer criollo en ocupar tan alto cargo en América.</li>
+          <li><strong>Gobernó:</strong> Por casi veinte años en total, en varios periodos.</li>
+          <li><strong>Muerte:</strong> Falleció en su estancia de Santa Fe en 1631.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">⭐ Hito histórico</p>
+          <p>Hernandarias fue el <strong>primer gobernador criollo de América</strong>. Su designación en 1592 marcó un precedente único en la historia colonial del continente.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 2 ══ -->
+    <section class="cartilla" id="slide-1">
+      <div class="card">
+        <span class="card-tag blue">Gobierno colonial</span>
+        <h2>Obra de Hernandarias: leyes y religión</h2>
+        <p>Durante su gobierno, Hernandarias promovió activamente la protección del indígena y la organización religiosa y cultural de la provincia.</p>
+        <ul>
+          <li><strong>Ordenanzas de protección indígena (1598 y 1603):</strong> Defendió al indio y reglamentó sus relaciones con los encomenderos.</li>
+          <li><strong>Sínodo Asunceno (1603):</strong> Reunión eclesiástica donde se decidió utilizar el <em>guaraní</em> como idioma de evangelización — un reconocimiento único a la lengua nativa.</li>
+          <li><strong>Cédula Real de 1602:</strong> Fue nombrado oficialmente Gobernador de la Provincia del Paraguay. Ese mismo año se abrió el puerto de Buenos Aires para la exportación e importación.</li>
+          <li><strong>Cédula de 1608:</strong> A pedido de Hernandarias, llegaron los jesuitas al Río de la Plata con el objetivo de reducir a los indios por la religión.</li>
+        </ul>
+        <div class="highlight-box">
+          <p class="label">💡 El guaraní como lengua oficial</p>
+          <p>La decisión del Sínodo de 1603 de usar el guaraní para evangelizar fue visionaria: convirtió al guaraní en lengua de comunicación masiva y explica por qué hoy sigue siendo idioma oficial del Paraguay.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 3 ══ -->
+    <section class="cartilla" id="slide-2">
+      <div class="card">
+        <span class="card-tag green">Educación y cultura</span>
+        <h2>Creaciones educativas y culturales</h2>
+        <p>Bajo la influencia de Hernandarias y la llegada de las órdenes religiosas, el Paraguay colonial desarrolló sus primeras instituciones educativas y culturales.</p>
+        <ul>
+          <li><strong>Casa de Recogidas y Huérfanas:</strong> Fundada por Francisca de Bocanegra, primera institución de asistencia social para mujeres en la provincia.</li>
+          <li><strong>Escuela Colegio del Padre Francisco de Zaldívar:</strong> Primera institución educativa formal en Asunción.</li>
+          <li><strong>Colegio jesuita en Asunción:</strong> Los jesuitas habilitaron el primer instituto de enseñanza secundaria en Asunción.</li>
+          <li><strong>Colegio Máximo de Córdoba:</strong> Fundado por Hernando de Trejo y Sanabria, hermanastro de Hernandarias. Más tarde se convirtió en la primera universidad del Río de la Plata.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">🎓 La primera universidad</p>
+          <p>El Colegio Máximo de Córdoba, vinculado directamente al entorno familiar de Hernandarias, se convirtió en la <strong>primera universidad del Río de la Plata</strong>, hoy conocida como la Universidad Nacional de Córdoba (Argentina).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 4 ══ -->
+    <section class="cartilla" id="slide-3">
+      <div class="card">
+        <span class="card-tag red">División territorial</span>
+        <h2>La División de la Provincia en 1617</h2>
+        <p>Uno de los hechos más trascendentes del periodo colonial fue la división de la Provincia del Paraguay en dos gobernaciones separadas, con graves consecuencias para el territorio paraguayo.</p>
+        <ul>
+          <li><strong>Causa:</strong> La dificultad que enfrentaban los gobernadores para administrar un territorio tan vasto desde Asunción.</li>
+          <li><strong>Real Cédula del 16 de diciembre de 1617:</strong> Dividió la gran provincia en dos gobernaciones.</li>
+          <li><strong>Provincia del Paraguay:</strong> Capital Asunción. Territorio interior sin acceso al mar.</li>
+          <li><strong>Provincia del Río de la Plata:</strong> Capital Buenos Aires. Con acceso al Atlántico y al comercio exterior.</li>
+          <li><strong>Consecuencia:</strong> Paraguay perdió extensos territorios y, fundamentalmente, su <em>litoral marítimo</em>, quedando como provincia mediterránea sin salida al océano.</li>
+        </ul>
+        <div class="highlight-box">
+          <p class="label">⚠️ Pérdida geopolítica</p>
+          <p>La división de 1617 fue una <strong>pérdida imponderable</strong> para el destino geopolítico del Paraguay: quedó aislado del comercio atlántico y dependiente de Buenos Aires para exportar sus productos.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 5 ══ -->
+    <section class="cartilla" id="slide-4">
+      <div class="card">
+        <span class="card-tag amber">Legislación indígena</span>
+        <h2>Las Ordenanzas de Alfaro (1611)</h2>
+        <p>Las Ordenanzas de Alfaro fueron el primer gran cuerpo legal colonial que protegió los derechos de los indígenas paraguayos, limitando el poder de los encomenderos.</p>
+        <ul>
+          <li><strong>Francisco de Alfaro:</strong> Oidor de la Audiencia de Charcas y Visitador de la Provincia del Río de la Plata. Llegó al Paraguay en 1611.</li>
+          <li><strong>Objetivo:</strong> Suprimir las encomiendas con servicio personal y humanizar el trato al indígena.</li>
+          <li><strong>Hernandarias como Protector de Indios:</strong> Alfaro designó a Hernandarias para este cargo, reconociendo su historial de defensa indígena.</li>
+        </ul>
+        <div class="highlight-box">
+          <p class="label">💡 Contexto</p>
+          <p>Antes de Alfaro, los indígenas eran prácticamente esclavos de los encomenderos. Las Ordenanzas intentaron transformar esa relación en una de trabajo regulado y pagado.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 6 ══ -->
+    <section class="cartilla" id="slide-5">
+      <div class="card">
+        <span class="card-tag amber">Legislación indígena</span>
+        <h2>Puntos clave de las Ordenanzas de Alfaro</h2>
+        <p>Las Ordenanzas establecieron derechos concretos y limitaciones precisas para proteger a los indígenas de los abusos coloniales.</p>
+        <ul>
+          <li><strong>Se suprime el trabajo servil</strong> de los indios: no podían ser tratados como esclavos.</li>
+          <li><strong>Restricción geográfica:</strong> No podían ser trasladados a más de una legua de distancia de sus residencias.</li>
+          <li><strong>Nulidad de compraventa:</strong> Se declaró nula la compraventa de indios.</li>
+          <li><strong>Libertad de patrón:</strong> El indio podía elegir a su patrón, pero no podía trabajar para el mismo más de un año.</li>
+          <li><strong>Tasa anual:</strong> El indio debía abonar cinco pesos como vasallo de la Corona; si no tenía dinero, podía pagarlo con trabajo.</li>
+          <li><strong>Reglamentación de la mita:</strong> El salario no podía abonarse en especie; en caso de enfermedad, el mitayo debía ser atendido por su patrón.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">⚠️ Limitaciones</p>
+          <p>Aunque revolucionarias para la época, las Ordenanzas de Alfaro tuvieron <strong>aplicación parcial</strong>. Los encomenderos resistieron su implementación y muchos abusos continuaron en la práctica.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 7 ══ -->
+    <section class="cartilla" id="slide-6">
+      <div class="card">
+        <span class="card-tag">Sociedad colonial</span>
+        <h2>La Sociedad Colonial — Clases sociales</h2>
+        <p>La sociedad colonial paraguaya estaba estructurada en clases sociales rígidas, determinadas principalmente por el origen étnico y el nacimiento.</p>
+        <div class="grid-2">
+          <div class="mini-card">
+            <h4>👑 Peninsulares</h4>
+            <p>Nacidos en España. Ocupaban los cargos más altos del gobierno, la iglesia y el ejército. Considerados de mayor rango.</p>
+          </div>
+          <div class="mini-card">
+            <h4>🌎 Criollos</h4>
+            <p>Hijos de españoles nacidos en América. Podían ocupar cargos importantes pero estaban por debajo de los peninsulares.</p>
+          </div>
+          <div class="mini-card">
+            <h4>🤝 Mestizos</h4>
+            <p>Hijos de español e indígena. Clase mayoritaria en el Paraguay. Base de la identidad cultural paraguaya actual.</p>
+          </div>
+          <div class="mini-card">
+            <h4>🌿 Indígenas y esclavos</h4>
+            <p>En la base de la pirámide. Los indígenas pagaban tributo; los esclavos africanos eran menos numerosos que en otras colonias.</p>
+          </div>
+        </div>
+        <div class="highlight-box">
+          <p class="label">💡 Paraguay: caso particular</p>
+          <p>El Paraguay fue una sociedad predominantemente <strong>mestiza</strong> desde temprano, a diferencia de otras colonias. El <em>cuñadasgo</em> guaraní y la escasez de mujeres españolas aceleraron el mestizaje.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 8 ══ -->
+    <section class="cartilla" id="slide-7">
+      <div class="card">
+        <span class="card-tag green">Economía colonial</span>
+        <h2>Agricultura, ganadería e industrias</h2>
+        <p>A partir de la fundación de Asunción comenzó la integración de actividades productivas, combinando los cultivos originarios con los aportados por los conquistadores.</p>
+        <ul>
+          <li><strong>Agricultura originaria:</strong> Maíz, porotos, maní, banana, zapallo.</li>
+          <li><strong>Agricultura introducida:</strong> Caña de azúcar, vid, tomate, cítricos. También se introdujeron nuevas herramientas: azada, machete, arado de madera.</li>
+          <li><strong>Ganadería:</strong> Ganado vacuno, equino, mulas, asnos, ovejas, cabras y porcinos.</li>
+          <li><strong>Primeras industrias:</strong> Transformación de productos primarios: almidón, harina, azúcar, dulces, vinos, hilado, telares y cuero.</li>
+          <li><strong>Yerba mate y tabaco:</strong> Constituyeron las actividades industriales más importantes. La yerba fue el producto más valorado para la exportación.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">🌿 La yerba mate</p>
+          <p>La <strong>yerba mate</strong> fue el principal producto de exportación del Paraguay colonial, mucho antes que el tabaco. Su cultivo y comercialización fueron controlados en gran parte por las misiones jesuíticas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 9 ══ -->
+    <section class="cartilla" id="slide-8">
+      <div class="card">
+        <span class="card-tag green">Economía colonial</span>
+        <h2>Comercio, moneda y transporte</h2>
+        <p>La economía colonial paraguaya fue precaria durante gran parte del periodo colonial, caracterizada por el aislamiento, la falta de moneda y la dependencia del trueque.</p>
+        <ul>
+          <li><strong>Comercio interno precario:</strong> Causado por la población dispersa, la falta de vías y medios de transporte y comunicación.</li>
+          <li><strong>Sistema de trueque:</strong> Durante décadas fue el principal mecanismo de intercambio económico en la provincia.</li>
+          <li><strong>La Real Hacienda:</strong> El sistema obligó a convertirse en un gran depósito de mercaderías, obligada a recibirlas como pago de impuestos en especie.</li>
+          <li><strong>Moneda metálica:</strong> Recién ingresó a la provincia en la última década del siglo XVIII, a través de la oficina del Estanco del Tabaco.</li>
+        </ul>
+        <div class="highlight-box">
+          <p class="label">💡 Aislamiento económico</p>
+          <p>La pérdida del litoral marítimo en 1617 obligó al Paraguay a exportar a través de Buenos Aires, pagando impuestos y dependiendo de intermediarios, lo que frenó su desarrollo económico durante décadas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CARTILLA 10 ══ -->
+    <section class="cartilla" id="slide-9">
+      <div class="card">
+        <span class="card-tag amber">Economía colonial</span>
+        <h2>El Estanco del Tabaco (1779)</h2>
+        <p>El Estanco del Tabaco fue un hito económico fundamental en la historia colonial del Paraguay: introdujo por primera vez la moneda metálica en la provincia y modernizó su sistema comercial.</p>
+        <ul>
+          <li><strong>Establecimiento:</strong> En 1779 se creó el Estanco del Tabaco en el Paraguay.</li>
+          <li><strong>Monopolio estatal:</strong> La Real Renta tomó a su cargo el monopolio de compra y venta de tabaco, reabriendo la fábrica de tabaco negro que había exportado a España.</li>
+          <li><strong>Cuenta corriente:</strong> Se abrió cuenta corriente a los cosecheros que contrataban determinada cantidad anual de tabaco.</li>
+          <li><strong>Beneficios a cosecheros:</strong> Fueron eximidos del servicio militar.</li>
+          <li><strong>Moneda metálica:</strong> Por primera vez, los cosecheros recibieron su pago en <em>moneda metálica</em>, marcando el ingreso del dinero físico a la provincia.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">📅 Dato clave — 1779</p>
+          <p>El Estanco del Tabaco de <strong>1779</strong> fue el punto de inflexión económico del Paraguay colonial: antes de él, casi todo el comercio se hacía por trueque o en especie. Fue el inicio de una economía monetaria.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ QUIZ ══ -->
+    <section class="cartilla" id="slide-10">
+      <div class="quiz-wrap">
+        <div class="quiz-header">
+          <h2>🎯 Quiz Final</h2>
+          <p>Unidad IV · 8 preguntas · Seleccioná la respuesta correcta</p>
+        </div>
+
+        <!-- Q1 -->
+        <div class="q-card" id="q0">
+          <p class="q-num">Pregunta 1</p>
+          <p class="q-text">¿Por qué Hernandarias fue una figura histórica única en América colonial?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(0,0,1)"><span class="letter">A</span> Fue el primer gobernador en fundar una ciudad</div>
+            <div class="opt" onclick="answer(0,1,1)"><span class="letter">B</span> Fue el primer gobernador criollo de América</div>
+            <div class="opt" onclick="answer(0,2,1)"><span class="letter">C</span> Fue el primer gobernador en llegar de España</div>
+            <div class="opt" onclick="answer(0,3,1)"><span class="letter">D</span> Fue el primer gobernador elegido por los indígenas</div>
+          </div>
+          <div class="feedback" id="fb0"></div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="q-card" id="q1">
+          <p class="q-num">Pregunta 2</p>
+          <p class="q-text">¿Qué se decidió en el Sínodo Asunceno de 1603?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(1,0,2)"><span class="letter">A</span> Dividir la provincia en dos gobernaciones</div>
+            <div class="opt" onclick="answer(1,1,2)"><span class="letter">B</span> Abolir la encomienda en el Paraguay</div>
+            <div class="opt" onclick="answer(1,2,2)"><span class="letter">C</span> Usar el guaraní como idioma de evangelización</div>
+            <div class="opt" onclick="answer(1,3,2)"><span class="letter">D</span> Expulsar a los jesuitas de la provincia</div>
+          </div>
+          <div class="feedback" id="fb1"></div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="q-card" id="q2">
+          <p class="q-num">Pregunta 3</p>
+          <p class="q-text">¿Quién fundó el Colegio Máximo de Córdoba, primera universidad del Río de la Plata?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(2,0,2)"><span class="letter">A</span> Hernandarias</div>
+            <div class="opt" onclick="answer(2,1,2)"><span class="letter">B</span> Francisco de Alfaro</div>
+            <div class="opt" onclick="answer(2,2,2)"><span class="letter">C</span> Hernando de Trejo y Sanabria</div>
+            <div class="opt" onclick="answer(2,3,2)"><span class="letter">D</span> Francisca de Bocanegra</div>
+          </div>
+          <div class="feedback" id="fb2"></div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="q-card" id="q3">
+          <p class="q-num">Pregunta 4</p>
+          <p class="q-text">¿Qué perdió Paraguay con la división provincial de 1617?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(3,0,1)"><span class="letter">A</span> Su capital, que pasó a ser Buenos Aires</div>
+            <div class="opt" onclick="answer(3,1,1)"><span class="letter">B</span> Extensos territorios y su litoral marítimo</div>
+            <div class="opt" onclick="answer(3,2,1)"><span class="letter">C</span> El control de las misiones jesuíticas</div>
+            <div class="opt" onclick="answer(3,3,1)"><span class="letter">D</span> La autoridad del Cabildo de Asunción</div>
+          </div>
+          <div class="feedback" id="fb3"></div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="q-card" id="q4">
+          <p class="q-num">Pregunta 5</p>
+          <p class="q-text">¿Cuánto debía pagar el indígena como tasa anual a la Corona según las Ordenanzas de Alfaro?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(4,0,2)"><span class="letter">A</span> Diez pesos</div>
+            <div class="opt" onclick="answer(4,1,2)"><span class="letter">B</span> Una legua de trabajo</div>
+            <div class="opt" onclick="answer(4,2,2)"><span class="letter">C</span> Cinco pesos</div>
+            <div class="opt" onclick="answer(4,3,2)"><span class="letter">D</span> No pagaba nada</div>
+          </div>
+          <div class="feedback" id="fb4"></div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="q-card" id="q5">
+          <p class="q-num">Pregunta 6</p>
+          <p class="q-text">¿Cuál fue el producto más valorado para la exportación en el Paraguay colonial?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(5,0,0)"><span class="letter">A</span> La yerba mate</div>
+            <div class="opt" onclick="answer(5,1,0)"><span class="letter">B</span> El tabaco</div>
+            <div class="opt" onclick="answer(5,2,0)"><span class="letter">C</span> El cuero vacuno</div>
+            <div class="opt" onclick="answer(5,3,0)"><span class="letter">D</span> La caña de azúcar</div>
+          </div>
+          <div class="feedback" id="fb5"></div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="q-card" id="q6">
+          <p class="q-num">Pregunta 7</p>
+          <p class="q-text">¿Por qué el comercio interno del Paraguay colonial era precario?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(6,0,1)"><span class="letter">A</span> Porque estaba prohibido por la Corona española</div>
+            <div class="opt" onclick="answer(6,1,1)"><span class="letter">B</span> Por la población dispersa y la falta de vías de comunicación</div>
+            <div class="opt" onclick="answer(6,2,1)"><span class="letter">C</span> Porque todos los productos se exportaban a España</div>
+            <div class="opt" onclick="answer(6,3,1)"><span class="letter">D</span> Porque los indígenas se negaban a comerciar</div>
+          </div>
+          <div class="feedback" id="fb6"></div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="q-card" id="q7">
+          <p class="q-num">Pregunta 8</p>
+          <p class="q-text">¿Qué importancia tuvo el Estanco del Tabaco de 1779 para la economía paraguaya?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(7,0,2)"><span class="letter">A</span> Eliminó el sistema del trueque de forma inmediata</div>
+            <div class="opt" onclick="answer(7,1,2)"><span class="letter">B</span> Permitió a Paraguay exportar directamente a Europa</div>
+            <div class="opt" onclick="answer(7,2,2)"><span class="letter">C</span> Introdujo por primera vez la moneda metálica en la provincia</div>
+            <div class="opt" onclick="answer(7,3,2)"><span class="letter">D</span> Abolió el monopolio comercial de Buenos Aires</div>
+          </div>
+          <div class="feedback" id="fb7"></div>
+        </div>
+
+        <!-- Resultado -->
+        <div class="quiz-result" id="quizResult">
+          <div class="result-emoji" id="resultEmoji"></div>
+          <div class="result-score" id="resultScore"></div>
+          <p class="result-msg" id="resultMsg"></p>
+          <button class="nav-btn primary" onclick="retryQuiz()">🔄 Intentar de nuevo</button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="nav">
+    <button class="nav-btn home"    onclick="goHome()">🏠 Inicio</button>
+    <button class="nav-btn"         onclick="prev()" id="btnPrev" disabled>← Anterior</button>
+    <button class="nav-btn primary" onclick="next()" id="btnNext">Siguiente →</button>
+  </nav>
+
+  <footer>
+    <p>Unidad IV · Historia del Paraguay</p>
+    <p>Facilitada por la <strong>Dra. Beatriz Espinola Zaracho</strong></p>
+  </footer>
+
+  <script>
+    const TOTAL = 11;
+    let current = 0;
+
+    const correctAnswers = [1, 2, 2, 1, 2, 0, 1, 2];
+    const feedbacks = [
+      [
+        "Incorrecto. Fundar ciudades fue una tarea común entre los gobernadores de la época.",
+        "✔ Correcto. En 1592, Hernandarias fue designado por el Cabildo como el primer gobernador criollo de América.",
+        "Incorrecto. Los gobernadores enviados desde España eran peninsulares, no criollos.",
+        "Incorrecto. Hernandarias fue designado por el Cabildo, no por los indígenas."
+      ],
+      [
+        "Incorrecto. La división de la provincia ocurrió en 1617 por Real Cédula, no en el Sínodo.",
+        "Incorrecto. La abolición de la encomienda con servicio personal fue obra de Alfaro en 1611.",
+        "✔ Correcto. En el Sínodo Asunceno de 1603 se decidió usar el guaraní como idioma de evangelización.",
+        "Incorrecto. Los jesuitas fueron invitados por Hernandarias en 1608; su expulsión ocurrió en 1767."
+      ],
+      [
+        "Incorrecto. Hernandarias fue gobernador, no el fundador del Colegio de Córdoba.",
+        "Incorrecto. Alfaro fue el autor de las Ordenanzas de 1611, no del Colegio de Córdoba.",
+        "✔ Correcto. Hernando de Trejo y Sanabria, hermanastro de Hernandarias, fundó el Colegio Máximo de Córdoba.",
+        "Incorrecto. Francisca de Bocanegra fundó la Casa de Recogidas y Huérfanas, no el Colegio de Córdoba."
+      ],
+      [
+        "Incorrecto. La capital del Paraguay siguió siendo Asunción; Buenos Aires fue capital de la nueva provincia del Río de la Plata.",
+        "✔ Correcto. La división de 1617 privó al Paraguay de extensos territorios y de su litoral marítimo, aislándolo del Atlántico.",
+        "Incorrecto. Las misiones jesuíticas continuaron bajo la jurisdicción del Paraguay.",
+        "Incorrecto. El Cabildo de Asunción mantuvo su autoridad dentro de la nueva provincia reducida."
+      ],
+      [
+        "Incorrecto. La tasa establecida por Alfaro era de cinco pesos, no diez.",
+        "Incorrecto. 'Una legua' era la distancia máxima que podían ser trasladados, no la tasa.",
+        "✔ Correcto. Las Ordenanzas de Alfaro establecieron una tasa anual de cinco pesos para el indígena como vasallo de la Corona.",
+        "Incorrecto. Los indígenas sí tenían obligación de pagar tributo a la Corona."
+      ],
+      [
+        "✔ Correcto. La yerba mate fue el producto más valorado para la exportación durante el periodo colonial paraguayo.",
+        "Incorrecto. El tabaco fue importante, pero secundario a la yerba mate en el periodo colonial temprano.",
+        "Incorrecto. El cuero fue un producto importante pero no el principal de exportación.",
+        "Incorrecto. La caña de azúcar fue un cultivo introducido pero no el principal producto de exportación."
+      ],
+      [
+        "Incorrecto. El comercio interno nunca estuvo prohibido; simplemente era difícil de realizar.",
+        "✔ Correcto. El comercio interno era precario por la población dispersa y la falta de vías y medios de transporte y comunicación.",
+        "Incorrecto. Gran parte de la producción se consumía localmente o se comerciaba regionalmente.",
+        "Incorrecto. Los indígenas participaban activamente en el comercio y la producción colonial."
+      ],
+      [
+        "Incorrecto. El trueque no desapareció de inmediato; el Estanco simplemente introdujo la moneda en el sector tabacalero.",
+        "Incorrecto. El Estanco no cambió las rutas de exportación; Paraguay seguía dependiendo de Buenos Aires.",
+        "✔ Correcto. El Estanco del Tabaco de 1779 fue el primer mecanismo por el que ingresó moneda metálica a la provincia del Paraguay.",
+        "Incorrecto. El monopolio comercial de Buenos Aires no fue abolido; continuó vigente."
+      ]
+    ];
+
+    let quizAnswered = new Array(8).fill(false);
+    let quizScore = 0;
+    let quizDone = false;
+
+    function updateProgress() {
+      const pct = ((current + 1) / TOTAL) * 100;
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('progressCount').textContent = (current + 1) + ' / ' + TOTAL;
+      document.getElementById('btnPrev').disabled = current === 0;
+      if (current === TOTAL - 1) {
+        document.getElementById('btnNext').textContent = '✓ Fin';
+        document.getElementById('btnNext').disabled = true;
+      } else {
+        document.getElementById('btnNext').textContent = 'Siguiente →';
+        document.getElementById('btnNext').disabled = false;
+      }
+    }
+
+    function showSlide(idx) {
+      document.querySelectorAll('.cartilla').forEach(s => s.classList.remove('active'));
+      document.getElementById('slide-' + idx).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      updateProgress();
+    }
+
+    function next() { if (current < TOTAL - 1) { current++; showSlide(current); } }
+    function prev() { if (current > 0) { current--; showSlide(current); } }
+    function goHome() { window.location.href = '../index.html'; }
+
+    function answer(qIdx, optIdx, correct) {
+      if (quizAnswered[qIdx]) return;
+      quizAnswered[qIdx] = true;
+      const card = document.getElementById('q' + qIdx);
+      const opts = card.querySelectorAll('.opt');
+      opts.forEach(o => o.classList.add('locked'));
+      opts[optIdx].classList.add(optIdx === correct ? 'correct' : 'wrong');
+      if (optIdx !== correct) opts[correct].classList.add('correct');
+      const fb = document.getElementById('fb' + qIdx);
+      fb.classList.add('show');
+      if (optIdx === correct) {
+        quizScore++;
+        fb.classList.add('ok');
+        fb.textContent = feedbacks[qIdx][correct];
+      } else {
+        fb.classList.add('ko');
+        fb.textContent = feedbacks[qIdx][optIdx];
+      }
+      if (quizAnswered.every(a => a) && !quizDone) {
+        quizDone = true;
+        setTimeout(showResult, 600);
+      }
+    }
+
+    function showResult() {
+      const pct = Math.round((quizScore / 8) * 100);
+      let emoji, msg;
+      if (pct >= 90)      { emoji = '🏆'; msg = '¡Excelente! Dominás la Unidad IV.'; }
+      else if (pct >= 70) { emoji = '🎉'; msg = '¡Muy bien! Repasá los detalles menores.'; }
+      else if (pct >= 50) { emoji = '📖'; msg = 'Bien, pero vale la pena repasar las cartillas.'; }
+      else                { emoji = '💪'; msg = 'Revisá las cartillas y volvé a intentarlo.'; }
+      document.getElementById('resultEmoji').textContent = emoji;
+      document.getElementById('resultScore').textContent = quizScore + ' / 8 (' + pct + '%)';
+      document.getElementById('resultMsg').textContent = msg;
+      document.getElementById('quizResult').classList.add('show');
+      document.getElementById('quizResult').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function retryQuiz() {
+      quizAnswered = new Array(8).fill(false);
+      quizScore = 0;
+      quizDone = false;
+      document.getElementById('quizResult').classList.remove('show');
+      for (let i = 0; i < 8; i++) {
+        document.getElementById('q' + i).querySelectorAll('.opt').forEach(o => o.classList.remove('correct','wrong','locked'));
+        const fb = document.getElementById('fb' + i);
+        fb.classList.remove('show','ok','ko');
+        fb.textContent = '';
+      }
+      document.getElementById('slide-10').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    updateProgress();
+  </script>
+
+</body>
+</html>

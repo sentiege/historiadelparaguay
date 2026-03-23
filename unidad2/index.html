@@ -9,7 +9,6 @@
       --primary: #7c3aed;
       --primary-light: #ede9fe;
       --secondary: #0f766e;
-      --accent: #d97706;
       --text: #1f2937;
       --muted: #6b7280;
       --bg: #f5f0e8;
@@ -46,15 +45,15 @@
     .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--primary), var(--secondary)); }
 
     .card-tag { display: inline-block; background: var(--primary-light); color: var(--primary); border-radius: 999px; padding: 0.2rem 0.75rem; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.7rem; }
-    .card-tag.green  { background: #dcfce7; color: #15803d; }
-    .card-tag.amber  { background: #fef3c7; color: #92400e; }
-    .card-tag.blue   { background: #dbeafe; color: #1d4ed8; }
-    .card-tag.red    { background: #fee2e2; color: #b91c1c; }
+    .card-tag.green { background: #dcfce7; color: #15803d; }
+    .card-tag.amber { background: #fef3c7; color: #92400e; }
+    .card-tag.blue  { background: #dbeafe; color: #1d4ed8; }
+    .card-tag.red   { background: #fee2e2; color: #b91c1c; }
 
     .card h2 { font-size: clamp(1.1rem, 2.5vw, 1.4rem); font-weight: 900; color: #1e1b4b; line-height: 1.25; margin-bottom: 0.8rem; }
-    .card p { font-size: 0.95rem; color: var(--text); line-height: 1.75; margin-bottom: 0.6rem; }
+    .card p  { font-size: 0.95rem; color: var(--text); line-height: 1.75; margin-bottom: 0.6rem; }
     .card ul, .card ol { padding-left: 1.3rem; display: flex; flex-direction: column; gap: 0.45rem; margin-top: 0.4rem; }
-    .card li { font-size: 0.93rem; line-height: 1.6; color: var(--text); }
+    .card li { font-size: 0.93rem; line-height: 1.6; }
     .card li strong { color: #1e1b4b; }
 
     .highlight-box { background: linear-gradient(135deg, #f5f3ff, #ede9fe); border: 1.5px solid #c4b5fd; border-radius: var(--radius-md); padding: 1rem 1.2rem; margin-top: 0.8rem; }
@@ -122,7 +121,7 @@
     <div class="hero-inner">
       <span class="hero-tag">Unidad II · Historia del Paraguay</span>
       <h1>Población Precolombina del Paraguay</h1>
-      <p class="hero-sub">Herramienta desarrollada con material didactico la <strong>Dra. Beatriz Espinola Zaracho</strong></p>
+      <p class="hero-sub">Facilitada por la <strong>Dra. Beatriz Espinola Zaracho</strong></p>
     </div>
   </header>
 
@@ -157,7 +156,7 @@
       <div class="card">
         <span class="card-tag amber">Prehistoria</span>
         <h2>La Población Precolombina — Prehistoria</h2>
-        <p>Para estudiar a los primeros habitantes del Paraguay, la Historia se apoya en ciencias auxiliares como la <strong>cronología</strong>, que ubica los hechos en el tiempo.</p>
+        <p>Para estudiar a los primeros habitantes del Paraguay, la Historia se apoya en la <strong>cronología</strong>, que ubica los hechos en el tiempo.</p>
         <ul>
           <li><strong>Edad Prehistórica:</strong> Tiempos muy lejanos desde la aparición de las primeras formas de vida, inclusive la del hombre en la era cuaternaria, hasta la aparición de la escritura.</li>
           <li><strong>La Prehistoria se divide en:</strong> Edad de Piedra y Edad de los Metales.</li>
@@ -174,7 +173,7 @@
         </div>
         <div class="dato-box">
           <p class="label">📚 Ciencias auxiliares</p>
-          <p>La Historia del Paraguay se apoya en la <strong>arqueología</strong>, la <strong>cronología</strong> y la <strong>antropología</strong> para estudiar sus pueblos precolombinos, dado que no dejaron registros escritos.</p>
+          <p>La Historia del Paraguay se apoya en la <strong>arqueología</strong>, la <strong>cronología</strong> y la <strong>antropología</strong> para estudiar sus pueblos precolombinos, ya que no dejaron registros escritos.</p>
         </div>
       </div>
     </section>
@@ -186,13 +185,13 @@
         <h2>Paleolítico, Mesolítico y Neolítico</h2>
         <p>La Edad de Piedra se divide en tres periodos que marcan la evolución del ser humano desde nómada cazador hasta agricultor sedentario.</p>
         <ul>
-          <li><strong>Paleolítico (Piedra Tallada):</strong> Etapa más larga de la prehistoria. Los humanos eran nómadas, cazadores-recolectores, vivían en cuevas y dominaron el fuego. Tallaban la piedra sin pulirla.</li>
-          <li><strong>Mesolítico (Piedra Media):</strong> Periodo de transición caracterizado por cambios climáticos y el inicio de la caza y recolección especializada. Herramientas más pequeñas y precisas.</li>
-          <li><strong>Neolítico (Piedra Pulida):</strong> La gran revolución. Aparece la <em>agricultura</em>, la <em>ganadería</em> y el <em>sedentarismo</em> (primeros poblados permanentes). Las piedras se pulen y perfeccionan.</li>
+          <li><strong>Paleolítico (Piedra Tallada):</strong> Etapa más larga. Los humanos eran nómadas cazadores-recolectores, vivían en cuevas y dominaron el fuego.</li>
+          <li><strong>Mesolítico (Piedra Media):</strong> Periodo de transición por cambios climáticos. Inicio de la caza y recolección especializada con herramientas más pequeñas y precisas.</li>
+          <li><strong>Neolítico (Piedra Pulida):</strong> La gran revolución. Aparecen la <em>agricultura</em>, la <em>ganadería</em> y el <em>sedentarismo</em>. Las piedras se pulen.</li>
         </ul>
         <div class="highlight-box">
           <p class="label">💡 Revolución neolítica</p>
-          <p>El Neolítico fue el cambio más importante en la prehistoria: pasar de cazar y recolectar a <strong>producir alimentos</strong> permitió el crecimiento de la población y la formación de las primeras sociedades organizadas.</p>
+          <p>El Neolítico fue el cambio más importante en la prehistoria: pasar de cazar a <strong>producir alimentos</strong> permitió el crecimiento de la población y los primeros poblados permanentes.</p>
         </div>
       </div>
     </section>
@@ -202,15 +201,15 @@
       <div class="card">
         <span class="card-tag amber">Prehistoria</span>
         <h2>La Edad de los Metales</h2>
-        <p>La Edad de los Metales marcó el fin de la prehistoria y el inicio de civilizaciones más complejas, gracias al dominio de nuevos materiales para fabricar herramientas y armas.</p>
+        <p>La Edad de los Metales marcó el fin de la prehistoria gracias al dominio de nuevos materiales para fabricar herramientas y armas más resistentes.</p>
         <div class="grid-2">
           <div class="mini-card">
             <h4>🟤 Edad del Cobre</h4>
-            <p>Primer metal utilizado. Blando y maleable; se usó para hacer herramientas y adornos sencillos.</p>
+            <p>Primer metal utilizado. Blando y maleable; se usó para herramientas y adornos sencillos.</p>
           </div>
           <div class="mini-card">
             <h4>🟡 Edad del Bronce</h4>
-            <p>Aleación de cobre y estaño, más dura y resistente. Permitió mejores armas y herramientas agrícolas.</p>
+            <p>Aleación de cobre y estaño, más dura. Permitió mejores armas y herramientas agrícolas.</p>
           </div>
           <div class="mini-card">
             <h4>⚫ Edad del Hierro</h4>
@@ -218,12 +217,12 @@
           </div>
           <div class="mini-card">
             <h4>🛞 Inventos clave</h4>
-            <p>Invención de la rueda, desarrollo del comercio organizado y complejización social (clases sociales, reyes).</p>
+            <p>Invención de la rueda, desarrollo del comercio y complejización social con clases y reyes.</p>
           </div>
         </div>
         <div class="dato-box">
           <p class="label">⚠️ En Paraguay</p>
-          <p>Los pueblos indígenas paraguayos no conocieron la metalurgia antes de la llegada de los españoles. Vivían en el Neolítico: usaban piedra, madera y barro para sus herramientas.</p>
+          <p>Los pueblos indígenas paraguayos <strong>no conocieron la metalurgia</strong> antes de la llegada de los españoles. Vivían en el Neolítico: usaban piedra, madera y barro para sus herramientas.</p>
         </div>
       </div>
     </section>
@@ -233,11 +232,11 @@
       <div class="card">
         <span class="card-tag green">Etnias chaqueñas</span>
         <h2>Los Pueblos del Chaco</h2>
-        <p>A la llegada de los españoles, el Gran Chaco estaba habitado por varias naciones aborígenes, llamados también <em>pampinos</em>. Se caracterizaban por una economía basada en la recolección, caza y pesca.</p>
+        <p>A la llegada de los españoles, el Gran Chaco estaba habitado por varias naciones aborígenes llamados también <em>pampinos</em>, con economía basada en la recolección, caza y pesca.</p>
         <ul>
           <li><strong>Característica común:</strong> Cada etnia se distinguía por diferencias culturales y lingüísticas propias.</li>
-          <li><strong>Los Guaycurúes:</strong> Grupo más guerrero y numeroso. Incluía a los Mbayá, Payaguá, Toba y Abipon. Expertos en canoas y en el río Paraguay.</li>
-          <li><strong>Los Mataco:</strong> Incluía a los Chulupi y Choroti. Habitantes del Chaco central y sur.</li>
+          <li><strong>Los Guaycurúes:</strong> Grupo más guerrero y numeroso. Incluía a los Mbayá, Payaguá, Toba y Abipon.</li>
+          <li><strong>Los Mataco:</strong> Incluía a los Chulupi y Choroti. Habitaban el Chaco central y sur.</li>
           <li><strong>Los Zámucos:</strong> Habitaban el Chaco boreal, en el límite con Bolivia.</li>
         </ul>
         <div class="highlight-box">
@@ -252,16 +251,16 @@
       <div class="card">
         <span class="card-tag green">Etnias chaqueñas</span>
         <h2>Organización política y social chaqueña</h2>
-        <p>Los pueblos chaqueños no tenían una organización estatal centralizada. Vivían en pequeñas agrupaciones con una estructura social relativamente simple.</p>
+        <p>Los pueblos chaqueños no tenían organización estatal centralizada. Vivían en pequeñas agrupaciones con estructura social relativamente simple.</p>
         <ul>
-          <li><strong>Organización política:</strong> No había tribu organizada en sentido estricto. Se agrupaban en comunidades de 50 a 200 personas compuestas por familias.</li>
+          <li><strong>Organización política:</strong> No había tribu organizada. Se agrupaban en comunidades de 50 a 200 personas compuestas por familias.</li>
           <li><strong>En tiempo de guerra:</strong> Elegían capitanes y un consejo de ancianos para coordinar los ataques.</li>
           <li><strong>Jerarquía social:</strong> 1) Jefe y consejo de ancianos, 2) Guerreros, 3) Comunes, 4) Esclavos.</li>
-          <li><strong>Economía:</strong> Principalmente caza y pesca. Muy poca agricultura; dependían casi totalmente de lo que proveía el medio natural.</li>
+          <li><strong>Economía:</strong> Principalmente caza y pesca. Muy poca agricultura; dependían del medio natural.</li>
         </ul>
         <div class="dato-box">
           <p class="label">📌 Diferencia con los guaraníes</p>
-          <p>A diferencia de los guaraníes —que eran agricultores sedentarios— los pueblos chaqueños eran fundamentalmente <strong>nómadas</strong>, siguiendo la caza y la pesca a lo largo del año.</p>
+          <p>A diferencia de los guaraníes —agricultores semi-sedentarios— los pueblos chaqueños eran fundamentalmente <strong>nómadas</strong>, siguiendo la caza y la pesca a lo largo del año.</p>
         </div>
       </div>
     </section>
@@ -271,15 +270,15 @@
       <div class="card">
         <span class="card-tag">Los Guaraníes</span>
         <h2>Los Guaraníes: parcialidades y distribución</h2>
-        <p>Los guaraníes eran el grupo indígena más numeroso y culturalmente desarrollado del actual Paraguay. Pertenecían a la cultura neolítica y habitaban principalmente las regiones boscosas al este del río Paraguay.</p>
+        <p>Los guaraníes eran el grupo indígena más numeroso y culturalmente desarrollado del actual Paraguay, habitaban principalmente las regiones boscosas al este del río Paraguay.</p>
         <ul>
-          <li><strong>Extensión:</strong> Habitaban Paraguay, Argentina, Brasil y Bolivia, constituyendo uno de los grupos más extendidos de América del Sur.</li>
-          <li><strong>Parcialidades en Paraguay:</strong> Carios (junto a Asunción), Itatines (norte), Guarambarenses, Yvyturusuenses, Itatines-Paraná, y otros.</li>
-          <li><strong>Los Carios:</strong> La parcialidad más importante, asentada en las inmediaciones de lo que sería Asunción. Fueron los primeros en establecer alianza con los conquistadores españoles.</li>
+          <li><strong>Extensión:</strong> Habitaban Paraguay, Argentina, Brasil y Bolivia.</li>
+          <li><strong>Parcialidades en Paraguay:</strong> Carios (junto a Asunción), Itatines (norte), Omaguas (Amazonas), Chiriguanos (Bolivia), Chiripas (Guairá), Tupíes (Brasil), Guarayos (Santa Cruz).</li>
+          <li><strong>Los Carios:</strong> La parcialidad más importante, asentada en las inmediaciones de Asunción. Fueron los primeros en aliarse con los conquistadores españoles.</li>
         </ul>
         <div class="dato-box">
           <p class="label">📍 Distribución geográfica</p>
-          <p><strong>Carios</strong> → Asunción · <strong>Itatines</strong> → norte del Paraguay · <strong>Omaguas</strong> → riberas del Amazonas · <strong>Chiriguanos</strong> → Bolivia · <strong>Chiripas</strong> → región del Guairá · <strong>Tupíes</strong> → Brasil · <strong>Guarayos</strong> → Santa Cruz de la Sierra.</p>
+          <p><strong>Carios</strong> → Asunción · <strong>Itatines</strong> → norte del Paraguay · <strong>Omaguas</strong> → Amazonas · <strong>Chiriguanos</strong> → Bolivia · <strong>Chiripas</strong> → Guairá · <strong>Tupíes</strong> → Brasil · <strong>Guarayos</strong> → Santa Cruz.</p>
         </div>
       </div>
     </section>
@@ -289,15 +288,18 @@
       <div class="card">
         <span class="card-tag">Los Guaraníes</span>
         <h2>Organización política, social y familiar</h2>
-        <p>La sociedad guaraní era relativamente igualitaria, organizada en aldeas independientes llamadas <em>tabas</em>, con un fuerte sentido de identidad familiar y comunitaria.</p>
+        <p>La sociedad guaraní estaba organizada en aldeas independientes llamadas <em>tabas</em>, con un fuerte sentido de identidad familiar y comunitaria.</p>
         <ul>
-          <li><strong>La taba:</strong> Aldea guaraní, compuesta por 50 o más familias. Cada taba era independiente, con economía y gobierno propio.</li>
+          <li><strong>La taba:</strong> Aldea de 50 o más familias. Cada taba era independiente, con economía y gobierno propio. No más de 7 cabañas comunales con paredes y techos de ramas y hojas de palmera.</li>
           <li><strong>Autoridad:</strong> Reconocían la autoridad de un <em>rubicha</em> (jefe), elegido por el consejo de ancianos.</li>
-          <li><strong>La familia:</strong> El padre era la cabeza de la familia. Se practicaba la <em>poligamia</em> (un hombre podía tener varias esposas).</li>
+          <li><strong>La familia:</strong> El padre era la cabeza de la familia. Se practicaba la <em>poligamia</em>.</li>
           <li><strong>Matrimonio:</strong> El hombre solo podía casarse luego de haber participado en una guerra.</li>
           <li><strong>Divorcio:</strong> Era conocido y aceptado; bastaba con que uno de los esposos expresara su deseo de separarse.</li>
-          <li><strong>Vivienda:</strong> Vivían en tabas de no más de 7 cabañas comunales, con paredes y techos de ramas y hojas de palmera.</li>
         </ul>
+        <div class="highlight-box">
+          <p class="label">💡 El rubicha</p>
+          <p>El rubicha no era un rey hereditario; era elegido por consenso del consejo de ancianos según su valor, sabiduría y habilidad en la guerra. Su autoridad podía ser cuestionada.</p>
+        </div>
       </div>
     </section>
 
@@ -308,15 +310,15 @@
         <h2>Religión y Antropofagia Ritual</h2>
         <p>Los guaraníes tenían un complejo sistema de creencias que mezclaba religión, magia y una visión animista del mundo.</p>
         <ul>
-          <li><strong>Tupá:</strong> El Ser Supremo. Se manifestaba ruidosamente a través del trueno y el relámpago.</li>
-          <li><strong>El alma (ãnga):</strong> Después de la muerte, el alma iba al <em>yvaga</em> (paraíso) o al <em>añaretã</em> (infierno), según el comportamiento en vida.</li>
-          <li><strong>El avá pajé (mago/chamán):</strong> Practicaba una mezcla de hechicería y religión; era el intermediario entre el mundo humano y el espiritual.</li>
+          <li><strong>Tupá:</strong> El Ser Supremo. Se manifestaba a través del trueno y el relámpago.</li>
+          <li><strong>El alma (ãnga):</strong> Después de la muerte iba al <em>yvaga</em> (paraíso) o al <em>añaretã</em> (infierno), según el comportamiento en vida.</li>
+          <li><strong>El avá pajé (chamán):</strong> Practicaba una mezcla de hechicería y religión; era intermediario entre el mundo humano y el espiritual.</li>
           <li><strong>Mundo mágico:</strong> Creían en genios y seres legendarios que habitaban la naturaleza.</li>
-          <li><strong>Antropofagia ritual:</strong> Practicaban el consumo ritual del enemigo capturado en guerra, como un modo de <em>heredar sus cualidades heroicas y su fuerza</em>. No era por hambre; era un rito de poder.</li>
+          <li><strong>Antropofagia ritual:</strong> Consumo ritual del enemigo capturado en guerra como modo de <em>heredar sus cualidades heroicas</em>. No era por hambre; era un rito de poder y honor.</li>
         </ul>
         <div class="highlight-box">
           <p class="label">💡 Contexto de la antropofagia</p>
-          <p>La antropofagia guaraní era un rito sagrado, no una costumbre cotidiana. Se creía que al comer al enemigo valiente, el guerrero absorbía su coraje y sus virtudes guerreras.</p>
+          <p>Era un rito sagrado, no una costumbre cotidiana. Al comer al enemigo valiente, el guerrero absorbía su coraje. Por eso solo se comía a los guerreros más temibles, nunca a los débiles.</p>
         </div>
       </div>
     </section>
@@ -326,23 +328,23 @@
       <div class="card">
         <span class="card-tag green">Cultura material</span>
         <h2>Cultura Material Guaraní</h2>
-        <p>La cultura material guaraní se caracterizaba por una adaptación armónica y creativa al entorno selvático. Desarrollaron técnicas artesanales de alta complejidad.</p>
+        <p>La cultura material guaraní se caracterizaba por una adaptación armónica al entorno selvático con técnicas artesanales de alta complejidad.</p>
         <div class="grid-2">
           <div class="mini-card">
             <h4>🏺 Alfarería</h4>
-            <p>Fabricaban cántaros, vasijas y urnas funerarias de cerámica utilizando arcilla y barro. De alta calidad artística.</p>
+            <p>Cántaros, vasijas y urnas funerarias de cerámica usando arcilla y barro. Alta calidad artística y funcional.</p>
           </div>
           <div class="mini-card">
             <h4>🧵 Tejidos</h4>
-            <p>Elaboraban hamacas y telas de fibras naturales (algodón, cuerdas vegetales). La hamaca paraguaya tiene origen guaraní.</p>
+            <p>Hamacas y telas de fibras naturales (algodón). La hamaca paraguaya tiene origen guaraní.</p>
           </div>
           <div class="mini-card">
             <h4>🧺 Cestería</h4>
-            <p>Fabricaban cestos y canastas con fibras vegetales trenzadas, usados para almacenar y transportar alimentos.</p>
+            <p>Cestos y canastas con fibras vegetales trenzadas para almacenar y transportar alimentos.</p>
           </div>
           <div class="mini-card">
             <h4>🏹 Armas</h4>
-            <p>Arcos, lanzas y mazas de madera de alta precisión. El arco guaraní era especialmente temido por su alcance y potencia.</p>
+            <p>Arcos, lanzas y mazas de madera de alta precisión. El arco guaraní era temido por su alcance y potencia.</p>
           </div>
         </div>
         <div class="dato-box">
@@ -380,7 +382,7 @@
           <div class="options">
             <div class="opt" onclick="answer(1,0,1)"><span class="letter">A</span> Edad Antigua y Edad Media</div>
             <div class="opt" onclick="answer(1,1,1)"><span class="letter">B</span> Edad de Piedra y Edad de los Metales</div>
-            <div class="opt" onclick="answer(1,2,1)"><span class="letter">C</span> Paleolítico y Neolítico</div>
+            <div class="opt" onclick="answer(1,2,1)"><span class="letter">C</span> Paleolítico y Neolítico solamente</div>
             <div class="opt" onclick="answer(1,3,1)"><span class="letter">D</span> Era Cuaternaria y Era Terciaria</div>
           </div>
           <div class="feedback" id="fb1"></div>
@@ -389,12 +391,12 @@
         <!-- Q3 -->
         <div class="q-card" id="q2">
           <p class="q-num">Pregunta 3</p>
-          <p class="q-text">¿Qué significa "Paleolítico" y cuál es su característica principal?</p>
+          <p class="q-text">¿Cuál es la característica principal del Neolítico?</p>
           <div class="options">
-            <div class="opt" onclick="answer(2,0,0)"><span class="letter">A</span> "Piedra Tallada" · Los humanos eran nómadas cazadores-recolectores</div>
-            <div class="opt" onclick="answer(2,1,0)"><span class="letter">B</span> "Piedra Pulida" · Aparece la agricultura y el sedentarismo</div>
-            <div class="opt" onclick="answer(2,2,0)"><span class="letter">C</span> "Piedra Media" · Periodo de transición climática</div>
-            <div class="opt" onclick="answer(2,3,0)"><span class="letter">D</span> "Piedra Nueva" · Invención de la rueda</div>
+            <div class="opt" onclick="answer(2,0,2)"><span class="letter">A</span> Los humanos eran nómadas que vivían en cuevas</div>
+            <div class="opt" onclick="answer(2,1,2)"><span class="letter">B</span> Se tallaba la piedra sin pulirla</div>
+            <div class="opt" onclick="answer(2,2,2)"><span class="letter">C</span> Aparecen la agricultura, la ganadería y el sedentarismo</div>
+            <div class="opt" onclick="answer(2,3,2)"><span class="letter">D</span> Se descubrió la metalurgia del hierro</div>
           </div>
           <div class="feedback" id="fb2"></div>
         </div>
@@ -402,4 +404,231 @@
         <!-- Q4 -->
         <div class="q-card" id="q3">
           <p class="q-num">Pregunta 4</p>
-          <p class="q-text">¿Qué gran cambio trajo el
+          <p class="q-text">¿Cuáles son las tres etnias chaqueñas mencionadas en el programa?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(3,0,1)"><span class="letter">A</span> Carios, Itatines y Chiripas</div>
+            <div class="opt" onclick="answer(3,1,1)"><span class="letter">B</span> Guaycurúes, Mataco y Zámucos</div>
+            <div class="opt" onclick="answer(3,2,1)"><span class="letter">C</span> Tupíes, Guarayos y Omaguas</div>
+            <div class="opt" onclick="answer(3,3,1)"><span class="letter">D</span> Mbayá, Chulupi y Chiriguanos</div>
+          </div>
+          <div class="feedback" id="fb3"></div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="q-card" id="q4">
+          <p class="q-num">Pregunta 5</p>
+          <p class="q-text">¿Cómo se llamaba la aldea guaraní y cuántas familias la componían?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(4,0,0)"><span class="letter">A</span> Taba · 50 o más familias</div>
+            <div class="opt" onclick="answer(4,1,0)"><span class="letter">B</span> Rubicha · 10 a 20 familias</div>
+            <div class="opt" onclick="answer(4,2,0)"><span class="letter">C</span> Yvaga · 100 familias exactas</div>
+            <div class="opt" onclick="answer(4,3,0)"><span class="letter">D</span> Ãnga · familias de hasta 7 personas</div>
+          </div>
+          <div class="feedback" id="fb4"></div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="q-card" id="q5">
+          <p class="q-num">Pregunta 6</p>
+          <p class="q-text">¿Cómo se llamaba el jefe de la taba guaraní?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(5,0,2)"><span class="letter">A</span> Avá pajé</div>
+            <div class="opt" onclick="answer(5,1,2)"><span class="letter">B</span> Tupá</div>
+            <div class="opt" onclick="answer(5,2,2)"><span class="letter">C</span> Rubicha</div>
+            <div class="opt" onclick="answer(5,3,2)"><span class="letter">D</span> Ãnga</div>
+          </div>
+          <div class="feedback" id="fb5"></div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="q-card" id="q6">
+          <p class="q-num">Pregunta 7</p>
+          <p class="q-text">¿Cuál era el Ser Supremo de la religión guaraní?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(6,0,1)"><span class="letter">A</span> Añaretã</div>
+            <div class="opt" onclick="answer(6,1,1)"><span class="letter">B</span> Tupá</div>
+            <div class="opt" onclick="answer(6,2,1)"><span class="letter">C</span> Avá pajé</div>
+            <div class="opt" onclick="answer(6,3,1)"><span class="letter">D</span> Yvaga</div>
+          </div>
+          <div class="feedback" id="fb6"></div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="q-card" id="q7">
+          <p class="q-num">Pregunta 8</p>
+          <p class="q-text">¿Cuál era el propósito de la antropofagia ritual guaraní?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(7,0,2)"><span class="letter">A</span> Alimentarse en épocas de escasez</div>
+            <div class="opt" onclick="answer(7,1,2)"><span class="letter">B</span> Castigar a los enemigos cobardes</div>
+            <div class="opt" onclick="answer(7,2,2)"><span class="letter">C</span> Heredar las cualidades heroicas del enemigo</div>
+            <div class="opt" onclick="answer(7,3,2)"><span class="letter">D</span> Ofrecer sacrificios a Tupá</div>
+          </div>
+          <div class="feedback" id="fb7"></div>
+        </div>
+
+        <!-- Resultado -->
+        <div class="quiz-result" id="quizResult">
+          <div class="result-emoji" id="resultEmoji"></div>
+          <div class="result-score" id="resultScore"></div>
+          <p class="result-msg" id="resultMsg"></p>
+          <button class="nav-btn primary" onclick="retryQuiz()">🔄 Intentar de nuevo</button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="nav">
+    <button class="nav-btn home"    onclick="goHome()">🏠 Inicio</button>
+    <button class="nav-btn"         onclick="prev()" id="btnPrev" disabled>← Anterior</button>
+    <button class="nav-btn primary" onclick="next()" id="btnNext">Siguiente →</button>
+  </nav>
+
+  <footer>
+    <p>Unidad II · Historia del Paraguay</p>
+    <p>Facilitada por la <strong>Dra. Beatriz Espinola Zaracho</strong></p>
+  </footer>
+
+  <script>
+    const TOTAL = 11;
+    let current = 0;
+
+    const correctAnswers = [0, 1, 2, 1, 0, 2, 1, 2];
+    const feedbacks = [
+      [
+        "✔ Correcto. El periodo Precolonial comprende desde los aborígenes hasta la fundación de Asunción en 1537.",
+        "Incorrecto. Ese periodo corresponde a la Organización Nacional.",
+        "Incorrecto. Ese es el periodo de La Conquista.",
+        "Incorrecto. Ese es el periodo Actual."
+      ],
+      [
+        "Incorrecto. Esas son divisiones de la Historia, no de la Prehistoria.",
+        "✔ Correcto. La Prehistoria se divide en Edad de Piedra y Edad de los Metales.",
+        "Incorrecto. El Paleolítico y el Neolítico son subdivisiones de la Edad de Piedra.",
+        "Incorrecto. Esas son eras geológicas, no divisiones de la Prehistoria."
+      ],
+      [
+        "Incorrecto. Esa es la característica del Paleolítico.",
+        "Incorrecto. Esa también es una característica del Paleolítico.",
+        "✔ Correcto. El Neolítico trajo la revolución agrícola: agricultura, ganadería y los primeros poblados permanentes.",
+        "Incorrecto. La metalurgia corresponde a la Edad de los Metales, posterior al Neolítico."
+      ],
+      [
+        "Incorrecto. Esas son parcialidades guaraníes, no etnias chaqueñas.",
+        "✔ Correcto. Las tres etnias chaqueñas del programa son los Guaycurúes, los Mataco y los Zámucos.",
+        "Incorrecto. Esas son también parcialidades guaraníes.",
+        "Incorrecto. Mbayá y Chulupi son subgrupos de Guaycurúes y Mataco respectivamente, pero no son las tres etnias principales."
+      ],
+      [
+        "✔ Correcto. La aldea guaraní se llamaba taba y estaba compuesta por 50 o más familias.",
+        "Incorrecto. Rubicha es el nombre del jefe, no de la aldea.",
+        "Incorrecto. Yvaga es el paraíso en la religión guaraní.",
+        "Incorrecto. Ãnga es el nombre del alma en la creencia guaraní."
+      ],
+      [
+        "Incorrecto. El avá pajé era el chamán o mago, no el jefe político.",
+        "Incorrecto. Tupá es el Ser Supremo de la religión guaraní.",
+        "✔ Correcto. El rubicha era el jefe de la taba, elegido por el consejo de ancianos.",
+        "Incorrecto. Ãnga significa 'alma' en guaraní."
+      ],
+      [
+        "Incorrecto. Añaretã es el infierno en la cosmología guaraní.",
+        "✔ Correcto. Tupá era el Ser Supremo que se manifestaba a través del trueno y el relámpago.",
+        "Incorrecto. El avá pajé era el chamán, intermediario con el mundo espiritual.",
+        "Incorrecto. Yvaga es el paraíso, no un ser supremo."
+      ],
+      [
+        "Incorrecto. La antropofagia guaraní no era por hambre; era un rito religioso.",
+        "Incorrecto. No se comía a los cobardes; al contrario, se comía a los más valientes.",
+        "✔ Correcto. La antropofagia era un rito para absorber las cualidades heroicas del enemigo más valiente.",
+        "Incorrecto. No era una ofrenda sacrificial a Tupá; era un rito de poder entre guerreros."
+      ]
+    ];
+
+    let quizAnswered = new Array(8).fill(false);
+    let quizScore = 0;
+    let quizDone = false;
+
+    function updateProgress() {
+      const pct = ((current + 1) / TOTAL) * 100;
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('progressCount').textContent = (current + 1) + ' / ' + TOTAL;
+      document.getElementById('btnPrev').disabled = current === 0;
+      if (current === TOTAL - 1) {
+        document.getElementById('btnNext').textContent = '✓ Fin';
+        document.getElementById('btnNext').disabled = true;
+      } else {
+        document.getElementById('btnNext').textContent = 'Siguiente →';
+        document.getElementById('btnNext').disabled = false;
+      }
+    }
+
+    function showSlide(idx) {
+      document.querySelectorAll('.cartilla').forEach(s => s.classList.remove('active'));
+      document.getElementById('slide-' + idx).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      updateProgress();
+    }
+
+    function next() { if (current < TOTAL - 1) { current++; showSlide(current); } }
+    function prev() { if (current > 0) { current--; showSlide(current); } }
+    function goHome() { window.location.href = '../index.html'; }
+
+    function answer(qIdx, optIdx, correct) {
+      if (quizAnswered[qIdx]) return;
+      quizAnswered[qIdx] = true;
+      const card = document.getElementById('q' + qIdx);
+      const opts = card.querySelectorAll('.opt');
+      opts.forEach(o => o.classList.add('locked'));
+      opts[optIdx].classList.add(optIdx === correct ? 'correct' : 'wrong');
+      if (optIdx !== correct) opts[correct].classList.add('correct');
+      const fb = document.getElementById('fb' + qIdx);
+      fb.classList.add('show');
+      if (optIdx === correct) {
+        quizScore++;
+        fb.classList.add('ok');
+        fb.textContent = feedbacks[qIdx][correct];
+      } else {
+        fb.classList.add('ko');
+        fb.textContent = feedbacks[qIdx][optIdx];
+      }
+      if (quizAnswered.every(a => a) && !quizDone) {
+        quizDone = true;
+        setTimeout(showResult, 600);
+      }
+    }
+
+    function showResult() {
+      const pct = Math.round((quizScore / 8) * 100);
+      let emoji, msg;
+      if (pct >= 90)      { emoji = '🏆'; msg = '¡Excelente! Dominás la Unidad II.'; }
+      else if (pct >= 70) { emoji = '🎉'; msg = '¡Muy bien! Repasá los detalles menores.'; }
+      else if (pct >= 50) { emoji = '📖'; msg = 'Bien, pero vale la pena repasar las cartillas.'; }
+      else                { emoji = '💪'; msg = 'Revisá las cartillas y volvé a intentarlo.'; }
+      document.getElementById('resultEmoji').textContent = emoji;
+      document.getElementById('resultScore').textContent = quizScore + ' / 8 (' + pct + '%)';
+      document.getElementById('resultMsg').textContent = msg;
+      document.getElementById('quizResult').classList.add('show');
+      document.getElementById('quizResult').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function retryQuiz() {
+      quizAnswered = new Array(8).fill(false);
+      quizScore = 0;
+      quizDone = false;
+      document.getElementById('quizResult').classList.remove('show');
+      for (let i = 0; i < 8; i++) {
+        document.getElementById('q' + i).querySelectorAll('.opt').forEach(o => o.classList.remove('correct','wrong','locked'));
+        const fb = document.getElementById('fb' + i);
+        fb.classList.remove('show','ok','ko');
+        fb.textContent = '';
+      }
+      document.getElementById('slide-10').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    updateProgress();
+  </script>
+
+</body>
+</html>

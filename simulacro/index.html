@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simulacro de Examen — Historia del Paraguay</title>
+  <style>
+    :root {
+      --primary: #7c3aed;
+      --primary-light: #ede9fe;
+      --secondary: #0f766e;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --bg: #f5f0e8;
+      --card-bg: #ffffff;
+      --border: #e2d9cc;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow: 0 8px 32px rgba(0,0,0,0.10);
+      --shadow-sm: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+
+    .hero { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #0f766e 100%); color: white; padding: 2rem 1.5rem 1.8rem; text-align: center; }
+    .hero-inner { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+    .hero-tag { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; padding: 0.3rem 0.9rem; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
+    .hero h1 { font-size: clamp(1.4rem, 4vw, 2.2rem); font-weight: 900; line-height: 1.15; }
+    .hero-sub { font-size: 0.9rem; color: rgba(255,255,255,0.8); }
+    .hero-sub strong { color: #fde68a; }
+    .hero-desc { font-size: 0.9rem; color: rgba(255,255,255,0.75); }
+
+    .progress-wrap { background: white; border-bottom: 1px solid var(--border); padding: 0.75rem 1.5rem; display: flex; align-items: center; gap: 1rem; position: sticky; top: 0; z-index: 10; box-shadow: var(--shadow-sm); }
+    .progress-label { font-size: 0.8rem; font-weight: 700; color: var(--primary); white-space: nowrap; }
+    .progress-bar-bg { flex: 1; height: 8px; background: var(--primary-light); border-radius: 999px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); border-radius: 999px; transition: width 0.4s ease; }
+    .progress-count { font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
+
+    .main { flex: 1; max-width: 860px; width: 100%; margin: 0 auto; padding: 2rem 1.2rem 1rem; }
+
+    .card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 1.6rem 1.8rem; position: relative; overflow: hidden; }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #f97316, #ea580c); }
+
+    .card-tag { display: inline-block; background: #ffedd5; color: #c2410c; border-radius: 999px; padding: 0.2rem 0.75rem; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.7rem; }
+    .card h2  { font-size: clamp(1.05rem, 2.4vw, 1.4rem); font-weight: 900; color: #1e1b4b; margin-bottom: 0.6rem; }
+    .card p   { font-size: 0.95rem; margin-bottom: 0.4rem; color: var(--text); }
+    .meta     { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.6rem; }
+
+    .q-num  { font-size: 0.78rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.2rem; }
+    .q-text { font-size: 1rem; font-weight: 700; color: #1e1b4b; margin-bottom: 0.9rem; line-height: 1.4; }
+
+    .options { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.4rem; }
+    .opt { display: flex; align-items: center; gap: 0.65rem; padding: 0.6rem 0.9rem; border: 1.5px solid var(--border); border-radius: var(--radius-md); cursor: pointer; font-size: 0.9rem; transition: all 0.18s; background: #fafaf9; }
+    .opt:hover:not(.locked) { border-color: #f97316; background: #fff7ed; }
+    .opt .letter { min-width: 24px; height: 24px; border-radius: 50%; background: #ffedd5; color: #c2410c; font-size: 0.75rem; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+    .opt.selected { border-color: #f97316; background: #ffedd5; }
+    .opt.correct  { border-color: #16a34a; background: #dcfce7; }
+    .opt.correct .letter { background: #16a34a; color: #fff; }
+    .opt.wrong    { border-color: #dc2626; background: #fee2e2; }
+    .opt.wrong .letter { background: #dc2626; color: #fff; }
+
+    .feedback { margin-top: 0.6rem; font-size: 0.83rem; font-weight: 600; padding: 0.45rem 0.8rem; border-radius: 8px; display: none; }
+    .feedback.show { display: block; }
+    .feedback.ok { background: #dcfce7; color: #15803d; }
+    .feedback.ko { background: #fee2e2; color: #b91c1c; }
+
+    .nav { margin-top: 1.2rem; display: flex; justify-content: space-between; gap: 0.7rem; flex-wrap: wrap; }
+    .nav-btn { border: none; border-radius: 999px; padding: 0.55rem 1.3rem; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: all 0.18s; background: #f3f4f6; color: var(--text); }
+    .nav-btn:hover    { background: #e5e7eb; transform: translateY(-1px); }
+    .nav-btn.primary  { background: linear-gradient(135deg, #f97316, #ea580c); color: white; box-shadow: 0 4px 14px rgba(248,113,22,0.35); }
+    .nav-btn.primary:hover { box-shadow: 0 6px 18px rgba(248,113,22,0.45); }
+    .nav-btn.home     { background: #f0fdf4; color: #15803d; border: 1.5px solid #86efac; }
+    .nav-btn.home:hover { background: #dcfce7; }
+    .nav-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+    .summary { margin-top: 1.6rem; padding: 1.2rem 1.3rem; border-radius: var(--radius-md); background: #f9fafb; border: 1px solid var(--border); font-size: 0.87rem; color: var(--muted); }
+
+    .result-modal {
+      position: fixed; inset: 0; background: rgba(15,23,42,0.65);
+      display: none; align-items: center; justify-content: center; padding: 1rem; z-index: 50;
+    }
+    .result-modal.show { display: flex; }
+    .result-card {
+      background: #fff; border-radius: 18px; box-shadow: var(--shadow);
+      padding: 1.8rem 1.6rem; max-width: 420px; width: 100%; text-align: center;
+    }
+    .result-emoji { font-size: 3rem; margin-bottom: 0.4rem; }
+    .result-score { font-size: 2.4rem; font-weight: 900; color: #f97316; margin-bottom: 0.2rem; }
+    .result-msg   { font-size: 0.95rem; color: var(--muted); margin-bottom: 0.4rem; }
+    .result-detail{ font-size: 0.83rem; color: var(--muted); }
+
+    footer { text-align: center; padding: 1.2rem 1rem 1.5rem; font-size: 0.8rem; color: var(--muted); border-top: 1px solid var(--border); }
+    footer strong { color: var(--primary); }
+
+    @media (max-width: 540px) {
+      .card   { padding: 1.3rem 1.1rem; }
+      .nav    { flex-direction: column; align-items: stretch; }
+      .nav-btn { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="hero-tag">Simulacro de examen</span>
+      <h1>Historia del Paraguay — Unidades I a VII</h1>
+      <p class="hero-sub">Facilitada por la <strong>Dra. Beatriz Espinola Zaracho</strong></p>
+      <p class="hero-desc">Este simulacro selecciona 30 preguntas al azar de un banco más amplio para que cada intento sea distinto.</p>
+    </div>
+  </header>
+
+  <div class="progress-wrap">
+    <span class="progress-label">Progreso</span>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
+    <span class="progress-count" id="progressCount">0 / 30</span>
+  </div>
+
+  <main class="main">
+    <div class="card" id="questionCard">
+      <span class="card-tag">Simulacro general</span>
+      <div class="q-num" id="qNumber">Pregunta 1 de 30</div>
+      <div class="meta" id="qMeta">Unidad: —</div>
+      <div class="q-text" id="qText">Texto de la pregunta.</div>
+      <div class="options" id="optionsContainer"></div>
+      <div class="feedback" id="feedbackBox"></div>
+
+      <div class="nav">
+        <button class="nav-btn home" onclick="goHome()">🏠 Volver al inicio</button>
+        <button class="nav-btn" id="btnPrev" onclick="prevQuestion()" disabled>← Anterior</button>
+        <button class="nav-btn primary" id="btnNext" onclick="nextQuestion()">Siguiente →</button>
+      </div>
+
+      <div class="summary" id="summaryBox">
+        Respondidas: <span id="answeredCount">0</span> / <span id="totalCount">30</span> · Correctas: <span id="correctCount">0</span>
+      </div>
+    </div>
+  </main>
+
+  <div class="result-modal" id="resultModal">
+    <div class="result-card">
+      <div class="result-emoji" id="resultEmoji">🏆</div>
+      <div class="result-score" id="resultScore">0 / 30</div>
+      <div class="result-msg" id="resultMsg">Mensaje</div>
+      <div class="result-detail" id="resultDetail"></div>
+      <div style="margin-top:1.2rem; display:flex; flex-direction:column; gap:0.5rem;">
+        <button class="nav-btn primary" onclick="restartQuiz()">🔄 Nuevo simulacro</button>
+        <button class="nav-btn" onclick="closeResult()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Simulacro de examen · Historia del Paraguay</p>
+    <p>Facilitada por la <strong>Dra. Beatriz Espinola Zaracho</strong></p>
+  </footer>
+
+  <script>
+    // ====== 1) Banco de preguntas (ejemplo) ======
+    // Después simplemente ampliás este array a ~60 preguntas.
+    const questionPool = [
+      {
+        unidad: "I",
+        question: "¿Cuál era la motivación principal de las exploraciones europeas en el siglo XV?",
+        options: [
+          "Encontrar nuevas rutas comerciales y riquezas",
+          "Difundir exclusivamente la religión cristiana",
+          "Fundar universidades en América",
+          "Establecer tratados de paz con los pueblos indígenas"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "I",
+        question: "¿Qué modificó el Tratado de Tordesillas respecto a las Bulas Alejandrinas?",
+        options: [
+          "Movió la línea de demarcación a 370 leguas al oeste de Cabo Verde",
+          "Anuló la división del mundo entre España y Portugal",
+          "Prohibió los viajes de Cristóbal Colón",
+          "Entregó todo el Atlántico a Portugal"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "II",
+        question: "¿Qué etnia pertenece al Chaco paraguayo?",
+        options: [
+          "Guaraníes",
+          "Guaycurúes",
+          "Charrúas",
+          "Mapuches"
+        ],
+        correctIndex: 1
+      },
+      {
+        unidad: "V",
+        question: "¿Qué significa Tupá-Mbaé en el sistema económico de las misiones jesuíticas?",
+        options: [
+          "Parcela individual del indio para su sustento",
+          "Tierra comunal cuyos frutos se destinaban a la iglesia y a los necesitados",
+          "Taller artesanal de la reducción",
+          "Impuesto que se pagaba a la Corona"
+        ],
+        correctIndex: 1
+      },
+      {
+        unidad: "VI",
+        question: "¿Qué establecía la Real Provisión del 12 de septiembre de 1537, clave para la Revolución Comunera?",
+        options: [
+          "El derecho del rey a nombrar siempre al gobernador",
+          "El derecho del pueblo a elegir gobernador en caso de vacancia",
+          "La expulsión de los jesuitas del Paraguay",
+          "La creación del Virreinato del Río de la Plata"
+        ],
+        correctIndex: 1
+      },
+      {
+        unidad: "VII",
+        question: "¿Qué recuperó España con el Tratado de San Ildefonso de 1777?",
+        options: [
+          "Solo el territorio de Matto Grosso",
+          "La Colonia del Sacramento y las 7 reducciones jesuíticas",
+          "El control de Río de Janeiro",
+          "La Isla de Santa Catalina"
+        ],
+        correctIndex: 1
+      }
+    ];
+
+    const QUESTIONS_PER_SIMULACRO = 30;
+
+    // ====== 2) Estado del simulacro ======
+    let questions = [];          // Las 30 seleccionadas
+    let currentIndex = 0;
+    let userAnswers = [];        // índice seleccionado por pregunta o null
+    let isFinished = false;
+
+    // ====== 3) Utilidades ======
+    function shuffleArray(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function createSimulacroQuestions() {
+      const poolCopy = [...questionPool];
+      shuffleArray(poolCopy);                            // barajamos el pool
+      const sliceSize = Math.min(QUESTIONS_PER_SIMULACRO, poolCopy.length);
+      const selected = poolCopy.slice(0, sliceSize);     // tomamos las primeras N
+
+      // Para cada pregunta, barajamos opciones pero guardamos cuál es la correcta
+      return selected.map(q => {
+        const indices = [0,1,2,3];
+        shuffleArray(indices);
+        const newOptions = indices.map(i => q.options[i]);
+        const newCorrectIndex = indices.indexOf(q.correctIndex);
+        return {
+          unidad: q.unidad,
+          question: q.question,
+          options: newOptions,
+          correctIndex: newCorrectIndex
+        };
+      });
+    }
+
+    function countCorrect() {
+      let c = 0;
+      questions.forEach((q, i) => {
+        if (userAnswers[i] === q.correctIndex) c++;
+      });
+      return c;
+    }
+
+    function updateProgress() {
+      const total = questions.length;
+      const answered = userAnswers.filter(a => a !== null && a !== undefined).length;
+      const pct = total ? (answered / total) * 100 : 0;
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('progressCount').textContent = answered + ' / ' + total;
+
+      document.getElementById('answeredCount').textContent = answered;
+      document.getElementById('totalCount').textContent = total;
+      document.getElementById('correctCount').textContent = countCorrect();
+
+      document.getElementById('btnPrev').disabled = currentIndex === 0;
+      document.getElementById('btnNext').textContent = currentIndex === total - 1 ? 'Finalizar' : 'Siguiente →';
+    }
+
+    function renderQuestion() {
+      const q = questions[currentIndex];
+      const total = questions.length;
+
+      document.getElementById('qNumber').textContent = 'Pregunta ' + (currentIndex + 1) + ' de ' + total;
+      document.getElementById('qMeta').textContent = 'Unidad: ' + (q.unidad || '—');
+      document.getElementById('qText').textContent = q.question;
+
+      const container = document.getElementById('optionsContainer');
+      container.innerHTML = '';
+      const feedbackBox = document.getElementById('feedbackBox');
+      feedbackBox.className = 'feedback';
+      feedbackBox.style.display = 'none';
+      feedbackBox.textContent = '';
+
+      q.options.forEach((optText, idx) => {
+        const div = document.createElement('div');
+        div.className = 'opt';
+        div.dataset.index = idx;
+        const letterSpan = document.createElement('span');
+        letterSpan.className = 'letter';
+        letterSpan.textContent = String.fromCharCode(65 + idx);
+        const textSpan = document.createElement('span');
+        textSpan.textContent = optText;
+        div.appendChild(letterSpan);
+        div.appendChild(textSpan);
+
+        div.addEventListener('click', () => selectOption(idx));
+
+        container.appendChild(div);
+      });
+
+      // marcar si ya fue respondida
+      const prevAns = userAnswers[currentIndex];
+      if (prevAns !== null && prevAns !== undefined) {
+        markSelection(prevAns, false);
+      }
+
+      updateProgress();
+    }
+
+    function markSelection(selectedIdx, showCheck) {
+      const q = questions[currentIndex];
+      const opts = document.querySelectorAll('.opt');
+      opts.forEach((el, idx) => {
+        el.classList.remove('selected', 'correct', 'wrong');
+        if (idx === selectedIdx) {
+          el.classList.add('selected');
+        }
+      });
+
+      if (showCheck) {
+        const feedbackBox = document.getElementById('feedbackBox');
+        const correctIdx = q.correctIndex;
+        opts.forEach((el, idx) => {
+          if (idx === correctIdx) el.classList.add('correct');
+          if (idx === selectedIdx && idx !== correctIdx) el.classList.add('wrong');
+        });
+
+        const ok = selectedIdx === correctIdx;
+        feedbackBox.style.display = 'block';
+        feedbackBox.classList.add('show', ok ? 'ok' : 'ko');
+        feedbackBox.textContent = ok ? '✔ Respuesta correcta.' : '✖ Respuesta incorrecta.';
+      }
+    }
+
+    function selectOption(idx) {
+      if (isFinished) return;
+      userAnswers[currentIndex] = idx;
+      markSelection(idx, true);
+      updateProgress();
+    }
+
+    function nextQuestion() {
+      const total = questions.length;
+      if (currentIndex === total - 1) {
+        finishQuiz();
+      } else {
+        currentIndex++;
+        renderQuestion();
+      }
+    }
+
+    function prevQuestion() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderQuestion();
+      }
+    }
+
+    function finishQuiz() {
+      isFinished = true;
+      const total = questions.length;
+      const correct = countCorrect();
+      const pct = Math.round((correct / total) * 100);
+      const modal = document.getElementById('resultModal');
+      const emojiEl = document.getElementById('resultEmoji');
+      const msgEl = document.getElementById('resultMsg');
+      const scoreEl = document.getElementById('resultScore');
+      const detailEl = document.getElementById('resultDetail');
+
+      let emoji, msg;
+      if (pct >= 90)      { emoji = '🏆'; msg = '¡Excelente! Estás listo para el examen.'; }
+      else if (pct >= 70) { emoji = '🎉'; msg = 'Muy buen resultado. Repasá algunos detalles.'; }
+      else if (pct >= 50) { emoji = '📖'; msg = 'Aceptable, pero conviene repasar varias unidades.'; }
+      else                { emoji = '💪'; msg = 'Necesitás repasar con calma las cartillas antes del examen.'; }
+
+      emojiEl.textContent = emoji;
+      scoreEl.textContent = correct + ' / ' + total + ' (' + pct + '%)';
+      msgEl.textContent = msg;
+      detailEl.textContent = 'Respuestas correctas: ' + correct + ' · Incorrectas: ' + (total - correct) + '. Podés revisar las unidades específicas donde fallaste.';
+
+      modal.classList.add('show');
+    }
+
+    function restartQuiz() {
+      isFinished = false;
+      currentIndex = 0;
+      questions = createSimulacroQuestions();
+      userAnswers = new Array(questions.length).fill(null);
+      document.getElementById('resultModal').classList.remove('show');
+      renderQuestion();
+    }
+
+    function closeResult() {
+      document.getElementById('resultModal').classList.remove('show');
+    }
+
+    function goHome() {
+      window.location.href = "../index.html";
+    }
+
+    // Inicialización
+    questions = createSimulacroQuestions();
+    userAnswers = new Array(questions.length).fill(null);
+    renderQuestion();
+  </script>
+
+</body>
+</html>

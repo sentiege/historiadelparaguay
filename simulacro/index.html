@@ -122,7 +122,7 @@
       <span class="card-tag">Simulacro general</span>
       <div class="q-num" id="qNumber">Pregunta 1 de 30</div>
       <div class="meta" id="qMeta">Unidad: —</div>
-      <div class="q-text" id="qText">Texto de la pregunta.</div>
+      <h2 class="q-text" id="qText">Texto de la pregunta.</h2>
       <div class="options" id="optionsContainer"></div>
       <div class="feedback" id="feedbackBox"></div>
 
@@ -157,9 +157,9 @@
   </footer>
 
   <script>
-    // ====== 1) Banco de preguntas (ejemplo) ======
-    // Después simplemente ampliás este array a ~60 preguntas.
+    // ====== 1) Banco de preguntas ======
     const questionPool = [
+      // ========= UNIDAD I =========
       {
         unidad: "I",
         question: "¿Cuál era la motivación principal de las exploraciones europeas en el siglo XV?",
@@ -168,6 +168,39 @@
           "Difundir exclusivamente la religión cristiana",
           "Fundar universidades en América",
           "Establecer tratados de paz con los pueblos indígenas"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "I",
+        question: "¿Qué permitió a los europeos navegar lejos de la costa en el siglo XV?",
+        options: [
+          "La brújula, el astrolabio y los nuevos tipos de carabelas",
+          "El uso de globos aerostáticos",
+          "La invención del submarino",
+          "Los viajes aéreos"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "I",
+        question: "¿Qué rey impulsó las primeras exploraciones portuguesas por la costa africana?",
+        options: [
+          "Enrique el Navegante",
+          "Felipe II",
+          "Carlos I",
+          "Luis XIV"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "I",
+        question: "¿Cuál era la idea central del proyecto de Cristóbal Colón?",
+        options: [
+          "Llegar a Asia navegando hacia el oeste",
+          "Circunnavegar África para llegar a la India",
+          "Descubrir un nuevo continente",
+          "Encontrar el paso del Noroeste"
         ],
         correctIndex: 0
       },
@@ -183,13 +216,329 @@
         correctIndex: 0
       },
       {
+        unidad: "I",
+        question: "¿Qué acuerdo reconocía que África quedaba bajo control de Portugal y Canarias de Castilla?",
+        options: [
+          "Tratado de Alcáçovas-Toledo",
+          "Tratado de Tordesillas",
+          "Tratado de Utrecht",
+          "Tratado de San Ildefonso"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "I",
+        question: "¿En cuál de los viajes Colón llegó por primera vez al continente americano (no solo islas)?",
+        options: [
+          "En su primero",
+          "En su segundo",
+          "En su tercero",
+          "En su cuarto"
+        ],
+        correctIndex: 2
+      },
+      {
+        unidad: "I",
+        question: "¿Qué permitió a Portugal colonizar la región donde se formaría Brasil?",
+        options: [
+          "El corrimiento de la línea de demarcación en el Tratado de Tordesillas",
+          "Las Bulas Alejandrinas sin modificaciones",
+          "El Tratado de Permuta de 1750",
+          "El Tratado de San Ildefonso de 1777"
+        ],
+        correctIndex: 0
+      },
+
+      // ========= UNIDAD II =========
+      {
         unidad: "II",
-        question: "¿Qué etnia pertenece al Chaco paraguayo?",
+        question: "¿Cuál de las siguientes es una división clásica de la Edad de Piedra?",
+        options: [
+          "Paleolítico, Mesolítico y Neolítico",
+          "Edad de Bronce y Edad de Hierro",
+          "Antigüedad y Edad Media",
+          "Renacimiento y Barroco"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "II",
+        question: "¿Qué pueblo se asocia principalmente a la región chaqueña del Paraguay?",
         options: [
           "Guaraníes",
           "Guaycurúes",
-          "Charrúas",
-          "Mapuches"
+          "Incas",
+          "Mayas"
+        ],
+        correctIndex: 1
+      },
+      {
+        unidad: "II",
+        question: "¿Cuál de estos grupos forma parte de las etnias chaqueñas?",
+        options: [
+          "Guaycurúes, Matacos y Zámucos",
+          "Aimaras, Quechuas y Lupacas",
+          "Charrúas, Mapuches y Tehuelches",
+          "Aztecas, Tlaxcaltecas y Tarascos"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "II",
+        question: "¿Qué rasgo caracterizaba la organización social de los guaraníes?",
+        options: [
+          "Vivir en grandes ciudades amuralladas",
+          "Organizarse en parcialidades bajo la autoridad de un cacique",
+          "Poseer una monarquía hereditaria",
+          "Tener un sistema feudal desarrollado"
+        ],
+        correctIndex: 1
+      },
+      {
+        unidad: "II",
+        question: "¿Qué práctica formaba parte de la religión guaraní?",
+        options: [
+          "La antropofagia ritual",
+          "La momificación de los muertos",
+          "El culto a pirámides escalonadas",
+          "El sacrificio de llamas"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "II",
+        question: "¿Qué se entiende por cultura material guaraní?",
+        options: [
+          "Sus creencias religiosas",
+          "Sus mitos orales",
+          "Sus herramientas, viviendas, utensilios y cerámicas",
+          "Sus cantos sagrados"
+        ],
+        correctIndex: 2
+      },
+
+      // ========= UNIDAD III =========
+      {
+        unidad: "III",
+        question: "¿Qué río exploró Sebastián Gaboto cuando llegó al Plata?",
+        options: [
+          "El Paraná y el Paraguay",
+          "El Amazonas",
+          "El Orinoco",
+          "El Nilo"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "III",
+        question: "¿Qué documento de 1537 autorizó la fundación de Asunción y el gobierno local?",
+        options: [
+          "La Real Provisión del 12 de septiembre de 1537",
+          "El Tratado de Permuta",
+          "La Real Cédula de 1783",
+          "El Memorial de 1777"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "III",
+        question: "¿Quién fue el adelantado que encabezó la expedición que fundó el primer Buenos Aires?",
+        options: [
+          "Pedro de Mendoza",
+          "Domingo Martínez de Irala",
+          "Hernandarias",
+          "Pedro de Cevallos"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "III",
+        question: "¿Qué papel tuvo Domingo Martínez de Irala en la historia paraguaya?",
+        options: [
+          "Fundador de las reducciones jesuíticas",
+          "Gobernador que consolidó Asunción y promovió nuevas fundaciones",
+          "Primer virrey del Río de la Plata",
+          "Autor del Tratado de Tordesillas"
+        ],
+        correctIndex: 1
+      },
+      {
+        unidad: "III",
+        question: "¿Qué importancia tuvo Asunción en el proceso de conquista?",
+        options: [
+          "Fue solo un fuerte militar menor",
+          "Fue base de nuevas fundaciones hacia el sur y el este",
+          "Fue capital del Virreinato del Perú",
+          "Fue puerto exclusivo de comercio con Inglaterra"
+        ],
+        correctIndex: 1
+      },
+
+      // ========= UNIDAD IV =========
+      {
+        unidad: "IV",
+        question: "¿Qué gobernador impulsó la obra educativa en el Paraguay colonial?",
+        options: [
+          "Hernandarias",
+          "Pedro de Mendoza",
+          "José de Antequera",
+          "Bernardo de Velasco"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "IV",
+        question: "¿Qué ordenanzas regularon el trato a los indígenas en la época colonial?",
+        options: [
+          "Las Ordenanzas de Alfaro",
+          "Las Leyes de Indias de 1811",
+          "El Tratado de San Ildefonso",
+          "Las Bulas Alejandrinas"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "IV",
+        question: "¿Cuál de los siguientes productos NO fue central en la economía colonial paraguaya?",
+        options: [
+          "Yerba mate",
+          "Tabaco",
+          "Maderas y cueros",
+          "Petróleo"
+        ],
+        correctIndex: 3
+      },
+      {
+        unidad: "IV",
+        question: "¿Qué institución administraba los ingresos de la Corona en la colonia?",
+        options: [
+          "La Real Hacienda",
+          "El Cabildo",
+          "La Audiencia",
+          "La Intendencia de Policía"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "IV",
+        question: "¿Cómo se caracterizaba la sociedad colonial paraguaya?",
+        options: [
+          "Era totalmente igualitaria",
+          "Estaba dividida en clases sociales bien diferenciadas",
+          "No existía mestizaje",
+          "Solo había nobles y esclavos"
+        ],
+        correctIndex: 1
+      },
+
+      // ========= UNIDAD V =========
+      {
+        unidad: "V",
+        question: "¿Cuál fue el rol principal de los Mercedarios en el Paraguay?",
+        options: [
+          "Evangelización masiva en reducciones indígenas",
+          "Enseñanza y asistencia espiritual a la población colonial",
+          "Organización del sistema económico Tupá-Mbaé",
+          "Fundación del Virreinato del Río de la Plata"
+        ],
+        correctIndex: 1
+      },
+      {
+        unidad: "V",
+        question: "¿Qué orden fundó el convento San José del Paraguay?",
+        options: [
+          "Mercedarios",
+          "Dominicos",
+          "Franciscanos",
+          "Jesuitas"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "V",
+        question: "¿Con quién llegaron los Franciscanos al Paraguay e iniciaron la evangelización sistemática de los guaraníes?",
+        options: [
+          "Con Pedro de Mendoza en 1535",
+          "Con Juan Ortiz de Zárate en 1575",
+          "Con Hernandarias en 1609",
+          "Con Pedro de Cevallos en 1776"
+        ],
+        correctIndex: 1
+      },
+      {
+        unidad: "V",
+        question: "¿Qué reducciones franciscanas importantes se fundaron en el Paraguay?",
+        options: [
+          "Altos, Atyrá, Yaguarón y Caazapá",
+          "Jesús, Trinidad y San Cosme",
+          "Santa Fe, Buenos Aires y Corrientes",
+          "Potosí, La Paz y Chuquisaca"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "V",
+        question: "¿Cuál fue el aporte fundamental de Fray Luis de Bolaños?",
+        options: [
+          "Fundó la Colonia del Sacramento",
+          "Creó la grafía guaraní y el catecismo en lengua nativa",
+          "Redactó la Real Cédula de 1537",
+          "Expulsó a los jesuitas del Paraguay"
+        ],
+        correctIndex: 1
+      },
+      {
+        unidad: "V",
+        question: "¿Quién fundó la Compañía de Jesús y en qué año?",
+        options: [
+          "Ignacio de Loyola en 1534",
+          "Cristóbal Colón en 1492",
+          "Carlos III en 1767",
+          "Hernandarias en 1600"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "V",
+        question: "¿Quién fue el primer jesuita en llegar al Paraguay?",
+        options: [
+          "Francisco de Javier",
+          "Fray Luis de Bolaños",
+          "Diego de Torres",
+          "Pedro de Cevallos"
+        ],
+        correctIndex: 2
+      },
+      {
+        unidad: "V",
+        question: "¿En qué territorios se ubicaban principalmente las misiones jesuíticas del Paraguay?",
+        options: [
+          "Entre los ríos Tebicuary, Paraná y Uruguay",
+          "Entre el Amazonas y el Orinoco",
+          "En la cordillera andina",
+          "En la costa del Pacífico"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "V",
+        question: "¿Qué pueblos jesuíticos se encontraban en territorio paraguayo?",
+        options: [
+          "San Ignacio Guasú, San Cosme, Itapúa, Corpus, Candelaria, Santa Ana, Loreto, San Ignacio Miní, Santa María de Fe y Santiago, entre otros",
+          "Potosí, Charcas y Chuquisaca",
+          "La Paz, Cochabamba y Santa Cruz",
+          "Quito, Lima y Cusco"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "V",
+        question: "¿Qué era el Abá-Mbaé en el sistema económico de las misiones?",
+        options: [
+          "La tierra común de toda la comunidad",
+          "La tierra asignada a cada familia indígena, cuya producción le pertenecía bajo control comunitario",
+          "El almacén de productos de exportación",
+          "El taller de carpintería"
         ],
         correctIndex: 1
       },
@@ -205,13 +554,248 @@
         correctIndex: 1
       },
       {
+        unidad: "V",
+        question: "¿Dónde se instaló la primera imprenta misionera y en qué año?",
+        options: [
+          "En Asunción en 1683",
+          "En Santa María en 1700",
+          "En Buenos Aires en 1600",
+          "En San Ignacio Guasú en 1690"
+        ],
+        correctIndex: 1
+      },
+      {
+        unidad: "V",
+        question: "¿Qué rey decretó la expulsión de los jesuitas de sus dominios y en qué año?",
+        options: [
+          "Felipe II en 1588",
+          "Felipe V en 1713",
+          "Carlos III en 1767",
+          "Carlos IV en 1800"
+        ],
+        correctIndex: 2
+      },
+
+      // ========= UNIDAD VI =========
+      {
         unidad: "VI",
-        question: "¿Qué establecía la Real Provisión del 12 de septiembre de 1537, clave para la Revolución Comunera?",
+        question: "¿Qué establecía la Real Provisión del 12 de septiembre de 1537, clave para el comunerismo?",
         options: [
           "El derecho del rey a nombrar siempre al gobernador",
           "El derecho del pueblo a elegir gobernador en caso de vacancia",
           "La expulsión de los jesuitas del Paraguay",
           "La creación del Virreinato del Río de la Plata"
+        ],
+        correctIndex: 1
+      },
+      {
+        unidad: "VI",
+        question: "¿Qué lema se asoció con la proclamación del obispo Cárdenas como gobernador por el pueblo?",
+        options: [
+          "La tierra para quien la trabaja",
+          "La voz del pueblo es la voz de Dios",
+          "Independencia o muerte",
+          "Viva el rey, muera el mal gobierno"
+        ],
+        correctIndex: 1
+      },
+      {
+        unidad: "VI",
+        question: "¿Qué acción tomó el obispo Fray Bernardino de Cárdenas al ser proclamado gobernador?",
+        options: [
+          "Fundó nuevas reducciones jesuíticas",
+          "Expulsó a los jesuitas de la provincia",
+          "Disolvió el Cabildo",
+          "Pidió perdón al virrey"
+        ],
+        correctIndex: 1
+      },
+      {
+        unidad: "VI",
+        question: "¿Quién fue Diego de los Reyes Balmaceda?",
+        options: [
+          "Un líder comunero ejecutado en Lima",
+          "Un gobernador del Paraguay muy vinculado con los jesuitas",
+          "El primer virrey del Río de la Plata",
+          "El fundador de la Colonia del Sacramento"
+        ],
+        correctIndex: 1
+      },
+      {
+        unidad: "VI",
+        question: "¿Cuál de las siguientes NO fue una acusación contra Reyes Balmaceda?",
+        options: [
+          "Imponer en provecho propio el servicio personal de los indios",
+          "Poner trabas al comercio",
+          "Organizar un censo general de la provincia",
+          "Cerrar los caminos a Charcas para evitar quejas"
+        ],
+        correctIndex: 2
+      },
+      {
+        unidad: "VI",
+        question: "¿Quién fue enviado por la Audiencia de Charcas como juez pesquisidor y terminó asumiendo el gobierno comunero?",
+        options: [
+          "Bruno Mauricio de Zavala",
+          "José de Antequera y Castro",
+          "Baltazar García Ros",
+          "Martín de Echauri"
+        ],
+        correctIndex: 1
+      },
+      {
+        unidad: "VI",
+        question: "¿En qué lugar las tropas de Baltazar García Ros fueron derrotadas por los comuneros?",
+        options: [
+          "Tabapy",
+          "Humaitá",
+          "Tebicuary",
+          "San Lorenzo"
+        ],
+        correctIndex: 2
+      },
+      {
+        unidad: "VI",
+        question: "¿Qué gobernador de Buenos Aires fue enviado para someter a los comuneros y apresar a Antequera?",
+        options: [
+          "Pedro de Cevallos",
+          "Bruno Mauricio de Zavala",
+          "Bernardo de Velasco",
+          "Hernandarias"
+        ],
+        correctIndex: 1
+      },
+      {
+        unidad: "VI",
+        question: "¿Quién fue el principal ideólogo del ideal comunero?",
+        options: [
+          "Diego de los Reyes Balmaceda",
+          "José Luis Bareiro",
+          "Fernando de Mompox",
+          "Juan de Mena"
+        ],
+        correctIndex: 2
+      },
+      {
+        unidad: "VI",
+        question: "¿Qué afirmaba el ideal comunero sobre el poder del común?",
+        options: [
+          "Que el rey era la única autoridad legítima",
+          "Que el poder común era más poderoso que el mismo rey",
+          "Que solo los jesuitas podían gobernar",
+          "Que el pueblo debía obedecer siempre sin cuestionar"
+        ],
+        correctIndex: 1
+      },
+      {
+        unidad: "VI",
+        question: "¿Cuál fue una sanción política impuesta al Paraguay tras la Revolución Comunera?",
+        options: [
+          "La expulsión definitiva de los jesuitas",
+          "La abolición del derecho del pueblo a elegir gobernador según la Cédula de 1537",
+          "La supresión del Cabildo de Asunción",
+          "La anexión a Brasil"
+        ],
+        correctIndex: 1
+      },
+      {
+        unidad: "VI",
+        question: "¿Cuál fue una sanción económica contra Paraguay después del movimiento comunero?",
+        options: [
+          "Se prohibió la producción de tabaco",
+          "Se embargaron productos en los puertos del Río de la Plata y se obligó a pasar por Santa Fe pagando altos impuestos",
+          "Se cerró el río Paraguay a la navegación",
+          "Se prohibió el comercio con Buenos Aires"
+        ],
+        correctIndex: 1
+      },
+
+      // ========= UNIDAD VII =========
+      {
+        unidad: "VII",
+        question: "¿Cuál fue uno de los principales objetivos de las Reformas Borbónicas en América?",
+        options: [
+          "Aumentar la autonomía de los cabildos",
+          "Centralizar el poder y aumentar la recaudación fiscal",
+          "Devolver tierras a los pueblos indígenas",
+          "Fortalecer el poder de los corregidores"
+        ],
+        correctIndex: 1
+      },
+      {
+        unidad: "VII",
+        question: "¿Qué instrumento administrativo creó Carlos III para mejorar el control colonial?",
+        options: [
+          "Las intendencias",
+          "Los cabildos abiertos",
+          "Las bulas papales",
+          "Las reducciones jesuíticas"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "VII",
+        question: "¿En qué año se creó el Virreinato del Río de la Plata y quién fue su primer virrey?",
+        options: [
+          "1776 · Pedro de Cevallos",
+          "1783 · Carlos III",
+          "1750 · Manuel Lobo",
+          "1777 · Agustín de Pinedo"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "VII",
+        question: "¿Qué territorios incluía el Virreinato del Río de la Plata?",
+        options: [
+          "Paraguay, Argentina, Bolivia, Uruguay y parte del sur de Brasil",
+          "Solo Paraguay y Argentina",
+          "México y Centroamérica",
+          "Chile y Perú"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "VII",
+        question: "¿Cuándo se creó la Audiencia de Buenos Aires y cuándo comenzó a funcionar?",
+        options: [
+          "Por Real Cédula de 1783, comenzó en 1785",
+          "Por Real Cédula de 1537, comenzó en 1538",
+          "Por Tratado de Permuta de 1750, comenzó en 1751",
+          "Por Tratado de Tordesillas, comenzó en 1500"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "VII",
+        question: "¿Qué característica principal tuvieron las Intendencias en el Virreinato del Río de la Plata?",
+        options: [
+          "Solo tenían funciones religiosas",
+          "Eran territorios independientes del virrey",
+          "Tenían poder político, judicial, militar y financiero",
+          "Estaban a cargo exclusivamente de órdenes religiosas"
+        ],
+        correctIndex: 2
+      },
+      {
+        unidad: "VII",
+        question: "¿Cuál NO fue una de las Gobernaciones Militares del Río de la Plata?",
+        options: [
+          "Banda Oriental o Montevideo",
+          "Misiones",
+          "Mojos",
+          "Nueva Granada"
+        ],
+        correctIndex: 3
+      },
+      {
+        unidad: "VII",
+        question: "¿Qué hecho desencadenó la Guerra Guaranítica?",
+        options: [
+          "La Real Provisión de 1537",
+          "El Tratado de Permuta de 1750 que entregaba 7 reducciones a Portugal",
+          "La creación del Virreinato del Río de la Plata",
+          "La expulsión de los jesuitas en 1767"
         ],
         correctIndex: 1
       },
@@ -225,15 +809,114 @@
           "La Isla de Santa Catalina"
         ],
         correctIndex: 1
+      },
+      {
+        unidad: "VII",
+        question: "¿Qué perdió el Paraguay como consecuencia del Tratado de San Ildefonso?",
+        options: [
+          "El territorio de Matto Grosso",
+          "La ciudad de Asunción",
+          "La Colonia del Sacramento",
+          "El Chaco paraguayo"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "VII",
+        question: "¿Qué pueblos fundó Agustín Fernando de Pinedo?",
+        options: [
+          "San Lorenzo del Campo Grande, Paraguarí, Quyquyhó, Quiindy, Félix Pérez Cardozo, Remolinos y Villa Real de la Concepción",
+          "Jesús, Trinidad y San Cosme",
+          "Santa Fe, Santa Cruz y Potosí",
+          "Lima, Quito y Bogotá"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "VII",
+        question: "¿Qué fue “El Memorial” de 1777?",
+        options: [
+          "Un tratado con Portugal",
+          "Un documento donde Pinedo describe los males que aquejaban a la provincia",
+          "El acta de independencia paraguaya",
+          "Un censo de población"
+        ],
+        correctIndex: 1
+      },
+      {
+        unidad: "VII",
+        question: "¿Qué realizó Lázaro de Rivera durante su gobierno?",
+        options: [
+          "Expulsó a los jesuitas del Paraguay",
+          "Realizó un censo poblacional, fundó San Juan Nepomuceno y fomentó escuelas primarias",
+          "Fundó el Virreinato del Río de la Plata",
+          "Cerró todas las escuelas"
+        ],
+        correctIndex: 1
+      },
+      {
+        unidad: "VII",
+        question: "¿Quién fue el último gobernador colonial del Paraguay que entregó el poder en 1811?",
+        options: [
+          "Agustín Fernando de Pinedo",
+          "Pedro Melo de Portugal",
+          "Bernardo de Velasco y Huidobro",
+          "Lázaro de Rivera"
+        ],
+        correctIndex: 2
+      },
+      {
+        unidad: "VII",
+        question: "¿Qué día entregó Bernardo de Velasco el poder a la revolución paraguaya?",
+        options: [
+          "15 de mayo de 1811",
+          "25 de diciembre de 1810",
+          "9 de julio de 1816",
+          "14 de mayo de 1811"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "VII",
+        question: "¿Quién es considerado el primer historiador del Río de la Plata?",
+        options: [
+          "Ulrico Schmidl",
+          "Ruiz Díaz de Guzmán",
+          "Juan Francisco Aguirre",
+          "Félix de Azara"
+        ],
+        correctIndex: 0
+      },
+      {
+        unidad: "VII",
+        question: "¿Qué obra escribió Ruiz Díaz de Guzmán?",
+        options: [
+          "Viaje al Río de la Plata",
+          "La Argentina",
+          "Descripción e Historia del Paraguay y el Río de la Plata",
+          "Apuntamientos para la historia natural de los pájaros del Paraguay"
+        ],
+        correctIndex: 1
+      },
+      {
+        unidad: "VII",
+        question: "¿Qué misión cumplió Félix de Azara en el Río de la Plata?",
+        options: [
+          "Fundar reducciones jesuíticas",
+          "Gobernar el Paraguay como virrey",
+          "Demarcar los límites entre posesiones españolas y portuguesas",
+          "Redactar el acta de independencia"
+        ],
+        correctIndex: 2
       }
     ];
 
     const QUESTIONS_PER_SIMULACRO = 30;
 
     // ====== 2) Estado del simulacro ======
-    let questions = [];          // Las 30 seleccionadas
+    let questions = [];
     let currentIndex = 0;
-    let userAnswers = [];        // índice seleccionado por pregunta o null
+    let userAnswers = [];
     let isFinished = false;
 
     // ====== 3) Utilidades ======
@@ -247,11 +930,10 @@
 
     function createSimulacroQuestions() {
       const poolCopy = [...questionPool];
-      shuffleArray(poolCopy);                            // barajamos el pool
+      shuffleArray(poolCopy);
       const sliceSize = Math.min(QUESTIONS_PER_SIMULACRO, poolCopy.length);
-      const selected = poolCopy.slice(0, sliceSize);     // tomamos las primeras N
+      const selected = poolCopy.slice(0, sliceSize);
 
-      // Para cada pregunta, barajamos opciones pero guardamos cuál es la correcta
       return selected.map(q => {
         const indices = [0,1,2,3];
         shuffleArray(indices);
@@ -321,7 +1003,6 @@
         container.appendChild(div);
       });
 
-      // marcar si ya fue respondida
       const prevAns = userAnswers[currentIndex];
       if (prevAns !== null && prevAns !== undefined) {
         markSelection(prevAns, false);
@@ -399,7 +1080,7 @@
       emojiEl.textContent = emoji;
       scoreEl.textContent = correct + ' / ' + total + ' (' + pct + '%)';
       msgEl.textContent = msg;
-      detailEl.textContent = 'Respuestas correctas: ' + correct + ' · Incorrectas: ' + (total - correct) + '. Podés revisar las unidades específicas donde fallaste.';
+      detailEl.textContent = 'Respuestas correctas: ' + correct + ' · Incorrectas: ' + (total - correct) + '.';
 
       modal.classList.add('show');
     }

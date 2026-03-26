@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unidad VI — Revolución Comunera</title>
+  <style>
+    :root {
+      --primary: #7c3aed;
+      --primary-light: #ede9fe;
+      --secondary: #0f766e;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --bg: #f5f0e8;
+      --card-bg: #ffffff;
+      --border: #e2d9cc;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow: 0 8px 32px rgba(0,0,0,0.10);
+      --shadow-sm: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+
+    .hero { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #0f766e 100%); color: white; padding: 2rem 1.5rem 1.8rem; text-align: center; }
+    .hero-inner { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+    .hero-tag { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; padding: 0.3rem 0.9rem; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
+    .hero h1 { font-size: clamp(1.4rem, 4vw, 2.2rem); font-weight: 900; line-height: 1.15; }
+    .hero-sub { font-size: 0.9rem; color: rgba(255,255,255,0.75); }
+    .hero-sub strong { color: #fde68a; }
+
+    .progress-wrap { background: white; border-bottom: 1px solid var(--border); padding: 0.75rem 1.5rem; display: flex; align-items: center; gap: 1rem; position: sticky; top: 0; z-index: 10; box-shadow: var(--shadow-sm); }
+    .progress-label { font-size: 0.8rem; font-weight: 700; color: var(--primary); white-space: nowrap; }
+    .progress-bar-bg { flex: 1; height: 8px; background: var(--primary-light); border-radius: 999px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); border-radius: 999px; transition: width 0.4s ease; }
+    .progress-count { font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
+
+    .main { flex: 1; max-width: 820px; width: 100%; margin: 0 auto; padding: 2rem 1.2rem 1rem; }
+
+    .cartilla { display: none; flex-direction: column; gap: 1.2rem; animation: fadeIn 0.35s ease; }
+    .cartilla.active { display: flex; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+    .card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 1.6rem 1.8rem; position: relative; overflow: hidden; }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--primary), var(--secondary)); }
+
+    .card-tag { display: inline-block; background: var(--primary-light); color: var(--primary); border-radius: 999px; padding: 0.2rem 0.75rem; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.7rem; }
+    .card-tag.green { background: #dcfce7; color: #15803d; }
+    .card-tag.amber { background: #fef3c7; color: #92400e; }
+    .card-tag.blue  { background: #dbeafe; color: #1d4ed8; }
+    .card-tag.red   { background: #fee2e2; color: #b91c1c; }
+
+    .card h2 { font-size: clamp(1.1rem, 2.5vw, 1.4rem); font-weight: 900; color: #1e1b4b; line-height: 1.25; margin-bottom: 0.8rem; }
+    .card p  { font-size: 0.95rem; color: var(--text); line-height: 1.75; margin-bottom: 0.6rem; }
+    .card ul, .card ol { padding-left: 1.3rem; display: flex; flex-direction: column; gap: 0.45rem; margin-top: 0.4rem; }
+    .card li { font-size: 0.93rem; line-height: 1.6; }
+    .card li strong { color: #1e1b4b; }
+
+    .highlight-box { background: linear-gradient(135deg, #f5f3ff, #ede9fe); border: 1.5px solid #c4b5fd; border-radius: var(--radius-md); padding: 1rem 1.2rem; margin-top: 0.8rem; }
+    .highlight-box p { margin: 0; font-size: 0.9rem; }
+    .highlight-box .label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 0.3rem; }
+
+    .dato-box { background: #fefce8; border: 1.5px solid #fde68a; border-radius: var(--radius-md); padding: 0.9rem 1.1rem; margin-top: 0.8rem; }
+    .dato-box p { margin: 0; font-size: 0.88rem; color: #78350f; }
+    .dato-box .label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #92400e; margin-bottom: 0.25rem; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.6rem; }
+    .mini-card { background: #f9f7f4; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.9rem 1rem; }
+    .mini-card h4 { font-size: 0.88rem; font-weight: 800; color: #1e1b4b; margin-bottom: 0.35rem; }
+    .mini-card p  { font-size: 0.82rem; color: var(--muted); line-height: 1.55; margin: 0; }
+
+    .quiz-wrap { display: flex; flex-direction: column; gap: 1.4rem; }
+    .quiz-header { text-align: center; margin-bottom: 0.5rem; }
+    .quiz-header h2 { font-size: 1.6rem; font-weight: 900; color: #1e1b4b; }
+    .quiz-header p  { font-size: 0.9rem; color: var(--muted); margin-top: 0.3rem; }
+
+    .q-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 1.3rem 1.5rem; }
+    .q-num  { font-size: 0.72rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem; }
+    .q-text { font-size: 0.97rem; font-weight: 700; color: #1e1b4b; margin-bottom: 0.9rem; line-height: 1.4; }
+    .options { display: flex; flex-direction: column; gap: 0.5rem; }
+    .opt { display: flex; align-items: center; gap: 0.65rem; padding: 0.6rem 0.9rem; border: 1.5px solid var(--border); border-radius: var(--radius-md); cursor: pointer; font-size: 0.9rem; transition: all 0.18s; background: #fafaf9; }
+    .opt:hover:not(.locked) { border-color: var(--primary); background: var(--primary-light); }
+    .opt .letter { min-width: 24px; height: 24px; border-radius: 50%; background: var(--primary-light); color: var(--primary); font-size: 0.75rem; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+    .opt.correct { border-color: #16a34a; background: #dcfce7; }
+    .opt.correct .letter { background: #16a34a; color: white; }
+    .opt.wrong   { border-color: #dc2626; background: #fee2e2; }
+    .opt.wrong .letter   { background: #dc2626; color: white; }
+    .feedback { margin-top: 0.6rem; font-size: 0.83rem; font-weight: 600; padding: 0.45rem 0.8rem; border-radius: 8px; display: none; }
+    .feedback.show { display: block; }
+    .feedback.ok { background: #dcfce7; color: #15803d; }
+    .feedback.ko { background: #fee2e2; color: #b91c1c; }
+
+    .quiz-result { display: none; background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow); padding: 2rem; text-align: center; flex-direction: column; align-items: center; gap: 0.7rem; }
+    .quiz-result.show { display: flex; }
+    .result-emoji { font-size: 3rem; }
+    .result-score { font-size: 2.5rem; font-weight: 900; color: var(--primary); }
+    .result-msg   { font-size: 1rem; color: var(--muted); }
+
+    .nav { position: sticky; bottom: 0; background: white; border-top: 1px solid var(--border); padding: 0.9rem 1.5rem; display: flex; gap: 0.7rem; justify-content: center; align-items: center; box-shadow: 0 -4px 16px rgba(0,0,0,0.06); flex-wrap: wrap; }
+    .nav-btn { border: none; border-radius: 999px; padding: 0.55rem 1.3rem; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: all 0.18s; background: #f3f4f6; color: var(--text); }
+    .nav-btn:hover    { background: #e5e7eb; transform: translateY(-1px); }
+    .nav-btn.primary  { background: linear-gradient(135deg, var(--primary), #5b21b6); color: white; box-shadow: 0 4px 14px rgba(124,58,237,0.3); }
+    .nav-btn.primary:hover { box-shadow: 0 6px 18px rgba(124,58,237,0.4); }
+    .nav-btn.home     { background: #f0fdf4; color: #15803d; border: 1.5px solid #86efac; }
+    .nav-btn.home:hover { background: #dcfce7; }
+    .nav-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+    footer { text-align: center; padding: 1.2rem 1rem 1.5rem; font-size: 0.8rem; color: var(--muted); border-top: 1px solid var(--border); line-height: 1.8; }
+    footer strong { color: var(--primary); }
+
+    @media (max-width: 540px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .card   { padding: 1.2rem 1.1rem; }
+      .nav    { padding: 0.7rem 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="hero-tag">Unidad VI · Historia del Paraguay</span>
+      <h1>Revolución Comunera</h1>
+      <p class="hero-sub">Facilitada por la <strong>Dra. Beatriz Espinola Zaracho</strong></p>
+    </div>
+  </header>
+
+  <div class="progress-wrap">
+    <span class="progress-label">Progreso</span>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:9%"></div></div>
+    <span class="progress-count" id="progressCount">1 / 11</span>
+  </div>
+
+  <main class="main">
+
+    <!-- CARTILLA 1 -->
+    <section class="cartilla active" id="slide-0">
+      <div class="card">
+        <span class="card-tag blue">Contexto general</span>
+        <h2>¿Qué fue la Revolución Comunera?</h2>
+        <p>La Revolución Comunera fue un movimiento de resistencia política y social protagonizado por los vecinos de Asunción contra autoridades coloniales y jesuitas, entre 1721 y 1735.</p>
+        <ul>
+          <li><strong>Escenario:</strong> Provincia del Paraguay, con Asunción como centro político.</li>
+          <li><strong>Actores:</strong> Vecinos, cabildo, líderes criollos, jesuitas y autoridades virreinales.</li>
+          <li><strong>Motivación:</strong> Defensa del “común” frente a abusos de gobernadores y privilegios jesuíticos.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">📌 Idea central</p>
+          <p>Los comuneros defendían que el <strong>pueblo organizado</strong> (el común) tenía derecho a controlar al gobernador y resistir sus abusos.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTILLA 2 -->
+    <section class="cartilla" id="slide-1">
+      <div class="card">
+        <span class="card-tag blue">Antecedentes</span>
+        <h2>Antecedentes de la Revolución Comunera</h2>
+        <p>El movimiento comunero no surgió de la nada; tuvo antecedentes que alimentaron un profundo descontento colectivo.</p>
+        <ul>
+          <li><strong>Clamor colectivo:</strong> Crecía el malestar de los vecinos por los abusos de autoridades y privilegios de órdenes religiosas.</li>
+          <li><strong>Real Provisión del 12 de septiembre de 1537:</strong> Reconocía el derecho del pueblo de elegir gobernador en caso de vacancia, fortaleciendo la conciencia política del cabildo asunceno.</li>
+          <li><strong>Oposición a los jesuitas:</strong> Muchos vecinos veían a los jesuitas como protegidos de la Corona, con privilegios económicos y territoriales.</li>
+          <li><strong>Decisión de armarse:</strong> El pueblo asumió la decisión de luchar “hasta las últimas consecuencias” por sus intereses.</li>
+        </ul>
+        <div class="highlight-box">
+          <p class="label">💡 Importancia de 1537</p>
+          <p>La Real Provisión de 1537 fue la base legal que los comuneros invocaron una y otra vez para justificar su derecho a elegir y destituir gobernadores.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTILLA 3 -->
+    <section class="cartilla" id="slide-2">
+      <div class="card">
+        <span class="card-tag amber">Primera revolución</span>
+        <h2>El obispo Cárdenas y la primera revolución</h2>
+        <p>El primer estallido comunero estuvo ligado al conflicto entre el obispo Fray Bernardino de Cárdenas y los jesuitas.</p>
+        <ul>
+          <li><strong>Intento sobre las reducciones:</strong> Cárdenas intentó ingresar a las reducciones jesuíticas; los jesuitas lo obligaron a huir.</li>
+          <li><strong>Regreso y proclamación:</strong> Dos años después regresó, invocando la Real Provisión de 1537, y el pueblo lo proclamó gobernador, bajo el lema: “La voz del pueblo es la voz de Dios”.</li>
+          <li><strong>Expulsión de los jesuitas:</strong> Como gobernador, Cárdenas expulsó a los jesuitas de la provincia.</li>
+          <li><strong>Intervención virreinal:</strong> Los jesuitas recurrieron al virrey, que designó a <strong>Sebastián de León y Zárate</strong> como nuevo gobernador.</li>
+          <li><strong>Resultado:</strong> Tras el enfrentamiento, Cárdenas fue exiliado y los jesuitas fueron restituidos.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">⚠️ Primer ensayo comunero</p>
+          <p>La proclamación del obispo Cárdenas como gobernador por el pueblo fue el primer antecedente claro del <strong>poder comunero</strong> enfrentado a la autoridad real.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTILLA 4 -->
+    <section class="cartilla" id="slide-3">
+      <div class="card">
+        <span class="card-tag amber">Reyes Balmaceda</span>
+        <h2>Acusaciones contra Diego de los Reyes Balmaceda</h2>
+        <p>La segunda gran fase comunera se desató contra el gobernador Diego de los Reyes Balmaceda, muy ligado a los jesuitas.</p>
+        <ul>
+          <li><strong>Nombramiento:</strong> En <strong>1717</strong> fue designado gobernador de la Provincia del Paraguay.</li>
+          <li><strong>Vínculos con jesuitas:</strong> Mantenía estrecha relación con la Compañía de Jesús, lo que despertó recelos entre los vecinos.</li>
+          <li><strong>Acusaciones principales:</strong></li>
+          <ul>
+            <li>Imponer en provecho propio el <em>servicio personal</em> de los indios.</li>
+            <li>Poner trabas al comercio.</li>
+            <li>Encerrar los caminos a Charcas para impedir quejas ante la Audiencia.</li>
+          </ul>
+        </ul>
+        <div class="highlight-box">
+          <p class="label">💡 Causa inmediata</p>
+          <p>Los abusos de Reyes Balmaceda fueron el detonante que llevó a los vecinos a pedir la intervención de la Audiencia de Charcas y abrió paso a Antequera.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTILLA 5 -->
+    <section class="cartilla" id="slide-4">
+      <div class="card">
+        <span class="card-tag green">Antequera</span>
+        <h2>Intervención de la Audiencia y ascenso de Antequera</h2>
+        <p>La Audiencia de Charcas intervino enviando un juez pesquisidor que terminó convirtiéndose en líder de los comuneros.</p>
+        <ul>
+          <li><strong>Juez pesquisidor:</strong> La Audiencia designó a <strong>José de Antequera y Castro</strong>, quien llegó a Asunción en <strong>1721</strong>.</li>
+          <li><strong>Destitución de Reyes:</strong> Antequera destituyó a Diego de los Reyes Balmaceda y asumió el gobierno de la provincia.</li>
+          <li><strong>Respuesta jesuítica:</strong> Los jesuitas usaron su influencia ante el virrey, que envió tropas al mando de <strong>Baltazar García Ros</strong>.</li>
+          <li><strong>Victoria comunera:</strong> Las fuerzas de García Ros fueron derrotadas por los comuneros a orillas del <strong>río Tebicuary</strong> en <strong>1724</strong>.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">🏹 Triunfo en Tebicuary</p>
+          <p>La victoria de Tebicuary mostró que el movimiento comunero podía derrotar militarmente a tropas enviadas desde Buenos Aires, aumentando su prestigio y radicalidad.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTILLA 6 -->
+    <section class="cartilla" id="slide-5">
+      <div class="card">
+        <span class="card-tag green">Zavala y Mompox</span>
+        <h2>Zavala, Antequera y Fernando de Mompox</h2>
+        <p>Tras la victoria comunera, la Corona redobló sus esfuerzos para someter a la provincia y castigar a Antequera.</p>
+        <ul>
+          <li><strong>Zavala enviado:</strong> El gobernador de Buenos Aires, <strong>Bruno Mauricio de Zavala</strong>, fue enviado para someter a la provincia y apresar a Antequera, además de restituir a los jesuitas.</li>
+          <li><strong>Nuevo gobernador:</strong> Se nombró a <strong>Martín de Barúa</strong> como gobernador del Paraguay.</li>
+          <li><strong>Juicio a Antequera:</strong> Antequera se presentó ante la Audiencia de Charcas para rendir cuentas; fue apresado junto con <strong>Juan de Mena</strong>.</li>
+          <li><strong>Encuentro con Mompox:</strong> En la cárcel conoció a <strong>Fernando de Mompox</strong>, quien adoptó con entusiasmo las ideas comuneras, escapó y llegó a Asunción en 1730.</li>
+        </ul>
+        <div class="highlight-box">
+          <p class="label">💡 De líder a mártir</p>
+          <p>El proceso contra Antequera lo convirtió en símbolo del comunerismo. Sus ideas fueron difundidas y radicalizadas por Fernando de Mompox.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTILLA 7 -->
+    <section class="cartilla" id="slide-6">
+      <div class="card">
+        <span class="card-tag green">Segunda fase</span>
+        <h2>Mompox, nueva junta y derrota final</h2>
+        <p>La llegada de Mompox a Asunción reavivó el movimiento comunero, pero también precipitó su derrota definitiva.</p>
+        <ul>
+          <li><strong>Junta gubernativa:</strong> En Asunción se formó una junta presidida por <strong>José Luis Bareiro</strong>.</li>
+          <li><strong>Traición a Mompox:</strong> Bareiro traicionó a Mompox y lo envió preso; este logró escapar en el camino y huyó al Brasil.</li>
+          <li><strong>Ejecución de Antequera y Mena:</strong> En Lima fueron ejecutados Antequera y Juan de Mena; al conocerse la noticia en Asunción, estalló de nuevo el conflicto.</li>
+          <li><strong>Derrotas comuneras:</strong> Zavala regresó y derrotó a los comuneros en <strong>Tabapy</strong> (1725). Se nombró a <strong>Martín de Echauri</strong> como nuevo gobernador, y los jesuitas fueron nuevamente restituidos.</li>
+          <li><strong>Fin del movimiento:</strong> Anuladas las posibilidades de resistencia, la revolución comunera llegó a su fin, dejando graves consecuencias para Paraguay.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">⚔️ Tabapy 1725</p>
+          <p>La derrota de Tabapy marcó el cierre militar del movimiento comunero y abrió paso a una dura etapa de castigos políticos y económicos.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTILLA 8 -->
+    <section class="cartilla" id="slide-7">
+      <div class="card">
+        <span class="card-tag amber">Ideología</span>
+        <h2>El ideal comunero</h2>
+        <p>El comunerismo paraguayo tuvo una fuerte carga ideológica, centrada en la soberanía del pueblo organizado, el “común”.</p>
+        <ul>
+          <li><strong>Idea central:</strong> “El poder común de cualquier república, ciudad, villa o aldea es más poderoso que el mismo rey.”</li>
+          <li><strong>Legitimidad popular:</strong> “En manos del común está admitir la ley y el gobernador que gustasen.”</li>
+          <li><strong>Autoridad suprema:</strong> “La autoridad del común no reconoce superior.”</li>
+          <li><strong>Ideólogo:</strong> Estas ideas fueron formuladas por <strong>Fernando de Mompox</strong>, considerado el principal ideólogo de la Revolución Comunera.</li>
+        </ul>
+        <div class="highlight-box">
+          <p class="label">💡 Proto-democracia</p>
+          <p>El ideal comunero anticipa principios de <strong>soberanía popular</strong> y control ciudadano sobre el gobierno que luego aparecerán en las revoluciones de independencia.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTILLA 9 -->
+    <section class="cartilla" id="slide-8">
+      <div class="card">
+        <span class="card-tag">Líderes</span>
+        <h2>Principales líderes comuneros</h2>
+        <p>La Revolución Comunera reunió a una generación de líderes criollos y religiosos que encabezaron la resistencia al poder virreinal.</p>
+        <div class="grid-2">
+          <div class="mini-card">
+            <h4>José de Antequera y Castro</h4>
+            <p>Juez pesquisidor y luego gobernador comunero. Destituyó a Reyes Balmaceda. Ejecutado en Lima.</p>
+          </div>
+          <div class="mini-card">
+            <h4>Fernando de Mompox</h4>
+            <p>Ideólogo comunero. Sostuvo que la autoridad del común no reconoce superior. Escapó hacia Brasil.</p>
+          </div>
+          <div class="mini-card">
+            <h4>Juan de Mena</h4>
+            <p>Colaborador cercano de Antequera. Fue apresado y ejecutado también en Lima.</p>
+          </div>
+          <div class="mini-card">
+            <h4>Otros líderes</h4>
+            <p>José de Urrunaga, Antonio Ruiz de Arellano, Miguel de Garay, Francisco Roxas de Aranda, Sebastián Fernández Montiel y Fray Miguel de Vargas Machuca.</p>
+          </div>
+        </div>
+        <div class="dato-box">
+          <p class="label">📚 Memoria histórica</p>
+          <p>Durante mucho tiempo, los comuneros fueron vistos como rebeldes; hoy se los reconoce como precursores de la autonomía paraguaya.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTILLA 10 -->
+    <section class="cartilla" id="slide-9">
+      <div class="card">
+        <span class="card-tag red">Consecuencias</span>
+        <h2>Sanciones impuestas al Paraguay</h2>
+        <p>La Corona castigó duramente a la provincia por la Revolución Comunera, tanto en el plano político como en el económico.</p>
+        <ul>
+          <li><strong>Sanción política:</strong></li>
+          <ul>
+            <li>Se abolió el derecho previsto en la Real Cédula de 1537, por el cual el pueblo podía elegir gobernador.</li>
+            <li>Se mandó a ahorcar o desterrar a los principales caudillos comuneros.</li>
+          </ul>
+          <li><strong>Sanción económica:</strong></li>
+          <ul>
+            <li>Fueron embargados todos los productos del Paraguay depositados en los puertos del Río de la Plata.</li>
+            <li>Se prohibió la libre exportación: las mercaderías debían pasar por el puerto preciso de Santa Fe, pagar ruinosos impuestos y seguir por tierra hasta Buenos Aires, donde volvían a pagar antes de exportarse.</li>
+          </ul>
+        </ul>
+        <div class="highlight-box">
+          <p class="label">⚠️ Efecto a largo plazo</p>
+          <p>Las sanciones reforzaron el aislamiento económico de Paraguay y sembraron un profundo resentimiento contra el centralismo porteño y la Corona, que pesará en 1811.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section class="cartilla" id="slide-10">
+      <div class="quiz-wrap">
+        <div class="quiz-header">
+          <h2>🎯 Quiz Final</h2>
+          <p>Unidad VI · 8 preguntas · Seleccioná la respuesta correcta</p>
+        </div>
+
+        <!-- Q1 -->
+        <div class="q-card" id="q0">
+          <p class="q-num">Pregunta 1</p>
+          <p class="q-text">¿Qué documento de 1537 fue clave como antecedente legal del movimiento comunero?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(0,0,0)"><span class="letter">A</span> El Tratado de Tordesillas</div>
+            <div class="opt" onclick="answer(0,1,0)"><span class="letter">B</span> La Real Provisión del 12 de septiembre de 1537</div>
+            <div class="opt" onclick="answer(0,2,0)"><span class="letter">C</span> La Bula Inter Caetera</div>
+            <div class="opt" onclick="answer(0,3,0)"><span class="letter">D</span> El Memorial de Pinedo</div>
+          </div>
+          <div class="feedback" id="fb0"></div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="q-card" id="q1">
+          <p class="q-num">Pregunta 2</p>
+          <p class="q-text">¿Qué acción tomó el obispo Fray Bernardino de Cárdenas al ser proclamado gobernador por el pueblo?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(1,0,3)"><span class="letter">A</span> Fundó nuevas reducciones jesuíticas</div>
+            <div class="opt" onclick="answer(1,1,3)"><span class="letter">B</span> Disolvió el Cabildo de Asunción</div>
+            <div class="opt" onclick="answer(1,2,3)"><span class="letter">C</span> Solicitó perdón al Virrey</div>
+            <div class="opt" onclick="answer(1,3,3)"><span class="letter">D</span> Expulsó a los jesuitas de la provincia</div>
+          </div>
+          <div class="feedback" id="fb1"></div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="q-card" id="q2">
+          <p class="q-num">Pregunta 3</p>
+          <p class="q-text">¿Cuál de las siguientes NO fue una acusación contra Diego de los Reyes Balmaceda?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(2,0,2)"><span class="letter">A</span> Imponer en provecho propio el servicio personal de los indios</div>
+            <div class="opt" onclick="answer(2,1,2)"><span class="letter">B</span> Poner trabas al comercio</div>
+            <div class="opt" onclick="answer(2,2,2)"><span class="letter">C</span> Organizar un censo general de la provincia</div>
+            <div class="opt" onclick="answer(2,3,2)"><span class="letter">D</span> Cerrar los caminos a Charcas para evitar quejas</div>
+          </div>
+          <div class="feedback" id="fb2"></div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="q-card" id="q3">
+          <p class="q-num">Pregunta 4</p>
+          <p class="q-text">¿Quién fue designado juez pesquisidor por la Audiencia de Charcas y terminó asumiendo el gobierno comunero?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(3,0,0)"><span class="letter">A</span> Bruno Mauricio de Zavala</div>
+            <div class="opt" onclick="answer(3,1,0)"><span class="letter">B</span> José de Antequera y Castro</div>
+            <div class="opt" onclick="answer(3,2,0)"><span class="letter">C</span> Baltazar García Ros</div>
+            <div class="opt" onclick="answer(3,3,0)"><span class="letter">D</span> Martín de Echauri</div>
+          </div>
+          <div class="feedback" id="fb3"></div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="q-card" id="q4">
+          <p class="q-num">Pregunta 5</p>
+          <p class="q-text">¿En qué batalla fueron derrotadas las tropas de Baltazar García Ros por los comuneros?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(4,0,1)"><span class="letter">A</span> Tabapy</div>
+            <div class="opt" onclick="answer(4,1,1)"><span class="letter">B</span> Tebicuary</div>
+            <div class="opt" onclick="answer(4,2,1)"><span class="letter">C</span> Humaitá</div>
+            <div class="opt" onclick="answer(4,3,1)"><span class="letter">D</span> San Lorenzo</div>
+          </div>
+          <div class="feedback" id="fb4"></div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="q-card" id="q5">
+          <p class="q-num">Pregunta 6</p>
+          <p class="q-text">¿Quién fue el principal ideólogo del ideal comunero?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(5,0,2)"><span class="letter">A</span> Diego de los Reyes Balmaceda</div>
+            <div class="opt" onclick="answer(5,1,2)"><span class="letter">B</span> José Luis Bareiro</div>
+            <div class="opt" onclick="answer(5,2,2)"><span class="letter">C</span> Fernando de Mompox</div>
+            <div class="opt" onclick="answer(5,3,2)"><span class="letter">D</span> Juan de Mena</div>
+          </div>
+          <div class="feedback" id="fb5"></div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="q-card" id="q6">
+          <p class="q-num">Pregunta 7</p>
+          <p class="q-text">¿Qué afirmaba el ideal comunero sobre el “poder común”?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(6,0,1)"><span class="letter">A</span> Que el rey era la única autoridad legítima sobre el pueblo</div>
+            <div class="opt" onclick="answer(6,1,1)"><span class="letter">B</span> Que el poder común era más poderoso que el mismo rey</div>
+            <div class="opt" onclick="answer(6,2,1)"><span class="letter">C</span> Que solo los jesuitas podían gobernar</div>
+            <div class="opt" onclick="answer(6,3,1)"><span class="letter">D</span> Que el común debía obedecer sin cuestionar</div>
+          </div>
+          <div class="feedback" id="fb6"></div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="q-card" id="q7">
+          <p class="q-num">Pregunta 8</p>
+          <p class="q-text">¿Cuál fue una de las sanciones políticas impuestas al Paraguay tras la Revolución Comunera?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(7,0,3)"><span class="letter">A</span> La expulsión definitiva de los jesuitas</div>
+            <div class="opt" onclick="answer(7,1,3)"><span class="letter">B</span> La supresión del Cabildo de Asunción</div>
+            <div class="opt" onclick="answer(7,2,3)"><span class="letter">C</span> La obligación de enviar soldados a Europa</div>
+            <div class="opt" onclick="answer(7,3,3)"><span class="letter">D</span> La abolición del derecho del pueblo a elegir gobernador según la Cédula de 1537</div>
+          </div>
+          <div class="feedback" id="fb7"></div>
+        </div>
+
+        <div class="quiz-result" id="quizResult">
+          <div class="result-emoji" id="resultEmoji"></div>
+          <div class="result-score" id="resultScore"></div>
+          <p class="result-msg" id="resultMsg"></p>
+          <button class="nav-btn primary" onclick="retryQuiz()">🔄 Intentar de nuevo</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="nav">
+    <button class="nav-btn home"    onclick="goHome()">🏠 Inicio</button>
+    <button class="nav-btn"         onclick="prev()" id="btnPrev" disabled>← Anterior</button>
+    <button class="nav-btn primary" onclick="next()" id="btnNext">Siguiente →</button>
+  </nav>
+
+  <footer>
+    <p>Unidad VI · Historia del Paraguay</p>
+    <p>Facilitada por la <strong>Dra. Beatriz Espinola Zaracho</strong></p>
+  </footer>
+
+  <script>
+    const TOTAL = 11;
+    let current = 0;
+
+    // índice de respuesta correcta por pregunta (0–3)
+    const correctAnswers = [1, 3, 2, 1, 1, 2, 1, 3];
+
+    const feedbacks = [
+      [
+        "Incorrecto. El Tratado de Tordesillas es de 1494 y nada tiene que ver con la Revolución Comunera.",
+        "✔ Correcto. La Real Provisión del 12 de septiembre de 1537 reconocía el derecho del pueblo a elegir gobernador y fue la base legal del comunerismo.",
+        "Incorrecto. La Bula Inter Caetera es de 1493 y se refiere al reparto del mundo entre España y Portugal.",
+        "Incorrecto. El Memorial es un documento de Agustín Fernando de Pinedo del siglo XVIII."
+      ],
+      [
+        "Incorrecto. Cárdenas se enfrentó a los jesuitas, no fundó nuevas reducciones.",
+        "Incorrecto. El Cabildo fue su principal apoyo, no lo disolvió.",
+        "Incorrecto. Lejos de pedir perdón, se apoyó en el pueblo para proclamarse gobernador.",
+        "✔ Correcto. Como gobernador, Cárdenas expulsó a los jesuitas de la provincia.",
+      ],
+      [
+        "Incorrecto. Esa fue una de las acusaciones centrales en su contra.",
+        "Incorrecto. También se lo acusó de obstaculizar el comercio.",
+        "✔ Correcto. El censo general es una medida propia de otros gobernadores, no una acusación contra Reyes Balmaceda.",
+        "Incorrecto. Cerrar los caminos a Charcas para evitar quejas fue otra acusación clave."
+      ],
+      [
+        "Incorrecto. Zavala fue enviado desde Buenos Aires para reprimir a los comuneros.",
+        "✔ Correcto. José de Antequera y Castro fue enviado como juez pesquisidor y terminó asumiendo el gobierno comunero.",
+        "Incorrecto. Baltazar García Ros comandó tropas contra Antequera y fue derrotado en Tebicuary.",
+        "Incorrecto. Martín de Echauri fue gobernador posterior, tras la derrota comunera."
+      ],
+      [
+        "Incorrecto. Tabapy fue la batalla donde Zavala derrotó a los comuneros en 1725.",
+        "✔ Correcto. En Tebicuary (1724) las tropas de Baltazar García Ros fueron derrotadas por los comuneros.",
+        "Incorrecto. Humaitá pertenece a otro periodo histórico.",
+        "Incorrecto. San Lorenzo es una fundación posterior, sin relación con esta batalla."
+      ],
+      [
+        "Incorrecto. Reyes Balmaceda fue el gobernador acusado por los comuneros.",
+        "Incorrecto. Bareiro presidió una junta que terminó traicionando a Mompox.",
+        "✔ Correcto. Fernando de Mompox formuló el ideal comunero sobre el poder del común por encima del rey.",
+        "Incorrecto. Mena fue compañero de Antequera, pero no el ideólogo del movimiento."
+      ],
+      [
+        "Incorrecto. Justamente los comuneros cuestionaban el poder absoluto del rey.",
+        "✔ Correcto. El ideal comunero afirmaba que el poder común era más poderoso que el mismo rey.",
+        "Incorrecto. Los jesuitas fueron un actor en conflicto, no el sujeto del ideal comunero.",
+        "Incorrecto. La obediencia ciega es lo contrario de lo que defendían los comuneros."
+      ],
+      [
+        "Incorrecto. La expulsión definitiva de los jesuitas ocurrió más tarde, en 1767, por orden de Carlos III.",
+        "Incorrecto. El Cabildo de Asunción no fue suprimido.",
+        "Incorrecto. No hubo obligación específica de enviar tropas a Europa como sanción comunera.",
+        "✔ Correcto. Se abolió el derecho del pueblo a elegir gobernador, previsto en la Real Cédula de 1537."
+      ]
+    ];
+
+    let quizAnswered = new Array(8).fill(false);
+    let quizScore = 0;
+    let quizDone = false;
+
+    function updateProgress() {
+      const pct = ((current + 1) / TOTAL) * 100;
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('progressCount').textContent = (current + 1) + ' / ' + TOTAL;
+      document.getElementById('btnPrev').disabled = current === 0;
+      if (current === TOTAL - 1) {
+        document.getElementById('btnNext').textContent = '✓ Fin';
+        document.getElementById('btnNext').disabled = true;
+      } else {
+        document.getElementById('btnNext').textContent = 'Siguiente →';
+        document.getElementById('btnNext').disabled = false;
+      }
+    }
+
+    function showSlide(idx) {
+      document.querySelectorAll('.cartilla').forEach(s => s.classList.remove('active'));
+      document.getElementById('slide-' + idx).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      updateProgress();
+    }
+
+    function next() { if (current < TOTAL - 1) { current++; showSlide(current); } }
+    function prev() { if (current > 0) { current--; showSlide(current); } }
+    function goHome() { window.location.href = '../index.html'; }
+
+    function answer(qIdx, optIdx, correctIdx) {
+      if (quizAnswered[qIdx]) return;
+      quizAnswered[qIdx] = true;
+
+      const card = document.getElementById('q' + qIdx);
+      const opts = card.querySelectorAll('.opt');
+      opts.forEach(o => o.classList.add('locked'));
+
+      opts[optIdx].classList.add(optIdx === correctIdx ? 'correct' : 'wrong');
+      if (optIdx !== correctIdx) opts[correctIdx].classList.add('correct');
+
+      const fb = document.getElementById('fb' + qIdx);
+      fb.classList.add('show');
+      if (optIdx === correctIdx) {
+        quizScore++;
+        fb.classList.add('ok');
+        fb.textContent = feedbacks[qIdx][correctIdx];
+      } else {
+        fb.classList.add('ko');
+        fb.textContent = feedbacks[qIdx][optIdx];
+      }
+
+      if (quizAnswered.every(a => a) && !quizDone) {
+        quizDone = true;
+        setTimeout(showResult, 600);
+      }
+    }
+
+    function showResult() {
+      const pct = Math.round((quizScore / 8) * 100);
+      let emoji, msg;
+      if (pct >= 90)      { emoji = '🏆'; msg = '¡Excelente! Dominás la Unidad VI.'; }
+      else if (pct >= 70) { emoji = '🎉'; msg = '¡Muy bien! Repasá los detalles menores.'; }
+      else if (pct >= 50) { emoji = '📖'; msg = 'Bien, pero vale la pena repasar las cartillas.'; }
+      else                { emoji = '💪'; msg = 'Revisá las cartillas y volvé a intentarlo.'; }
+      document.getElementById('resultEmoji').textContent = emoji;
+      document.getElementById('resultScore').textContent = quizScore + ' / 8 (' + pct + '%)';
+      document.getElementById('resultMsg').textContent = msg;
+      document.getElementById('quizResult').classList.add('show');
+      document.getElementById('quizResult').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function retryQuiz() {
+      quizAnswered = new Array(8).fill(false);
+      quizScore = 0;
+      quizDone = false;
+      document.getElementById('quizResult').classList.remove('show');
+      for (let i = 0; i < 8; i++) {
+        document.getElementById('q' + i).querySelectorAll('.opt').forEach(o => o.classList.remove('correct','wrong','locked'));
+        const fb = document.getElementById('fb' + i);
+        fb.classList.remove('show','ok','ko');
+        fb.textContent = '';
+      }
+      document.getElementById('slide-10').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    updateProgress();
+  </script>
+</body>
+</html>

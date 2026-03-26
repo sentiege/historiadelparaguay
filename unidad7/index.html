@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unidad VII — Reformas Borbónicas y el Paraguay del Siglo XVIII</title>
+  <style>
+    :root {
+      --primary: #7c3aed;
+      --primary-light: #ede9fe;
+      --secondary: #0f766e;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --bg: #f5f0e8;
+      --card-bg: #ffffff;
+      --border: #e2d9cc;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow: 0 8px 32px rgba(0,0,0,0.10);
+      --shadow-sm: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+
+    .hero { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #0f766e 100%); color: white; padding: 2rem 1.5rem 1.8rem; text-align: center; }
+    .hero-inner { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+    .hero-tag { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; padding: 0.3rem 0.9rem; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
+    .hero h1 { font-size: clamp(1.4rem, 4vw, 2.2rem); font-weight: 900; line-height: 1.15; }
+    .hero-sub { font-size: 0.9rem; color: rgba(255,255,255,0.75); }
+    .hero-sub strong { color: #fde68a; }
+
+    .progress-wrap { background: white; border-bottom: 1px solid var(--border); padding: 0.75rem 1.5rem; display: flex; align-items: center; gap: 1rem; position: sticky; top: 0; z-index: 10; box-shadow: var(--shadow-sm); }
+    .progress-label { font-size: 0.8rem; font-weight: 700; color: var(--primary); white-space: nowrap; }
+    .progress-bar-bg { flex: 1; height: 8px; background: var(--primary-light); border-radius: 999px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); border-radius: 999px; transition: width 0.4s ease; }
+    .progress-count { font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
+
+    .main { flex: 1; max-width: 820px; width: 100%; margin: 0 auto; padding: 2rem 1.2rem 1rem; }
+
+    .cartilla { display: none; flex-direction: column; gap: 1.2rem; animation: fadeIn 0.35s ease; }
+    .cartilla.active { display: flex; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+    .card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 1.6rem 1.8rem; position: relative; overflow: hidden; }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--primary), var(--secondary)); }
+
+    .card-tag { display: inline-block; background: var(--primary-light); color: var(--primary); border-radius: 999px; padding: 0.2rem 0.75rem; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.7rem; }
+    .card-tag.green { background: #dcfce7; color: #15803d; }
+    .card-tag.amber { background: #fef3c7; color: #92400e; }
+    .card-tag.blue  { background: #dbeafe; color: #1d4ed8; }
+    .card-tag.red   { background: #fee2e2; color: #b91c1c; }
+
+    .card h2 { font-size: clamp(1.1rem, 2.5vw, 1.4rem); font-weight: 900; color: #1e1b4b; line-height: 1.25; margin-bottom: 0.8rem; }
+    .card p  { font-size: 0.95rem; color: var(--text); line-height: 1.75; margin-bottom: 0.6rem; }
+    .card ul, .card ol { padding-left: 1.3rem; display: flex; flex-direction: column; gap: 0.45rem; margin-top: 0.4rem; }
+    .card li { font-size: 0.93rem; line-height: 1.6; }
+    .card li strong { color: #1e1b4b; }
+
+    .highlight-box { background: linear-gradient(135deg, #f5f3ff, #ede9fe); border: 1.5px solid #c4b5fd; border-radius: var(--radius-md); padding: 1rem 1.2rem; margin-top: 0.8rem; }
+    .highlight-box p { margin: 0; font-size: 0.9rem; }
+    .highlight-box .label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 0.3rem; }
+
+    .dato-box { background: #fefce8; border: 1.5px solid #fde68a; border-radius: var(--radius-md); padding: 0.9rem 1.1rem; margin-top: 0.8rem; }
+    .dato-box p { margin: 0; font-size: 0.88rem; color: #78350f; }
+    .dato-box .label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #92400e; margin-bottom: 0.25rem; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.6rem; }
+    .mini-card { background: #f9f7f4; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.9rem 1rem; }
+    .mini-card h4 { font-size: 0.88rem; font-weight: 800; color: #1e1b4b; margin-bottom: 0.35rem; }
+    .mini-card p  { font-size: 0.82rem; color: var(--muted); line-height: 1.55; margin: 0; }
+
+    .quiz-wrap { display: flex; flex-direction: column; gap: 1.4rem; }
+    .quiz-header { text-align: center; margin-bottom: 0.5rem; }
+    .quiz-header h2 { font-size: 1.6rem; font-weight: 900; color: #1e1b4b; }
+    .quiz-header p  { font-size: 0.9rem; color: var(--muted); margin-top: 0.3rem; }
+
+    .q-card { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 1.3rem 1.5rem; }
+    .q-num  { font-size: 0.72rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem; }
+    .q-text { font-size: 0.97rem; font-weight: 700; color: #1e1b4b; margin-bottom: 0.9rem; line-height: 1.4; }
+    .options { display: flex; flex-direction: column; gap: 0.5rem; }
+    .opt { display: flex; align-items: center; gap: 0.65rem; padding: 0.6rem 0.9rem; border: 1.5px solid var(--border); border-radius: var(--radius-md); cursor: pointer; font-size: 0.9rem; transition: all 0.18s; background: #fafaf9; }
+    .opt:hover:not(.locked) { border-color: var(--primary); background: var(--primary-light); }
+    .opt .letter { min-width: 24px; height: 24px; border-radius: 50%; background: var(--primary-light); color: var(--primary); font-size: 0.75rem; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+    .opt.correct { border-color: #16a34a; background: #dcfce7; }
+    .opt.correct .letter { background: #16a34a; color: white; }
+    .opt.wrong   { border-color: #dc2626; background: #fee2e2; }
+    .opt.wrong .letter   { background: #dc2626; color: white; }
+    .feedback { margin-top: 0.6rem; font-size: 0.83rem; font-weight: 600; padding: 0.45rem 0.8rem; border-radius: 8px; display: none; }
+    .feedback.show { display: block; }
+    .feedback.ok { background: #dcfce7; color: #15803d; }
+    .feedback.ko { background: #fee2e2; color: #b91c1c; }
+
+    .quiz-result { display: none; background: var(--card-bg); border: 1.5px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow); padding: 2rem; text-align: center; flex-direction: column; align-items: center; gap: 0.7rem; }
+    .quiz-result.show { display: flex; }
+    .result-emoji { font-size: 3rem; }
+    .result-score { font-size: 2.5rem; font-weight: 900; color: var(--primary); }
+    .result-msg   { font-size: 1rem; color: var(--muted); }
+
+    .nav { position: sticky; bottom: 0; background: white; border-top: 1px solid var(--border); padding: 0.9rem 1.5rem; display: flex; gap: 0.7rem; justify-content: center; align-items: center; box-shadow: 0 -4px 16px rgba(0,0,0,0.06); flex-wrap: wrap; }
+    .nav-btn { border: none; border-radius: 999px; padding: 0.55rem 1.3rem; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: all 0.18s; background: #f3f4f6; color: var(--text); }
+    .nav-btn:hover    { background: #e5e7eb; transform: translateY(-1px); }
+    .nav-btn.primary  { background: linear-gradient(135deg, var(--primary), #5b21b6); color: white; box-shadow: 0 4px 14px rgba(124,58,237,0.3); }
+    .nav-btn.primary:hover { box-shadow: 0 6px 18px rgba(124,58,237,0.4); }
+    .nav-btn.home     { background: #f0fdf4; color: #15803d; border: 1.5px solid #86efac; }
+    .nav-btn.home:hover { background: #dcfce7; }
+    .nav-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+    footer { text-align: center; padding: 1.2rem 1rem 1.5rem; font-size: 0.8rem; color: var(--muted); border-top: 1px solid var(--border); line-height: 1.8; }
+    footer strong { color: var(--primary); }
+
+    @media (max-width: 540px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .card   { padding: 1.2rem 1.1rem; }
+      .nav    { padding: 0.7rem 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="hero-tag">Unidad VII · Historia del Paraguay</span>
+      <h1>Reformas Borbónicas y Paraguay del Siglo XVIII</h1>
+      <p class="hero-sub">Facilitada por la <strong>Dra. Beatriz Espinola Zaracho</strong></p>
+    </div>
+  </header>
+
+  <div class="progress-wrap">
+    <span class="progress-label">Progreso</span>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:9%"></div></div>
+    <span class="progress-count" id="progressCount">1 / 11</span>
+  </div>
+
+  <main class="main">
+
+    <!-- CARTILLA 1 -->
+    <section class="cartilla active" id="slide-0">
+      <div class="card">
+        <span class="card-tag blue">Contexto general</span>
+        <h2>¿Qué fueron las Reformas Borbónicas?</h2>
+        <p>Las Reformas Borbónicas fueron una serie de cambios administrativos, políticos, económicos y religiosos aplicados por la Corona española durante el siglo XVIII, especialmente bajo Carlos III.</p>
+        <ul>
+          <li><strong>Objetivo político:</strong> Centralizar el poder y reforzar la autoridad real.</li>
+          <li><strong>Objetivo económico:</strong> Recuperar la economía imperial, aumentar la recaudación fiscal y hacer más eficiente la administración.</li>
+          <li><strong>Objetivo colonial:</strong> Fortalecer el control sobre las colonias americanas, limitando el poder de los criollos.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">📌 Idea clave</p>
+          <p>Las Reformas Borbónicas buscaron modernizar el imperio, pero también generaron tensiones con las élites criollas que luego alimentaron las independencias.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTILLA 2 -->
+    <section class="cartilla" id="slide-1">
+      <div class="card">
+        <span class="card-tag blue">Carlos III</span>
+        <h2>Reformas de Carlos III — Política administrativa</h2>
+        <p>Carlos III fue el principal impulsor de las Reformas Borbónicas, especialmente en el plano administrativo y económico.</p>
+        <ul>
+          <li><strong>Centralización del poder:</strong> Buscó reducir el poder de los cabildos y de las autoridades locales criollas.</li>
+          <li><strong>Intendencias:</strong> Creó el sistema de <em>intendencias</em> para controlar mejor la administración, la justicia, el ejército y las finanzas.</li>
+          <li><strong>Ejército:</strong> Fortaleció el ejército profesional para defender las colonias y asegurar la obediencia interna.</li>
+          <li><strong>Iglesia:</strong> Limitó el poder de la Iglesia, especialmente de órdenes como los jesuitas.</li>
+          <li><strong>Economía:</strong> Impulsó la liberalización comercial y la creación de Reales Fábricas.</li>
+        </ul>
+        <div class="highlight-box">
+          <p class="label">💡 Resultado</p>
+          <p>Las reformas de Carlos III hicieron al Estado más eficiente, pero también más controlador, lo que generó resistencias en América.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTILLA 3 -->
+    <section class="cartilla" id="slide-2">
+      <div class="card">
+        <span class="card-tag amber">Virreinato</span>
+        <h2>Creación del Virreinato del Río de la Plata (1776)</h2>
+        <p>Una de las reformas clave fue la creación del Virreinato del Río de la Plata, que cambió la dependencia política del Paraguay.</p>
+        <ul>
+          <li><strong>Cédula Real:</strong> Creado el <strong>1 de agosto de 1776</strong>.</li>
+          <li><strong>Territorios:</strong> Incluía los actuales Paraguay, Argentina, Bolivia, Uruguay, parte del sur de Brasil (Río Grande del Sur) y la Isla de Santa Catalina.</li>
+          <li><strong>Capital:</strong> Buenos Aires.</li>
+          <li><strong>Primer virrey:</strong> <strong>Pedro de Cevallos</strong>.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">📍 Impacto en Paraguay</p>
+          <p>Desde 1776, Paraguay pasó a depender del nuevo Virreinato del Río de la Plata, reforzando la centralidad de Buenos Aires en lo político y económico.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTILLA 4 -->
+    <section class="cartilla" id="slide-3">
+      <div class="card">
+        <span class="card-tag amber">Audiencia</span>
+        <h2>La Audiencia de Buenos Aires</h2>
+        <p>Con el nuevo virreinato se creó también una nueva Audiencia, que pasó a ser el máximo tribunal de justicia para el Paraguay.</p>
+        <ul>
+          <li><strong>Creación:</strong> Por Real Cédula del <strong>25 de julio de 1783</strong>.</li>
+          <li><strong>Inicio de funciones:</strong> Comenzó a funcionar en <strong>agosto de 1785</strong>.</li>
+          <li><strong>Dependencia paraguaya:</strong> Desde entonces, Paraguay quedó bajo la jurisdicción de la <strong>Audiencia de Buenos Aires</strong>, dejando de depender de Charcas.</li>
+        </ul>
+        <div class="highlight-box">
+          <p class="label">⚖️ Consecuencia</p>
+          <p>La justicia superior y muchas decisiones políticas pasaron a tomarse en Buenos Aires, reduciendo la autonomía efectiva de Asunción.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTILLA 5 -->
+    <section class="cartilla" id="slide-4">
+      <div class="card">
+        <span class="card-tag green">Intendencias</span>
+        <h2>Las Intendencias y Gobernaciones Militares</h2>
+        <p>El Virreinato del Río de la Plata fue reorganizado territorialmente mediante intendencias y gobernaciones militares para mejorar el control.</p>
+        <ul>
+          <li><strong>División de 1782:</strong> Ocho <em>Gobernaciones-Intendencias</em> y cuatro <em>Gobernaciones Militares</em>.</li>
+          <li><strong>Funciones:</strong> Poder político, judicial, militar y financiero; dependían directamente del virrey.</li>
+          <li><strong>Intendencias principales:</strong> Buenos Aires, Córdoba, Salta, Paraguay, La Paz, Potosí, Charcas (La Plata o Chuquisaca) y Cochabamba (Santa Cruz).</li>
+          <li><strong>Gobernaciones militares:</strong> Banda Oriental (Montevideo), Misiones, Mojos y Chiquitos.</li>
+          <li><strong>Finalidad:</strong> Contener a los portugueses, someter a los indios, reprimir abusos de corregidores y prevenir levantamientos.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">📌 Intendencia del Paraguay</p>
+          <p>Paraguay fue erigido en <strong>Intendencia</strong>, con un intendente que concentraba poder militar, político y fiscal, reforzando el control borbónico.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTILLA 6 -->
+    <section class="cartilla" id="slide-5">
+      <div class="card">
+        <span class="card-tag green">Portugal</span>
+        <h2>Usurpaciones portuguesas y Tratado de Permuta (1750)</h2>
+        <p>La expansión portuguesa en el Río de la Plata obligó a España a negociar tratados que afectaron directamente a los territorios guaraníes.</p>
+        <ul>
+          <li><strong>Colonia del Sacramento:</strong> En <strong>1680</strong>, el gobernador de Río de Janeiro, <strong>Manuel Lobo</strong>, ocupó la isla de San Gabriel y fundó la Colonia del Sacramento.</li>
+          <li><strong>Tratado de 1681:</strong> España y Portugal acordaron conferencias para definir límites, sin éxito.</li>
+          <li><strong>Tratado de Permuta (1750):</strong> Firmado el <strong>13 de enero de 1750</strong>. España legalizó las usurpaciones portuguesas, entregando <strong>7 reducciones jesuíticas</strong> a Portugal a cambio de la Colonia del Sacramento y 28 mil pesos.</li>
+          <li><strong>Guerra Guaranítica:</strong> Los guaraníes se resistieron a abandonar sus tierras, ganados y plantaciones, desatando la guerra contra Portugal.</li>
+        </ul>
+        <div class="highlight-box">
+          <p class="label">⚔️ Guerra Guaranítica</p>
+          <p>Fue un conflicto donde los guaraníes, aliados a los jesuitas, se enfrentaron tanto a tropas españolas como portuguesas que querían ejecutar el Tratado de Permuta.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTILLA 7 -->
+    <section class="cartilla" id="slide-6">
+      <div class="card">
+        <span class="card-tag green">Tratado de 1777</span>
+        <h2>Tratado de San Ildefonso (1777)</h2>
+        <p>El Tratado de San Ildefonso fue un nuevo acuerdo entre España y Portugal que modificó la situación territorial en el Río de la Plata.</p>
+        <ul>
+          <li><strong>Firma:</strong> En <strong>1777</strong> entre España y Portugal.</li>
+          <li><strong>Recuperaciones:</strong> España recuperó la <strong>Colonia del Sacramento</strong> y las <strong>7 reducciones jesuíticas</strong>.</li>
+          <li><strong>Pérdida para Paraguay:</strong> El tratado significó la pérdida de un vasto y rico territorio: <strong>Matto Grosso</strong>, que quedó definitivamente en manos portuguesas.</li>
+        </ul>
+        <div class="dato-box">
+          <p class="label">📍 Consecuencia geopolítica</p>
+          <p>El Paraguay quedó más encerrado, perdiendo posibilidades de expansión hacia el norte y el este, mientras Brasil se consolidaba sobre antiguas áreas jesuíticas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTILLA 8 -->
+    <section class="cartilla" id="slide-7">
+      <div class="card">
+        <span class="card-tag amber">Gobiernos</span>
+        <h2>Gobiernos de la segunda mitad del siglo XVIII</h2>
+        <p>En este periodo gobernaron en Paraguay varias figuras importantes que impulsaron fundaciones, reformas y censos.</p>
+        <div class="grid-2">
+          <div class="mini-card">
+            <h4>Agustín Fernando de Pinedo (1772–1778)</h4>
+            <p>Fundó San Lorenzo del Campo Grande, Paraguarí, Quyquyhó, Quiindy, Félix Pérez Cardozo, Remolinos y Villa Real de la Concepción. En 1777 envió a la Corona el documento “El Memorial”.</p>
+          </div>
+          <div class="mini-card">
+            <h4>Pedro Melo de Portugal</h4>
+            <p>Gobernó desde 1778. Inauguró el Real Colegio Seminario de San Carlos y erigió la provincia como Intendencia. Fundó pueblos como San Pedro de Ycuamandyyú, Itacurubí del Rosario, Caapucú, Pilar y otros.</p>
+          </div>
+        </div>
+        <div class="highlight-box">
+          <p class="label">💡 “El Memorial”</p>
+          <p>En “El Memorial” (1777), Pinedo describió los males que aquejaban a la provincia, ofreciendo un diagnóstico clave de la situación paraguaya antes del Virreinato del Río de la Plata.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTILLA 9 -->
+    <section class="cartilla" id="slide-8">
+      <div class="card">
+        <span class="card-tag amber">Gobiernos</span>
+        <h2>Lázaro de Rivera y Bernardo de Velasco</h2>
+        <p>En el cambio de siglo, dos gobernadores marcaron el cierre de la época colonial y el umbral de la independencia.</p>
+        <ul>
+          <li><strong>Lázaro de Rivera (1796):</strong></li>
+          <ul>
+            <li>Realizó un <strong>censo poblacional</strong>.</li>
+            <li>Fundó <strong>San Juan Nepomuceno</strong>.</li>
+            <li>Incrementó la producción de tabaco.</li>
+            <li>Estableció varias escuelas primarias; obligó a los indios a enviar a sus hijos varones desde los seis años.</li>
+            <li>Redactó una <strong>Cartilla Real</strong> para la enseñanza de los jóvenes.</li>
+          </ul>
+          <li><strong>Bernardo de Velasco y Huidobro (1806):</strong></li>
+          <ul>
+            <li>Último gobernador colonial del Paraguay.</li>
+            <li>Durante su gobierno fue obispo Fray Pedro García de Panes, último obispo del periodo hispánico y primero de la época independiente.</li>
+            <li>Velasco entregó el poder a la Revolución triunfante el <strong>15 de mayo de 1811</strong>.</li>
+          </ul>
+        </ul>
+        <div class="dato-box">
+          <p class="label">📅 15 de mayo de 1811</p>
+          <p>Ese día, Bernardo de Velasco entregó el poder a los revolucionarios, marcando el inicio de la independencia paraguaya.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTILLA 10 -->
+    <section class="cartilla" id="slide-9">
+      <div class="card">
+        <span class="card-tag red">Historiografía</span>
+        <h2>Labor historiográfica y Félix de Azara</h2>
+        <p>El siglo XVIII también vio el surgimiento de importantes cronistas y estudiosos del Paraguay y el Río de la Plata.</p>
+        <ul>
+          <li><strong>Ulrico Schmidl:</strong> Primer historiador del Río de la Plata. Participó en la expedición de Pedro de Mendoza y escribió <em>Viaje al Río de la Plata (1534–1554)</em>.</li>
+          <li><strong>Ruiz Díaz de Guzmán:</strong> Primer historiador mestizo de la Cuenca del Plata. Autor de <em>La Argentina</em> (1612), crónica sobre descubrimiento, población y conquista.</li>
+          <li><strong>Juan Francisco Aguirre:</strong> Oficial de marina y jefe de la cuarta Comisión Demarcadora de límites. Autor de un importante <em>Diario</em>.</li>
+          <li><strong>Félix de Azara:</strong> Oficial de marina, naturalista y antropólogo. Llegó en 1780 para demarcar límites según el Tratado de San Ildefonso. Autor de obras como <em>Apuntamientos para la historia natural de los pájaros del Paraguay y del Río de la Plata</em>, <em>Viajes por América Meridional</em> y <em>Descripción e Historia del Paraguay y el Río de la Plata</em>.</li>
+        </ul>
+        <div class="highlight-box">
+          <p class="label">📚 Importancia</p>
+          <p>Sin las obras de Schmidl, Ruiz Díaz de Guzmán, Aguirre y Azara sería mucho más difícil reconstruir la historia temprana del Paraguay.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section class="cartilla" id="slide-10">
+      <div class="quiz-wrap">
+        <div class="quiz-header">
+          <h2>🎯 Quiz Final</h2>
+          <p>Unidad VII · 8 preguntas · Seleccioná la respuesta correcta</p>
+        </div>
+
+        <!-- Q1 -->
+        <div class="q-card" id="q0">
+          <p class="q-num">Pregunta 1</p>
+          <p class="q-text">¿Cuál fue uno de los principales objetivos de las Reformas Borbónicas en América?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(0,0,1)"><span class="letter">A</span> Aumentar la autonomía de los cabildos</div>
+            <div class="opt" onclick="answer(0,1,1)"><span class="letter">B</span> Centralizar el poder y aumentar la recaudación fiscal</div>
+            <div class="opt" onclick="answer(0,2,1)"><span class="letter">C</span> Devolver tierras a los pueblos indígenas</div>
+            <div class="opt" onclick="answer(0,3,1)"><span class="letter">D</span> Fortalecer el poder de los corregidores</div>
+          </div>
+          <div class="feedback" id="fb0"></div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="q-card" id="q1">
+          <p class="q-num">Pregunta 2</p>
+          <p class="q-text">¿En qué año se creó el Virreinato del Río de la Plata y quién fue su primer virrey?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(1,0,0)"><span class="letter">A</span> 1776 · Pedro de Cevallos</div>
+            <div class="opt" onclick="answer(1,1,0)"><span class="letter">B</span> 1783 · Carlos III</div>
+            <div class="opt" onclick="answer(1,2,0)"><span class="letter">C</span> 1750 · Manuel Lobo</div>
+            <div class="opt" onclick="answer(1,3,0)"><span class="letter">D</span> 1777 · Agustín de Pinedo</div>
+          </div>
+          <div class="feedback" id="fb1"></div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="q-card" id="q2">
+          <p class="q-num">Pregunta 3</p>
+          <p class="q-text">¿Qué característica principal tuvieron las Intendencias en el Virreinato del Río de la Plata?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(2,0,2)"><span class="letter">A</span> Solo tenían funciones religiosas</div>
+            <div class="opt" onclick="answer(2,1,2)"><span class="letter">B</span> Eran territorios independientes del virrey</div>
+            <div class="opt" onclick="answer(2,2,2)"><span class="letter">C</span> Tenían poder político, judicial, militar y financiero</div>
+            <div class="opt" onclick="answer(2,3,2)"><span class="letter">D</span> Estaban a cargo exclusivamente de órdenes religiosas</div>
+          </div>
+          <div class="feedback" id="fb2"></div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="q-card" id="q3">
+          <p class="q-num">Pregunta 4</p>
+          <p class="q-text">¿Qué establecía el Tratado de Permuta de 1750 entre España y Portugal?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(3,0,3)"><span class="letter">A</span> La devolución de la Colonia del Sacramento a España sin compensaciones</div>
+            <div class="opt" onclick="answer(3,1,3)"><span class="letter">B</span> La creación del Virreinato del Río de la Plata</div>
+            <div class="opt" onclick="answer(3,2,3)"><span class="letter">C</span> La independencia del Paraguay</div>
+            <div class="opt" onclick="answer(3,3,3)"><span class="letter">D</span> La legalización de las usurpaciones portuguesas a cambio de la Colonia del Sacramento y 28 mil pesos</div>
+          </div>
+          <div class="feedback" id="fb3"></div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="q-card" id="q4">
+          <p class="q-num">Pregunta 5</p>
+          <p class="q-text">¿Qué recuperó España con el Tratado de San Ildefonso de 1777?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(4,0,0)"><span class="letter">A</span> Solo el territorio de Matto Grosso</div>
+            <div class="opt" onclick="answer(4,1,0)"><span class="letter">B</span> La Colonia del Sacramento y las 7 reducciones jesuíticas</div>
+            <div class="opt" onclick="answer(4,2,0)"><span class="letter">C</span> El control de Río de Janeiro</div>
+            <div class="opt" onclick="answer(4,3,0)"><span class="letter">D</span> La Isla de Santa Catalina</div>
+          </div>
+          <div class="feedback" id="fb4"></div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="q-card" id="q5">
+          <p class="q-num">Pregunta 6</p>
+          <p class="q-text">¿Qué fue “El Memorial” enviado por Agustín Fernando de Pinedo en 1777?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(5,0,1)"><span class="letter">A</span> Un tratado de paz con Portugal</div>
+            <div class="opt" onclick="answer(5,1,1)"><span class="letter">B</span> Un documento que describía los males que aquejaban a la provincia</div>
+            <div class="opt" onclick="answer(5,2,1)"><span class="letter">C</span> El acta de independencia del Paraguay</div>
+            <div class="opt" onclick="answer(5,3,1)"><span class="letter">D</span> Un informe sobre la Guerra Guaranítica</div>
+          </div>
+          <div class="feedback" id="fb5"></div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="q-card" id="q6">
+          <p class="q-num">Pregunta 7</p>
+          <p class="q-text">¿Qué medida educativa importante tomó Lázaro de Rivera?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(6,0,2)"><span class="letter">A</span> Expulsó a los jesuitas del Paraguay</div>
+            <div class="opt" onclick="answer(6,1,2)"><span class="letter">B</span> Cerró las escuelas primarias existentes</div>
+            <div class="opt" onclick="answer(6,2,2)"><span class="letter">C</span> Estableció escuelas primarias y obligó a los indios a enviar a sus hijos varones desde los seis años</div>
+            <div class="opt" onclick="answer(6,3,2)"><span class="letter">D</span> Prohibió la enseñanza de la lectura y escritura</div>
+          </div>
+          <div class="feedback" id="fb6"></div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="q-card" id="q7">
+          <p class="q-num">Pregunta 8</p>
+          <p class="q-text">¿Quién fue Félix de Azara y qué misión cumplió en el Río de la Plata?</p>
+          <div class="options">
+            <div class="opt" onclick="answer(7,0,3)"><span class="letter">A</span> Un misionero jesuita enviado a fundar reducciones</div>
+            <div class="opt" onclick="answer(7,1,3)"><span class="letter">B</span> El primer virrey del Río de la Plata</div>
+            <div class="opt" onclick="answer(7,2,3)"><span class="letter">C</span> El autor del Memorial sobre los males de la provincia</div>
+            <div class="opt" onclick="answer(7,3,3)"><span class="letter">D</span> Un oficial de marina que llegó en 1780 para demarcar los límites entre posesiones españolas y portuguesas</div>
+          </div>
+          <div class="feedback" id="fb7"></div>
+        </div>
+
+        <div class="quiz-result" id="quizResult">
+          <div class="result-emoji" id="resultEmoji"></div>
+          <div class="result-score" id="resultScore"></div>
+          <p class="result-msg" id="resultMsg"></p>
+          <button class="nav-btn primary" onclick="retryQuiz()">🔄 Intentar de nuevo</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="nav">
+    <button class="nav-btn home"    onclick="goHome()">🏠 Inicio</button>
+    <button class="nav-btn"         onclick="prev()" id="btnPrev" disabled>← Anterior</button>
+    <button class="nav-btn primary" onclick="next()" id="btnNext">Siguiente →</button>
+  </nav>
+
+  <footer>
+    <p>Unidad VII · Historia del Paraguay</p>
+    <p>Facilitada por la <strong>Dra. Beatriz Espinola Zaracho</strong></p>
+  </footer>
+
+  <script>
+    const TOTAL = 11;
+    let current = 0;
+
+    const correctAnswers = [1, 0, 2, 3, 1, 1, 2, 3];
+
+    const feedbacks = [
+      [
+        "Incorrecto. Las reformas buscaban justamente reducir la autonomía local.",
+        "✔ Correcto. Centralizar el poder y aumentar la recaudación fiscal fue uno de los objetivos centrales.",
+        "Incorrecto. La devolución de tierras indígenas no fue un objetivo borbónico.",
+        "Incorrecto. Se buscó controlar mejor a los corregidores, no fortalecer sus abusos."
+      ],
+      [
+        "✔ Correcto. El Virreinato del Río de la Plata se creó en 1776 y su primer virrey fue Pedro de Cevallos.",
+        "Incorrecto. 1783 es la fecha de la Real Cédula que crea la Audiencia de Buenos Aires.",
+        "Incorrecto. 1750 es el año del Tratado de Permuta.",
+        "Incorrecto. Agustín de Pinedo fue gobernador del Paraguay, no virrey."
+      ],
+      [
+        "Incorrecto. También tenían competencias civiles y militares.",
+        "Incorrecto. Dependían directamente del virrey.",
+        "✔ Correcto. Las intendencias concentraban poder político, judicial, militar y financiero.",
+        "Incorrecto. No estaban a cargo de órdenes religiosas, sino de funcionarios reales."
+      ],
+      [
+        "Incorrecto. Hubo compensaciones importantes para Portugal.",
+        "Incorrecto. El Virreinato se creó en 1776, no en 1750.",
+        "Incorrecto. El tratado no tenía relación con la independencia paraguaya.",
+        "✔ Correcto. España reconoció las usurpaciones portuguesas, entregando 7 reducciones a cambio de la Colonia del Sacramento y 28 mil pesos."
+      ],
+      [
+        "Incorrecto. Matto Grosso fue precisamente lo que se perdió para Portugal.",
+        "✔ Correcto. España recuperó la Colonia del Sacramento y las 7 reducciones jesuíticas.",
+        "Incorrecto. Río de Janeiro siguió siendo territorio portugués.",
+        "Incorrecto. La Isla de Santa Catalina no fue el centro del acuerdo para España."
+      ],
+      [
+        "Incorrecto. Los tratados con Portugal fueron otros documentos.",
+        "✔ Correcto. 'El Memorial' describe los males que aquejaban a la provincia y fue enviado a la Corona en 1777.",
+        "Incorrecto. La independencia se declaró en 1811, mucho después.",
+        "Incorrecto. La Guerra Guaranítica fue consecuencia del Tratado de Permuta de 1750."
+      ],
+      [
+        "Incorrecto. La expulsión de los jesuitas fue decretada por Carlos III en 1767.",
+        "Incorrecto. Rivera abrió, no cerró, escuelas primarias.",
+        "✔ Correcto. Rivera estableció escuelas primarias y obligó a los indios a enviar a sus hijos varones desde los seis años.",
+        "Incorrecto. Su política fue exactamente la contraria: promover la alfabetización básica."
+      ],
+      [
+        "Incorrecto. Azara no fue jesuita ni misionero.",
+        "Incorrecto. El primer virrey fue Pedro de Cevallos.",
+        "Incorrecto. El Memorial fue obra de Pinedo.",
+        "✔ Correcto. Félix de Azara llegó como oficial de marina para demarcar límites y luego escribió importantes obras sobre el Paraguay y el Río de la Plata."
+      ]
+    ];
+
+    let quizAnswered = new Array(8).fill(false);
+    let quizScore = 0;
+    let quizDone = false;
+
+    function updateProgress() {
+      const pct = ((current + 1) / TOTAL) * 100;
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('progressCount').textContent = (current + 1) + ' / ' + TOTAL;
+      document.getElementById('btnPrev').disabled = current === 0;
+      if (current === TOTAL - 1) {
+        document.getElementById('btnNext').textContent = '✓ Fin';
+        document.getElementById('btnNext').disabled = true;
+      } else {
+        document.getElementById('btnNext').textContent = 'Siguiente →';
+        document.getElementById('btnNext').disabled = false;
+      }
+    }
+
+    function showSlide(idx) {
+      document.querySelectorAll('.cartilla').forEach(s => s.classList.remove('active'));
+      document.getElementById('slide-' + idx).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      updateProgress();
+    }
+
+    function next() { if (current < TOTAL - 1) { current++; showSlide(current); } }
+    function prev() { if (current > 0) { current--; showSlide(current); } }
+    function goHome() { window.location.href = '../index.html'; }
+
+    function answer(qIdx, optIdx, correctIdx) {
+      if (quizAnswered[qIdx]) return;
+      quizAnswered[qIdx] = true;
+
+      const card = document.getElementById('q' + qIdx);
+      const opts = card.querySelectorAll('.opt');
+      opts.forEach(o => o.classList.add('locked'));
+
+      opts[optIdx].classList.add(optIdx === correctIdx ? 'correct' : 'wrong');
+      if (optIdx !== correctIdx) opts[correctIdx].classList.add('correct');
+
+      const fb = document.getElementById('fb' + qIdx);
+      fb.classList.add('show');
+      if (optIdx === correctIdx) {
+        quizScore++;
+        fb.classList.add('ok');
+        fb.textContent = feedbacks[qIdx][correctIdx];
+      } else {
+        fb.classList.add('ko');
+        fb.textContent = feedbacks[qIdx][optIdx];
+      }
+
+      if (quizAnswered.every(a => a) && !quizDone) {
+        quizDone = true;
+        setTimeout(showResult, 600);
+      }
+    }
+
+    function showResult() {
+      const pct = Math.round((quizScore / 8) * 100);
+      let emoji, msg;
+      if (pct >= 90)      { emoji = '🏆'; msg = '¡Excelente! Dominás la Unidad VII.'; }
+      else if (pct >= 70) { emoji = '🎉'; msg = '¡Muy bien! Repasá los detalles menores.'; }
+      else if (pct >= 50) { emoji = '📖'; msg = 'Bien, pero vale la pena repasar las cartillas.'; }
+      else                { emoji = '💪'; msg = 'Revisá las cartillas y volvé a intentarlo.'; }
+      document.getElementById('resultEmoji').textContent = emoji;
+      document.getElementById('resultScore').textContent = quizScore + ' / 8 (' + pct + '%)';
+      document.getElementById('resultMsg').textContent = msg;
+      document.getElementById('quizResult').classList.add('show');
+      document.getElementById('quizResult').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function retryQuiz() {
+      quizAnswered = new Array(8).fill(false);
+      quizScore = 0;
+      quizDone = false;
+      document.getElementById('quizResult').classList.remove('show');
+      for (let i = 0; i < 8; i++) {
+        document.getElementById('q' + i).querySelectorAll('.opt').forEach(o => o.classList.remove('correct','wrong','locked'));
+        const fb = document.getElementById('fb' + i);
+        fb.classList.remove('show','ok','ko');
+        fb.textContent = '';
+      }
+      document.getElementById('slide-10').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    updateProgress();
+  </script>
+</body>
+</html>

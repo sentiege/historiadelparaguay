@@ -1,466 +1,2613 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Herramienta de Repaso — Historia del Paraguay</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Historia del Paraguay</title>
   <style>
     :root {
-      --primary: #7c3aed;
-      --primary-light: #ede9fe;
-      --secondary: #0f766e;
-      --text: #1f2937;
-      --muted: #6b7280;
-      --bg: #f5f0e8;
-      --card-bg: #ffffff;
-      --border: #e2d9cc;
-      --radius-lg: 18px;
-      --radius-md: 12px;
-      --shadow: 0 8px 32px rgba(0,0,0,0.09);
-      --shadow-sm: 0 2px 10px rgba(0,0,0,0.06);
+      --naranja: #e65100;
+      --naranja-medio: #f57c00;
+      --naranja-claro: #fff3e0;
+      --acento: #1565c0;
+      --verde: #2e7d32;
+      --fondo: #fdf6f0;
+      --tarjeta: #ffffff;
+      --texto: #1a1a2e;
+      --gris: #6b7280;
+      --rojo: #c62828;
     }
 
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: "Segoe UI", system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--fondo);
+      color: var(--texto);
       min-height: 100vh;
     }
 
-    .hero {
-      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #0f766e 100%);
-      color: white;
-      padding: 3rem 1.5rem 2.5rem;
-      text-align: center;
-    }
-
-    .hero-inner {
-      max-width: 700px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .hero-tag {
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 999px;
-      padding: 0.3rem 0.9rem;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: rgba(255,255,255,0.9);
-    }
-
-    .hero h1 {
-      font-size: clamp(1.8rem, 5vw, 3rem);
-      font-weight: 900;
-      line-height: 1.1;
-    }
-
-    .hero-sub { font-size: 1rem; color: rgba(255,255,255,0.8); }
-    .hero-sub strong { color: #fde68a; font-weight: 700; }
-    .hero-desc { font-size: 0.92rem; color: rgba(255,255,255,0.65); margin-top: 0.2rem; }
-
-    .main {
+    .container {
       max-width: 860px;
       margin: 0 auto;
-      padding: 2rem 1.2rem 3rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
+      padding: 1.5rem 1rem;
     }
 
-    .section-title {
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: var(--muted);
-      margin: 0.2rem 0 0.4rem;
+    /* ── CABECERA ── */
+    header {
+      background: linear-gradient(135deg, #e65100 0%, #bf360c 100%);
+      color: white;
+      padding: 1.5rem 1rem 1rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      border-radius: 0 0 16px 16px;
     }
+    header h1 { margin: 0 0 0.25rem; font-size: 1.4rem; font-weight: 700; }
+    header p { margin: 0; font-size: 0.85rem; opacity: 0.85; }
 
-    .unit-card {
-      background: var(--card-bg);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-sm);
-      padding: 1.4rem 1.6rem;
+    /* ── PROGRESO ── */
+    .progress-wrapper {
+      background: var(--tarjeta);
+      border-radius: 12px;
+      padding: 0.9rem 1.2rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
       display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-      transition: transform 0.2s, box-shadow 0.2s;
-      position: relative;
+      align-items: center;
+      gap: 1rem;
+    }
+    .progress-info { flex: 1; }
+    .progress-label { font-size: 0.78rem; color: var(--gris); margin-bottom: 0.3rem; }
+    .progress-bar-bg { width: 100%; height: 10px; background: #f0dac8; border-radius: 999px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; background: var(--naranja); border-radius: 999px; transition: width 0.5s ease; }
+    .progress-pct { font-size: 1rem; font-weight: 700; color: var(--naranja); white-space: nowrap; }
+
+    /* ── ÍNDICE LATERAL ── */
+    .hamburger-btn {
+      position: fixed; top: 1rem; right: 1rem; z-index: 200;
+      background: var(--naranja); color: white; border: none;
+      border-radius: 50%; width: 44px; height: 44px;
+      font-size: 1.2rem; cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+    .sidebar-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 300;
+    }
+    .sidebar-overlay.open { display: block; }
+    .sidebar {
+      position: fixed; top: 0; right: -320px; width: 300px; height: 100%;
+      background: white; z-index: 400; overflow-y: auto;
+      transition: right 0.3s ease; box-shadow: -4px 0 16px rgba(0,0,0,0.15);
+    }
+    .sidebar.open { right: 0; }
+    .sidebar-header {
+      background: var(--naranja); color: white;
+      padding: 1rem 1.2rem; display: flex; justify-content: space-between; align-items: center;
+    }
+    .sidebar-header h3 { font-size: 0.95rem; }
+    .sidebar-close { background: none; border: none; color: white; font-size: 1.3rem; cursor: pointer; }
+    .sidebar-list { list-style: none; padding: 0.5rem 0; }
+    .sidebar-list li { border-bottom: 1px solid #f0e0d0; }
+    .sidebar-list a {
+      display: block; padding: 0.7rem 1.2rem; font-size: 0.85rem;
+      color: var(--texto); text-decoration: none;
+    }
+    .sidebar-list a:hover { background: var(--naranja-claro); color: var(--naranja); }
+    .sidebar-list a.visitada { color: var(--verde); }
+    .sidebar-list a.visitada::after { content: " ✓"; }
+
+    /* ── CARTILLAS ── */
+    .cartilla {
+      background: var(--tarjeta);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      display: none;
+    }
+    .cartilla.activa { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+    .cartilla-header { margin-bottom: 1rem; }
+    .num-cartilla {
+      display: inline-block; color: white; font-size: 0.7rem; font-weight: 700;
+      padding: 0.25rem 0.7rem; border-radius: 999px; margin-bottom: 0.5rem; letter-spacing: 0.05em;
+    }
+    .cartilla-header h2 { font-size: 1.2rem; font-weight: 700; color: var(--texto); line-height: 1.3; }
+
+    .concepto-clave {
+      background: var(--naranja-claro); border-left: 4px solid var(--naranja);
+      border-radius: 0 8px 8px 0; padding: 0.9rem 1rem; margin-bottom: 1.2rem;
+    }
+    .concepto-clave .etiqueta {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      color: var(--naranja); letter-spacing: 0.08em; margin-bottom: 0.4rem;
+    }
+    .concepto-clave p { font-size: 0.9rem; line-height: 1.5; color: var(--texto); }
+
+    .cartilla ul { padding-left: 1.2rem; margin-bottom: 1rem; }
+    .cartilla ul li { margin-bottom: 0.4rem; font-size: 0.9rem; line-height: 1.5; }
+    .cartilla p { font-size: 0.9rem; line-height: 1.6; margin-bottom: 0.8rem; }
+    .cartilla h3 { font-size: 1rem; font-weight: 700; color: var(--naranja); margin: 1rem 0 0.5rem; }
+    .cartilla h4 { font-size: 0.9rem; font-weight: 700; color: var(--naranja-medio); margin: 0.8rem 0 0.4rem; }
+
+    /* Tabla */
+    .tabla-wrap { overflow-x: auto; margin-bottom: 1rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    th { background: var(--naranja); color: white; padding: 0.6rem 0.8rem; text-align: left; font-weight: 600; }
+    td { padding: 0.55rem 0.8rem; border-bottom: 1px solid #f0dac8; }
+    tr:nth-child(even) td { background: #fef8f3; }
+
+    /* Cita */
+    .cita {
+      background: #fef0e6; border-left: 4px solid var(--naranja-medio);
+      border-radius: 0 8px 8px 0; padding: 0.8rem 1rem; margin: 1rem 0;
+      font-style: italic; color: #5d3a1a; font-size: 0.88rem;
+    }
+    .cita-autor { font-style: normal; font-weight: 700; font-size: 0.78rem; color: var(--naranja); margin-top: 0.4rem; }
+
+    /* Badge */
+    .badge {
+      display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.6rem;
+      border-radius: 999px; margin: 0.15rem;
+    }
+    .badge-naranja { background: var(--naranja-claro); color: var(--naranja); }
+    .badge-azul { background: #e3f2fd; color: #1565c0; }
+    .badge-verde { background: #e8f5e9; color: #2e7d32; }
+
+    /* ── MINI-QUIZ ── */
+    .quiz-section { margin-top: 1.5rem; border-top: 2px solid var(--naranja-claro); padding-top: 1rem; }
+    .quiz-titulo { font-size: 0.85rem; font-weight: 700; color: var(--naranja); margin-bottom: 0.8rem; }
+    .quiz-pregunta { font-size: 0.88rem; font-weight: 600; margin-bottom: 0.6rem; line-height: 1.4; }
+    .quiz-opciones { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 0.6rem; }
+    .quiz-opcion {
+      display: flex; align-items: center; gap: 0.5rem; padding: 0.55rem 0.8rem;
+      background: #fef8f3; border: 1.5px solid #f0dac8; border-radius: 8px;
+      cursor: pointer; font-size: 0.85rem; transition: all 0.2s;
+    }
+    .quiz-opcion:hover { background: var(--naranja-claro); border-color: var(--naranja-medio); }
+    .quiz-opcion.correcta { background: #e8f5e9; border-color: var(--verde); }
+    .quiz-opcion.incorrecta { background: #ffebee; border-color: var(--rojo); }
+    .quiz-feedback { font-size: 0.82rem; padding: 0.5rem 0.8rem; border-radius: 6px; display: none; }
+    .quiz-feedback.ok { background: #e8f5e9; color: var(--verde); display: block; }
+    .quiz-feedback.mal { background: #ffebee; color: var(--rojo); display: block; }
+
+    /* ── NAVEGACIÓN ── */
+    .nav-cartillas {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 1.5rem; gap: 0.5rem;
+    }
+    .btn-nav {
+      padding: 0.6rem 1.2rem; border: none; border-radius: 8px; cursor: pointer;
+      font-weight: 600; font-size: 0.88rem; transition: all 0.2s;
+    }
+    .btn-prev { background: #f0dac8; color: var(--naranja); }
+    .btn-prev:hover { background: #e0c4a8; }
+    .btn-next { background: var(--naranja); color: white; }
+    .btn-next:hover { background: #bf360c; }
+    .btn-nav:disabled { opacity: 0.35; cursor: not-allowed; }
+    .cartilla-counter { font-size: 0.8rem; color: var(--gris); }
+
+    /* ── PANTALLA INICIO ── */
+    #pantalla-inicio {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; min-height: 60vh; text-align: center;
+    }
+    .inicio-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+    .inicio-titulo { font-size: 1.6rem; font-weight: 800; color: var(--naranja); margin-bottom: 0.5rem; }
+    .inicio-sub { font-size: 0.95rem; color: var(--gris); margin-bottom: 2rem; }
+    .btn-iniciar {
+      background: var(--naranja); color: white; border: none; border-radius: 10px;
+      padding: 0.9rem 2rem; font-size: 1rem; font-weight: 700; cursor: pointer;
+      box-shadow: 0 3px 10px rgba(230,81,0,0.35); transition: all 0.2s;
+    }
+    .btn-iniciar:hover { background: #bf360c; transform: translateY(-1px); }
+
+    /* ── MODO EXAMEN ── */
+    #pantalla-examen { display: none; }
+    .examen-header {
+      background: linear-gradient(135deg, #e65100 0%, #bf360c 100%);
+      color: white; padding: 1rem 1.2rem; border-radius: 12px; margin-bottom: 1rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .examen-titulo { font-size: 1rem; font-weight: 700; }
+    .examen-timer { font-size: 1.1rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .examen-progress { font-size: 0.8rem; opacity: 0.85; margin-top: 0.2rem; }
+    .examen-pregunta-card {
+      background: white; border-radius: 12px; padding: 1.3rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07); margin-bottom: 1rem;
+    }
+    .examen-num { font-size: 0.72rem; color: var(--naranja); font-weight: 700; margin-bottom: 0.5rem; text-transform: uppercase; }
+    .examen-texto { font-size: 0.95rem; font-weight: 600; line-height: 1.45; margin-bottom: 1rem; }
+    .examen-opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+    .examen-opcion {
+      padding: 0.65rem 1rem; background: #fef8f3; border: 1.5px solid #f0dac8;
+      border-radius: 8px; cursor: pointer; font-size: 0.88rem; transition: all 0.2s; text-align: left;
+    }
+    .examen-opcion:hover { background: var(--naranja-claro); border-color: var(--naranja-medio); }
+    .examen-opcion.sel { background: var(--naranja-claro); border-color: var(--naranja); font-weight: 600; }
+    .examen-nav { display: flex; justify-content: space-between; gap: 0.5rem; margin-top: 1rem; }
+    .btn-examen-nav {
+      padding: 0.6rem 1.2rem; border: none; border-radius: 8px;
+      cursor: pointer; font-weight: 600; font-size: 0.88rem;
+    }
+    .btn-examen-prev { background: #f0dac8; color: var(--naranja); }
+    .btn-finalizar { background: var(--naranja); color: white; }
+    .btn-finalizar:hover { background: #bf360c; }
+
+    /* ── RESULTADO ── */
+    #pantalla-resultado { display: none; text-align: center; padding: 2rem 1rem; }
+    .resultado-icon { font-size: 3rem; margin-bottom: 0.5rem; }
+    .resultado-score { font-size: 2.5rem; font-weight: 800; color: var(--naranja); }
+    .resultado-detalle { font-size: 0.9rem; color: var(--gris); margin: 0.5rem 0 1.5rem; }
+    .resultado-review { text-align: left; }
+    .review-item {
+      background: white; border-radius: 10px; padding: 1rem;
+      margin-bottom: 0.8rem; box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+    .review-item.ok { border-left: 4px solid var(--verde); }
+    .review-item.mal { border-left: 4px solid var(--rojo); }
+    .review-pregunta { font-size: 0.88rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .review-resp { font-size: 0.82rem; color: var(--gris); }
+    .review-correcta { color: var(--verde); font-weight: 600; }
+    .review-incorrecta { color: var(--rojo); }
+    .btn-reiniciar {
+      margin: 1rem 0.5rem; padding: 0.7rem 1.4rem; border: none; border-radius: 8px;
+      cursor: pointer; font-weight: 600; font-size: 0.9rem;
+    }
+    .btn-volver { background: #f0dac8; color: var(--naranja); }
+    .btn-repetir { background: var(--naranja); color: white; }
+
+    /* ── FOOTER NAV ── */
+    .footer-nav {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: white; border-top: 1px solid #f0dac8;
+      display: flex; z-index: 100;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+    }
+    .footer-tab {
+      flex: 1; padding: 0.7rem; border: none; background: none;
+      font-size: 0.78rem; color: var(--gris); cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; gap: 0.2rem;
+    }
+    .footer-tab.activo { color: var(--naranja); font-weight: 700; }
+    .footer-tab-icon { font-size: 1.2rem; }
+    .footer-spacer { height: 80px; }
+
+    /* ── PORTADAS DE UNIDAD ── */
+    .portada-unidad {
+      background: linear-gradient(135deg, #e65100 0%, #bf360c 100%);
+      color: white; border-radius: 16px; padding: 2rem 1.5rem; margin-bottom: 1.2rem;
+      display: none;
+    }
+    .portada-unidad.activa { display: block; animation: fadeIn 0.3s ease; }
+    .portada-num { font-size: 0.8rem; text-transform: uppercase; opacity: 0.8; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+    .portada-titulo { font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; }
+    .portada-subtemas { font-size: 0.88rem; opacity: 0.9; line-height: 1.8; }
+    .portada-subtemas span { display: inline-block; background: rgba(255,255,255,0.2); border-radius: 999px; padding: 0.2rem 0.7rem; margin: 0.2rem; }
+
+    /* ── PANTALLA PROF ── */
+    #pantalla-prof { display: none; }
+    .prof-unidad {
+      background: var(--tarjeta); border-radius: 16px;
+      margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.07); overflow: hidden;
+    }
+    .prof-unidad-header {
+      background: linear-gradient(135deg, #e65100 0%, #bf360c 100%);
+      color: white; padding: 1rem 1.2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      cursor: pointer; user-select: none;
+    }
+    .prof-unidad-header h3 { font-size: 1rem; font-weight: 700; margin: 0; }
+    .prof-unidad-header .u-num { font-size: 0.75rem; opacity: 0.85; display: block; margin-bottom: 0.2rem; }
+    .prof-chevron { font-size: 1rem; transition: transform 0.3s; }
+    .prof-unidad.open .prof-chevron { transform: rotate(180deg); }
+    .prof-unidad-body { display: none; padding: 0; }
+    .prof-unidad.open .prof-unidad-body { display: block; }
+    .prof-tema {
+      border-bottom: 1px solid #f0dac8;
       overflow: hidden;
     }
-
-    .unit-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    .prof-tema:last-child { border-bottom: none; }
+    .prof-tema-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.8rem 1.2rem; cursor: pointer;
+      background: none; border: none; width: 100%; text-align: left;
     }
-
-    .unit-card.available { cursor: pointer; border-color: #c4b5fd; }
-    .unit-card.available:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
-
-    .unit-header { display: flex; align-items: flex-start; gap: 1rem; }
-
-    .unit-num {
-      min-width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary), #5b21b6);
-      color: white;
-      font-size: 1rem;
-      font-weight: 900;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      box-shadow: 0 4px 12px rgba(124,58,237,0.3);
+    .prof-tema-header:hover { background: var(--naranja-claro); }
+    .prof-tema-header span { font-size: 0.88rem; font-weight: 600; color: var(--texto); }
+    .prof-tema-chevron { font-size: 0.8rem; color: var(--gris); transition: transform 0.3s; flex-shrink: 0; margin-left: 0.5rem; }
+    .prof-tema.open .prof-tema-chevron { transform: rotate(180deg); }
+    .prof-tema-body { display: none; padding: 0.5rem 1.2rem 1rem; }
+    .prof-tema.open .prof-tema-body { display: block; }
+    .prof-tema-body p { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.7rem; color: var(--texto); }
+    .prof-tema-body ul { padding-left: 1.2rem; margin-bottom: 0.7rem; }
+    .prof-tema-body ul li { font-size: 0.88rem; line-height: 1.55; margin-bottom: 0.35rem; }
+    .prof-tema-body h4 { font-size: 0.88rem; font-weight: 700; color: var(--naranja); margin: 0.8rem 0 0.4rem; }
+    .prof-tema-body .tabla-wrap { overflow-x: auto; margin-bottom: 0.8rem; }
+    .prof-intro {
+      background: var(--naranja-claro); border-left: 4px solid var(--naranja);
+      border-radius: 0 8px 8px 0; padding: 0.8rem 1rem; margin-bottom: 1.2rem;
+      font-size: 0.88rem; line-height: 1.5; color: var(--texto);
     }
+    .prof-intro strong { color: var(--naranja); }
 
-    .unit-label {
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-      color: var(--primary);
-      margin-bottom: 0.1rem;
-    }
-
-    .unit-title {
-      font-size: clamp(0.97rem, 2vw, 1.15rem);
-      font-weight: 800;
-      color: #1e1b4b;
-      line-height: 1.3;
-    }
-
-    .unit-badge {
-      margin-left: auto;
-      flex-shrink: 0;
-      padding: 0.25rem 0.75rem;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .available-badge { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
-
-    .unit-topics {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-      padding-left: 0.2rem;
-    }
-
-    .unit-topics li {
-      font-size: 0.9rem;
-      color: var(--muted);
-      padding-left: 1.1rem;
-      position: relative;
-    }
-
-    .unit-topics li::before {
-      content: '·';
-      position: absolute;
-      left: 0;
-      color: var(--primary);
-      font-weight: 900;
-    }
-
-    .unit-footer {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-      padding-top: 0.3rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .chip { background: var(--primary-light); color: var(--primary); border-radius: 999px; padding: 0.2rem 0.7rem; font-size: 0.78rem; font-weight: 700; }
-    .chip.muted { background: #f3f4f6; color: var(--muted); }
-
-    .btn-go {
-      margin-left: auto;
-      background: linear-gradient(135deg, var(--primary), #5b21b6);
-      color: white;
-      border-radius: 999px;
-      padding: 0.45rem 1.1rem;
-      font-size: 0.88rem;
-      font-weight: 800;
-      box-shadow: 0 4px 12px rgba(124,58,237,0.25);
-    }
-
-    .simulacro-card .unit-num {
-      background: linear-gradient(135deg, #f97316, #ea580c);
-    }
-    .simulacro-card::before {
-      background: linear-gradient(90deg, #f97316, #ea580c);
-    }
-    .simulacro-card .chip {
-      background: #ffedd5;
-      color: #c2410c;
-    }
-    .simulacro-card .btn-go {
-      background: linear-gradient(135deg, #f97316, #ea580c);
-      box-shadow: 0 4px 12px rgba(234,88,12,0.35);
-    }
-
-    .footer {
-      text-align: center;
-      padding: 1.5rem 1rem 2rem;
-      font-size: 0.83rem;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-      line-height: 1.8;
-    }
-    .footer strong { color: var(--primary); }
-
-    @media (max-width: 520px) {
-      .unit-card  { padding: 1.1rem 1rem; }
-      .hero       { padding: 2rem 1rem 1.8rem; }
-      .unit-badge { display: none; }
-      .btn-go     { margin-left: 0; }
+    /* Responsive */
+    @media (max-width: 480px) {
+      .cartilla { padding: 1.1rem; }
+      .cartilla-header h2 { font-size: 1.05rem; }
     }
   </style>
 </head>
 <body>
 
-  <header class="hero">
-    <div class="hero-inner">
-      <span class="hero-tag">Herramienta de Repaso</span>
-      <h1>Historia del Paraguay</h1>
-      <p class="hero-sub">Facilitada por la <strong>Dra. Beatriz Espinola Zaracho</strong></p>
-      <p class="hero-desc">Seleccioná una unidad o un simulacro para comenzar el repaso interactivo.</p>
-    </div>
-  </header>
+<header>
+  <h1>📜 Historia del Paraguay</h1>
+  <p>Cartillas de estudio · Unidades 1 al 8</p>
+</header>
 
-  <main class="main">
+<button class="hamburger-btn" onclick="abrirSidebar()" title="Índice">☰</button>
 
-    <p class="section-title">Unidades de estudio</p>
+<div class="sidebar-overlay" id="overlay" onclick="cerrarSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h3>📋 Índice de Cartillas</h3>
+    <button class="sidebar-close" onclick="cerrarSidebar()">✕</button>
+  </div>
+  <ul class="sidebar-list" id="lista-sidebar"></ul>
+</aside>
 
-    <!-- UNIDAD I -->
-    <div class="unit-card available" onclick="window.location.href='unidad1/index.html'">
-      <div class="unit-header">
-        <div class="unit-num">I</div>
-        <div>
-          <p class="unit-label">Unidad I</p>
-          <h2 class="unit-title">Exploraciones y descubrimientos</h2>
+<div class="container">
+
+  <!-- PANTALLA INICIO -->
+  <div id="pantalla-inicio">
+    <div class="inicio-icon">🇵🇾</div>
+    <div class="inicio-titulo">Historia del Paraguay</div>
+    <div class="inicio-sub">7 unidades · desde el descubrimiento hasta las Reformas Borbónicas</div>
+    <button class="btn-iniciar" onclick="iniciarEstudio()">Comenzar a estudiar →</button>
+  </div>
+
+  <!-- PANTALLA CARTILLAS -->
+  <div id="pantalla-cartillas" style="display:none;">
+
+    <div class="progress-wrapper">
+      <div class="progress-info">
+        <div class="progress-label">Progreso de estudio</div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="barra-progreso" style="width:0%"></div>
         </div>
-        <span class="unit-badge available-badge">Disponible</span>
       </div>
-      <ul class="unit-topics">
-        <li>Los motivos de Europa en el siglo XV</li>
-        <li>Ciencia y tecnología naval</li>
-        <li>Las exploraciones portuguesas</li>
-        <li>Cristóbal Colón y sus cuatro viajes</li>
-        <li>Bulas Alejandrinas y Tratado de Tordesillas</li>
-      </ul>
-      <div class="unit-footer">
-        <span class="chip">10 cartillas</span>
-        <span class="chip">Quiz final</span>
-        <span class="btn-go">Comenzar →</span>
-      </div>
+      <div class="progress-pct" id="pct-progreso">0%</div>
     </div>
 
-    <!-- UNIDAD II -->
-    <div class="unit-card available" onclick="window.location.href='unidad2/index.html'">
-      <div class="unit-header">
-        <div class="unit-num">II</div>
-        <div>
-          <p class="unit-label">Unidad II</p>
-          <h2 class="unit-title">La población precolombina del Paraguay</h2>
+    <!-- ══════════════════════════════════════════════
+         UNIDAD 1 — Exploraciones y Descubrimientos
+         ══════════════════════════════════════════════ -->
+
+    <!-- PORTADA U1 -->
+    <div class="cartilla activa" id="c0" data-unidad="1">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#e65100;">Unidad 1</span>
+        <h2>Exploraciones y Descubrimientos</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Temas de esta unidad</div>
+        <p>El contexto europeo del siglo XV, los navegantes portugueses, Cristóbal Colón y sus cuatro viajes, las Bulas Alejandrinas y el Tratado de Tordesillas.</p>
+      </div>
+      <ul>
+        <li>Transición del feudalismo al capitalismo comercial</li>
+        <li>La escuela de navegación portuguesa y sus exploraciones</li>
+        <li>Los cuatro viajes de Cristóbal Colón (1492–1504)</li>
+        <li>Bulas Alejandrinas (1493) y Tratado de Tordesillas</li>
+      </ul>
+    </div>
+
+    <!-- C1: Europa siglo XV -->
+    <div class="cartilla" id="c1" data-unidad="1">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#e65100;">U1 · Cartilla 1</span>
+        <h2>Europa en el Siglo XV</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Idea central</div>
+        <p>El siglo XV marcó la transición del feudalismo al capitalismo comercial. Europa necesitaba oro, plata y rutas nuevas a Asia para sostener su crecimiento económico.</p>
+      </div>
+      <h3>Factores que impulsaron las exploraciones</h3>
+      <ul>
+        <li><strong>Búsqueda de rutas a Asia:</strong> las especias eran enormemente valiosas y el camino terrestre era costoso.</li>
+        <li><strong>Caída de Constantinopla (1453):</strong> los turcos otomanos cortaron las rutas comerciales tradicionales.</li>
+        <li><strong>Avances tecnológicos:</strong> perfeccionamiento de la brújula y la carabela; invención de la imprenta por Gutenberg (~1440), que difundió el conocimiento.</li>
+        <li><strong>Ambición de riquezas:</strong> necesidad de oro y plata para la economía monetaria emergente.</li>
+        <li><strong>Motivación religiosa:</strong> deseo de expandir el cristianismo.</li>
+      </ul>
+      <h3>Los Portugueses — Enrique el Navegante</h3>
+      <p>El Infante Enrique de Portugal fundó una escuela de navegación en el Algarve. Bajo su impulso, los portugueses exploraron la costa africana sistemáticamente.</p>
+      <ul>
+        <li><strong>Islas:</strong> Azores, Cabo Verde, Madeira.</li>
+        <li><strong>Bartolomé Díaz (1488):</strong> llegó al extremo sur de África. El rey lo llamó Cabo Tormentoso; luego se renombró <em>Cabo de Buena Esperanza</em>.</li>
+      </ul>
+      <h3>Tratado de Alcazovas-Toledo (1479–1480)</h3>
+      <div class="tabla-wrap">
+        <table>
+          <tr><th>Portugal obtiene</th><th>Castilla obtiene</th></tr>
+          <tr><td>África (Guinea, Azores, Madeira, Cabo Verde)</td><td>Islas Canarias</td></tr>
+        </table>
+      </div>
+      <div class="quiz-section">
+        <div class="quiz-titulo">✏️ Mini-Quiz</div>
+        <div class="quiz-pregunta">¿Cuál fue el factor que interrumpió las rutas comerciales europeas hacia Asia y aceleró la búsqueda de nuevas rutas?</div>
+        <div class="quiz-opciones">
+          <div class="quiz-opcion" onclick="responder(this,'mal')">La invención de la imprenta</div>
+          <div class="quiz-opcion" onclick="responder(this,'ok')">La caída de Constantinopla (1453)</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">El Tratado de Alcazovas</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">El descubrimiento del Cabo de Buena Esperanza</div>
         </div>
-        <span class="unit-badge available-badge">Disponible</span>
-      </div>
-      <ul class="unit-topics">
-        <li>Divisiones de la Historia Paraguaya</li>
-        <li>La Edad de Piedra: Paleolítico, Mesolítico y Neolítico</li>
-        <li>Etnias chaqueñas: Guaycurúes, Mataco y Zámucos</li>
-        <li>Los Guaraníes: parcialidades y organización</li>
-        <li>Religión guaraní y rito de la antropofagia</li>
-        <li>Cultura material guaraní</li>
-      </ul>
-      <div class="unit-footer">
-        <span class="chip">10 cartillas</span>
-        <span class="chip">Quiz final</span>
-        <span class="btn-go">Comenzar →</span>
+        <div class="quiz-feedback ok" style="display:none;">¡Correcto! La caída de Constantinopla en manos otomanas cortó las rutas de las especias y obligó a Europa a buscar caminos alternativos por mar.</div>
+        <div class="quiz-feedback mal" style="display:none;">Incorrecto. La respuesta correcta es la caída de Constantinopla (1453), que bloqueó las rutas terrestres hacia Asia.</div>
       </div>
     </div>
 
-    <!-- UNIDAD III -->
-    <div class="unit-card available" onclick="window.location.href='unidad3/index.html'">
-      <div class="unit-header">
-        <div class="unit-num">III</div>
-        <div>
-          <p class="unit-label">Unidad III</p>
-          <h2 class="unit-title">Exploraciones y conquista del Río de la Plata y el Paraguay</h2>
+    <!-- C2: Cristóbal Colón -->
+    <div class="cartilla" id="c2" data-unidad="1">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#e65100;">U1 · Cartilla 2</span>
+        <h2>Cristóbal Colón y sus Cuatro Viajes</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Idea central</div>
+        <p>Colón, convencido de que la Tierra era redonda, propuso llegar a Asia navegando hacia el oeste. El 12 de octubre de 1492 llegó a América, cambiando la historia del mundo.</p>
+      </div>
+      <p>Nacido en Génova en 1451, Colón buscó financiamiento en Portugal sin éxito. Finalmente los Reyes Católicos de Castilla apoyaron su proyecto.</p>
+      <div class="tabla-wrap">
+        <table>
+          <tr><th>Viaje</th><th>Años</th><th>Hitos principales</th></tr>
+          <tr><td><strong>1°</strong></td><td>1492–1493</td><td>Sale el 3 agosto (La Pinta, La Niña, Santa María). Llega a Guanahani (San Salvador) el 12/10/1492.</td></tr>
+          <tr><td><strong>2°</strong></td><td>1493–1496</td><td>Dominica, Martinica, Guadalupe, Puerto Rico, Jamaica. Funda Villa Isabela.</td></tr>
+          <tr><td><strong>3°</strong></td><td>1498–1500</td><td>Isla Trinidad, desembocadura del Orinoco. Fue arrestado y enviado a España.</td></tr>
+          <tr><td><strong>4°</strong></td><td>1502–1504</td><td>Exploró desde Honduras hasta Panamá.</td></tr>
+        </table>
+      </div>
+      <p>Colón falleció el 20 de mayo de 1506 en Valladolid, sin saber que había llegado a un continente desconocido para los europeos.</p>
+      <div class="quiz-section">
+        <div class="quiz-titulo">✏️ Mini-Quiz</div>
+        <div class="quiz-pregunta">¿Cuál fue el nombre del lugar donde Colón llegó el 12 de octubre de 1492?</div>
+        <div class="quiz-opciones">
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Villa Isabela</div>
+          <div class="quiz-opcion" onclick="responder(this,'ok')">Guanahani (San Salvador)</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Isla Trinidad</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">La Española</div>
         </div>
-        <span class="unit-badge available-badge">Disponible</span>
-      </div>
-      <ul class="unit-topics">
-        <li>Descubrimiento del Mar del Sur y del Río de la Plata</li>
-        <li>Viajes de Magallanes, Elcano, Alejo García y Gaboto</li>
-        <li>Don Pedro de Mendoza: objetivos y exploraciones</li>
-        <li>Fundación de Asunción — Real Provisión 1537</li>
-        <li>Domingo Martínez de Irala: gobierno y legado</li>
-        <li>Fundaciones desde Asunción: Santa Fe, Buenos Aires y otras</li>
-      </ul>
-      <div class="unit-footer">
-        <span class="chip">10 cartillas</span>
-        <span class="chip">Quiz final</span>
-        <span class="btn-go">Comenzar →</span>
+        <div class="quiz-feedback ok" style="display:none;">¡Correcto! La isla Guanahani, renombrada San Salvador, fue el primer territorio americano avistado el 12 de octubre de 1492.</div>
+        <div class="quiz-feedback mal" style="display:none;">Incorrecto. Colón llegó a la isla Guanahani (San Salvador) el 12 de octubre de 1492.</div>
       </div>
     </div>
 
-    <!-- UNIDAD IV -->
-    <div class="unit-card available" onclick="window.location.href='unidad4/index.html'">
-      <div class="unit-header">
-        <div class="unit-num">IV</div>
-        <div>
-          <p class="unit-label">Unidad IV</p>
-          <h2 class="unit-title">El Paraguay colonial</h2>
+    <!-- C3: Bulas y Tordesillas -->
+    <div class="cartilla" id="c3" data-unidad="1">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#e65100;">U1 · Cartilla 3</span>
+        <h2>Bulas Alejandrinas y Tratado de Tordesillas</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Idea central</div>
+        <p>El Papa y las potencias ibéricas dividieron el mundo entre España y Portugal mediante documentos jurídicos que determinaron qué territorios podía colonizar cada reino.</p>
+      </div>
+      <h3>Bulas Alejandrinas (1493)</h3>
+      <p>Emitidas por el Papa Alejandro VI. Constaron de 5 documentos que establecieron una línea a 100 leguas al oeste de las islas Azores y Cabo Verde:</p>
+      <ul>
+        <li><strong>Al oeste de la línea:</strong> pertenecía a Castilla.</li>
+        <li><strong>Al este de la línea:</strong> pertenecía a Portugal.</li>
+      </ul>
+      <h3>Tratado de Tordesillas (1494)</h3>
+      <p>Firmado entre Castilla y el rey Juan II de Portugal. Corrió la línea de demarcación a <strong>370 leguas al oeste del archipiélago de Cabo Verde</strong>.</p>
+      <div class="tabla-wrap">
+        <table>
+          <tr><th>Castilla (oeste)</th><th>Portugal (este)</th></tr>
+          <tr><td>América en general</td><td>Brasil, África, Asia</td></tr>
+        </table>
+      </div>
+      <div class="cita">
+        "El Tratado de Tordesillas fue lo que permitió a Portugal colonizar Brasil legalmente."
+        <div class="cita-autor">— Consecuencia histórica del acuerdo</div>
+      </div>
+      <div class="quiz-section">
+        <div class="quiz-titulo">✏️ Mini-Quiz</div>
+        <div class="quiz-pregunta">¿A cuántas leguas al oeste de Cabo Verde fijó el Tratado de Tordesillas la línea divisoria?</div>
+        <div class="quiz-opciones">
+          <div class="quiz-opcion" onclick="responder(this,'mal')">100 leguas</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">250 leguas</div>
+          <div class="quiz-opcion" onclick="responder(this,'ok')">370 leguas</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">500 leguas</div>
         </div>
-        <span class="unit-badge available-badge">Disponible</span>
-      </div>
-      <ul class="unit-topics">
-        <li>Gobierno de Hernandarias y Ordenanzas de Alfaro</li>
-        <li>División de la Provincia del Paraguay</li>
-        <li>Sociedad colonial: clases sociales</li>
-        <li>Economía colonial: yerba mate, tabaco, maderas, cueros</li>
-        <li>Real Hacienda y gravámenes</li>
-      </ul>
-      <div class="unit-footer">
-        <span class="chip">10 cartillas</span>
-        <span class="chip">Quiz final</span>
-        <span class="btn-go">Comenzar →</span>
+        <div class="quiz-feedback ok" style="display:none;">¡Correcto! El Tratado de Tordesillas estableció la línea a 370 leguas al oeste de Cabo Verde.</div>
+        <div class="quiz-feedback mal" style="display:none;">Incorrecto. La respuesta correcta es 370 leguas al oeste de Cabo Verde.</div>
       </div>
     </div>
 
-    <!-- UNIDAD V -->
-    <div class="unit-card available" onclick="window.location.href='unidad5/index.html'">
-      <div class="unit-header">
-        <div class="unit-num">V</div>
-        <div>
-          <p class="unit-label">Unidad V</p>
-          <h2 class="unit-title">La labor misionera de las órdenes religiosas</h2>
+    <!-- ══════════════════════════════════════════════
+         UNIDAD 2 — Población Precolombina
+         ══════════════════════════════════════════════ -->
+
+    <!-- PORTADA U2 -->
+    <div class="cartilla" id="c4" data-unidad="2">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#f57c00;">Unidad 2</span>
+        <h2>Población Precolombina del Paraguay</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Temas de esta unidad</div>
+        <p>Periodización de la historia paraguaya, prehistoria y edades, etnias chaqueñas y la nación guaraní: su organización social, familiar y política.</p>
+      </div>
+      <ul>
+        <li>División de la historia paraguaya en periodos</li>
+        <li>Edad de Piedra y Edad de los Metales</li>
+        <li>Grupos chaqueños (Guaycurúes, Matacos, Zamucos)</li>
+        <li>La nación Guaraní: parcialidades, vivienda, familia y organización política</li>
+      </ul>
+    </div>
+
+    <!-- C5: Periodos históricos -->
+    <div class="cartilla" id="c5" data-unidad="2">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#f57c00;">U2 · Cartilla 1</span>
+        <h2>Periodización de la Historia Paraguaya</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Idea central</div>
+        <p>La historia del Paraguay se divide en seis grandes periodos, desde la época precolonial hasta el periodo actual que comienza con el Tratado de Paz del Chaco.</p>
+      </div>
+      <div class="tabla-wrap">
+        <table>
+          <tr><th>Periodo</th><th>Referencia temporal</th></tr>
+          <tr><td><strong>Precolonial</strong></td><td>Hasta la fundación de Asunción</td></tr>
+          <tr><td><strong>Conquista</strong></td><td>Hasta la división de la Provincia Gigante</td></tr>
+          <tr><td><strong>Colonial</strong></td><td>Época colonial española</td></tr>
+          <tr><td><strong>Independencia</strong></td><td>Hasta la muerte del Dr. Francia</td></tr>
+          <tr><td><strong>Organización Nacional</strong></td><td>C.A. López, F.S. López, Triple Alianza</td></tr>
+          <tr><td><strong>Constitucional</strong></td><td>Hasta deposición Eusebio Ayala (1936)</td></tr>
+          <tr><td><strong>Actual</strong></td><td>Desde el Tratado de Paz del Chaco</td></tr>
+        </table>
+      </div>
+      <h3>Prehistoria</h3>
+      <p>La prehistoria se divide en la <strong>Edad de Piedra</strong> (Paleolítico, Mesolítico y Neolítico) y la <strong>Edad de los Metales</strong> (cobre, bronce, hierro).</p>
+      <div class="tabla-wrap">
+        <table>
+          <tr><th>Periodo</th><th>Características</th></tr>
+          <tr><td>Paleolítico</td><td>Nómadas, cazadores-recolectores, uso del fuego</td></tr>
+          <tr><td>Mesolítico</td><td>Periodo de transición</td></tr>
+          <tr><td>Neolítico</td><td>Agricultura, ganadería, sedentarismo</td></tr>
+          <tr><td>Edad de los Metales</td><td>Cobre → bronce → hierro; aparece la rueda y el comercio</td></tr>
+        </table>
+      </div>
+      <div class="quiz-section">
+        <div class="quiz-titulo">✏️ Mini-Quiz</div>
+        <div class="quiz-pregunta">¿En qué periodo prehistórico aparecen la agricultura y el sedentarismo?</div>
+        <div class="quiz-opciones">
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Paleolítico</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Mesolítico</div>
+          <div class="quiz-opcion" onclick="responder(this,'ok')">Neolítico</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Edad del Bronce</div>
         </div>
-        <span class="unit-badge available-badge">Disponible</span>
-      </div>
-      <ul class="unit-topics">
-        <li>Mercedarios y Dominicos</li>
-        <li>Franciscanos: reducciones y evangelización</li>
-        <li>Jesuitas: organización territorial y reducciones</li>
-        <li>Economía: Abá-Mbaé y Tupá-Mbaé</li>
-        <li>Cultura, arte y expulsión de los jesuitas</li>
-      </ul>
-      <div class="unit-footer">
-        <span class="chip">10 cartillas</span>
-        <span class="chip">Quiz final</span>
-        <span class="btn-go">Comenzar →</span>
+        <div class="quiz-feedback ok" style="display:none;">¡Correcto! El Neolítico se caracteriza por la aparición de la agricultura, la ganadería y el sedentarismo.</div>
+        <div class="quiz-feedback mal" style="display:none;">Incorrecto. Es el Neolítico el periodo en que aparecen la agricultura, la ganadería y el sedentarismo.</div>
       </div>
     </div>
 
-    <!-- UNIDAD VI -->
-    <div class="unit-card available" onclick="window.location.href='unidad6/index.html'">
-      <div class="unit-header">
-        <div class="unit-num">VI</div>
-        <div>
-          <p class="unit-label">Unidad VI</p>
-          <h2 class="unit-title">Revolución Comunera</h2>
+    <!-- C6: Guaraníes -->
+    <div class="cartilla" id="c6" data-unidad="2">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#f57c00;">U2 · Cartilla 2</span>
+        <h2>Los Guaraníes — Etnias y Organización</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Idea central</div>
+        <p>Los guaraníes eran el grupo más numeroso del Paraguay precolonial. Su organización se basaba en la <em>taba</em> (aldea) y el liderazgo del <em>rubicha</em>, con una estructura familiar poligámica.</p>
+      </div>
+      <h3>Grupos Chaqueños</h3>
+      <p>Habitaban el Chaco paraguayo con economía de recolección, caza y pesca. Se organizaban en agrupaciones de 50 a 200 personas dirigidas por un consejo de ancianos.</p>
+      <div class="badge badge-naranja">Guaycurúes (Mbaya, Payaguá, Toba, Abipon)</div>
+      <div class="badge badge-azul">Matacos (Chulupi, Choroti)</div>
+      <div class="badge badge-verde">Zamucos</div>
+
+      <h3>Parcialidades Guaraníes</h3>
+      <div class="tabla-wrap">
+        <table>
+          <tr><th>Parcialidad</th><th>Ubicación</th></tr>
+          <tr><td>Carios</td><td>Inmediaciones de Asunción</td></tr>
+          <tr><td>Itatines</td><td>Norte del Paraguay / sur de Mato Grosso</td></tr>
+          <tr><td>Omaguas</td><td>Norte, riberas del Amazonas</td></tr>
+          <tr><td>Chiriguanos</td><td>Bolivia y los Andes</td></tr>
+          <tr><td>Chiripas</td><td>Región del Guairá</td></tr>
+          <tr><td>Guarayos</td><td>Santa Cruz de la Sierra</td></tr>
+        </table>
+      </div>
+      <h3>Organización Social Guaraní</h3>
+      <ul>
+        <li><strong>Taba:</strong> pueblo de máximo 7 cabañas; paredes de ramas y hojas de palmera; espacio central para fiestas y ritos.</li>
+        <li><strong>Familia:</strong> padre como cabeza; poligamia permitida; el hombre debía participar en una guerra para poder casarse; el divorcio se permitía con simple expresión de voluntad.</li>
+        <li><strong>Política:</strong> cada taba era independiente; el <em>rubicha</em> era elegido por el consejo de ancianos; la organización tribal solo se activaba para la guerra.</li>
+      </ul>
+      <div class="quiz-section">
+        <div class="quiz-titulo">✏️ Mini-Quiz</div>
+        <div class="quiz-pregunta">¿Cómo se llamaba el pueblo o aldea de los guaraníes?</div>
+        <div class="quiz-opciones">
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Rubicha</div>
+          <div class="quiz-opcion" onclick="responder(this,'ok')">Taba</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Coty guazú</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Tupa-Mbae</div>
         </div>
-        <span class="unit-badge available-badge">Disponible</span>
-      </div>
-      <ul class="unit-topics">
-        <li>Antecedentes y Real Provisión de 1537</li>
-        <li>Obispo Cárdenas y primera revolución</li>
-        <li>Antequera, Mompox y las victorias comuneras</li>
-        <li>Ideal comunero y líderes principales</li>
-        <li>Sanciones políticas y económicas al Paraguay</li>
-      </ul>
-      <div class="unit-footer">
-        <span class="chip">10 cartillas</span>
-        <span class="chip">Quiz final</span>
-        <span class="btn-go">Comenzar →</span>
+        <div class="quiz-feedback ok" style="display:none;">¡Correcto! La <em>taba</em> era el nombre del pueblo guaraní, formado por un máximo de 7 cabañas.</div>
+        <div class="quiz-feedback mal" style="display:none;">Incorrecto. La aldea guaraní se llamaba <em>taba</em>. El <em>rubicha</em> era el líder elegido por los ancianos.</div>
       </div>
     </div>
 
-    <!-- UNIDAD VII -->
-    <div class="unit-card available" onclick="window.location.href='unidad7/index.html'">
-      <div class="unit-header">
-        <div class="unit-num">VII</div>
-        <div>
-          <p class="unit-label">Unidad VII</p>
-          <h2 class="unit-title">Reformas Borbónicas y Paraguay del siglo XVIII</h2>
+    <!-- ══════════════════════════════════════════════
+         UNIDAD 3 — Exploraciones y Conquistas
+         ══════════════════════════════════════════════ -->
+
+    <!-- PORTADA U3 -->
+    <div class="cartilla" id="c7" data-unidad="3">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#d84315;">Unidad 3</span>
+        <h2>Exploraciones y Conquistas en el Río de la Plata</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Temas de esta unidad</div>
+        <p>Los exploradores que llegaron a la cuenca del Plata, la institución del Adelantado, la fundación de Asunción y los primeros gobiernos coloniales.</p>
+      </div>
+      <ul>
+        <li>Primeros exploradores: Balboa, Solís, Magallanes, Elcano, García, Gaboto</li>
+        <li>Los cinco Adelantados del Río de la Plata</li>
+        <li>Fundación de Buenos Aires (1536) y Asunción (1537)</li>
+        <li>Domingo Martínez de Irala y el mestizaje</li>
+      </ul>
+    </div>
+
+    <!-- C8: Primeros Exploradores -->
+    <div class="cartilla" id="c8" data-unidad="3">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#d84315;">U3 · Cartilla 1</span>
+        <h2>Los Primeros Exploradores</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Idea central</div>
+        <p>Antes de la conquista formal, varios exploradores abrieron el camino al Río de la Plata y al Paraguay, muchos de ellos buscando la legendaria "Sierra de la Plata".</p>
+      </div>
+      <div class="tabla-wrap">
+        <table>
+          <tr><th>Explorador</th><th>Año</th><th>Logro</th></tr>
+          <tr><td>Vasco Núñez de Balboa</td><td>1513</td><td>Descubrió el Mar del Sur (Océano Pacífico)</td></tr>
+          <tr><td>Juan Díaz de Solís</td><td>1515</td><td>Llegó al "Mar Dulce" (futuro Río de la Plata)</td></tr>
+          <tr><td>Hernando de Magallanes</td><td>1520</td><td>Descubrió el estrecho que une Atlántico y Pacífico</td></tr>
+          <tr><td>Sebastián Elcano</td><td>1519–1522</td><td>Primera circunnavegación de la Tierra (18 sobrevivientes)</td></tr>
+          <tr><td>Alejo García</td><td>~1525</td><td>Descubridor del Paraguay; primer europeo en cruzar tierras paraguayas</td></tr>
+          <tr><td>Sebastián Gaboto</td><td>1527–1528</td><td>Exploró Paraná y Paraguay; fundó Sancti Spiritu (primer asentamiento en Argentina)</td></tr>
+        </table>
+      </div>
+      <p><strong>Alejo García</strong> era un náufrago de la expedición de Solís. Cruzó las tierras paraguayas en busca de la Sierra de la Plata, llegando al Alto Perú, donde fue muerto por indígenas al regresar.</p>
+      <div class="quiz-section">
+        <div class="quiz-titulo">✏️ Mini-Quiz</div>
+        <div class="quiz-pregunta">¿Quién es considerado el descubridor del Paraguay?</div>
+        <div class="quiz-opciones">
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Juan Díaz de Solís</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Sebastián Gaboto</div>
+          <div class="quiz-opcion" onclick="responder(this,'ok')">Alejo García</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Pedro de Mendoza</div>
         </div>
-        <span class="unit-badge available-badge">Disponible</span>
-      </div>
-      <ul class="unit-topics">
-        <li>Reformas Borbónicas y Carlos III</li>
-        <li>Virreinato del Río de la Plata y Audiencia</li>
-        <li>Intendencias y gobernaciones militares</li>
-        <li>Tratados de Permuta y San Ildefonso</li>
-        <li>Pinedo, Melo, Rivera, Velasco y labor historiográfica</li>
-      </ul>
-      <div class="unit-footer">
-        <span class="chip">10 cartillas</span>
-        <span class="chip">Quiz final</span>
-        <span class="btn-go">Comenzar →</span>
+        <div class="quiz-feedback ok" style="display:none;">¡Correcto! Alejo García, náufrago de la expedición de Solís, fue el primer europeo en cruzar el territorio paraguayo y es considerado su descubridor.</div>
+        <div class="quiz-feedback mal" style="display:none;">Incorrecto. Alejo García es considerado el descubridor del Paraguay; cruzó sus tierras ~1525 en busca de la Sierra de la Plata.</div>
       </div>
     </div>
 
-    <p class="section-title">Evaluación final</p>
-
-    <!-- SIMULACRO -->
-    <div class="unit-card available simulacro-card" onclick="window.location.href='simulacro/index.html'">
-      <div class="unit-header">
-        <div class="unit-num">★</div>
-        <div>
-          <p class="unit-label">Simulacro</p>
-          <h2 class="unit-title">Simulacro de examen general</h2>
+    <!-- C9: Los Adelantados -->
+    <div class="cartilla" id="c9" data-unidad="3">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#d84315;">U3 · Cartilla 2</span>
+        <h2>Los Adelantados del Río de la Plata</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Idea central</div>
+        <p>Los Adelantados eran funcionarios nombrados por la Corona española con poderes administrativos, judiciales y militares. Debían costear sus propias expediciones y podían designar sucesor.</p>
+      </div>
+      <h3>Objetivos principales</h3>
+      <ul>
+        <li>Buscar camino al Perú</li>
+        <li>Defender de los portugueses</li>
+        <li>Ocupar la cuenca del Río de la Plata</li>
+      </ul>
+      <div class="tabla-wrap">
+        <table>
+          <tr><th>#</th><th>Adelantado</th><th>Nota</th></tr>
+          <tr><td>1°</td><td>Pedro de Mendoza</td><td>Nombrado 21/5/1534 por Carlos V. Fundó Buenos Aires (2/2/1536). Falleció en alta mar (23/6/1537).</td></tr>
+          <tr><td>2°</td><td>Alvar Núñez Cabeza de Vaca</td><td>Llegó a Asunción el 11/3/1542. Fue depuesto e Irala retomó el gobierno.</td></tr>
+          <tr><td>3°</td><td>Juan de Sanabria</td><td>No ejerció. Tampoco su hijo Diego. Sí ejerció su madre, Doña Mencía de Sanabria.</td></tr>
+          <tr><td>4°</td><td>Juan Ortiz de Zarate</td><td>Llegó con los Franciscanos en 1575.</td></tr>
+          <tr><td>5°</td><td>Juan Torres de Vera y Aragón</td><td>Último adelantado del Río de la Plata.</td></tr>
+        </table>
+      </div>
+      <div class="quiz-section">
+        <div class="quiz-titulo">✏️ Mini-Quiz</div>
+        <div class="quiz-pregunta">¿Quién fundó la ciudad de Buenos Aires el 2 de febrero de 1536?</div>
+        <div class="quiz-opciones">
+          <div class="quiz-opcion" onclick="responder(this,'ok')">Pedro de Mendoza</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Juan de Ayolas</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Alvar Núñez Cabeza de Vaca</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Juan de Salazar de Espinoza</div>
         </div>
-        <span class="unit-badge available-badge">Disponible</span>
-      </div>
-      <ul class="unit-topics">
-        <li>Preguntas de las 7 unidades</li>
-        <li>Formato similar a un examen escrito tipo test</li>
-        <li>Corrección automática y puntaje final</li>
-      </ul>
-      <div class="unit-footer">
-        <span class="chip">+25 preguntas</span>
-        <span class="chip">Resultados al instante</span>
-        <span class="btn-go">Empezar simulacro →</span>
+        <div class="quiz-feedback ok" style="display:none;">¡Correcto! Pedro de Mendoza fundó el fuerte de Nuestra Señora del Buen Aire el 2 de febrero de 1536.</div>
+        <div class="quiz-feedback mal" style="display:none;">Incorrecto. Fue Pedro de Mendoza quien fundó Buenos Aires el 2 de febrero de 1536.</div>
       </div>
     </div>
 
-  </main>
+    <!-- C10: Fundación de Asunción -->
+    <div class="cartilla" id="c10" data-unidad="3">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#d84315;">U3 · Cartilla 3</span>
+        <h2>Fundación de Asunción y Primeros Gobiernos</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Idea central</div>
+        <p>El 15 de agosto de 1537, Juan de Salazar de Espinoza fundó la Casa Fuerte Nuestra Señora de la Asunción, origen de la actual capital del Paraguay.</p>
+      </div>
+      <h3>Colinas históricas de Asunción</h3>
+      <ul>
+        <li><strong>Loma Kavara:</strong> lugar probable de fundación (hoy Plaza de los Comuneros)</li>
+        <li><strong>Loma San Jerónimo, Loma Clavel</strong> (Cuartel de Infantería de Marina)</li>
+        <li><strong>Loma Cachinga:</strong> antiguo Hospital de Clínicas</li>
+        <li><strong>Loma del Mangrullo:</strong> punto más alto; hoy Parque Carlos Antonio López</li>
+        <li><strong>Loma de la Encarnación:</strong> Iglesia de la Encarnación</li>
+      </ul>
+      <h3>Real Provisión del 12 de setiembre de 1537</h3>
+      <p>Ante la muerte de Mendoza, el rey Carlos V comisionó a Alonso Cabrera con una Cédula Real que disponía: si el Adelantado no había designado lugarteniente, los pobladores elegirían al más indicado. Bajo esta norma, <strong>Domingo Martínez de Irala</strong> asumió el gobierno el 31 de julio de 1539.</p>
+      <h3>El Mestizaje</h3>
+      <p>Irala ofreció a los carios guaraníes —que también anhelaban llegar al Perú— una alianza. Los carios entregaron sus hijas en "prenda de amistad" con los españoles. Así surgió el <strong>mestizaje</strong>, que sería el cimiento de la nueva comunidad paraguaya.</p>
+      <div class="quiz-section">
+        <div class="quiz-titulo">✏️ Mini-Quiz</div>
+        <div class="quiz-pregunta">¿Quién fundó la Casa Fuerte Nuestra Señora de la Asunción el 15 de agosto de 1537?</div>
+        <div class="quiz-opciones">
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Pedro de Mendoza</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Juan de Ayolas</div>
+          <div class="quiz-opcion" onclick="responder(this,'ok')">Juan de Salazar de Espinoza</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Domingo Martínez de Irala</div>
+        </div>
+        <div class="quiz-feedback ok" style="display:none;">¡Correcto! Juan de Salazar de Espinoza fundó la Casa Fuerte de Asunción el 15 de agosto de 1537.</div>
+        <div class="quiz-feedback mal" style="display:none;">Incorrecto. Fue Juan de Salazar de Espinoza el fundador de Asunción el 15 de agosto de 1537.</div>
+      </div>
+    </div>
 
-<footer class="footer">
-  <p>Herramienta de repaso académico · Historia del Paraguay</p>
-  <p>Facilitada por la <strong>Dra. Beatriz Espinola Zaracho</strong></p>
-  <p>Desarrollado por <strong>SC</strong></p>
+    <!-- ══════════════════════════════════════════════
+         UNIDAD 4 — Paraguay Colonial
+         ══════════════════════════════════════════════ -->
 
-  <a href="https://hits.sh/sentiege.github.io/historiadelparaguay/" target="_blank" style="text-decoration:none;">
-    <img
-      src="https://hits.sh/sentiege.github.io/historiadelparaguay/.svg?view=today-total&amp;label=Visitas&amp;color=4a9eda&amp;labelColor=1e3a5f"
-      alt="Contador de visitas"
-      style="vertical-align:middle;margin-top:6px;border-radius:4px;"
-    >
-  </a>
-</footer>
+    <!-- PORTADA U4 -->
+    <div class="cartilla" id="c11" data-unidad="4">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#bf360c;">Unidad 4</span>
+        <h2>Paraguay Colonial</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Temas de esta unidad</div>
+        <p>Hernandarias y su obra, la división de la Provincia en 1617, las Ordenanzas de Alfaro, la sociedad colonial y la economía colonial paraguaya.</p>
+      </div>
+      <ul>
+        <li>Hernandarias: primer criollo gobernador</li>
+        <li>División en Gobernación del Río de la Plata y del Guairá o Paraguay (1617)</li>
+        <li>Ordenanzas de Alfaro (1611): protección indígena</li>
+        <li>Clases sociales coloniales y economía (agricultura, ganadería, yerba, tabaco)</li>
+      </ul>
+    </div>
 
+    <!-- C12: Hernandarias -->
+    <div class="cartilla" id="c12" data-unidad="4">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#bf360c;">U4 · Cartilla 1</span>
+        <h2>Hernandarias — El Primer Gobernador Criollo</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Idea central</div>
+        <p>Hernando Arias de Saavedra "Hernandarias" fue el primer criollo en gobernar una provincia española en América. Gobernó aproximadamente 20 años y dejó una obra duradera de protección indígena y educación.</p>
+      </div>
+      <p>Nacido en Asunción (~1564), hijo del Cap. Martín Suárez de Toledo y Doña María de Sanabria. En 1592 el Cabildo lo designó Gobernador interino. La Cédula Real de 1602 lo confirmó como Gobernador de la Provincia.</p>
+      <h3>Obra de Hernandarias</h3>
+      <ul>
+        <li><strong>Ordenanzas de Protección Indígena:</strong> 1598 y 1603, para defender al indio y reglamentar sus relaciones con los encomenderos.</li>
+        <li><strong>Sínodo Asunceno (1603):</strong> estableció el guaraní como idioma de evangelización.</li>
+        <li><strong>1602:</strong> abrió el puerto de Buenos Aires para exportación e importación.</li>
+        <li><strong>1608:</strong> gestionó ante el rey la llegada de los jesuitas a la provincia.</li>
+      </ul>
+      <h3>Educación y Cultura</h3>
+      <ul>
+        <li>Casa de Recogidas y Huérfanas (fundada por Francisca de Bocanegra)</li>
+        <li>Escuela Colegio del Padre Francisco de Zaldívar</li>
+        <li>Los jesuitas habilitaron el primer colegio secundario en Asunción</li>
+        <li>Hernando de Trejo y Sanabria (hermanastro de Hernandarias) fundó el Colegio Máximo de Córdoba: primera universidad del Río de la Plata</li>
+      </ul>
+      <div class="quiz-section">
+        <div class="quiz-titulo">✏️ Mini-Quiz</div>
+        <div class="quiz-pregunta">¿Cuál fue el hecho que hizo histórico a Hernandarias en 1592?</div>
+        <div class="quiz-opciones">
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Fundó la Universidad de Córdoba</div>
+          <div class="quiz-opcion" onclick="responder(this,'ok')">Fue el primer criollo en ejercer el gobierno de una provincia española</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Dictó las Ordenanzas de Alfaro</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Expulsó a los jesuitas de la provincia</div>
+        </div>
+        <div class="quiz-feedback ok" style="display:none;">¡Correcto! En 1592 el Cabildo lo designó Gobernador interino, convirtiéndose en el primer criollo en ocupar tan alto cargo en América española.</div>
+        <div class="quiz-feedback mal" style="display:none;">Incorrecto. En 1592 fue designado primer gobernador criollo de una provincia española en América.</div>
+      </div>
+    </div>
 
-</body>
+    <!-- C13: División y Ordenanzas -->
+    <div class="cartilla" id="c13" data-unidad="4">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#bf360c;">U4 · Cartilla 2</span>
+        <h2>División de la Provincia (1617) y Ordenanzas de Alfaro</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Idea central</div>
+        <p>La enorme extensión de la Provincia Gigante de Indias obligó a dividirla en 1617. Las Ordenanzas de Alfaro protegieron a los indígenas de la esclavitud y el trabajo servil.</p>
+      </div>
+      <h3>División en 1617 (Real Cédula 16 de diciembre)</h3>
+      <div class="tabla-wrap">
+        <table>
+          <tr><th>Gobernación</th><th>Capital</th><th>Ciudades</th></tr>
+          <tr><td>Río de la Plata</td><td>Buenos Aires</td><td>Santa Fe, Corrientes, Concepción del Bermejo</td></tr>
+          <tr><td>Guairá o Paraguay</td><td>Asunción</td><td>Villa Rica, Ciudad Real, Santiago de Jerez</td></tr>
+        </table>
+      </div>
+      <p>Esta división significó una pérdida imponderable para el destino geopolítico del Paraguay: perdió extensos territorios y su litoral marítimo.</p>
+      <h3>Ordenanzas de Alfaro (1611)</h3>
+      <p>El Oidor Francisco de Alfaro visitó la provincia y dictó ordenanzas que suprimieron las encomiendas con servicio personal:</p>
+      <ul>
+        <li>Se suprime el trabajo servil de los indios</li>
+        <li>No pueden ser trasladados a más de una legua de sus residencias</li>
+        <li>Se declara nula la compraventa de indios</li>
+        <li>El indio puede elegir a su patrón, pero no trabajar para él más de un año</li>
+        <li>Tasa anual de 5 pesos como vasallo de la Corona (o trabajo equivalente)</li>
+        <li>Se reglamenta la <em>mita</em>: el salario no puede pagarse en especie; en caso de enfermedad, el patrón debe atender al mitayo</li>
+      </ul>
+      <div class="quiz-section">
+        <div class="quiz-titulo">✏️ Mini-Quiz</div>
+        <div class="quiz-pregunta">¿Qué estableció la Real Cédula del 16 de diciembre de 1617?</div>
+        <div class="quiz-opciones">
+          <div class="quiz-opcion" onclick="responder(this,'mal')">La creación del Virreinato del Río de la Plata</div>
+          <div class="quiz-opcion" onclick="responder(this,'ok')">La división de la Provincia en Gobernación del Río de la Plata y del Guairá o Paraguay</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">La expulsión de los jesuitas</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Las Ordenanzas de Alfaro</div>
+        </div>
+        <div class="quiz-feedback ok" style="display:none;">¡Correcto! La Real Cédula del 16/12/1617 dividió la Provincia Gigante en dos gobernaciones: Río de la Plata (capital Buenos Aires) y Guairá o Paraguay (capital Asunción).</div>
+        <div class="quiz-feedback mal" style="display:none;">Incorrecto. La Real Cédula de 1617 dividió la provincia en dos gobernaciones: Río de la Plata y Guairá o Paraguay.</div>
+      </div>
+    </div>
+
+    <!-- C14: Economía Colonial -->
+    <div class="cartilla" id="c14" data-unidad="4">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#bf360c;">U4 · Cartilla 3</span>
+        <h2>Sociedad y Economía Colonial</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Idea central</div>
+        <p>La sociedad colonial paraguaya era jerárquica y estratificada. La economía se basaba en la agricultura, la ganadería y la exportación de yerba mate y tabaco.</p>
+      </div>
+      <h3>Clases Sociales</h3>
+      <div class="tabla-wrap">
+        <table>
+          <tr><th>Estrato</th><th>Descripción</th></tr>
+          <tr><td>Españoles</td><td>Máxima jerarquía; peninsulares nacidos en España</td></tr>
+          <tr><td>Criollos</td><td>Hijos de españoles nacidos en América</td></tr>
+          <tr><td>Mestizos</td><td>Mezcla de español e indígena; mayoría de la población</td></tr>
+          <tr><td>Indígenas</td><td>Encomendados y libres</td></tr>
+          <tr><td>Negros y mulatos</td><td>Esclavos africanos y sus descendientes</td></tr>
+        </table>
+      </div>
+      <h3>Actividades Económicas</h3>
+      <ul>
+        <li><strong>Agricultura:</strong> maíz, porotos, maní, banana, zapallo (originarios); caña de azúcar, vid, tomate, cítricos (aportados por los conquistadores).</li>
+        <li><strong>Ganadería:</strong> vacuno, equino, mulas, asnos, ovejas, cabras, porcinos.</li>
+        <li><strong>Industria:</strong> almidón, harina, azúcar, vinos, madera, hilado y telares, cuero.</li>
+        <li><strong>Yerba mate:</strong> producto más valorado para la exportación.</li>
+        <li><strong>Tabaco:</strong> en 1779 se estableció el Estanco del Tabaco; primera introducción de moneda metálica a la provincia.</li>
+      </ul>
+      <p>El comercio interno fue precario por la dispersión poblacional. Se usaba el trueque; la moneda metálica recién ingresó en la última década del siglo XVIII.</p>
+      <div class="quiz-section">
+        <div class="quiz-titulo">✏️ Mini-Quiz</div>
+        <div class="quiz-pregunta">¿Cuál fue el producto más valorado para la exportación en el Paraguay colonial?</div>
+        <div class="quiz-opciones">
+          <div class="quiz-opcion" onclick="responder(this,'mal')">El algodón</div>
+          <div class="quiz-opcion" onclick="responder(this,'ok')">La yerba mate</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">El cuero vacuno</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">La caña de azúcar</div>
+        </div>
+        <div class="quiz-feedback ok" style="display:none;">¡Correcto! La yerba mate fue el producto más valorado para la exportación en la economía colonial paraguaya.</div>
+        <div class="quiz-feedback mal" style="display:none;">Incorrecto. La yerba mate fue el producto más valorado para la exportación en el Paraguay colonial.</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+         UNIDAD 5 — Labor Misionera
+         ══════════════════════════════════════════════ -->
+
+    <!-- PORTADA U5 -->
+    <div class="cartilla" id="c15" data-unidad="5">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#6d4c41;">Unidad 5</span>
+        <h2>La Labor Misionera de las Órdenes Religiosas</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Temas de esta unidad</div>
+        <p>Las cuatro órdenes religiosas que actuaron en Paraguay: Mercedarios, Dominicos, Franciscanos y Jesuitas. Las reducciones jesuíticas: organización, economía y cultura.</p>
+      </div>
+      <ul>
+        <li>Mercedarios, Dominicos y Franciscanos: primeras misiones</li>
+        <li>Jesuitas: las reducciones más famosas del continente</li>
+        <li>Organización de las reducciones: estructura política, social y económica</li>
+        <li>Sistema colectivista: Aba-Mbae y Tupa-Mbae</li>
+      </ul>
+    </div>
+
+    <!-- C16: Órdenes Religiosas -->
+    <div class="cartilla" id="c16" data-unidad="5">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#6d4c41;">U5 · Cartilla 1</span>
+        <h2>Las Órdenes Religiosas en Paraguay</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Idea central</div>
+        <p>Cuatro órdenes religiosas evangelizaron el Paraguay. Los franciscanos establecieron las primeras reducciones sistemáticas; los jesuitas construyeron las más famosas del continente americano.</p>
+      </div>
+      <div class="tabla-wrap">
+        <table>
+          <tr><th>Orden</th><th>Llegada</th><th>Obra principal</th></tr>
+          <tr><td>Mercedarios</td><td>~1575 (posiblemente primeros)</td><td>Enseñanza y asistencia espiritual; convento San José del Paraguay; capilla en Areguá.</td></tr>
+          <tr><td>Dominicos</td><td>1583 (con Alonso Guerra)</td><td>Convento Santa Catalina Virgen y Mártir.</td></tr>
+          <tr><td>Franciscanos</td><td>1575 (con J. Ortiz de Zarate)</td><td>Reducciones de Altos, Atyrá, Yaguarón, Caazapá. Fray Luis de Bolaños: primeras reducciones + grafía guaraní + catecismo en lengua nativa.</td></tr>
+          <tr><td>Jesuitas (Compañía de Jesús)</td><td>1608 (a pedido de Hernandarias)</td><td>Misiones entre los ríos Tebicuary, Paraná y Uruguay. Las más famosas del continente.</td></tr>
+        </table>
+      </div>
+      <p>La Compañía de Jesús fue fundada por San Ignacio de Loyola en 1534. El primer jesuita en Paraguay fue el Padre Diego de Torres. Sus misiones abarcaron el sur de Paraguay, el nordeste de Argentina y el sur de Brasil.</p>
+      <div class="quiz-section">
+        <div class="quiz-titulo">✏️ Mini-Quiz</div>
+        <div class="quiz-pregunta">¿Qué franciscano creó las primeras reducciones, la grafía guaraní y el catecismo en lengua nativa?</div>
+        <div class="quiz-opciones">
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Fray Alonso de San Buenaventura</div>
+          <div class="quiz-opcion" onclick="responder(this,'ok')">Fray Luis de Bolaños</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Padre Diego de Torres</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">San Ignacio de Loyola</div>
+        </div>
+        <div class="quiz-feedback ok" style="display:none;">¡Correcto! Fray Luis de Bolaños fue el pionero franciscano que estableció las primeras reducciones y creó la escritura y catecismo en guaraní.</div>
+        <div class="quiz-feedback mal" style="display:none;">Incorrecto. Fue Fray Luis de Bolaños quien creó las primeras reducciones, la grafía guaraní y el catecismo en lengua nativa.</div>
+      </div>
+    </div>
+
+    <!-- C17: Reducciones Jesuíticas -->
+    <div class="cartilla" id="c17" data-unidad="5">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#6d4c41;">U5 · Cartilla 2</span>
+        <h2>Las Reducciones Jesuíticas</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Idea central</div>
+        <p>Las reducciones jesuíticas fueron comunidades autosuficientes con un sistema económico colectivista único: combinaban la propiedad individual (Aba-Mbae) con la producción comunitaria (Tupa-Mbae).</p>
+      </div>
+      <h3>Reducciones en Paraguay</h3>
+      <p>San Ignacio Guasú, San Cosme, Itapuá, Corpus, Candelaria, Santa Ana, Loreto, San Ignacio Mini, Santa María de Fe, Santiago, Santa Rosa de Lima, Jesús, Trinidad, San Joaquín, San Estanislao y Belén.</p>
+      <h3>Organización de cada reducción</h3>
+      <ul>
+        <li><strong>Iglesia</strong> — edificio central; frente: plaza con imagen del patrono</li>
+        <li><strong>Coty guazú</strong> — casa de las mujeres</li>
+        <li><strong>Colegio/casa de los padres</strong></li>
+        <li><strong>Cabildo, talleres, almacén, tambo</strong> (hospedaje para viajeros)</li>
+      </ul>
+      <h3>Autoridades de la misión</h3>
+      <div class="tabla-wrap">
+        <table>
+          <tr><th>Cargo</th><th>Función</th></tr>
+          <tr><td>Rector</td><td>Máxima autoridad jesuita</td></tr>
+          <tr><td>Doctrinero</td><td>Propagaba la doctrina cristiana</td></tr>
+          <tr><td>Despensero</td><td>Aprovisionamiento del pueblo</td></tr>
+          <tr><td>Auxiliar</td><td>Trato directo con los indios</td></tr>
+          <tr><td>Corregidor español</td><td>Representaba al Gobernador de la Provincia</td></tr>
+          <tr><td>Alcalde (indio)</td><td>Parte del Cabildo; administraba justicia</td></tr>
+          <tr><td>Capitán (indio)</td><td>Comandaba el ejército</td></tr>
+        </table>
+      </div>
+      <h3>Sistema Económico Colectivista</h3>
+      <div class="tabla-wrap">
+        <table>
+          <tr><th>División</th><th>Nombre</th><th>Beneficio</th></tr>
+          <tr><td>Tierra del indio</td><td><strong>Aba-Mbae</strong> ("cosa del indio")</td><td>Propiedad del indio, controlada por la comunidad</td></tr>
+          <tr><td>Tierra común</td><td><strong>Tupa-Mbae</strong> ("cosa de Dios")</td><td>Iglesia, viudas, huérfanos y necesitados</td></tr>
+        </table>
+      </div>
+      <h3>Cultura y Arte</h3>
+      <ul>
+        <li>Primera imprenta misionera en Santa María (1700): primeros libros impresos: <em>Martirologio Romano</em> y <em>De la diferencia entre lo temporal y lo eterno</em>.</li>
+        <li>Escuelas de carpintería, talla de madera, albañilería, música, tejido, herrería, pintura, estatuaria, relojería e imprenta.</li>
+      </ul>
+      <div class="quiz-section">
+        <div class="quiz-titulo">✏️ Mini-Quiz</div>
+        <div class="quiz-pregunta">¿Cómo se llamaba la parte de la tierra trabajada por la comunidad cuya producción beneficiaba a la iglesia, viudas y huérfanos?</div>
+        <div class="quiz-opciones">
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Aba-Mbae</div>
+          <div class="quiz-opcion" onclick="responder(this,'ok')">Tupa-Mbae</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Coty guazú</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Taba</div>
+        </div>
+        <div class="quiz-feedback ok" style="display:none;">¡Correcto! El Tupa-Mbae ("cosa de Dios") era la tierra común cuya producción se destinaba a la iglesia, viudas, huérfanos y necesitados.</div>
+        <div class="quiz-feedback mal" style="display:none;">Incorrecto. El <em>Tupa-Mbae</em> era la tierra comunitaria destinada a la iglesia y a los más necesitados.</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+         UNIDAD 6 — Revolución Comunera
+         ══════════════════════════════════════════════ -->
+
+    <!-- PORTADA U6 -->
+    <div class="cartilla" id="c18" data-unidad="6">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#c62828;">Unidad 6</span>
+        <h2>La Revolución Comunera</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Temas de esta unidad</div>
+        <p>La primera rebelión popular de América. El conflicto entre comuneros y jesuitas, los líderes Antequera y Mompox, y las sanciones impuestas al Paraguay.</p>
+      </div>
+      <ul>
+        <li>Antecedentes y Primera Revolución (Obispo Cárdenas)</li>
+        <li>José de Antequera y Castro: el juez que gobernó</li>
+        <li>Fernando de Mompox: el ideólogo comunero</li>
+        <li>Líderes comuneros y sanciones al Paraguay</li>
+      </ul>
+    </div>
+
+    <!-- C19: Antecedentes y Primera Revolución -->
+    <div class="cartilla" id="c19" data-unidad="6">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#c62828;">U6 · Cartilla 1</span>
+        <h2>Antecedentes y Revolución Comunera</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Idea central</div>
+        <p>La Revolución Comunera fue el primer movimiento de autonomía política en América del Sur. Combinó el rechazo a los jesuitas, la defensa del derecho popular a elegir gobernadores y el ideal de soberanía comunal.</p>
+      </div>
+      <h3>Primera Revolución — El Obispo Cárdenas</h3>
+      <ul>
+        <li>El Obispo Fray Bernardino de Cárdenas intentó penetrar las reducciones jesuíticas; los jesuitas lo expulsaron.</li>
+        <li>Dos años después regresó y el pueblo lo proclamó Gobernador al grito de "La voz del Pueblo es la voz de Dios".</li>
+        <li>Cárdenas expulsó a los jesuitas de la provincia.</li>
+        <li>Los jesuitas recurrieron al Virrey; el nuevo Gobernador Sebastián de León y Zarate exilió a Cárdenas y restituyó a los jesuitas.</li>
+      </ul>
+      <h3>Gobernador Reyes Balmaceda (1717)</h3>
+      <p>Diego de los Reyes Balmaceda, pro-jesuita, fue acusado de: servicio personal de indios en provecho propio, trabas al comercio y cierre de caminos a Charcas.</p>
+      <h3>José de Antequera y Castro (1721)</h3>
+      <p>Juez pesquisidor de la Audiencia de Charcas. Llegó a Asunción, destituyó a Balmaceda y asumió el gobierno. Los jesuitas enviaron desde Buenos Aires a Baltazar García Ros, quien fue derrotado por los comuneros en las orillas del Tebicuary (1724).</p>
+      <div class="quiz-section">
+        <div class="quiz-titulo">✏️ Mini-Quiz</div>
+        <div class="quiz-pregunta">¿Quién fue el juez pesquisidor que destituyó a Balmaceda y lideró los comuneros desde 1721?</div>
+        <div class="quiz-opciones">
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Fernando de Mompox</div>
+          <div class="quiz-opcion" onclick="responder(this,'ok')">José de Antequera y Castro</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Fray Bernardino de Cárdenas</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Bruno Mauricio de Zavala</div>
+        </div>
+        <div class="quiz-feedback ok" style="display:none;">¡Correcto! José de Antequera y Castro fue el juez designado por la Audiencia de Charcas que asumió el gobierno y lideró la revolución comunera.</div>
+        <div class="quiz-feedback mal" style="display:none;">Incorrecto. Fue José de Antequera y Castro quien destituyó a Balmaceda en 1721 y lideró el movimiento comunero.</div>
+      </div>
+    </div>
+
+    <!-- C20: Ideal Comunero y Sanciones -->
+    <div class="cartilla" id="c20" data-unidad="6">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#c62828;">U6 · Cartilla 2</span>
+        <h2>El Ideal Comunero y las Sanciones</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Idea central</div>
+        <p>Fernando de Mompox articuló un pensamiento político revolucionario: el poder del pueblo es superior al del rey. Tras la derrota comunera, el Paraguay sufrió graves sanciones políticas y económicas.</p>
+      </div>
+      <div class="cita">
+        "El poder común de cualquier república, ciudad, villa o aldea es más poderosa que el mismo rey; en manos del común está admitir la ley y el gobernador que gustasen. La autoridad del común no reconoce superior."
+        <div class="cita-autor">— Fernando de Mompox, ideólogo de la Revolución Comunera</div>
+      </div>
+      <h3>Desenlace</h3>
+      <ul>
+        <li>Bruno Mauricio de Zavala fue enviado para someter la provincia.</li>
+        <li>Antequera fue apresado y ejecutado en Lima junto con Juan de Mena.</li>
+        <li>Mompox llegó a Asunción en julio 1730; fue traicionado por José Luis Bareiro y huyó al Brasil.</li>
+        <li>Segunda derrota comunera en Tabapy (1725); nuevo Gobernador: Martín de Echauri.</li>
+        <li>Los jesuitas fueron restituidos definitivamente.</li>
+      </ul>
+      <h3>Principales Líderes Comuneros</h3>
+      <div class="badge badge-naranja">José de Antequera y Castro</div>
+      <div class="badge badge-naranja">Fernando de Mompox</div>
+      <div class="badge badge-naranja">Juan de Mena</div>
+      <div class="badge badge-naranja">José de Urrunaga</div>
+      <div class="badge badge-naranja">Antonio Ruiz de Arellano</div>
+      <div class="badge badge-naranja">Miguel de Garay</div>
+      <div class="badge badge-naranja">Francisco Roxas de Aranda</div>
+      <h3>Sanciones Impuestas al Paraguay</h3>
+      <div class="tabla-wrap">
+        <table>
+          <tr><th>Tipo</th><th>Sanción</th></tr>
+          <tr><td>Política</td><td>Se abolió el derecho de elegir Gobernador (Real Cédula 1537). Se ahorcó o desterró a los principales caudillos.</td></tr>
+          <tr><td>Económica</td><td>Embargo de productos paraguayos. Prohibición de libre exportación. Las mercaderías debían pasar por Santa Fe pagando impuestos y luego por Buenos Aires.</td></tr>
+        </table>
+      </div>
+      <div class="quiz-section">
+        <div class="quiz-titulo">✏️ Mini-Quiz</div>
+        <div class="quiz-pregunta">¿Cuál fue la sanción política más importante impuesta al Paraguay tras la derrota comunera?</div>
+        <div class="quiz-opciones">
+          <div class="quiz-opcion" onclick="responder(this,'mal')">La prohibición de exportar yerba mate</div>
+          <div class="quiz-opcion" onclick="responder(this,'ok')">La abolición del derecho del pueblo a elegir Gobernador</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">La expulsión de todos los franciscanos</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">La creación de la Gobernación del Río de la Plata</div>
+        </div>
+        <div class="quiz-feedback ok" style="display:none;">¡Correcto! Se abolió el derecho del pueblo a elegir Gobernador, que estaba previsto en la Real Cédula de 1537.</div>
+        <div class="quiz-feedback mal" style="display:none;">Incorrecto. La sanción política fue abolir el derecho del pueblo a elegir Gobernador, garantizado desde 1537.</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+         UNIDAD 7 — Reformas Borbónicas
+         ══════════════════════════════════════════════ -->
+
+    <!-- PORTADA U7 -->
+    <div class="cartilla" id="c21" data-unidad="7">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#4a148c;">Unidad 7</span>
+        <h2>Las Reformas Borbónicas y el Paraguay del Siglo XVIII</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Temas de esta unidad</div>
+        <p>Las reformas administrativas de la dinastía Borbón, la creación del Virreinato del Río de la Plata, el sistema de intendencias, los tratados con Portugal y los últimos gobernadores coloniales.</p>
+      </div>
+      <ul>
+        <li>Carlos III y la centralización del poder</li>
+        <li>Virreinato del Río de la Plata (1776) y Audiencia de Buenos Aires (1783)</li>
+        <li>Las intendencias (1782) y gobernaciones militares</li>
+        <li>Tratados con Portugal: Permuta (1750) y San Ildefonso (1777)</li>
+        <li>Últimos gobernadores coloniales (Pinedo, Melo de Portugal, Alos, Rivera, Velazco)</li>
+      </ul>
+    </div>
+
+    <!-- C22: Reformas Borbónicas -->
+    <div class="cartilla" id="c22" data-unidad="7">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#4a148c;">U7 · Cartilla 1</span>
+        <h2>Las Reformas Borbónicas</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Idea central</div>
+        <p>La dinastía Borbón, especialmente Carlos III, impulsó profundas reformas para centralizar el poder, aumentar la recaudación fiscal y fortalecer el control sobre las colonias americanas.</p>
+      </div>
+      <h3>Objetivos de las Reformas</h3>
+      <ul>
+        <li>Centralizar el poder en la Corona</li>
+        <li>Recuperar la economía y aumentar la recaudación fiscal</li>
+        <li>Fortalecer el control sobre las colonias</li>
+        <li>Limitar el poder criollo y de la Iglesia</li>
+        <li>Modernizar el Estado: Reales Fábricas, liberalización comercial</li>
+      </ul>
+      <h3>Virreinato del Río de la Plata (1776)</h3>
+      <p>Creado por Real Cédula del 1° de agosto de 1776. Primer Virrey: Pedro de Cevallos. Capital: Buenos Aires.</p>
+      <p>Territorios: Paraguay, Argentina, Bolivia, Uruguay, Río Grande del Sur (Brasil), Isla de Santa Catalina (Brasil).</p>
+      <h3>Audiencia de Buenos Aires (1783)</h3>
+      <p>Creada por Real Cédula del 25 de julio de 1783; comenzó a funcionar en agosto de 1785. Paraguay pasó a depender de ella.</p>
+      <h3>Intendencias (1782)</h3>
+      <p>El Virreinato se dividió en 8 Gobernaciones de Intendencias y 4 Gobernaciones Militares. Las intendencias tenían poder político, judicial, militar y financiero.</p>
+      <div class="tabla-wrap">
+        <table>
+          <tr><th>Intendencias</th><th>Gobernaciones Militares</th></tr>
+          <tr><td>Buenos Aires, Córdoba, Salta, Paraguay, La Paz, Potosí, Charcas, Cochabamba</td><td>Banda Oriental (Montevideo), Misiones, Mojos, Chiquitos</td></tr>
+        </table>
+      </div>
+      <div class="quiz-section">
+        <div class="quiz-titulo">✏️ Mini-Quiz</div>
+        <div class="quiz-pregunta">¿Quién fue el primer Virrey del Río de la Plata, creado en 1776?</div>
+        <div class="quiz-opciones">
+          <div class="quiz-opcion" onclick="responder(this,'ok')">Pedro de Cevallos</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Agustín Fernando de Pinedo</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Bernardo de Velazco</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Carlos III</div>
+        </div>
+        <div class="quiz-feedback ok" style="display:none;">¡Correcto! Pedro de Cevallos fue el primer Virrey del Río de la Plata, cuya capital era Buenos Aires.</div>
+        <div class="quiz-feedback mal" style="display:none;">Incorrecto. El primer Virrey del Río de la Plata fue Pedro de Cevallos (1776).</div>
+      </div>
+    </div>
+
+    <!-- C23: Tratados y últimos gobernadores -->
+    <div class="cartilla" id="c23" data-unidad="7">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#4a148c;">U7 · Cartilla 2</span>
+        <h2>Tratados con Portugal y Últimos Gobernadores</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Idea central</div>
+        <p>Los conflictos con Portugal por límites territoriales costaron al Paraguay extensos territorios. Los últimos gobernadores coloniales consolidaron ciudades y dejaron el poder en 1811 a la Revolución de la Independencia.</p>
+      </div>
+      <h3>Consolidación de las Usurpaciones Portuguesas</h3>
+      <ul>
+        <li>En 1680, el gobernador de Río de Janeiro Manuel Lobos fundó la Colonia Sacramento sobre el Río de la Plata.</li>
+        <li>España y Portugal firmaron en 1681 un tratado para acordar límites; no llegaron a acuerdo.</li>
+      </ul>
+      <div class="tabla-wrap">
+        <table>
+          <tr><th>Tratado</th><th>Año</th><th>Contenido / Consecuencia</th></tr>
+          <tr><td>Tratado de Permuta</td><td>1750</td><td>España entregó 7 reducciones jesuíticas a Portugal a cambio de la Colonia Sacramento y 28.000 pesos. Generó la <strong>Guerra Guaranítica</strong>.</td></tr>
+          <tr><td>Tratado de San Ildefonso</td><td>1777</td><td>España recuperó la Colonia Sacramento y las 7 reducciones, pero perdió el territorio de Mato Grosso.</td></tr>
+        </table>
+      </div>
+      <h3>Últimos Gobernadores Coloniales</h3>
+      <div class="tabla-wrap">
+        <table>
+          <tr><th>Gobernador</th><th>Período</th><th>Obra destacada</th></tr>
+          <tr><td>Agustín F. de Pinedo</td><td>1772–1778</td><td>Fundó San Lorenzo, Paraguarí, Villa Real de la Concepción. Envió El Memorial a la Corona.</td></tr>
+          <tr><td>Pedro Melo de Portugal</td><td>1778–</td><td>Inauguró el Real Colegio Seminario de San Carlos; la provincia fue erigida como Intendencia.</td></tr>
+          <tr><td>Joaquín Alos y Brú</td><td>1787–</td><td>Fundó el Fuerte Borbón (hoy Olimpo) y Laureles.</td></tr>
+          <tr><td>Lázaro de Rivera</td><td>1796–</td><td>Primer Censo Poblacional; escuelas primarias; fundó San Juan Nepomuceno; Cartilla Real para jóvenes.</td></tr>
+          <tr><td>Bernardo de Velazco y Huidobro</td><td>1806–1811</td><td>Último gobernador colonial. Entregó el poder a la Revolución el 15 de mayo de 1811.</td></tr>
+        </table>
+      </div>
+      <h3>Labor Historiográfica</h3>
+      <ul>
+        <li><strong>Ulrico Schmidl:</strong> primer historiador del Río de la Plata. Obra: <em>Viaje al Río de la Plata (1534–1554)</em>.</li>
+        <li><strong>Ruiz Díaz de Guzmán:</strong> primer historiador mestizo. Obra: <em>La Argentina</em> (1612).</li>
+        <li><strong>Juan Francisco Aguirre:</strong> oficial de la marina española; jefe de la cuarta Comisión Demarcadora de límites. Obra: <em>Diario</em>.</li>
+      </ul>
+      <div class="quiz-section">
+        <div class="quiz-titulo">✏️ Mini-Quiz</div>
+        <div class="quiz-pregunta">¿Qué conflicto bélico provocó el Tratado de Permuta de 1750?</div>
+        <div class="quiz-opciones">
+          <div class="quiz-opcion" onclick="responder(this,'mal')">La Revolución Comunera</div>
+          <div class="quiz-opcion" onclick="responder(this,'ok')">La Guerra Guaranítica</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">La Guerra de la Triple Alianza</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">La Guerra del Chaco</div>
+        </div>
+        <div class="quiz-feedback ok" style="display:none;">¡Correcto! La Guerra Guaranítica fue la consecuencia directa del Tratado de Permuta, cuando los guaraníes se resistieron a abandonar sus reducciones y tierras.</div>
+        <div class="quiz-feedback mal" style="display:none;">Incorrecto. El Tratado de Permuta de 1750 provocó la Guerra Guaranítica, pues los guaraníes se negaron a abandonar sus reducciones.</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+         UNIDAD 8 — La Revolución de Independencia
+         ══════════════════════════════════════════════ -->
+
+    <!-- PORTADA U8 — c24 -->
+    <div class="cartilla" id="c24" data-unidad="8">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#b71c1c;">Unidad 8</span>
+        <h2>La Revolución de Independencia</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Temas de esta unidad</div>
+        <p>Las causas ideológicas y las Invasiones Inglesas, la reacción del Paraguay ante Buenos Aires, las batallas de Paraguarí y Tacuary, el Pronunciamiento del 14-15 de mayo de 1811 y la conformación de los primeros gobiernos patrios hasta la República.</p>
+      </div>
+      <ul>
+        <li>Fuentes ideológicas e Invasiones Inglesas (1806–1807)</li>
+        <li>Congreso del 24 de julio de 1810 y posición del Paraguay</li>
+        <li>Misión de Espínola y Peña — Expedición militar de Belgrano</li>
+        <li>Pronunciamiento del 14 y 15 de mayo de 1811</li>
+        <li>Primer Gobierno Provisorio y Primer Congreso Nacional (1811)</li>
+        <li>Segundo Congreso Nacional — El Consulado y la República (1813)</li>
+      </ul>
+    </div>
+
+    <!-- C25: Invasiones Inglesas -->
+    <div class="cartilla" id="c25" data-unidad="8">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#b71c1c;">U8 · Cartilla 1</span>
+        <h2>Las Invasiones Inglesas y sus Consecuencias</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Idea central</div>
+        <p>Las Invasiones Inglesas de 1806–1807 demostraron la capacidad militar de los criollos y sembraron en ellos la confianza de que podían defenderse —y gobernarse— sin depender de España.</p>
+      </div>
+      <h3>Contexto europeo</h3>
+      <p>A inicios del siglo XIX España se alió con Napoleón Bonaparte contra Inglaterra. En <strong>1804</strong> se declaró la guerra; en <strong>1805</strong> la escuadra franco-hispana fue destruida en Trafalgar.</p>
+      <h3>Primera invasión — Buenos Aires (1806)</h3>
+      <ul>
+        <li>Una flota inglesa al mando de <strong>Sir Home Popham</strong> desembarcó en Buenos Aires.</li>
+        <li>El Virrey <strong>Rafael de Sobremonte</strong> huyó de la ciudad sin oponer resistencia.</li>
+        <li>Los criollos bonaerenses, sin apoyo oficial, organizaron la reconquista y expulsaron a los ingleses.</li>
+      </ul>
+      <h3>Segunda invasión — Montevideo (1807)</h3>
+      <ul>
+        <li>Los ingleses regresaron con <strong>100 buques y 6.000 soldados</strong>; tomaron Montevideo.</li>
+        <li>Los criollos nombraron a <strong>Santiago de Liniers</strong> en reemplazo de Sobremonte como máxima autoridad militar.</li>
+        <li>Finalmente los ingleses fueron rechazados y abandonaron el Río de la Plata definitivamente.</li>
+      </ul>
+      <h3>Contribución del Paraguay</h3>
+      <p>Paraguay envió un ejército de más de <strong>900 hombres</strong>. Figuras destacadas: <strong>Juan Manuel Gamarra</strong>, <strong>José Fernández Montiel</strong>, <strong>Fulgencio Yegros</strong> y <strong>Antonio Tomás Yegros</strong>.</p>
+      <div class="cita">
+        Desde entonces los criollos se sintieron con derecho a opinar sobre el destino de la colonia.
+        <div class="cita-autor">— consecuencia histórica clave</div>
+      </div>
+      <div class="quiz-section">
+        <div class="quiz-titulo">✏️ Mini-Quiz</div>
+        <div class="quiz-pregunta">¿Quién huyó de Buenos Aires al llegar la flota inglesa en 1806?</div>
+        <div class="quiz-opciones">
+          <div class="quiz-opcion" onclick="responder(this,'ok')">El Virrey Rafael de Sobremonte</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Santiago de Liniers</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Bernardo de Velazco</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Fulgencio Yegros</div>
+        </div>
+        <div class="quiz-feedback ok" style="display:none;">Correcto. Sobremonte abandonó Buenos Aires sin resistir, lo que desacreditó a las autoridades españolas y mostró que los criollos podían defenderse solos.</div>
+        <div class="quiz-feedback mal" style="display:none;">Incorrecto. Fue el Virrey Rafael de Sobremonte quien huyó, lo que desacreditó profundamente a las autoridades coloniales.</div>
+      </div>
+    </div>
+
+    <!-- C26: Congreso de 1810 y misiones -->
+    <div class="cartilla" id="c26" data-unidad="8">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#b71c1c;">U8 · Cartilla 2</span>
+        <h2>El Paraguay ante la Junta de Buenos Aires</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Idea central</div>
+        <p>El Paraguay rechazó reconocer la supremacía de Buenos Aires. Ante el fracaso de la vía diplomática, Buenos Aires envió una expedición militar al mando de Belgrano, que fue derrotada por los propios criollos paraguayos.</p>
+      </div>
+      <h3>Congreso del 24 de julio de 1810</h3>
+      <p>La Junta de Gobierno de Buenos Aires (creada el 25/5/1810) pidió la adhesión de todas las provincias. Gobernador <strong>Bernardo de Velazco</strong> convocó el Congreso en el Real Colegio San Carlos.</p>
+      <div class="tabla-wrap">
+        <table>
+          <tr><th colspan="2">Resoluciones del Congreso</th></tr>
+          <tr><td>1°</td><td>Reconocer y jurar al Supremo Consejo de Regencia (representante de Fernando VII)</td></tr>
+          <tr><td>2°</td><td>Guardar armonía con Buenos Aires, pero <strong>NO reconocer su superioridad</strong></td></tr>
+          <tr><td>3°</td><td>Formar una Junta de Guerra para la defensa de la Provincia</td></tr>
+          <tr><td>4°</td><td>Declarar el Colegio San Carlos Cuartel General</td></tr>
+        </table>
+      </div>
+      <h3>Misión de Espínola y Peña</h3>
+      <p>La Junta envió a <strong>José Espínola y Peña</strong> a obtener la obediencia paraguaya. Llegó a Pilar (el Cabildo juró ante él), pero Velazco lo alejó enviando hacia Concepción. Espínola y Peña huyó a Buenos Aires y aconsejó enviar fuerza militar.</p>
+      <h3>Expedición Militar de Manuel Belgrano</h3>
+      <ul>
+        <li>Belgrano marchó con <strong>~1.500 hombres</strong> hacia el Paraguay.</li>
+        <li><strong>Batalla de Paraguarí (19/1/1811):</strong> Velazco y los jefes españoles huyeron del campo. Los criollos paraguayos —Cabañas, Gamarra, Yegros— obligaron a Belgrano a retirarse.</li>
+        <li><strong>Batalla de Tacuary (9/3/1811):</strong> Acuerdo diplomático: entendimiento mutuo y envío de diputado paraguayo al Congreso de Buenos Aires.</li>
+      </ul>
+      <p>Resultado: los jefes criollos paraguayos ganaron <strong>prestigio y confianza</strong>; los jefes españoles, el despréstigio de la huida.</p>
+      <div class="quiz-section">
+        <div class="quiz-titulo">✏️ Mini-Quiz</div>
+        <div class="quiz-pregunta">¿Qué decidió el Congreso del 24 de julio de 1810 respecto a la Junta de Buenos Aires?</div>
+        <div class="quiz-opciones">
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Reconocer su supremacía y unirse a ella</div>
+          <div class="quiz-opcion" onclick="responder(this,'ok')">Mantener armonía pero NO reconocer su superioridad</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Declarar la guerra a Buenos Aires</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Reconocer al rey de Portugal</div>
+        </div>
+        <div class="quiz-feedback ok" style="display:none;">Correcto. El Paraguay optó por una postura soberana: relación armónica con Buenos Aires, pero sin reconocer jerarquía alguna sobre la provincia.</div>
+        <div class="quiz-feedback mal" style="display:none;">Incorrecto. El Congreso resolvió guardar armonía con Buenos Aires pero sin reconocer su superioridad sobre el Paraguay.</div>
+      </div>
+    </div>
+
+    <!-- C27: Pronunciamiento 14 y 15 de mayo -->
+    <div class="cartilla" id="c27" data-unidad="8">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#b71c1c;">U8 · Cartilla 3</span>
+        <h2>El Pronunciamiento del 14 y 15 de Mayo de 1811</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Idea central</div>
+        <p>En la noche del 14 al 15 de mayo de 1811, los criollos paraguayos tomaron el poder. Fue el acto fundacional de la independencia del Paraguay.</p>
+      </div>
+      <h3>El Plan original</h3>
+      <p>El movimiento contaba con tres focos simultáneos: <strong>Fulgencio Yegros</strong> desde Misiones, <strong>Manuel Cabañas</strong> desde Cordilleras y <strong>Blas José Rojas</strong> desde Corrientes, para converger sobre Asunción. Se adelantó al 14 de mayo al detectarse una posible traición.</p>
+      <h3>Noche del 14 de mayo</h3>
+      <ul>
+        <li><strong>Pedro Juan Caballero</strong> (en ausencia de Yegros) tomó el Cuartel de Infantería, cuyo oficial de guardia era el Capitán <strong>Mauricio José Troche</strong>.</li>
+        <li>El Capitán <strong>Vicente Ignacio Iturbe</strong> llevó una nota a Velazco con las exigencias: entregar armas, permanecer gobernador bajo vigilancia de 2 diputados del cuartel, ningún barco zarpa, ningún portugués abandona la ciudad.</li>
+        <li>Velazco se negó a firmar.</li>
+      </ul>
+      <h3>Madrugada del 15 de mayo</h3>
+      <ul>
+        <li>Los revolucionarios colocaron <strong>cañones apuntando a la casa de Velazco</strong>.</li>
+        <li>Velazco se rindió y firmó la nota.</li>
+        <li>Se disparó una <strong>salva de 21 cañonazos</strong> como señal de victoria; el pueblo festejó en las calles.</li>
+      </ul>
+      <div class="cita">
+        «Entregar todas las armas al Cuartel» · «Ningún buque se mueva» · «Ningún portugués salga de la ciudad»
+        <div class="cita-autor">— Exigencias de la nota de Pedro Juan Caballero a Velazco</div>
+      </div>
+      <div class="quiz-section">
+        <div class="quiz-titulo">✏️ Mini-Quiz</div>
+        <div class="quiz-pregunta">¿Quién condujo el pronunciamiento en Asunción la noche del 14 de mayo, ante la ausencia de Yegros?</div>
+        <div class="quiz-opciones">
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Manuel Cabañas</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">José Gaspar Rodríguez de Francia</div>
+          <div class="quiz-opcion" onclick="responder(this,'ok')">Pedro Juan Caballero</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Vicente Ignacio Iturbe</div>
+        </div>
+        <div class="quiz-feedback ok" style="display:none;">Correcto. Pedro Juan Caballero lideró la toma del Cuartel de Infantería en Asunción, ya que Fulgencio Yegros no había llegado aún desde el interior.</div>
+        <div class="quiz-feedback mal" style="display:none;">Incorrecto. Fue Pedro Juan Caballero quien tomó el mando en Asunción la noche del 14 de mayo, mientras Yegros estaba en el interior del país.</div>
+      </div>
+    </div>
+
+    <!-- C28: Primer Gobierno Provisorio y Primer Congreso -->
+    <div class="cartilla" id="c28" data-unidad="8">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#b71c1c;">U8 · Cartilla 4</span>
+        <h2>Primer Gobierno Provisorio y Primer Congreso Nacional</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Idea central</div>
+        <p>Entre mayo y junio de 1811 el Paraguay organizó sus primeras instituciones de gobierno independiente, separando definitivamente el poder de Velazco y estableciendo la Junta Superior Gubernativa.</p>
+      </div>
+      <h3>Primer Gobierno Provisorio — 16 de mayo de 1811</h3>
+      <p>Triunvirato formado al día siguiente del Pronunciamiento:</p>
+      <div class="tabla-wrap">
+        <table>
+          <tr><th>Integrante</th><th>Cargo anterior</th></tr>
+          <tr><td>Dr. <strong>José Gaspar Rodríguez de Francia</strong></td><td>Abogado / intelectual</td></tr>
+          <tr><td>Capitán <strong>Juan Valeriano Zaballos</strong></td><td>Militar criollo</td></tr>
+          <tr><td><strong>Bernardo de Velazco</strong></td><td>Gobernador colonial (bajo control)</td></tr>
+        </table>
+      </div>
+      <h3>Primer Congreso Nacional — 17–20 de junio de 1811</h3>
+      <p>Reunido en la Casa de Gobierno; presidido por Francia y Zeballos. Resoluciones:</p>
+      <ul>
+        <li>Separación definitiva de Velazco del gobierno.</li>
+        <li>Prohibición a españoles europeos de ocupar cargos públicos.</li>
+        <li>Libertad de comercio; supresión de impuestos gravosos.</li>
+        <li>Suspensión del reconocimiento de las Cortes y el Consejo de Regencia.</li>
+        <li>Francia designado para representar al Paraguay en Buenos Aires.</li>
+        <li>Nuevo gobierno: la <strong>Junta Superior Gubernativa</strong>.</li>
+      </ul>
+      <h3>Junta Superior Gubernativa</h3>
+      <div class="tabla-wrap">
+        <table>
+          <tr><th>Cargo</th><th>Persona</th></tr>
+          <tr><td>Presidente</td><td>Fulgencio Yegros</td></tr>
+          <tr><td>Vocal 1°</td><td>José Gaspar Rodríguez de Francia</td></tr>
+          <tr><td>Vocal 2°</td><td>Pedro Juan Caballero</td></tr>
+          <tr><td>Vocal 3°</td><td>Francisco Javier Bogarín</td></tr>
+          <tr><td>Vocal 4°</td><td>Fernando de la Mora</td></tr>
+        </table>
+      </div>
+      <h3>Obras de la Junta Superior Gubernativa</h3>
+      <ul>
+        <li><strong>Nota del 20/7/1811:</strong> declaración de voluntad de conservar la independencia.</li>
+        <li><strong>Bando del 6/1/1812:</strong> educación primaria obligatoria.</li>
+        <li>Creación de la Sociedad Paraguaya Literaria (Juan Andrés Gelly).</li>
+        <li>Fundación de la Academia Militar.</li>
+        <li>Reapertura del Seminario San Carlos.</li>
+        <li>Primera Biblioteca Pública del Paraguay.</li>
+        <li><strong>Tratado del 12/10/1811</strong> con Buenos Aires: libre comercio de tabaco; cobro de impuestos de yerba en Asunción; alianza recíproca.</li>
+      </ul>
+      <div class="quiz-section">
+        <div class="quiz-titulo">✏️ Mini-Quiz</div>
+        <div class="quiz-pregunta">¿Quién fue el primer Presidente de la Junta Superior Gubernativa del Paraguay?</div>
+        <div class="quiz-opciones">
+          <div class="quiz-opcion" onclick="responder(this,'mal')">José Gaspar Rodríguez de Francia</div>
+          <div class="quiz-opcion" onclick="responder(this,'ok')">Fulgencio Yegros</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Pedro Juan Caballero</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Fernando de la Mora</div>
+        </div>
+        <div class="quiz-feedback ok" style="display:none;">Correcto. Fulgencio Yegros fue el presidente de la Junta Superior Gubernativa, el primer gobierno autónomo del Paraguay.</div>
+        <div class="quiz-feedback mal" style="display:none;">Incorrecto. El presidente de la Junta Superior Gubernativa fue Fulgencio Yegros; Francia era uno de los vocales.</div>
+      </div>
+    </div>
+
+    <!-- C29: Segundo Congreso y la República -->
+    <div class="cartilla" id="c29" data-unidad="8">
+      <div class="cartilla-header">
+        <span class="num-cartilla" style="background:#b71c1c;">U8 · Cartilla 5</span>
+        <h2>El Consulado y la República del Paraguay</h2>
+      </div>
+      <div class="concepto-clave">
+        <div class="etiqueta">Idea central</div>
+        <p>El Segundo Congreso Nacional de 1813 proclamó al Paraguay <strong>República</strong>, siendo la primera república absolutamente independiente de América del Sur, separada tanto de España como de Buenos Aires.</p>
+      </div>
+      <h3>Segundo Congreso Nacional — 30 de septiembre de 1813</h3>
+      <ul>
+        <li>Se resolvió <strong>NO enviar diputados</strong> al Congreso General de Buenos Aires.</li>
+        <li>Nueva forma de gobierno: <strong>EL CONSULADO</strong> (inspirado en el modelo de la República Romana).</li>
+        <li>Cónsules elegidos: <strong>Fulgencio Yegros</strong> y <strong>José Gaspar Rodríguez de Francia</strong>, con mandato alternado de 4 meses cada uno.</li>
+        <li>El Paraguay fue declarado <strong>REPÚBLICA DEL PARAGUAY</strong>.</li>
+      </ul>
+      <div class="cita">
+        El Paraguay fue la primera república absolutamente independiente de América del Sur.
+        <div class="cita-autor">— Segundo Congreso Nacional, 30 de septiembre de 1813</div>
+      </div>
+      <h3>La Dictadura de Francia</h3>
+      <p>En el Tercer Congreso (1814), Rodríguez de Francia fue designado <strong>Dictador Supremo</strong> por 5 años. En el Cuarto Congreso (1816) fue designado <strong>Dictador Perpetuo</strong> hasta su muerte en 1840. Su gobierno garantizó la independencia real del país frente a las pretensiones de Buenos Aires y Portugal.</p>
+      <h3>Resumen: Línea de tiempo de la independencia</h3>
+      <div class="tabla-wrap">
+        <table>
+          <tr><th>Fecha</th><th>Hecho</th></tr>
+          <tr><td>25 mayo 1810</td><td>Junta de Buenos Aires</td></tr>
+          <tr><td>24 julio 1810</td><td>Congreso paraguayo: rechazo a la supremacía de Buenos Aires</td></tr>
+          <tr><td>19 enero 1811</td><td>Batalla de Paraguarí</td></tr>
+          <tr><td>9 marzo 1811</td><td>Batalla de Tacuary</td></tr>
+          <tr><td>14–15 mayo 1811</td><td>Pronunciamiento de la Independencia</td></tr>
+          <tr><td>16 mayo 1811</td><td>Primer Gobierno Provisorio (Triunvirato)</td></tr>
+          <tr><td>17–20 junio 1811</td><td>Primer Congreso Nacional — Junta Superior Gubernativa</td></tr>
+          <tr><td>12 oct. 1811</td><td>Tratado con Buenos Aires</td></tr>
+          <tr><td>30 sept. 1813</td><td>Segundo Congreso: República del Paraguay — El Consulado</td></tr>
+          <tr><td>1814</td><td>Dictadura Suprema de Francia</td></tr>
+          <tr><td>1816</td><td>Dictadura Perpetua de Francia</td></tr>
+        </table>
+      </div>
+      <div class="quiz-section">
+        <div class="quiz-titulo">✏️ Mini-Quiz</div>
+        <div class="quiz-pregunta">¿Qué hecho histórico ocurrió el 30 de septiembre de 1813?</div>
+        <div class="quiz-opciones">
+          <div class="quiz-opcion" onclick="responder(this,'mal')">El Pronunciamiento del 15 de mayo</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">La Batalla de Tacuary</div>
+          <div class="quiz-opcion" onclick="responder(this,'ok')">Se declaró la República del Paraguay y se formó el Consulado</div>
+          <div class="quiz-opcion" onclick="responder(this,'mal')">Francia fue proclamado Dictador Perpetuo</div>
+        </div>
+        <div class="quiz-feedback ok" style="display:none;">Correcto. El Segundo Congreso del 30 de septiembre de 1813 declaró al Paraguay República independiente y creó el Consulado con Yegros y Francia como cónsules.</div>
+        <div class="quiz-feedback mal" style="display:none;">Incorrecto. El 30 de septiembre de 1813, el Segundo Congreso Nacional declaró la República del Paraguay y estableció el Consulado.</div>
+      </div>
+    </div>
+
+    <!-- ── NAVEGACIÓN ── -->
+    <div class="nav-cartillas">
+      <button class="btn-nav btn-prev" id="btn-prev" onclick="cambiarCartilla(-1)" disabled>← Anterior</button>
+      <span class="cartilla-counter" id="contador-cartilla"></span>
+      <button class="btn-nav btn-next" id="btn-next" onclick="cambiarCartilla(1)">Siguiente →</button>
+    </div>
+
+  </div><!-- fin pantalla-cartillas -->
+
+  <!-- ══════════════════════════════════════════════
+       MODO EXAMEN
+       ══════════════════════════════════════════════ -->
+  <div id="pantalla-examen">
+    <div class="examen-header">
+      <div>
+        <div class="examen-titulo">🏆 Modo Examen</div>
+        <div class="examen-progress" id="ex-progress"></div>
+      </div>
+      <div class="examen-timer" id="ex-timer">20:00</div>
+    </div>
+    <div class="examen-pregunta-card">
+      <div class="examen-num" id="ex-num"></div>
+      <div class="examen-texto" id="ex-texto"></div>
+      <div class="examen-opciones" id="ex-opciones"></div>
+    </div>
+    <div class="examen-nav">
+      <button class="btn-examen-nav btn-examen-prev" onclick="examenNav(-1)">← Anterior</button>
+      <button class="btn-examen-nav btn-finalizar" onclick="finalizarExamen()">Finalizar examen</button>
+    </div>
+  </div>
+
+  <!-- RESULTADO -->
+  <div id="pantalla-resultado">
+    <div class="resultado-icon" id="res-icon"></div>
+    <div class="resultado-score" id="res-score"></div>
+    <div class="resultado-detalle" id="res-detalle"></div>
+    <div class="resultado-review" id="res-review"></div>
+    <button class="btn-reiniciar btn-repetir" onclick="iniciarExamen()">🔄 Repetir examen</button>
+    <button class="btn-reiniciar btn-volver" onclick="mostrarCartillas()">📖 Volver a estudiar</button>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       PANTALLA PROVISTO POR LA PROF
+       ══════════════════════════════════════════════ -->
+  <div id="pantalla-prof">
+    <div class="prof-intro">
+      <strong>Guía de la Profesora</strong> — Temas desarrollados organizados por unidad. Tocá una unidad para expandirla y luego cada tema para leer el contenido.
+    </div>
+
+    <!-- UNIDAD 1 -->
+    <div class="prof-unidad" id="pu1">
+      <div class="prof-unidad-header" onclick="toggleUnidadProf('pu1')">
+        <div><span class="u-num">Unidad 1</span><h3>Exploraciones y Descubrimientos</h3></div>
+        <span class="prof-chevron">▼</span>
+      </div>
+      <div class="prof-unidad-body">
+
+        <div class="prof-tema" id="pt1-1">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt1-1')">
+            <span>Motivaciones económicas para las exploraciones</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <p>La principal motivación fue económica: Europa estaba en plena transición del <strong>feudalismo al capitalismo comercial</strong>, lo que generó una enorme necesidad de metales preciosos (oro y plata) para sostener la economía monetaria emergente.</p>
+            <h4>Factores clave</h4>
+            <ul>
+              <li><strong>Caída de Constantinopla (1453):</strong> los turcos otomanos cortaron las rutas terrestres a Asia, encareciendo las especias y obligando a buscar rutas marítimas alternativas.</li>
+              <li><strong>Avances tecnológicos:</strong> perfeccionamiento de la brújula y la carabela; invención de la imprenta por Gutenberg (~1440) que difundió mapas y conocimientos geográficos.</li>
+              <li><strong>Búsqueda de especias:</strong> canela, pimienta y otras especias asiáticas eran extremadamente valiosas en Europa.</li>
+              <li><strong>Motivación religiosa:</strong> deseo de expandir el cristianismo a nuevos territorios.</li>
+              <li><strong>Apoyo de la Corona española:</strong> los Reyes Católicos financiaron las expediciones como inversión política y económica.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="prof-tema" id="pt1-2">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt1-2')">
+            <span>Qué se descubrió en cada uno de los 4 viajes de Colón</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <h4>1° Viaje (1492–1493)</h4>
+            <ul>
+              <li>Salida: 3 de agosto de 1492 desde Palos de la Frontera con las carabelas La Pinta, La Niña y la nao Santa María.</li>
+              <li><strong>12 de octubre de 1492:</strong> llegada a la isla Guanahani (llamada San Salvador). Primera tierra americana.</li>
+              <li>Exploró: Cuba y La Española (hoy Haití/República Dominicana).</li>
+            </ul>
+            <h4>2° Viaje (1493–1496)</h4>
+            <ul>
+              <li>Partió con 17 barcos y más de 1.000 hombres.</li>
+              <li>Descubrió: Dominica, Martinica, Guadalupe, Puerto Rico y Jamaica.</li>
+              <li>Fundó Villa Isabela, primera ciudad europea en América.</li>
+            </ul>
+            <h4>3° Viaje (1498–1500)</h4>
+            <ul>
+              <li>Descubrió la isla Trinidad y la desembocadura del río Orinoco (Venezuela), primer contacto con tierra firme continental.</li>
+              <li>Colón fue arrestado por Francisco de Bobadilla y enviado a España encadenado.</li>
+            </ul>
+            <h4>4° Viaje (1502–1504)</h4>
+            <ul>
+              <li>Exploró desde Honduras hasta Panamá, buscando un estrecho que comunicara con el océano Pacífico.</li>
+              <li>No encontró el estrecho; regresó enfermo a España.</li>
+              <li>Falleció el <strong>20 de mayo de 1506</strong> en Valladolid, creyendo haber llegado a Asia.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="prof-tema" id="pt1-3">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt1-3')">
+            <span>Diferencia entre la Bula Alejandrina y el Tratado de Tordesillas</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <div class="tabla-wrap">
+              <table>
+                <tr><th>Aspecto</th><th>Bulas Alejandrinas (1493)</th><th>Tratado de Tordesillas (1494)</th></tr>
+                <tr><td>Autor/Origen</td><td>Papa Alejandro VI (Iglesia Católica)</td><td>Acuerdo bilateral: Castilla y Portugal</td></tr>
+                <tr><td>Cantidad de documentos</td><td>5 bulas papales</td><td>1 tratado internacional</td></tr>
+                <tr><td>Posición de la línea</td><td>100 leguas al oeste de Azores/Cabo Verde</td><td>370 leguas al oeste de Cabo Verde</td></tr>
+                <tr><td>Zona oeste</td><td>Castilla</td><td>Castilla</td></tr>
+                <tr><td>Zona este</td><td>Portugal</td><td>Portugal</td></tr>
+                <tr><td>Efecto para Brasil</td><td>Brasil quedaría en zona castellana</td><td>Al correr la línea al oeste, Brasil quedó en zona portuguesa</td></tr>
+              </table>
+            </div>
+            <p><strong>Diferencia clave:</strong> Las Bulas fueron un acto unilateral del Papa que favoreció a Castilla. El Tratado de Tordesillas fue negociado directamente entre los reinos y corrió la línea 270 leguas más al oeste, lo que permitió a Portugal reclamar legalmente el territorio de Brasil.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- UNIDAD 2 -->
+    <div class="prof-unidad" id="pu2">
+      <div class="prof-unidad-header" onclick="toggleUnidadProf('pu2')">
+        <div><span class="u-num">Unidad 2</span><h3>Los Guaraníes</h3></div>
+        <span class="prof-chevron">▼</span>
+      </div>
+      <div class="prof-unidad-body">
+
+        <div class="prof-tema" id="pt2-1">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt2-1')">
+            <span>Los guaraníes: organización social, política y económica</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <h4>Organización Social</h4>
+            <ul>
+              <li>Vivían en la <strong>taba</strong> (pueblo), compuesta por un máximo de 7 grandes cabañas con paredes de ramas y techo de palmera.</li>
+              <li>En el espacio central se realizaban fiestas y ritos comunitarios.</li>
+              <li>La familia era la unidad básica; el padre era el jefe del hogar.</li>
+              <li>Se practicaba la <strong>poligamia</strong>: el hombre podía tener varias esposas, especialmente si se había destacado en la guerra.</li>
+              <li>El divorcio era posible mediante una simple declaración verbal.</li>
+            </ul>
+            <h4>Organización Política</h4>
+            <ul>
+              <li>Cada taba era una unidad independiente, gobernada por un <strong>rubicha</strong> (jefe).</li>
+              <li>El rubicha era elegido por el consejo de ancianos (los más experimentados en guerra y en vida).</li>
+              <li>La organización tribal más amplia solo surgía en caso de guerra, cuando varias tabas se unían bajo un jefe militar.</li>
+              <li>Las decisiones importantes se tomaban en asamblea de guerreros adultos.</li>
+            </ul>
+            <h4>Organización Económica</h4>
+            <ul>
+              <li>Base: <strong>agricultura</strong> (maíz, mandioca, porotos, maní, zapallo), complementada con caza, pesca y recolección.</li>
+              <li>No utilizaban moneda; practicaban una economía de subsistencia basada en el intercambio.</li>
+              <li>Las mujeres fabricaban hamacas, cestos y cerámica; los hombres se dedicaban a la caza, la guerra y la tala.</li>
+              <li>La tierra no era propiedad privada; pertenecía a la comunidad de la taba.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- UNIDAD 3 -->
+    <div class="prof-unidad" id="pu3">
+      <div class="prof-unidad-header" onclick="toggleUnidadProf('pu3')">
+        <div><span class="u-num">Unidad 3</span><h3>Exploraciones y Conquistas en el Río de la Plata</h3></div>
+        <span class="prof-chevron">▼</span>
+      </div>
+      <div class="prof-unidad-body">
+
+        <div class="prof-tema" id="pt3-1">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt3-1')">
+            <span>¿Quién descubrió el Mar del Sur?</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <p><strong>Vasco Núñez de Balboa</strong> descubrió el océano Pacífico (llamado por él «Mar del Sur») el <strong>25 de septiembre de 1513</strong>. Desde el istmo de Panamá avistó el océano y tomó posesión de él en nombre de la Corona de Castilla, entrando con armadura y espada en las aguas.</p>
+          </div>
+        </div>
+
+        <div class="prof-tema" id="pt3-2">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt3-2')">
+            <span>Los Adelantados del Río de la Plata</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <p>El adelantado era un funcionario real que recibía el título de gobernador, capitán general y justicia mayor de los territorios que conquistara a su propio costo.</p>
+            <div class="tabla-wrap">
+              <table>
+                <tr><th>#</th><th>Adelantado</th><th>Hechos destacados</th></tr>
+                <tr><td>1°</td><td>Pedro de Mendoza</td><td>Designado el 21/5/1534. Fundó Buenos Aires el 2/2/1536 (Nuestra Señora del Buen Ayre). Falleció en alta mar el 23/6/1537 regresando enfermo a España.</td></tr>
+                <tr><td>2°</td><td>Álvar Núñez Cabeza de Vaca</td><td>Llegó a Asunción el 11/3/1542. Fue depuesto por un motín liderado por Irala. Enviado a España encadenado en la carabela San Marcos.</td></tr>
+                <tr><td>3°</td><td>Juan de Sanabria</td><td>Murió antes de ejercer. Su hijo Diego tampoco llegó. Ejerció su esposa Doña Mencía de Sanabria, quien dirigió la expedición hasta el Río de la Plata.</td></tr>
+                <tr><td>4°</td><td>Juan Ortiz de Zárate</td><td>Llegó con franciscanos en 1575. Murió poco después.</td></tr>
+                <tr><td>5°</td><td>Juan Torres de Vera y Aragón</td><td>Último adelantado; fundó Corrientes (1588).</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="prof-tema" id="pt3-3">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt3-3')">
+            <span>Obras de Domingo Martínez de Irala</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <ul>
+              <li>Asumió el gobierno el <strong>31 de julio de 1539</strong>, invocando la Real Provisión de 1537 que autorizaba a los pobladores a elegir a su gobernante.</li>
+              <li>Ordenó el <strong>despoblamiento del Buen Ayre</strong> (Buenos Aires) y concentró a todos los colonizadores en Asunción.</li>
+              <li>Creó el <strong>Cabildo de Asunción</strong>, primer órgano de gobierno municipal.</li>
+              <li>Promovió el <strong>mestizaje</strong>: estableció alianzas con los carios-guaraníes, quienes entregaron sus hijas «en prenda de amistad». Este mestizaje fue el cimiento de la nación paraguaya.</li>
+              <li>Organizó expediciones en busca de la <strong>Sierra de la Plata</strong> (riquezas míticas del interior del continente).</li>
+              <li>Distribuyó encomiendas de indios entre los colonos (luego cuestionado por los abusos).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="prof-tema" id="pt3-4">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt3-4')">
+            <span>Fundación de Asunción</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <p>Asunción fue fundada el <strong>15 de agosto de 1537</strong> (festividad de la Asunción de la Virgen María) por <strong>Juan de Salazar de Espinoza</strong>, quien estableció la Casa Fuerte «Nuestra Señora de la Asunción».</p>
+            <ul>
+              <li>Juan de Salazar venía en busca de Ayolas (enviado por Pedro de Mendoza) cuando los guaraníes carios lo recibieron en paz.</li>
+              <li>La ubicación fue estratégica: bahía protegida sobre el río Paraguay, rodeada de tierras fértiles y población guaraní pacífica.</li>
+              <li>Asunción se convirtió en la «Madre de Ciudades» del Río de la Plata: desde ella se fundaron Buenos Aires (refundación 1580), Corrientes, Santa Fe y otras.</li>
+            </ul>
+            <p><em>Colinas históricas de la fundación:</em> Loma Kavara (probable lugar exacto), San Jerónimo, Clavel, Cachinga, Mangrullo, Encarnación, Cerrito Sansón Cué.</p>
+          </div>
+        </div>
+
+        <div class="prof-tema" id="pt3-5">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt3-5')">
+            <span>¿Qué decía la Real Provisión de 1537?</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <p>Firmada el <strong>12 de septiembre de 1537</strong> en Valladolid por el Rey Carlos V (a instancias de Alonso Cabrera), establecía:</p>
+            <ul>
+              <li>Si el adelantado o gobernador moría sin haber designado un lugarteniente, <strong>los mismos pobladores tendrían derecho a elegir</strong> al más idóneo «según Dios y sus conciencias».</li>
+              <li>La elección debía ser ratificada por el Rey.</li>
+              <li>Esta provisión fue el fundamento legal con que Domingo Martínez de Irala asumió el gobierno en 1539, siendo la primera elección popular de gobernante en el Río de la Plata.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="prof-tema" id="pt3-6">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt3-6')">
+            <span>Encomiendas bajo el gobierno de Irala</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <p>La <strong>encomienda</strong> era un sistema por el cual la Corona otorgaba a un colono español (encomendero) un grupo de indios para que trabajaran para él, a cambio de que el encomendero los evangelizara y los protegiera.</p>
+            <ul>
+              <li>Irala distribuyó encomiendas entre los colonos, lo que generó grandes abusos: trabajo forzado, traslados violentos, separación de familias y las llamadas «rancheadas» (ataques para capturar indios).</li>
+              <li>La práctica del servicio personal hizo que los indios trabajaran como esclavos de facto.</li>
+              <li>Los abusos continuaron hasta la llegada del oidor Francisco de Alfaro en 1611, quien promulgó sus Ordenanzas suprimiendo el servicio personal.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- UNIDAD 4 -->
+    <div class="prof-unidad" id="pu4">
+      <div class="prof-unidad-header" onclick="toggleUnidadProf('pu4')">
+        <div><span class="u-num">Unidad 4</span><h3>Paraguay Colonial</h3></div>
+        <span class="prof-chevron">▼</span>
+      </div>
+      <div class="prof-unidad-body">
+
+        <div class="prof-tema" id="pt4-1">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt4-1')">
+            <span>Obras educativas de Hernando Arias de Saavedra (Hernandarias)</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <ul>
+              <li>Fundó la <strong>Casa de Recogidas y Huérfanas</strong> bajo el cuidado de Francisca de Bocanegra: primer hogar para mujeres desamparadas.</li>
+              <li>Impulsó la <strong>Escuela Colegio del Padre Francisco de Zaldívar</strong>, uno de los primeros centros educativos de la provincia.</li>
+              <li>Gestionó ante la Corona la llegada de los jesuitas (Cédula Real de 1608), quienes habilitaron el primer colegio secundario de Asunción.</li>
+              <li>Convocó el <strong>Sínodo Asunceno de 1603</strong>: estableció el guaraní como idioma oficial de evangelización, reconociendo la lengua nativa.</li>
+              <li>Su hermanastro <strong>Hernando de Trejo y Sanabria</strong> fundó el Colegio Máximo de Córdoba (hoy Universidad Nacional de Córdoba), primera universidad del Río de la Plata.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="prof-tema" id="pt4-2">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt4-2')">
+            <span>División política de la provincia (1617)</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <p>La <strong>Real Cédula del 16 de diciembre de 1617</strong> dividió la enorme «Provincia Gigante de Indias» en dos gobernaciones:</p>
+            <div class="tabla-wrap">
+              <table>
+                <tr><th>Gobernación</th><th>Capital</th><th>Ciudades principales</th></tr>
+                <tr><td>Gobernación del Río de la Plata</td><td>Buenos Aires</td><td>Santa Fe, Corrientes, Concepción del Bermejo</td></tr>
+                <tr><td>Gobernación del Guairá o Paraguay</td><td>Asunción</td><td>Villa Rica del Espíritu Santo, Ciudad Real, Santiago de Jerez</td></tr>
+              </table>
+            </div>
+            <p><strong>Consecuencia fundamental:</strong> Paraguay perdió sus extensos territorios costeros y quedó sin salida al mar, convirtiéndose en una provincia mediterránea. Esto afectó gravemente su comercio exterior por décadas.</p>
+          </div>
+        </div>
+
+        <div class="prof-tema" id="pt4-3">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt4-3')">
+            <span>Ordenanzas de Alfaro — supresión de las Encomiendas</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <p><strong>Francisco de Alfaro</strong>, Oidor de la Audiencia de Charcas, llegó a la provincia en 1611 y promulgó ordenanzas que transformaron el sistema de trabajo indígena:</p>
+            <ul>
+              <li>Suprimió el <strong>servicio personal</strong>: los indios ya no podían ser obligados a trabajar gratuitamente.</li>
+              <li>Prohibió el traslado de indios a más de <strong>1 legua</strong> de su lugar de residencia.</li>
+              <li>Declaró nula la <strong>compraventa de indios</strong>: no podían ser tratados como mercancía.</li>
+              <li>Reconoció al indio el derecho de elegir libremente a su patrón (con contrato máximo de 1 año).</li>
+              <li>Fijó una <strong>tasa anual de 5 pesos</strong> como tributo máximo.</li>
+              <li>Reglamentó la <strong>mita</strong>: el trabajo obligatorio debía ser remunerado en dinero (no en especie), y el empleador debía atender al indio en caso de enfermedad.</li>
+              <li>Designó a <strong>Hernandarias</strong> como Protector de Indios.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="prof-tema" id="pt4-4">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt4-4')">
+            <span>La economía colonial: Yerba mate</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <p>La <strong>yerba mate</strong> fue el producto más importante de la economía colonial paraguaya y la principal fuente de riqueza para la exportación durante todo el período colonial.</p>
+            <ul>
+              <li>Era recolectada en los yerbales silvestres del interior de la provincia por trabajadores indígenas.</li>
+              <li>Se exportaba hacia Buenos Aires, el Río de la Plata y luego a mercados sudamericanos más amplios.</li>
+              <li>Constituyó la base del comercio exterior paraguayo durante toda la colonia.</li>
+              <li>La producción jesuítica de yerba mate en las reducciones fue especialmente eficiente y generó conflictos con los productores privados.</li>
+              <li>El impuesto a la yerba mate fue uno de los principales ingresos fiscales de la provincia.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- UNIDAD 5 -->
+    <div class="prof-unidad" id="pu5">
+      <div class="prof-unidad-header" onclick="toggleUnidadProf('pu5')">
+        <div><span class="u-num">Unidad 5</span><h3>Labor Misionera — Los Jesuitas</h3></div>
+        <span class="prof-chevron">▼</span>
+      </div>
+      <div class="prof-unidad-body">
+
+        <div class="prof-tema" id="pt5-1">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt5-1')">
+            <span>Obras de los Jesuitas</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <h4>Las Reducciones</h4>
+            <p>Los jesuitas establecieron las reducciones más famosas del continente americano, ubicadas entre los ríos Tebicuary, Paraná y Uruguay. En territorio paraguayo se destacan:</p>
+            <p>San Ignacio Guasú, San Cosme y Damián, Itapuá (actual Encarnación), Corpus, Candelaria, Santa Ana, Loreto, San Ignacio Miní, Santa María de Fe, Santiago, Santa Rosa de Lima, Jesús, Trinidad, San Joaquín, San Estanislao, Belén.</p>
+            <h4>Sistema económico</h4>
+            <ul>
+              <li><strong>Aba-Mbae</strong> (tierra del indio): parcelas asignadas a cada familia para su sustento.</li>
+              <li><strong>Tupã-Mbae</strong> (tierra de Dios/comunitaria): producción colectiva destinada a la iglesia, asistencia a viudas, huérfanos y enfermos.</li>
+              <li>Sin moneda: el intercambio era en especie.</li>
+            </ul>
+            <h4>Educación y cultura</h4>
+            <ul>
+              <li><strong>Primera imprenta misionera</strong> instalada en Santa María la Mayor (1700): los primeros libros impresos fueron el Martirologio Romano y «De la diferencia entre lo temporal y lo eterno».</li>
+              <li>Escuelas de: carpintería, talla de madera, albañilería, música, tejido, herrería, pintura, estatuaria, relojería e imprenta.</li>
+              <li>Los indios crearon las famosas imágenes sagradas (santos tallados en madera) que son patrimonio artístico de Paraguay.</li>
+            </ul>
+            <h4>Expulsión</h4>
+            <p>En 1767 el Rey Carlos III expulsó a los jesuitas de todos los territorios españoles. Las reducciones decayeron rápidamente al quedar sin dirección, y muchos indios se dispersaron o fueron sometidos a nuevas encomiendas.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- UNIDAD 6 -->
+    <div class="prof-unidad" id="pu6">
+      <div class="prof-unidad-header" onclick="toggleUnidadProf('pu6')">
+        <div><span class="u-num">Unidad 6</span><h3>Revolución Comunera</h3></div>
+        <span class="prof-chevron">▼</span>
+      </div>
+      <div class="prof-unidad-body">
+
+        <div class="prof-tema" id="pt6-1">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt6-1')">
+            <span>Revolución Comunera</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <p>La Revolución Comunera (1717–1735) fue la <strong>primera rebelión popular de América del Sur</strong>. Combinó el rechazo a los abusos de los gobernadores españoles, la oposición a los jesuitas y la defensa del derecho de los vecinos a elegir sus autoridades.</p>
+            <h4>Figuras principales</h4>
+            <ul>
+              <li><strong>José de Antequera y Castro:</strong> juez pesquisidor enviado desde Lima que terminó gobernando Paraguay. Lideró la rebelión.</li>
+              <li><strong>Fernando de Mompox y Zayas:</strong> ideólogo de la revolución. Proclamó el principio: <em>«El poder común de cualquier república, ciudad, villa o aldea es más poderosa que el mismo rey»</em>.</li>
+            </ul>
+            <h4>Desarrollo</h4>
+            <ul>
+              <li>Los comuneros expulsaron a gobernadores designados por Buenos Aires y elegían a sus propios líderes.</li>
+              <li>Los jesuitas (aliados de la Corona y Buenos Aires) utilizaron a sus indios guaraníes armados contra los comuneros.</li>
+              <li>Antequera fue derrotado en la batalla de Tabapý (1725) y huyó a Lima, donde fue ejecutado (1731).</li>
+              <li>Fernando de Mompox continuó la rebelión hasta 1735 cuando fue finalmente sofocada.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="prof-tema" id="pt6-2">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt6-2')">
+            <span>Sanciones políticas y económicas de la Revolución Comunera</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <h4>Sanciones Políticas</h4>
+            <ul>
+              <li>Abolición del derecho de los vecinos a elegir gobernadores (suprimiendo el principio invocado en la Real Provisión de 1537).</li>
+              <li>Ahorcamiento, encarcelamiento y destierro de los principales caudillos y líderes comuneros.</li>
+              <li>Reforzamiento de la autoridad del Virreinato del Perú (y luego del Río de la Plata) sobre Paraguay.</li>
+            </ul>
+            <h4>Sanciones Económicas</h4>
+            <ul>
+              <li>Embargo de los productos paraguayos (especialmente yerba mate y tabaco) depositados en los puertos del Río de la Plata.</li>
+              <li>Prohibición de libre exportación desde Paraguay.</li>
+              <li>Obligación de hacer pasar todas las mercaderías por <strong>Santa Fe</strong> (donde se cobraba un impuesto) y luego por <strong>Buenos Aires</strong> (donde se cobraba otro impuesto), encareciendo enormemente los productos paraguayos.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- UNIDAD 7 -->
+    <div class="prof-unidad" id="pu7">
+      <div class="prof-unidad-header" onclick="toggleUnidadProf('pu7')">
+        <div><span class="u-num">Unidad 7</span><h3>Reformas Borbónicas</h3></div>
+        <span class="prof-chevron">▼</span>
+      </div>
+      <div class="prof-unidad-body">
+
+        <div class="prof-tema" id="pt7-1">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt7-1')">
+            <span>Tratado de Permuta y Tratado de San Ildefonso</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <h4>Tratado de Permuta (1750)</h4>
+            <ul>
+              <li>Firmado el <strong>13 de enero de 1750</strong> entre España y Portugal.</li>
+              <li>España entregó a Portugal <strong>7 reducciones jesuíticas</strong> al este del río Uruguay (con sus tierras, ganados y edificios) a cambio de la Colonia del Sacramento y 28.000 pesos.</li>
+              <li>Los guaraníes que vivían en esas reducciones se negaron a abandonar sus hogares, desencadenando la <strong>Guerra Guaranítica (1754–1756)</strong>: fuerzas combinadas hispano-portuguesas aplastaron la resistencia. Murió el líder indígena Sepé Tiaraju.</li>
+            </ul>
+            <h4>Tratado de San Ildefonso (1777)</h4>
+            <ul>
+              <li>España <strong>recuperó</strong> la Colonia del Sacramento y las 7 reducciones jesuíticas.</li>
+              <li>Sin embargo, Paraguay cedió el vasto territorio del <strong>Mato Grosso</strong> a Portugal, lo que significó una enorme pérdida territorial para el Paraguay.</li>
+              <li>Fue una solución diplomática que perjudicó más a Paraguay que a Buenos Aires o España.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="prof-tema" id="pt7-2">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt7-2')">
+            <span>Los últimos Gobernadores coloniales</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <div class="tabla-wrap">
+              <table>
+                <tr><th>Gobernador</th><th>Período</th><th>Obras y hechos destacados</th></tr>
+                <tr>
+                  <td><strong>Agustín Fernando de Pinedo</strong></td>
+                  <td>1772–1778</td>
+                  <td>Fundó San Lorenzo del Campo Grande, Paraguarí y Villa Real de la Concepción. Envió a la Corona el célebre «Memorial» (1777) describiendo los males económicos de la provincia.</td>
+                </tr>
+                <tr>
+                  <td><strong>Pedro Melo de Portugal</strong></td>
+                  <td>1778–1787</td>
+                  <td>Inauguró el Real Colegio Seminario de San Carlos. La provincia fue erigida como Intendencia. Fundó Villa San Pedro, Itacurubí, Villa del Rosario, Caapucú, Acahay, Villa del Pilar, entre otros.</td>
+                </tr>
+                <tr>
+                  <td><strong>Joaquín Alos y Brú</strong></td>
+                  <td>1787–1796</td>
+                  <td>Fundó el Fuerte Borbón (hoy Olimpo) para defensa contra los portugueses e indígenas del Chaco. También fundó Laureles.</td>
+                </tr>
+                <tr>
+                  <td><strong>Lázaro de Rivera</strong></td>
+                  <td>1796–1806</td>
+                  <td>Realizó el primer Censo Poblacional del Paraguay. Fundó San Juan Nepomuceno. Estableció escuelas primarias y obligó a los padres a enviar a sus hijos varones desde los 6 años. Creó una Cartilla Real para la enseñanza de jóvenes. Incrementó la producción de tabaco.</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- UNIDAD 8 -->
+    <div class="prof-unidad" id="pu8">
+      <div class="prof-unidad-header" onclick="toggleUnidadProf('pu8')">
+        <div><span class="u-num">Unidad 8</span><h3>La Revolución de Independencia</h3></div>
+        <span class="prof-chevron">▼</span>
+      </div>
+      <div class="prof-unidad-body">
+
+        <div class="prof-tema" id="pt8-1">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt8-1')">
+            <span>Invasiones Inglesas y su influencia en el Río de la Plata</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <p>A inicios del siglo XIX, España se alió con Napoleón Bonaparte contra Inglaterra. En <strong>1804</strong> se declaró la guerra, y en 1805 Inglaterra venció a la escuadra franco-hispana en Trafalgar.</p>
+            <h4>Primera invasión — Buenos Aires (1806)</h4>
+            <ul>
+              <li>Una flota inglesa al mando de <strong>Sir Home Popham</strong> desembarcó en Buenos Aires.</li>
+              <li>El Virrey <strong>Rafael de Sobremonte</strong> huyó de la ciudad sin oponer resistencia.</li>
+              <li>Los bonaerenses, con criollos y refuerzos de otras provincias, organizaron la reconquista y expulsaron a los ingleses.</li>
+            </ul>
+            <h4>Segunda invasión — Montevideo (1807)</h4>
+            <ul>
+              <li>Los ingleses volvieron con una flota de 100 buques y 6.000 soldados; tomaron Montevideo.</li>
+              <li>Los criollos nombraron a <strong>Santiago de Liniers</strong> (héroe de la reconquista) en reemplazo de Sobremonte como máxima autoridad militar.</li>
+              <li>Finalmente los ingleses tuvieron que retirarse definitivamente.</li>
+            </ul>
+            <h4>Contribución del Paraguay</h4>
+            <ul>
+              <li>Paraguay contribuyó con un ejército de más de <strong>900 hombres</strong>.</li>
+              <li>Figuras destacadas: Juan Manuel Gamarra, José Fernández Montiel, Fulgencio Yegros, Antonio Tomás Yegros.</li>
+              <li>Consecuencia clave: los criollos descubrieron su capacidad militar y se sintieron con derecho a opinar sobre el destino de la colonia.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="prof-tema" id="pt8-2">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt8-2')">
+            <span>Congreso del 24 de julio de 1810</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <p>La <strong>Junta de Gobierno de Buenos Aires</strong>, constituida el 25 de mayo de 1810, buscaba la adhesión de todas las provincias del virreinato. El gobernador del Paraguay, <strong>Bernardo de Velazco</strong>, convocó un congreso en el Real Colegio San Carlos para decidir la posición de la provincia.</p>
+            <h4>Resoluciones del Congreso</h4>
+            <ul>
+              <li><strong>1°</strong> Reconocimiento y jura de lealtad al <strong>Supremo Consejo de Regencia</strong> (representante de Fernando VII, rey prisionero de Napoleón).</li>
+              <li><strong>2°</strong> Guardar armonía y buenas relaciones con la Junta de Buenos Aires, pero <strong>NO reconocer su superioridad</strong> ni someterse a sus órdenes.</li>
+              <li><strong>3°</strong> Formar una <strong>Junta de Guerra</strong> para organizar la defensa de la provincia.</li>
+              <li><strong>4°</strong> Declarar el Real Colegio San Carlos como <strong>Cuartel General</strong> de las fuerzas militares.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="prof-tema" id="pt8-3">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt8-3')">
+            <span>Misión de Espínola y Peña — Misión Militar de Belgrano</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <h4>Misión de José Espínola y Peña</h4>
+            <p>La Junta de Buenos Aires envió a <strong>José Espínola y Peña</strong> como emisario diplomático para obtener la obediencia del Paraguay. Llegó a Pilar, donde el cabildo juró ante él lealtad a la Junta. Sin embargo, al avanzar hacia Asunción, Velazco lo envió a Concepción para alejarlo; Espínola y Peña huyó a Buenos Aires y aconsejó a la Junta enviar una fuerza militar.</p>
+            <h4>Misión Militar de Manuel Belgrano</h4>
+            <p>La Junta encomendó al Dr. <strong>Manuel Belgrano</strong> una expedición de ~1.500 hombres. Se libraron dos batallas decisivas:</p>
+            <ul>
+              <li><strong>Batalla de Paraguarí (19 de enero de 1811):</strong> Velazco y los jefes españoles huyeron del campo de batalla. Los jefes criollos paraguayos — Manuel Cabañas, Juan Gamarra y Fulgencio Yegros — no persiguieron a los porteños pero evitaron la derrota y obligaron a Belgrano a retirarse al sur.</li>
+              <li><strong>Batalla de Tacuary (9 de marzo de 1811):</strong> Los jefes paraguayos llegaron a un <strong>acuerdo diplomático</strong> con Belgrano: entendimiento mutuo y envío de un diputado paraguayo al Congreso General de Buenos Aires.</li>
+            </ul>
+            <p>Consecuencia: los jefes criollos (Yegros, Cabañas, Caballero) ganaron confianza y popularidad frente a los españoles que habían huido.</p>
+          </div>
+        </div>
+
+        <div class="prof-tema" id="pt8-4">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt8-4')">
+            <span>Pronunciamiento del 14 y 15 de mayo de 1811</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <p>El plan original consistía en un levantamiento simultáneo: <strong>Fulgencio Yegros</strong> desde Misiones/Itapuá, <strong>Manuel Cabañas</strong> desde Cordilleras y <strong>Blas José Rojas</strong> desde Corrientes, para converger sobre Asunción. Se adelantó al 14 de mayo ante la amenaza de que los contrarrevolucionarios descubrieran el plan.</p>
+            <h4>Noche del 14 de mayo</h4>
+            <ul>
+              <li><strong>Pedro Juan Caballero</strong> (en ausencia de Yegros) tomó el Cuartel de Infantería, cuyo guardia era el Capitán Mauricio José Troche.</li>
+              <li>El Capitán <strong>Vicente Ignacio Iturbe</strong> llevó una nota a Velazco con las exigencias: (1) entregar todas las armas al Cuartel, (2) el gobernador permanece pero con 2 diputados del Cuartel vigilándolo, (3) ningún barco zarpa, (4) ningún portugués abandona la ciudad.</li>
+              <li>Velazco se negó a firmar.</li>
+            </ul>
+            <h4>Madrugada del 15 de mayo</h4>
+            <ul>
+              <li>Los revolucionarios colocaron cañones apuntando a la casa de Velazco.</li>
+              <li>Velazco se rindió y firmó la nota.</li>
+              <li>Se disparó una <strong>salva de 21 cañonazos</strong> como señal de victoria; el pueblo festejó en las calles.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="prof-tema" id="pt8-5">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt8-5')">
+            <span>Primer Gobierno Provisorio y Primer Congreso Nacional</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <h4>Primer Gobierno Provisorio (16 de mayo de 1811)</h4>
+            <p>Se formó un <strong>Triunvirato</strong> compuesto por:</p>
+            <ul>
+              <li>Dr. <strong>José Gaspar Rodríguez de Francia</strong></li>
+              <li>Capitán <strong>Juan Valeriano Zaballos</strong></li>
+              <li><strong>Bernardo de Velazco</strong> (gobernador anterior, bajo control)</li>
+            </ul>
+            <h4>Primer Congreso Nacional (17–20 de junio de 1811)</h4>
+            <p>Reunido en la Casa de Gobierno, presidido por Francia y Zeballos. Resolvió:</p>
+            <ul>
+              <li>Separación definitiva de Velazco del gobierno.</li>
+              <li>Prohibición a los españoles europeos de ocupar cargos públicos.</li>
+              <li>Libertad de comercio y supresión de impuestos gravosos.</li>
+              <li>Suspensión del reconocimiento de las Cortes de Cádiz y el Consejo de Regencia.</li>
+              <li>Designación de Francia para representar a Paraguay ante el Congreso General de Buenos Aires.</li>
+              <li>Designación del nuevo gobierno: la <strong>Junta Superior Gubernativa</strong>.</li>
+            </ul>
+            <h4>Junta Superior Gubernativa</h4>
+            <ul>
+              <li><strong>Presidente:</strong> Fulgencio Yegros</li>
+              <li><strong>Vocales:</strong> J. G. Rodríguez de Francia, Pedro Juan Caballero, Francisco Javier Bogarín, Fernando de la Mora</li>
+            </ul>
+            <h4>Obras de la Junta Superior</h4>
+            <ul>
+              <li><strong>Nota del 20 de julio de 1811:</strong> declaración formal de la voluntad de conservar la independencia de la provincia.</li>
+              <li><strong>Bando del 6 de enero de 1812:</strong> educación primaria obligatoria.</li>
+              <li>Creación de la <strong>Sociedad Paraguaya Literaria</strong> (impulsada por Juan Andrés Gelly).</li>
+              <li>Fundación de la <strong>Academia Militar</strong>.</li>
+              <li>Reapertura del <strong>Seminario San Carlos</strong>.</li>
+              <li>Creación de la primera <strong>Biblioteca Pública del Paraguay</strong>.</li>
+              <li><strong>Tratado del 12 de octubre de 1811</strong> con Buenos Aires: libre comercio de tabaco, cobro de impuestos de yerba mate en Asunción, y alianza recíproca.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="prof-tema" id="pt8-6">
+          <button class="prof-tema-header" onclick="toggleTemaProf('pt8-6')">
+            <span>Segundo Congreso Nacional — El Consulado y la República</span>
+            <span class="prof-tema-chevron">▼</span>
+          </button>
+          <div class="prof-tema-body">
+            <p>El <strong>Segundo Congreso Nacional</strong> se reunió el <strong>30 de septiembre de 1813</strong>. Sus resoluciones fueron históricas:</p>
+            <ul>
+              <li>Se resolvió <strong>no enviar diputados</strong> al Congreso General de Buenos Aires, afirmando la soberanía paraguaya.</li>
+              <li>Se adoptó una nueva forma de gobierno: <strong>EL CONSULADO</strong>, siguiendo el modelo de la República Romana clásica.</li>
+              <li>Se designó como Cónsules a <strong>Fulgencio Yegros</strong> y <strong>J. G. Rodríguez de Francia</strong>, con mandato alternado de 4 meses cada uno.</li>
+              <li>El Paraguay fue declarado <strong>REPÚBLICA DEL PARAGUAY</strong>, convirtiéndose en la <strong>primera república absolutamente independiente de América del Sur</strong>.</li>
+            </ul>
+            <p>Este fue el acto constitutivo de la República: Paraguay no solo se separó de España, sino también de Buenos Aires, proclamando su soberanía total como nación libre e independiente.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- fin pantalla-prof -->
+
+  <div class="footer-spacer"></div>
+</div><!-- fin container -->
+
+<!-- FOOTER NAV -->
+<nav class="footer-nav">
+  <button class="footer-tab activo" id="tab-cartillas" onclick="mostrarCartillas()">
+    <span class="footer-tab-icon">📖</span>
+    Cartillas
+  </button>
+  <button class="footer-tab" id="tab-examen" onclick="iniciarExamen()">
+    <span class="footer-tab-icon">🏆</span>
+    Modo Examen
+  </button>
+  <button class="footer-tab" id="tab-prof" onclick="mostrarProf()">
+    <span class="footer-tab-icon">📋</span>
+    De la Prof
+  </button>
+</nav>
+
+<script>
+// ══════════════════════════════════════
+// DATOS
+// ══════════════════════════════════════
+const TOTAL_CARTILLAS = 30; // c0 a c29
+
+const banco = [
+  // UNIDAD 1
+  { cartilla: 1, titulo: "Europa en el Siglo XV", pregunta: "¿Qué invento de Gutenberg (~1440) contribuyó a la difusión del conocimiento y las ideas de exploración?", opciones: ["La brújula magnética","La imprenta","La carabela","El astrolabio"], correcta: 1, explicacion: "La imprenta de Gutenberg (~1440) permitió difundir mapas, tratados y conocimientos geográficos que impulsaron la era de las exploraciones." },
+  { cartilla: 1, titulo: "Europa en el Siglo XV", pregunta: "¿Qué nombre recibió el extremo sur de África descubierto por Bartolomé Díaz en 1488?", opciones: ["Cabo Tormentoso (luego Buena Esperanza)","Cabo Verde","Cabo Finisterre","Cabo de la Roca"], correcta: 0, explicacion: "Bartolomé Díaz llegó al extremo sur de África en 1488, inicialmente llamado Cabo Tormentoso; el rey lo renombró Cabo de Buena Esperanza." },
+  { cartilla: 2, titulo: "Cristóbal Colón", pregunta: "¿En qué ciudad y año nació Cristóbal Colón?", opciones: ["Lisboa, 1451","Génova, 1451","Venecia, 1460","Sevilla, 1455"], correcta: 1, explicacion: "Cristóbal Colón nació en Génova (actual Italia) en 1451." },
+  { cartilla: 2, titulo: "Cristóbal Colón", pregunta: "¿Cuántos viajes realizó Cristóbal Colón al continente americano?", opciones: ["Dos","Tres","Cuatro","Cinco"], correcta: 2, explicacion: "Colón realizó cuatro viajes a América: 1492-93, 1493-96, 1498-1500 y 1502-04." },
+  { cartilla: 3, titulo: "Bulas y Tordesillas", pregunta: "¿Qué papa emitió las Bulas Alejandrinas en 1493?", opciones: ["Julio II","Alejandro VI","León X","Clemente VII"], correcta: 1, explicacion: "El Papa Alejandro VI emitió en 1493 las cinco Bulas que dividieron las zonas de exploración entre Castilla y Portugal." },
+  { cartilla: 3, titulo: "Bulas y Tordesillas", pregunta: "¿Qué permitió el Tratado de Tordesillas a Portugal?", opciones: ["Colonizar toda América","Colonizar Brasil legalmente","Comerciar con la India","Explorar el Pacífico"], correcta: 1, explicacion: "El Tratado de Tordesillas (1494), al correr la línea a 370 leguas al oeste de Cabo Verde, incluyó el territorio del Brasil dentro de la zona portuguesa." },
+  // UNIDAD 2
+  { cartilla: 5, titulo: "Periodización e Historia", pregunta: "¿Cuántos grandes periodos tiene la historia paraguaya según la división estudiada?", opciones: ["4","5","6","7"], correcta: 2, explicacion: "La historia paraguaya se divide en 6 periodos: Precolonial, Conquista, Colonial, Independencia, Organización Nacional, Constitucional y Actual (algunos incluyen el Actual como 7°)." },
+  { cartilla: 5, titulo: "Prehistoria", pregunta: "¿En qué periodo prehistórico el ser humano era nómada, cazador y usaba el fuego?", opciones: ["Neolítico","Mesolítico","Paleolítico","Edad del Bronce"], correcta: 2, explicacion: "El Paleolítico ('Edad de Piedra Antigua') se caracteriza por el nomadismo, la caza, la recolección y el uso del fuego." },
+  { cartilla: 6, titulo: "Los Guaraníes", pregunta: "¿Cuál es el nombre del jefe o líder de la taba guaraní, elegido por el consejo de ancianos?", opciones: ["Tupa","Rubicha","Carios","Abipon"], correcta: 1, explicacion: "El rubicha era el líder de la taba guaraní, elegido por el consejo de ancianos para dirigir la comunidad." },
+  { cartilla: 6, titulo: "Etnias Chaqueñas", pregunta: "¿A cuál de los siguientes grupos pertenecen los Payaguá y los Mbaya?", opciones: ["Matacos","Zamucos","Guaycurúes","Chiriguanos"], correcta: 2, explicacion: "Los Payaguá y los Mbaya eran parcialidades de la nación Guaycurú, que habitaba el Chaco paraguayo." },
+  // UNIDAD 3
+  { cartilla: 8, titulo: "Primeros Exploradores", pregunta: "¿Qué explorador completó la primera circunnavegación del globo terrestre (1519–1522)?", opciones: ["Magallanes","Elcano","Gaboto","Solís"], correcta: 1, explicacion: "Sebastián Elcano asumió el mando tras la muerte de Magallanes en Filipinas y regresó a España con 18 supervivientes, completando la primera vuelta al mundo." },
+  { cartilla: 8, titulo: "Primeros Exploradores", pregunta: "¿Cuál fue el primer asentamiento español en el actual territorio argentino, fundado por Gaboto en 1527?", opciones: ["Buenos Aires","Corpus Christi","Sancti Spiritu","Villa Isabela"], correcta: 2, explicacion: "Sebastián Gaboto fundó Sancti Spiritu en 1527, el primer asentamiento permanente español en el actual territorio argentino." },
+  { cartilla: 9, titulo: "Los Adelantados", pregunta: "¿Cuántos Adelantados tuvo el Río de la Plata?", opciones: ["3","4","5","6"], correcta: 2, explicacion: "Fueron 5 Adelantados del Río de la Plata: Pedro de Mendoza, Alvar Núñez Cabeza de Vaca, Juan de Sanabria (ejercido por Doña Mencía), Juan Ortiz de Zarate y Juan Torres de Vera y Aragón." },
+  { cartilla: 9, titulo: "Los Adelantados", pregunta: "¿En qué año Pedro de Mendoza fue nombrado Adelantado por Carlos V?", opciones: ["1530","1534","1536","1537"], correcta: 1, explicacion: "Pedro de Mendoza fue nombrado Adelantado, Capitán General y Justicia Mayor el 21 de mayo de 1534." },
+  { cartilla: 10, titulo: "Fundación de Asunción", pregunta: "¿Qué dispuso la Real Provisión del 12 de setiembre de 1537?", opciones: ["La fundación de Buenos Aires","Que el pueblo eligiera gobernador si Mendoza no designó sucesor","La creación del Virreinato","La expulsión de los jesuitas"], correcta: 1, explicacion: "La Real Provisión de 1537 estableció que si el Adelantado no había designado lugarteniente, los pobladores elegirían al gobernador más indicado." },
+  // UNIDAD 4
+  { cartilla: 12, titulo: "Hernandarias", pregunta: "¿En qué año llegaron los jesuitas a Paraguay, a pedido de Hernandarias?", opciones: ["1592","1602","1608","1617"], correcta: 2, explicacion: "Hernandarias solicitó la llegada de los jesuitas y mediante Cédula Real de 1608 se autorizó su venida al Paraguay." },
+  { cartilla: 13, titulo: "División Provincial", pregunta: "¿Cuál era la capital de la Gobernación del Guairá o Paraguay según la división de 1617?", opciones: ["Buenos Aires","Villa Rica","Santiago de Jerez","Asunción"], correcta: 3, explicacion: "La Gobernación del Guairá o Paraguay tenía como capital a Asunción, con las ciudades de Villa Rica, Ciudad Real y Santiago de Jerez." },
+  { cartilla: 14, titulo: "Economía Colonial", pregunta: "¿En qué año se estableció el Estanco del Tabaco en el Paraguay?", opciones: ["1752","1763","1779","1790"], correcta: 2, explicacion: "En 1779 se estableció el Estanco del Tabaco, que introdujo por primera vez la moneda metálica en la provincia." },
+  // UNIDAD 5
+  { cartilla: 16, titulo: "Órdenes Religiosas", pregunta: "¿Quién fue el fundador de la Compañía de Jesús?", opciones: ["San Francisco de Asís","Santo Domingo de Guzmán","San Ignacio de Loyola","San Pedro Nolasco"], correcta: 2, explicacion: "San Ignacio de Loyola fundó la Compañía de Jesús en 1534." },
+  { cartilla: 17, titulo: "Reducciones Jesuíticas", pregunta: "¿En qué ciudad se instaló la primera imprenta misionera en 1700?", opciones: ["Asunción","San Ignacio Guasú","Santa María","Candelaria"], correcta: 2, explicacion: "La primera imprenta misionera fue instalada en la ciudad de Santa María en el año 1700." },
+  { cartilla: 17, titulo: "Reducciones Jesuíticas", pregunta: "¿Cómo se llamaba la tierra de cultivo de propiedad individual del indio en las misiones?", opciones: ["Tupa-Mbae","Coty guazú","Aba-Mbae","Taba"], correcta: 2, explicacion: "El Aba-Mbae ('cosa del indio') era la parcela individual; el Tupa-Mbae era la tierra comunitaria." },
+  // UNIDAD 6
+  { cartilla: 19, titulo: "Revolución Comunera", pregunta: "¿Dónde fueron derrotados los comuneros por primera vez por las fuerzas de García Ros (1724)?", opciones: ["En Asunción","En las orillas del río Tebicuary","En Tabapy","En Buenos Aires"], correcta: 1, explicacion: "García Ros fue derrotado por los comuneros en las orillas del río Tebicuary en 1724." },
+  { cartilla: 20, titulo: "Ideal Comunero", pregunta: "¿Dónde fue ejecutado Antequera tras su captura?", opciones: ["Asunción","Buenos Aires","Lima","Charcas"], correcta: 2, explicacion: "Antequera y Juan de Mena fueron ejecutados en Lima, lo que desató nuevamente el conflicto en Asunción." },
+  // UNIDAD 7
+  { cartilla: 22, titulo: "Reformas Borbónicas", pregunta: "¿En cuántas intendencias y gobernaciones militares se dividió el Virreinato del Río de la Plata en 1782?", opciones: ["4 intendencias y 8 militares","8 intendencias y 4 militares","6 intendencias y 2 militares","10 intendencias y 2 militares"], correcta: 1, explicacion: "El Virreinato se dividió en 8 Gobernaciones de Intendencias y 4 Gobernaciones Militares." },
+  { cartilla: 23, titulo: "Últimos Gobernadores", pregunta: "¿Quién fue el último gobernador colonial del Paraguay y cuándo entregó el poder?", opciones: ["Lázaro de Rivera, 1806","Joaquín Alos, 1800","Bernardo de Velazco, 15 de mayo de 1811","Pedro Melo de Portugal, 1778"], correcta: 2, explicacion: "Bernardo de Velazco y Huidobro fue el último gobernador colonial. Entregó el poder a la Revolución el 15 de mayo de 1811." },
+  // UNIDAD 8
+  { cartilla: 25, titulo: "Invasiones Inglesas", pregunta: "¿Quién comandó la flota inglesa que desembarcó en Buenos Aires en 1806?", opciones: ["Santiago de Liniers","Sir Home Popham","Rafael de Sobremonte","Manuel Belgrano"], correcta: 1, explicacion: "Sir Home Popham comandó la flota inglesa en la primera invasión de 1806. El Virrey Sobremonte huyó, y los criollos organizaron la reconquista." },
+  { cartilla: 25, titulo: "Invasiones Inglesas", pregunta: "¿Con cuántos hombres contribuyó Paraguay en las Invasiones Inglesas?", opciones: ["Más de 500","Más de 900","Exactamente 300","Más de 2.000"], correcta: 1, explicacion: "Paraguay envió un ejército de más de 900 hombres, con figuras como Fulgencio Yegros, Juan Manuel Gamarra y José Fernández Montiel." },
+  { cartilla: 26, titulo: "Congreso de 1810", pregunta: "¿Qué resolvió el Congreso del 24 de julio de 1810 sobre la Junta de Buenos Aires?", opciones: ["Reconocerla como gobierno superior","Declararle la guerra","Guardar armonía pero NO reconocer su superioridad","Pedir ayuda militar a Portugal"], correcta: 2, explicacion: "El Congreso del 24 de julio de 1810 optó por una postura soberana: relación amistosa con Buenos Aires, pero sin reconocer ninguna superioridad sobre el Paraguay." },
+  { cartilla: 26, titulo: "Misión de Belgrano", pregunta: "¿Qué ocurrió en la Batalla de Paraguarí (19 de enero de 1811)?", opciones: ["Belgrano venció y tomó Asunción","Los jefes españoles huyeron; los criollos paraguayos frenaron a Belgrano","Se firmó un armisticio inmediato","Paraguay se rindió ante Buenos Aires"], correcta: 1, explicacion: "En Paraguarí, Velazco y los jefes españoles huyeron del campo de batalla. Los jefes criollos paraguayos (Cabañas, Gamarra, Yegros) obligaron a Belgrano a retirarse al sur." },
+  { cartilla: 27, titulo: "14 y 15 de Mayo", pregunta: "¿Qué señal marcó el triunfo del pronunciamiento del 15 de mayo de 1811?", opciones: ["El izamiento de la bandera paraguaya","Una salva de 21 cañonazos","La firma de una constitución","La llegada de Yegros a Asunción"], correcta: 1, explicacion: "Una salva de 21 cañonazos fue la señal de que Velazco se había rendido y la revolución había triunfado. El pueblo festejó en las calles." },
+  { cartilla: 27, titulo: "14 y 15 de Mayo", pregunta: "¿Quién entregó personalmente la nota de exigencias a Velazco la noche del 14 de mayo?", opciones: ["Pedro Juan Caballero","Fulgencio Yegros","Vicente Ignacio Iturbe","Manuel Cabañas"], correcta: 2, explicacion: "El Capitán Vicente Ignacio Iturbe fue quien llevó la nota de exigencias desde el Cuartel hasta la casa de Velazco." },
+  { cartilla: 28, titulo: "Primer Gobierno Provisorio", pregunta: "¿Qué tipo de gobierno se formó el 16 de mayo de 1811?", opciones: ["Una dictadura unipersonal","Un consulado de dos cónsules","Un triunvirato (tres miembros)","Una asamblea de 10 vocales"], correcta: 2, explicacion: "El 16 de mayo de 1811 se formó un Triunvirato compuesto por: José Gaspar Rodríguez de Francia, Juan Valeriano Zaballos y Bernardo de Velazco (bajo control criollo)." },
+  { cartilla: 28, titulo: "Junta Superior Gubernativa", pregunta: "¿Qué bando del 6 de enero de 1812 dictó la Junta Superior Gubernativa?", opciones: ["La libre exportación de yerba mate","La educación primaria obligatoria","La expulsión de todos los españoles","La creación del ejército nacional"], correcta: 1, explicacion: "El Bando del 6 de enero de 1812 estableció la educación primaria obligatoria en el Paraguay, una medida pionera para la época." },
+  { cartilla: 29, titulo: "La República", pregunta: "¿Qué forma de gobierno adoptó Paraguay en el Segundo Congreso Nacional de 1813?", opciones: ["Una monarquía constitucional","Una dictadura perpetua","El Consulado, con dos cónsules","Una federación con Buenos Aires"], correcta: 2, explicacion: "El Segundo Congreso de 1813 estableció El Consulado, inspirado en la Roma republicana, con Fulgencio Yegros y José Gaspar Rodríguez de Francia como cónsules." },
+  { cartilla: 29, titulo: "La República", pregunta: "¿Qué distinción histórica tiene la declaración de la República del Paraguay en 1813?", opciones: ["Fue la primera monarquía de América","Fue la primera república absolutamente independiente de América del Sur","Fue la primera provincia en unirse al Virreinato","Fue la primera en reconocer la supremacía de España"], correcta: 1, explicacion: "Al declararse República independiente en 1813, separada tanto de España como de Buenos Aires, Paraguay se convirtió en la primera república absolutamente independiente de América del Sur." },
+];
+
+// ══════════════════════════════════════
+// ESTADO
+// ══════════════════════════════════════
+let cartillaActual = 0;
+let visitadas = new Set();
+let examenPreguntas = [];
+let examenRespuestas = {};
+let examenPregActual = 0;
+let timerInterval = null;
+let timerSeg = 1200; // 20 min
+
+// ══════════════════════════════════════
+// INICIO
+// ══════════════════════════════════════
+function iniciarEstudio() {
+  document.getElementById('pantalla-inicio').style.display = 'none';
+  document.getElementById('pantalla-cartillas').style.display = 'block';
+  construirSidebar();
+  mostrarCartilla(0);
+}
+
+// ══════════════════════════════════════
+// SIDEBAR
+// ══════════════════════════════════════
+const nombresCartillas = [
+  "Portada — U1: Exploraciones y Descubrimientos",
+  "U1-1: Europa en el Siglo XV",
+  "U1-2: Cristóbal Colón y sus Viajes",
+  "U1-3: Bulas y Tratado de Tordesillas",
+  "Portada — U2: Población Precolombina",
+  "U2-1: Periodización de la Historia",
+  "U2-2: Los Guaraníes",
+  "Portada — U3: Exploraciones y Conquistas",
+  "U3-1: Primeros Exploradores",
+  "U3-2: Los Adelantados",
+  "U3-3: Fundación de Asunción",
+  "Portada — U4: Paraguay Colonial",
+  "U4-1: Hernandarias",
+  "U4-2: División de la Provincia y Alfaro",
+  "U4-3: Sociedad y Economía Colonial",
+  "Portada — U5: Labor Misionera",
+  "U5-1: Las Órdenes Religiosas",
+  "U5-2: Las Reducciones Jesuíticas",
+  "Portada — U6: Revolución Comunera",
+  "U6-1: Antequera y la Revolución",
+  "U6-2: Ideal Comunero y Sanciones",
+  "Portada — U7: Reformas Borbónicas",
+  "U7-1: Las Reformas Borbónicas",
+  "U7-2: Tratados y Últimos Gobernadores",
+  "Portada — U8: Revolución de Independencia",
+  "U8-1: Las Invasiones Inglesas",
+  "U8-2: Paraguay ante la Junta de Buenos Aires",
+  "U8-3: El Pronunciamiento del 14 y 15 de Mayo",
+  "U8-4: Primer Gobierno Provisorio y Congreso",
+  "U8-5: El Consulado y la República",
+];
+
+function construirSidebar() {
+  const lista = document.getElementById('lista-sidebar');
+  lista.innerHTML = '';
+  nombresCartillas.forEach((nombre, i) => {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = '#';
+    a.textContent = nombre;
+    a.id = `sidebar-item-${i}`;
+    a.onclick = (e) => { e.preventDefault(); mostrarCartilla(i); cerrarSidebar(); };
+    li.appendChild(a);
+    lista.appendChild(li);
+  });
+}
+
+function abrirSidebar() {
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('overlay').classList.add('open');
+}
+function cerrarSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+}
+
+// ══════════════════════════════════════
+// CARTILLAS
+// ══════════════════════════════════════
+function mostrarCartilla(idx) {
+  document.querySelectorAll('.cartilla').forEach(c => c.classList.remove('activa'));
+  const c = document.getElementById(`c${idx}`);
+  if (c) { c.classList.add('activa'); cartillaActual = idx; }
+  visitadas.add(idx);
+  actualizarProgreso();
+  actualizarNav();
+  actualizarSidebarVisitadas();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function cambiarCartilla(dir) {
+  const nuevo = cartillaActual + dir;
+  if (nuevo >= 0 && nuevo < TOTAL_CARTILLAS) mostrarCartilla(nuevo);
+}
+
+function actualizarNav() {
+  document.getElementById('btn-prev').disabled = cartillaActual === 0;
+  document.getElementById('btn-next').disabled = cartillaActual === TOTAL_CARTILLAS - 1;
+  document.getElementById('contador-cartilla').textContent = `${cartillaActual + 1} / ${TOTAL_CARTILLAS}`;
+}
+
+function actualizarProgreso() {
+  const pct = Math.round((visitadas.size / TOTAL_CARTILLAS) * 100);
+  document.getElementById('barra-progreso').style.width = pct + '%';
+  document.getElementById('pct-progreso').textContent = pct + '%';
+}
+
+function actualizarSidebarVisitadas() {
+  visitadas.forEach(i => {
+    const a = document.getElementById(`sidebar-item-${i}`);
+    if (a) a.classList.add('visitada');
+  });
+}
+
+// ══════════════════════════════════════
+// MINI-QUIZ
+// ══════════════════════════════════════
+function responder(el, tipo) {
+  const section = el.closest('.quiz-section');
+  if (section.dataset.respondido) return;
+  section.dataset.respondido = '1';
+  const opciones = section.querySelectorAll('.quiz-opcion');
+  opciones.forEach(o => { o.style.pointerEvents = 'none'; });
+  el.classList.add(tipo === 'ok' ? 'correcta' : 'incorrecta');
+  section.querySelector('.quiz-feedback.' + tipo).style.display = 'block';
+}
+
+// ══════════════════════════════════════
+// MODO EXAMEN
+// ══════════════════════════════════════
+function iniciarExamen() {
+  document.getElementById('pantalla-inicio').style.display = 'none';
+  document.getElementById('pantalla-cartillas').style.display = 'none';
+  document.getElementById('pantalla-resultado').style.display = 'none';
+  document.getElementById('pantalla-prof').style.display = 'none';
+  document.getElementById('pantalla-examen').style.display = 'block';
+  document.getElementById('tab-examen').classList.add('activo');
+  document.getElementById('tab-cartillas').classList.remove('activo');
+  document.getElementById('tab-prof').classList.remove('activo');
+
+  examenPreguntas = [...banco].sort(() => Math.random() - 0.5).slice(0, 20);
+  examenRespuestas = {};
+  examenPregActual = 0;
+  timerSeg = 1200;
+  renderPregunta();
+  iniciarTimer();
+}
+
+function renderPregunta() {
+  const p = examenPreguntas[examenPregActual];
+  document.getElementById('ex-num').textContent = `Pregunta ${examenPregActual + 1} de ${examenPreguntas.length} — ${p.titulo}`;
+  document.getElementById('ex-texto').textContent = p.pregunta;
+  document.getElementById('ex-progress').textContent = `${examenPregActual + 1}/${examenPreguntas.length}`;
+  const cont = document.getElementById('ex-opciones');
+  cont.innerHTML = '';
+  p.opciones.forEach((op, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'examen-opcion' + (examenRespuestas[examenPregActual] === i ? ' sel' : '');
+    btn.textContent = op;
+    btn.onclick = () => {
+      document.querySelectorAll('.examen-opcion').forEach(b => b.classList.remove('sel'));
+      btn.classList.add('sel');
+      examenRespuestas[examenPregActual] = i;
+    };
+    cont.appendChild(btn);
+  });
+}
+
+function examenNav(dir) {
+  const nuevo = examenPregActual + dir;
+  if (nuevo >= 0 && nuevo < examenPreguntas.length) {
+    examenPregActual = nuevo;
+    renderPregunta();
+  }
+}
+
+function iniciarTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timerSeg--;
+    const m = Math.floor(timerSeg / 60).toString().padStart(2, '0');
+    const s = (timerSeg % 60).toString().padStart(2, '0');
+    document.getElementById('ex-timer').textContent = `${m}:${s}`;
+    if (timerSeg <= 0) { clearInterval(timerInterval); finalizarExamen(); }
+  }, 1000);
+}
+
+function finalizarExamen() {
+  clearInterval(timerInterval);
+  document.getElementById('pantalla-examen').style.display = 'none';
+  document.getElementById('pantalla-resultado').style.display = 'block';
+
+  let correctas = 0;
+  let reviewHTML = '';
+  examenPreguntas.forEach((p, i) => {
+    const resp = examenRespuestas[i];
+    const ok = resp === p.correcta;
+    if (ok) correctas++;
+    const cls = ok ? 'ok' : 'mal';
+    const icon = ok ? '✅' : '❌';
+    reviewHTML += `<div class="review-item ${cls}">
+      <div class="review-pregunta">${icon} ${p.pregunta}</div>
+      <div class="review-resp">
+        ${ok ? `<span class="review-correcta">Tu respuesta: ${p.opciones[resp] || '—'}</span>` :
+          `<span class="review-incorrecta">Tu respuesta: ${resp !== undefined ? p.opciones[resp] : '(sin respuesta)'}</span> · 
+           <span class="review-correcta">Correcta: ${p.opciones[p.correcta]}</span>`}
+      </div>
+      <div class="review-resp" style="font-size:0.8rem;color:#666;margin-top:0.3rem;">${p.explicacion}</div>
+    </div>`;
+  });
+
+  const total = examenPreguntas.length;
+  const pct = Math.round((correctas / total) * 100);
+  document.getElementById('res-icon').textContent = pct >= 70 ? '🎉' : pct >= 50 ? '👍' : '📚';
+  document.getElementById('res-score').textContent = `${correctas}/${total} (${pct}%)`;
+  document.getElementById('res-detalle').textContent = pct >= 70 ? '¡Excelente resultado!' : pct >= 50 ? 'Buen intento, sigue practicando.' : 'Repasa las unidades y vuelve a intentarlo.';
+  document.getElementById('res-review').innerHTML = reviewHTML;
+}
+
+// ══════════════════════════════════════
+// TABS FOOTER
+// ══════════════════════════════════════
+function mostrarCartillas() {
+  clearInterval(timerInterval);
+  document.getElementById('pantalla-inicio').style.display = 'none';
+  document.getElementById('pantalla-examen').style.display = 'none';
+  document.getElementById('pantalla-resultado').style.display = 'none';
+  document.getElementById('pantalla-prof').style.display = 'none';
+  document.getElementById('pantalla-cartillas').style.display = 'block';
+  document.getElementById('tab-cartillas').classList.add('activo');
+  document.getElementById('tab-examen').classList.remove('activo');
+  document.getElementById('tab-prof').classList.remove('activo');
+  if (visitadas.size === 0) { construirSidebar(); mostrarCartilla(0); }
+}
+
+// ══════════════════════════════════════
+// PANTALLA PROF
+// ══════════════════════════════════════
+function mostrarProf() {
+  clearInterval(timerInterval);
+  document.getElementById('pantalla-inicio').style.display = 'none';
+  document.getElementById('pantalla-examen').style.display = 'none';
+  document.getElementById('pantalla-resultado').style.display = 'none';
+  document.getElementById('pantalla-cartillas').style.display = 'none';
+  document.getElementById('pantalla-prof').style.display = 'block';
+  document.getElementById('tab-prof').classList.add('activo');
+  document.getElementById('tab-cartillas').classList.remove('activo');
+  document.getElementById('tab-examen').classList.remove('activo');
+}
+
+function toggleUnidadProf(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+
+function toggleTemaProf(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+</script>
+<script data-pplx-inline-edit>
+(function(){
+  if(window===window.top)return;
+  function inlineAll(orig,clone){
+    if(orig.nodeType!==1)return;
+    try{
+      var cs=getComputedStyle(orig);
+      var t='';
+      for(var i=0;i<cs.length;i++){t+=cs[i]+':'+cs.getPropertyValue(cs[i])+';';}
+      clone.style.cssText=t;
+    }catch(e){}
+    var oc=orig.children,cc=clone.children;
+    for(var j=0;j<oc.length&&j<cc.length;j++){inlineAll(oc[j],cc[j]);}
+  }
+  function stripExternal(clone){
+    var imgs=clone.querySelectorAll('img');
+    for(var i=0;i<imgs.length;i++){
+      var s=imgs[i].getAttribute('src');
+      if(s&&!s.startsWith('data:'))imgs[i].removeAttribute('src');
+    }
+    var all=clone.querySelectorAll('*');
+    for(var i=0;i<all.length;i++){
+      var st=all[i].style.cssText;
+      if(st&&st.indexOf('url(')>=0){
+        all[i].style.cssText=st.replace(/url\(["']?(?!data:)[^)"']*["']?\)/gi,'none');
+      }
+    }
+  }
+  window.addEventListener('message',function(e){
+    if(!e.data||e.data.type!=='INLINE_EDIT_CAPTURE_REQUEST')return;
+    var scrollX=window.scrollX||window.pageXOffset||0;
+    var scrollY=window.scrollY||window.pageYOffset||0;
+    var w=window.innerWidth,h=window.innerHeight;
+    try{
+      var clone=document.documentElement.cloneNode(true);
+      var rm=clone.querySelectorAll('script,link[rel="stylesheet"],style');
+      for(var i=0;i<rm.length;i++){rm[i].remove();}
+      inlineAll(document.documentElement,clone);
+      stripExternal(clone);
+      var html=new XMLSerializer().serializeToString(clone);
+      var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'">'
+        +'<foreignObject width="100%" height="100%">'
+        +'<div xmlns="http://www.w3.org/1999/xhtml" style="width:'+w+'px;height:'+h+'px;overflow:hidden">'
+        +'<div style="transform:translate(-'+scrollX+'px,-'+scrollY+'px);transform-origin:top left">'
+        +html+'</div></div></foreignObject></svg>';
+      var svgUrl='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+      var img=new Image();
+      img.onload=function(){
+        var c=document.createElement('canvas');c.width=w;c.height=h;
+        c.getContext('2d').drawImage(img,0,0);
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:c.toDataURL('image/png'),scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.onerror=function(){
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.src=svgUrl;
+    }catch(err){
+      window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+    }
+  });
+})();
+</script></body>
 </html>

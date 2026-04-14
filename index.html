@@ -337,7 +337,37 @@
       .cartilla { padding: 1.1rem; }
       .cartilla-header h2 { font-size: 1.05rem; }
     }
-  </style>
+  
+/* ── TEMAS EXAMEN BADGE ── */
+.temas-examen-box{margin-top:14px;background:#f3e5f5;border-left:4px solid #9c27b0;border-radius:10px;padding:10px 14px;}
+.temas-examen-box .etiqueta-tema{font-size:.72rem;font-weight:700;color:#7b1fa2;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
+.temas-examen-box ul{margin:0;padding-left:16px;}
+.temas-examen-box ul li{font-size:.83rem;color:#4a148c;margin-bottom:3px;}
+/* ── EXA. TEMARIOS ── */
+#pantalla-exa-temarios{display:none;padding:16px;max-width:700px;margin:0 auto;}
+.exa-header{text-align:center;margin-bottom:20px;}
+.exa-header h2{font-size:1.4rem;color:var(--primario,#b71c1c);}
+.exa-header p{color:#666;font-size:.88rem;}
+.et-pregunta{background:#fff;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.09);padding:18px;margin-bottom:16px;border-left:4px solid var(--primario,#b71c1c);}
+.et-num{font-size:.72rem;color:#999;margin-bottom:4px;}
+.et-texto{font-weight:600;margin-bottom:12px;color:#1a1a2e;line-height:1.4;}
+.et-opciones{list-style:none;padding:0;margin:0;}
+.et-opciones li{padding:9px 12px;border-radius:8px;border:1.5px solid #e0e0e0;margin-bottom:7px;cursor:pointer;font-size:.87rem;transition:background .15s,border-color .15s;}
+.et-opciones li:hover:not(.deshabilitada){background:#f0f4ff;border-color:var(--primario,#b71c1c);}
+.et-opciones li.correcta{background:#e8f5e9;border-color:#43a047;color:#2e7d32;font-weight:600;}
+.et-opciones li.incorrecta{background:#ffebee;border-color:#e53935;color:#c62828;}
+.et-opciones li.deshabilitada{pointer-events:none;}
+.et-explicacion{display:none;margin-top:10px;padding:8px 12px;background:#fffde7;border-radius:8px;font-size:.82rem;color:#555;border-left:3px solid #fdd835;line-height:1.4;}
+.et-puntaje-bar{display:none;background:#2e7d32;color:#fff;text-align:center;padding:12px;border-radius:10px;font-weight:700;font-size:1rem;box-shadow:0 4px 12px rgba(0,0,0,.2);margin-bottom:14px;}
+.et-btn-reiniciar{display:none;margin:0 auto 90px;padding:12px 32px;background:var(--primario,#b71c1c);color:#fff;border:none;border-radius:10px;font-size:1rem;cursor:pointer;font-weight:600;width:100%;max-width:320px;}
+.et-btn-reiniciar:hover{opacity:.85;}
+.et-badge-t1{display:inline-block;background:#e65100;color:#fff;font-size:.68rem;padding:2px 7px;border-radius:20px;font-weight:700;margin-left:6px;vertical-align:middle;}
+.et-badge-t2{display:inline-block;background:#1565c0;color:#fff;font-size:.68rem;padding:2px 7px;border-radius:20px;font-weight:700;margin-left:6px;vertical-align:middle;}
+/* footer 4 tabs */
+.footer-nav{display:flex;}
+.footer-tab{flex:1;font-size:.72rem;}
+
+</style>
 </head>
 <body>
 
@@ -400,7 +430,15 @@
         <li>Los cuatro viajes de Cristóbal Colón (1492–1504)</li>
         <li>Bulas Alejandrinas (1493) y Tratado de Tordesillas</li>
       </ul>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Motivaciones económicas de las exploraciones</li>
+        <li>Los 4 viajes de Cristóbal Colón</li>
+        <li>Bulas Alejandrinas vs. Tratado de Tordesillas</li>
+        </ul>
+      </div></div>
 
     <!-- C1: Europa siglo XV -->
     <div class="cartilla" id="c1" data-unidad="1">
@@ -445,7 +483,15 @@
         <div class="quiz-feedback ok" style="display:none;">¡Correcto! La caída de Constantinopla en manos otomanas cortó las rutas de las especias y obligó a Europa a buscar caminos alternativos por mar.</div>
         <div class="quiz-feedback mal" style="display:none;">Incorrecto. La respuesta correcta es la caída de Constantinopla (1453), que bloqueó las rutas terrestres hacia Asia.</div>
       </div>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Motivaciones económicas de las exploraciones</li>
+        <li>Los 4 viajes de Cristóbal Colón</li>
+        <li>Bulas Alejandrinas vs. Tratado de Tordesillas</li>
+        </ul>
+      </div></div>
 
     <!-- C2: Cristóbal Colón -->
     <div class="cartilla" id="c2" data-unidad="1">
@@ -480,7 +526,15 @@
         <div class="quiz-feedback ok" style="display:none;">¡Correcto! La isla Guanahani, renombrada San Salvador, fue el primer territorio americano avistado el 12 de octubre de 1492.</div>
         <div class="quiz-feedback mal" style="display:none;">Incorrecto. Colón llegó a la isla Guanahani (San Salvador) el 12 de octubre de 1492.</div>
       </div>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Motivaciones económicas de las exploraciones</li>
+        <li>Los 4 viajes de Cristóbal Colón</li>
+        <li>Bulas Alejandrinas vs. Tratado de Tordesillas</li>
+        </ul>
+      </div></div>
 
     <!-- C3: Bulas y Tordesillas -->
     <div class="cartilla" id="c3" data-unidad="1">
@@ -522,7 +576,15 @@
         <div class="quiz-feedback ok" style="display:none;">¡Correcto! El Tratado de Tordesillas estableció la línea a 370 leguas al oeste de Cabo Verde.</div>
         <div class="quiz-feedback mal" style="display:none;">Incorrecto. La respuesta correcta es 370 leguas al oeste de Cabo Verde.</div>
       </div>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Motivaciones económicas de las exploraciones</li>
+        <li>Los 4 viajes de Cristóbal Colón</li>
+        <li>Bulas Alejandrinas vs. Tratado de Tordesillas</li>
+        </ul>
+      </div></div>
 
     <!-- ══════════════════════════════════════════════
          UNIDAD 2 — Población Precolombina
@@ -544,7 +606,14 @@
         <li>Grupos chaqueños (Guaycurúes, Matacos, Zamucos)</li>
         <li>La nación Guaraní: parcialidades, vivienda, familia y organización política</li>
       </ul>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Organización social, política y económica guaraní</li>
+        <li>Antropofagia ritual como práctica religiosa guaraní</li>
+        </ul>
+      </div></div>
 
     <!-- C5: Periodos históricos -->
     <div class="cartilla" id="c5" data-unidad="2">
@@ -591,7 +660,14 @@
         <div class="quiz-feedback ok" style="display:none;">¡Correcto! El Neolítico se caracteriza por la aparición de la agricultura, la ganadería y el sedentarismo.</div>
         <div class="quiz-feedback mal" style="display:none;">Incorrecto. Es el Neolítico el periodo en que aparecen la agricultura, la ganadería y el sedentarismo.</div>
       </div>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Organización social, política y económica guaraní</li>
+        <li>Antropofagia ritual como práctica religiosa guaraní</li>
+        </ul>
+      </div></div>
 
     <!-- C6: Guaraníes -->
     <div class="cartilla" id="c6" data-unidad="2">
@@ -639,7 +715,14 @@
         <div class="quiz-feedback ok" style="display:none;">¡Correcto! La <em>taba</em> era el nombre del pueblo guaraní, formado por un máximo de 7 cabañas.</div>
         <div class="quiz-feedback mal" style="display:none;">Incorrecto. La aldea guaraní se llamaba <em>taba</em>. El <em>rubicha</em> era el líder elegido por los ancianos.</div>
       </div>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Organización social, política y económica guaraní</li>
+        <li>Antropofagia ritual como práctica religiosa guaraní</li>
+        </ul>
+      </div></div>
 
     <!-- ══════════════════════════════════════════════
          UNIDAD 3 — Exploraciones y Conquistas
@@ -661,7 +744,18 @@
         <li>Fundación de Buenos Aires (1536) y Asunción (1537)</li>
         <li>Domingo Martínez de Irala y el mestizaje</li>
       </ul>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Descubrimiento del Mar del Sur — Vasco Núñez de Balboa (1513)</li>
+        <li>Los Adelantados del Río de la Plata</li>
+        <li>Obras de Domingo Martínez de Irala</li>
+        <li>Fundación de Asunción (15 de agosto de 1537)</li>
+        <li>Real Provisión de 1537 — elección popular</li>
+        <li>El Adelantazgo como institución colonial</li>
+        </ul>
+      </div></div>
 
     <!-- C8: Primeros Exploradores -->
     <div class="cartilla" id="c8" data-unidad="3">
@@ -697,7 +791,18 @@
         <div class="quiz-feedback ok" style="display:none;">¡Correcto! Alejo García, náufrago de la expedición de Solís, fue el primer europeo en cruzar el territorio paraguayo y es considerado su descubridor.</div>
         <div class="quiz-feedback mal" style="display:none;">Incorrecto. Alejo García es considerado el descubridor del Paraguay; cruzó sus tierras ~1525 en busca de la Sierra de la Plata.</div>
       </div>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Descubrimiento del Mar del Sur — Vasco Núñez de Balboa (1513)</li>
+        <li>Los Adelantados del Río de la Plata</li>
+        <li>Obras de Domingo Martínez de Irala</li>
+        <li>Fundación de Asunción (15 de agosto de 1537)</li>
+        <li>Real Provisión de 1537 — elección popular</li>
+        <li>El Adelantazgo como institución colonial</li>
+        </ul>
+      </div></div>
 
     <!-- C9: Los Adelantados -->
     <div class="cartilla" id="c9" data-unidad="3">
@@ -737,7 +842,18 @@
         <div class="quiz-feedback ok" style="display:none;">¡Correcto! Pedro de Mendoza fundó el fuerte de Nuestra Señora del Buen Aire el 2 de febrero de 1536.</div>
         <div class="quiz-feedback mal" style="display:none;">Incorrecto. Fue Pedro de Mendoza quien fundó Buenos Aires el 2 de febrero de 1536.</div>
       </div>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Descubrimiento del Mar del Sur — Vasco Núñez de Balboa (1513)</li>
+        <li>Los Adelantados del Río de la Plata</li>
+        <li>Obras de Domingo Martínez de Irala</li>
+        <li>Fundación de Asunción (15 de agosto de 1537)</li>
+        <li>Real Provisión de 1537 — elección popular</li>
+        <li>El Adelantazgo como institución colonial</li>
+        </ul>
+      </div></div>
 
     <!-- C10: Fundación de Asunción -->
     <div class="cartilla" id="c10" data-unidad="3">
@@ -773,7 +889,18 @@
         <div class="quiz-feedback ok" style="display:none;">¡Correcto! Juan de Salazar de Espinoza fundó la Casa Fuerte de Asunción el 15 de agosto de 1537.</div>
         <div class="quiz-feedback mal" style="display:none;">Incorrecto. Fue Juan de Salazar de Espinoza el fundador de Asunción el 15 de agosto de 1537.</div>
       </div>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Descubrimiento del Mar del Sur — Vasco Núñez de Balboa (1513)</li>
+        <li>Los Adelantados del Río de la Plata</li>
+        <li>Obras de Domingo Martínez de Irala</li>
+        <li>Fundación de Asunción (15 de agosto de 1537)</li>
+        <li>Real Provisión de 1537 — elección popular</li>
+        <li>El Adelantazgo como institución colonial</li>
+        </ul>
+      </div></div>
 
     <!-- ══════════════════════════════════════════════
          UNIDAD 4 — Paraguay Colonial
@@ -795,7 +922,16 @@
         <li>Ordenanzas de Alfaro (1611): protección indígena</li>
         <li>Clases sociales coloniales y economía (agricultura, ganadería, yerba, tabaco)</li>
       </ul>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Obras educativas de Hernandarias</li>
+        <li>División política de la provincia (Real Cédula 1617)</li>
+        <li>Ordenanzas de Alfaro — supresión de encomiendas (1611)</li>
+        <li>Yerba mate — principal producto de la economía colonial</li>
+        </ul>
+      </div></div>
 
     <!-- C12: Hernandarias -->
     <div class="cartilla" id="c12" data-unidad="4">
@@ -834,7 +970,16 @@
         <div class="quiz-feedback ok" style="display:none;">¡Correcto! En 1592 el Cabildo lo designó Gobernador interino, convirtiéndose en el primer criollo en ocupar tan alto cargo en América española.</div>
         <div class="quiz-feedback mal" style="display:none;">Incorrecto. En 1592 fue designado primer gobernador criollo de una provincia española en América.</div>
       </div>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Obras educativas de Hernandarias</li>
+        <li>División política de la provincia (Real Cédula 1617)</li>
+        <li>Ordenanzas de Alfaro — supresión de encomiendas (1611)</li>
+        <li>Yerba mate — principal producto de la economía colonial</li>
+        </ul>
+      </div></div>
 
     <!-- C13: División y Ordenanzas -->
     <div class="cartilla" id="c13" data-unidad="4">
@@ -877,7 +1022,16 @@
         <div class="quiz-feedback ok" style="display:none;">¡Correcto! La Real Cédula del 16/12/1617 dividió la Provincia Gigante en dos gobernaciones: Río de la Plata (capital Buenos Aires) y Guairá o Paraguay (capital Asunción).</div>
         <div class="quiz-feedback mal" style="display:none;">Incorrecto. La Real Cédula de 1617 dividió la provincia en dos gobernaciones: Río de la Plata y Guairá o Paraguay.</div>
       </div>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Obras educativas de Hernandarias</li>
+        <li>División política de la provincia (Real Cédula 1617)</li>
+        <li>Ordenanzas de Alfaro — supresión de encomiendas (1611)</li>
+        <li>Yerba mate — principal producto de la economía colonial</li>
+        </ul>
+      </div></div>
 
     <!-- C14: Economía Colonial -->
     <div class="cartilla" id="c14" data-unidad="4">
@@ -921,7 +1075,16 @@
         <div class="quiz-feedback ok" style="display:none;">¡Correcto! La yerba mate fue el producto más valorado para la exportación en la economía colonial paraguaya.</div>
         <div class="quiz-feedback mal" style="display:none;">Incorrecto. La yerba mate fue el producto más valorado para la exportación en el Paraguay colonial.</div>
       </div>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Obras educativas de Hernandarias</li>
+        <li>División política de la provincia (Real Cédula 1617)</li>
+        <li>Ordenanzas de Alfaro — supresión de encomiendas (1611)</li>
+        <li>Yerba mate — principal producto de la economía colonial</li>
+        </ul>
+      </div></div>
 
     <!-- ══════════════════════════════════════════════
          UNIDAD 5 — Labor Misionera
@@ -943,7 +1106,15 @@
         <li>Organización de las reducciones: estructura política, social y económica</li>
         <li>Sistema colectivista: Aba-Mbae y Tupa-Mbae</li>
       </ul>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Obras de los Jesuitas en el Paraguay</li>
+        <li>Estructura de las misiones: el Doctrinero</li>
+        <li>Expulsión de los Jesuitas por Carlos III (1767)</li>
+        </ul>
+      </div></div>
 
     <!-- C16: Órdenes Religiosas -->
     <div class="cartilla" id="c16" data-unidad="5">
@@ -977,7 +1148,15 @@
         <div class="quiz-feedback ok" style="display:none;">¡Correcto! Fray Luis de Bolaños fue el pionero franciscano que estableció las primeras reducciones y creó la escritura y catecismo en guaraní.</div>
         <div class="quiz-feedback mal" style="display:none;">Incorrecto. Fue Fray Luis de Bolaños quien creó las primeras reducciones, la grafía guaraní y el catecismo en lengua nativa.</div>
       </div>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Obras de los Jesuitas en el Paraguay</li>
+        <li>Estructura de las misiones: el Doctrinero</li>
+        <li>Expulsión de los Jesuitas por Carlos III (1767)</li>
+        </ul>
+      </div></div>
 
     <!-- C17: Reducciones Jesuíticas -->
     <div class="cartilla" id="c17" data-unidad="5">
@@ -1036,7 +1215,15 @@
         <div class="quiz-feedback ok" style="display:none;">¡Correcto! El Tupa-Mbae ("cosa de Dios") era la tierra común cuya producción se destinaba a la iglesia, viudas, huérfanos y necesitados.</div>
         <div class="quiz-feedback mal" style="display:none;">Incorrecto. El <em>Tupa-Mbae</em> era la tierra comunitaria destinada a la iglesia y a los más necesitados.</div>
       </div>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Obras de los Jesuitas en el Paraguay</li>
+        <li>Estructura de las misiones: el Doctrinero</li>
+        <li>Expulsión de los Jesuitas por Carlos III (1767)</li>
+        </ul>
+      </div></div>
 
     <!-- ══════════════════════════════════════════════
          UNIDAD 6 — Revolución Comunera
@@ -1058,7 +1245,14 @@
         <li>Fernando de Mompox: el ideólogo comunero</li>
         <li>Líderes comuneros y sanciones al Paraguay</li>
       </ul>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Revolución Comunera (1717–1735) — primera rebelión popular de Sudamérica</li>
+        <li>Sanciones políticas y económicas post-Revolución Comunera</li>
+        </ul>
+      </div></div>
 
     <!-- C19: Antecedentes y Primera Revolución -->
     <div class="cartilla" id="c19" data-unidad="6">
@@ -1093,7 +1287,14 @@
         <div class="quiz-feedback ok" style="display:none;">¡Correcto! José de Antequera y Castro fue el juez designado por la Audiencia de Charcas que asumió el gobierno y lideró la revolución comunera.</div>
         <div class="quiz-feedback mal" style="display:none;">Incorrecto. Fue José de Antequera y Castro quien destituyó a Balmaceda en 1721 y lideró el movimiento comunero.</div>
       </div>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Revolución Comunera (1717–1735) — primera rebelión popular de Sudamérica</li>
+        <li>Sanciones políticas y económicas post-Revolución Comunera</li>
+        </ul>
+      </div></div>
 
     <!-- C20: Ideal Comunero y Sanciones -->
     <div class="cartilla" id="c20" data-unidad="6">
@@ -1145,7 +1346,14 @@
         <div class="quiz-feedback ok" style="display:none;">¡Correcto! Se abolió el derecho del pueblo a elegir Gobernador, que estaba previsto en la Real Cédula de 1537.</div>
         <div class="quiz-feedback mal" style="display:none;">Incorrecto. La sanción política fue abolir el derecho del pueblo a elegir Gobernador, garantizado desde 1537.</div>
       </div>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Revolución Comunera (1717–1735) — primera rebelión popular de Sudamérica</li>
+        <li>Sanciones políticas y económicas post-Revolución Comunera</li>
+        </ul>
+      </div></div>
 
     <!-- ══════════════════════════════════════════════
          UNIDAD 7 — Reformas Borbónicas
@@ -1168,7 +1376,16 @@
         <li>Tratados con Portugal: Permuta (1750) y San Ildefonso (1777)</li>
         <li>Últimos gobernadores coloniales (Pinedo, Melo de Portugal, Alos, Rivera, Velazco)</li>
       </ul>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Tratado de Permuta</li>
+        <li>Tratado de San Ildefonso (1777) — desmembración territorial</li>
+        <li>Gobernadores: Pinedo, Melo de Portugal, Alos y Brú, Lázaro de Rivera</li>
+        <li>Primer Censo Poblacional — Lázaro de Rivera</li>
+        </ul>
+      </div></div>
 
     <!-- C22: Reformas Borbónicas -->
     <div class="cartilla" id="c22" data-unidad="7">
@@ -1213,7 +1430,16 @@
         <div class="quiz-feedback ok" style="display:none;">¡Correcto! Pedro de Cevallos fue el primer Virrey del Río de la Plata, cuya capital era Buenos Aires.</div>
         <div class="quiz-feedback mal" style="display:none;">Incorrecto. El primer Virrey del Río de la Plata fue Pedro de Cevallos (1776).</div>
       </div>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Tratado de Permuta</li>
+        <li>Tratado de San Ildefonso (1777) — desmembración territorial</li>
+        <li>Gobernadores: Pinedo, Melo de Portugal, Alos y Brú, Lázaro de Rivera</li>
+        <li>Primer Censo Poblacional — Lázaro de Rivera</li>
+        </ul>
+      </div></div>
 
     <!-- C23: Tratados y últimos gobernadores -->
     <div class="cartilla" id="c23" data-unidad="7">
@@ -1266,7 +1492,16 @@
         <div class="quiz-feedback ok" style="display:none;">¡Correcto! La Guerra Guaranítica fue la consecuencia directa del Tratado de Permuta, cuando los guaraníes se resistieron a abandonar sus reducciones y tierras.</div>
         <div class="quiz-feedback mal" style="display:none;">Incorrecto. El Tratado de Permuta de 1750 provocó la Guerra Guaranítica, pues los guaraníes se negaron a abandonar sus reducciones.</div>
       </div>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Tratado de Permuta</li>
+        <li>Tratado de San Ildefonso (1777) — desmembración territorial</li>
+        <li>Gobernadores: Pinedo, Melo de Portugal, Alos y Brú, Lázaro de Rivera</li>
+        <li>Primer Censo Poblacional — Lázaro de Rivera</li>
+        </ul>
+      </div></div>
 
     <!-- ══════════════════════════════════════════════
          UNIDAD 8 — La Revolución de Independencia
@@ -1290,7 +1525,19 @@
         <li>Primer Gobierno Provisorio y Primer Congreso Nacional (1811)</li>
         <li>Segundo Congreso Nacional — El Consulado y la República (1813)</li>
       </ul>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Invasiones Inglesas al Río de la Plata</li>
+        <li>Congreso del 24 de julio de 1810</li>
+        <li>Misión de Espínola y Peña</li>
+        <li>Primer Gobierno Provisorio — Triunvirato (16/5/1811)</li>
+        <li>Junta Superior Gubernativa y sus disposiciones</li>
+        <li>Primer y Segundo Congreso Nacional</li>
+        <li>Comandancia General de Armas — Carlos Antonio López (1841)</li>
+        </ul>
+      </div></div>
 
     <!-- C25: Invasiones Inglesas -->
     <div class="cartilla" id="c25" data-unidad="8">
@@ -1334,7 +1581,19 @@
         <div class="quiz-feedback ok" style="display:none;">Correcto. Sobremonte abandonó Buenos Aires sin resistir, lo que desacreditó a las autoridades españolas y mostró que los criollos podían defenderse solos.</div>
         <div class="quiz-feedback mal" style="display:none;">Incorrecto. Fue el Virrey Rafael de Sobremonte quien huyó, lo que desacreditó profundamente a las autoridades coloniales.</div>
       </div>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Invasiones Inglesas al Río de la Plata</li>
+        <li>Congreso del 24 de julio de 1810</li>
+        <li>Misión de Espínola y Peña</li>
+        <li>Primer Gobierno Provisorio — Triunvirato (16/5/1811)</li>
+        <li>Junta Superior Gubernativa y sus disposiciones</li>
+        <li>Primer y Segundo Congreso Nacional</li>
+        <li>Comandancia General de Armas — Carlos Antonio López (1841)</li>
+        </ul>
+      </div></div>
 
     <!-- C26: Congreso de 1810 y misiones -->
     <div class="cartilla" id="c26" data-unidad="8">
@@ -1378,7 +1637,19 @@
         <div class="quiz-feedback ok" style="display:none;">Correcto. El Paraguay optó por una postura soberana: relación armónica con Buenos Aires, pero sin reconocer jerarquía alguna sobre la provincia.</div>
         <div class="quiz-feedback mal" style="display:none;">Incorrecto. El Congreso resolvió guardar armonía con Buenos Aires pero sin reconocer su superioridad sobre el Paraguay.</div>
       </div>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Invasiones Inglesas al Río de la Plata</li>
+        <li>Congreso del 24 de julio de 1810</li>
+        <li>Misión de Espínola y Peña</li>
+        <li>Primer Gobierno Provisorio — Triunvirato (16/5/1811)</li>
+        <li>Junta Superior Gubernativa y sus disposiciones</li>
+        <li>Primer y Segundo Congreso Nacional</li>
+        <li>Comandancia General de Armas — Carlos Antonio López (1841)</li>
+        </ul>
+      </div></div>
 
     <!-- C27: Pronunciamiento 14 y 15 de mayo -->
     <div class="cartilla" id="c27" data-unidad="8">
@@ -1420,7 +1691,19 @@
         <div class="quiz-feedback ok" style="display:none;">Correcto. Pedro Juan Caballero lideró la toma del Cuartel de Infantería en Asunción, ya que Fulgencio Yegros no había llegado aún desde el interior.</div>
         <div class="quiz-feedback mal" style="display:none;">Incorrecto. Fue Pedro Juan Caballero quien tomó el mando en Asunción la noche del 14 de mayo, mientras Yegros estaba en el interior del país.</div>
       </div>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Invasiones Inglesas al Río de la Plata</li>
+        <li>Congreso del 24 de julio de 1810</li>
+        <li>Misión de Espínola y Peña</li>
+        <li>Primer Gobierno Provisorio — Triunvirato (16/5/1811)</li>
+        <li>Junta Superior Gubernativa y sus disposiciones</li>
+        <li>Primer y Segundo Congreso Nacional</li>
+        <li>Comandancia General de Armas — Carlos Antonio López (1841)</li>
+        </ul>
+      </div></div>
 
     <!-- C28: Primer Gobierno Provisorio y Primer Congreso -->
     <div class="cartilla" id="c28" data-unidad="8">
@@ -1485,7 +1768,19 @@
         <div class="quiz-feedback ok" style="display:none;">Correcto. Fulgencio Yegros fue el presidente de la Junta Superior Gubernativa, el primer gobierno autónomo del Paraguay.</div>
         <div class="quiz-feedback mal" style="display:none;">Incorrecto. El presidente de la Junta Superior Gubernativa fue Fulgencio Yegros; Francia era uno de los vocales.</div>
       </div>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Invasiones Inglesas al Río de la Plata</li>
+        <li>Congreso del 24 de julio de 1810</li>
+        <li>Misión de Espínola y Peña</li>
+        <li>Primer Gobierno Provisorio — Triunvirato (16/5/1811)</li>
+        <li>Junta Superior Gubernativa y sus disposiciones</li>
+        <li>Primer y Segundo Congreso Nacional</li>
+        <li>Comandancia General de Armas — Carlos Antonio López (1841)</li>
+        </ul>
+      </div></div>
 
     <!-- C29: Segundo Congreso y la República -->
     <div class="cartilla" id="c29" data-unidad="8">
@@ -1539,7 +1834,19 @@
         <div class="quiz-feedback ok" style="display:none;">Correcto. El Segundo Congreso del 30 de septiembre de 1813 declaró al Paraguay República independiente y creó el Consulado con Yegros y Francia como cónsules.</div>
         <div class="quiz-feedback mal" style="display:none;">Incorrecto. El 30 de septiembre de 1813, el Segundo Congreso Nacional declaró la República del Paraguay y estableció el Consulado.</div>
       </div>
-    </div>
+    
+      <div class="temas-examen-box">
+        <div class="etiqueta-tema">📌 Temas del Examen</div>
+        <ul>
+        <li>Invasiones Inglesas al Río de la Plata</li>
+        <li>Congreso del 24 de julio de 1810</li>
+        <li>Misión de Espínola y Peña</li>
+        <li>Primer Gobierno Provisorio — Triunvirato (16/5/1811)</li>
+        <li>Junta Superior Gubernativa y sus disposiciones</li>
+        <li>Primer y Segundo Congreso Nacional</li>
+        <li>Comandancia General de Armas — Carlos Antonio López (1841)</li>
+        </ul>
+      </div></div>
 
     <!-- ── NAVEGACIÓN ── -->
     <div class="nav-cartillas">
@@ -2212,7 +2519,18 @@
 
   </div><!-- fin pantalla-prof -->
 
-  <div class="footer-spacer"></div>
+  
+<!-- ══ PANTALLA EXA. TEMARIOS ══ -->
+<div id="pantalla-exa-temarios">
+  <div class="exa-header">
+    <h2>📝 Examen — Temarios 1 y 2</h2>
+    <p>Preguntas de opción múltiple sobre los temas evaluados por la Prof.</p>
+  </div>
+  <div id="et-puntaje-bar" class="et-puntaje-bar"></div>
+  <div id="et-contenedor"></div>
+  <button class="et-btn-reiniciar" id="et-btn-reiniciar" onclick="reiniciarExaTemarios()">🔄 Reiniciar Examen</button>
+</div>
+<div class="footer-spacer"></div>
 </div><!-- fin container -->
 
 <!-- FOOTER NAV -->
@@ -2228,6 +2546,10 @@
   <button class="footer-tab" id="tab-prof" onclick="mostrarProf()">
     <span class="footer-tab-icon">📋</span>
     De la Prof
+  </button>
+  <button class="footer-tab" id="tab-exa-temarios" onclick="mostrarExaTemarios()">
+    <span class="footer-tab-icon">📝</span>
+    Exa. Temarios
   </button>
 </nav>
 
@@ -2419,6 +2741,8 @@ function responder(el, tipo) {
 // MODO EXAMEN
 // ══════════════════════════════════════
 function iniciarExamen() {
+  const _etP = document.getElementById('pantalla-exa-temarios'); if(_etP) _etP.style.display='none';
+  const _etT = document.getElementById('tab-exa-temarios'); if(_etT) _etT.classList.remove('activo');
   document.getElementById('pantalla-inicio').style.display = 'none';
   document.getElementById('pantalla-cartillas').style.display = 'none';
   document.getElementById('pantalla-resultado').style.display = 'none';
@@ -2511,6 +2835,8 @@ function finalizarExamen() {
 // TABS FOOTER
 // ══════════════════════════════════════
 function mostrarCartillas() {
+  const _etP = document.getElementById('pantalla-exa-temarios'); if(_etP) _etP.style.display='none';
+  const _etT = document.getElementById('tab-exa-temarios'); if(_etT) _etT.classList.remove('activo');
   clearInterval(timerInterval);
   document.getElementById('pantalla-inicio').style.display = 'none';
   document.getElementById('pantalla-examen').style.display = 'none';
@@ -2527,6 +2853,8 @@ function mostrarCartillas() {
 // PANTALLA PROF
 // ══════════════════════════════════════
 function mostrarProf() {
+  const _etP = document.getElementById('pantalla-exa-temarios'); if(_etP) _etP.style.display='none';
+  const _etT = document.getElementById('tab-exa-temarios'); if(_etT) _etT.classList.remove('activo');
   clearInterval(timerInterval);
   document.getElementById('pantalla-inicio').style.display = 'none';
   document.getElementById('pantalla-examen').style.display = 'none';
@@ -2547,6 +2875,168 @@ function toggleTemaProf(id) {
   const el = document.getElementById(id);
   el.classList.toggle('open');
 }
+
+
+// ══════════════════════════════════════════════════════════════════════
+// EXA. TEMARIOS
+// ══════════════════════════════════════════════════════════════════════
+const bancoTemarios = [
+  // ── TEMARIO 1 ──
+  { t:1, pregunta:"¿Cuál fue la principal motivación de las exploraciones europeas del siglo XV?",
+    opciones:["Difundir el cristianismo en tierras desconocidas","Encontrar rutas comerciales hacia Asia para obtener metales preciosos y especias","Escapar de las guerras entre reinos europeos","Descubrir nuevas especies de flora y fauna","Descongestionar la población europea con nuevas colonias"],
+    correcta:1, exp:"Europa necesitaba rutas alternativas a Asia para el comercio de especias y metales preciosos, en plena transición del feudalismo al capitalismo comercial." },
+
+  { t:1, pregunta:"¿Qué diferencia principal existe entre las Bulas Alejandrinas (1493) y el Tratado de Tordesillas (1494)?",
+    opciones:["Las Bulas dividían África; Tordesillas dividía América","Las Bulas fueron un acto unilateral del Papa; Tordesillas fue un acuerdo bilateral que corrió la línea 270 leguas más al oeste","Las Bulas favorecían a Portugal; Tordesillas favorecía a España","Las Bulas eran de carácter militar; Tordesillas era religioso","No hay diferencia real entre ambos documentos"],
+    correcta:1, exp:"Las Bulas Alejandrinas fueron emitidas por el Papa Alejandro VI favoreciendo a Castilla. Tordesillas fue negociado entre los reinos y corrió la línea al oeste, permitiendo a Portugal reclamar Brasil." },
+
+  { t:1, pregunta:"¿Quién descubrió el Mar del Sur (Océano Pacífico) en 1513?",
+    opciones:["Juan Díaz de Solís","Sebastián Gaboto","Vasco Núñez de Balboa","Bartolomé Díaz","Cristóbal Colón"],
+    correcta:2, exp:"Vasco Núñez de Balboa cruzó el istmo de Panamá y avistó el Pacífico el 25 de septiembre de 1513, tomando posesión en nombre de la Corona de Castilla." },
+
+  { t:1, pregunta:"¿Qué títulos recibió Cristóbal Colón mediante la Capitulación de Santa Fe?",
+    opciones:["Una importante suma de dinero para financiar el Primer Viaje","La ciudadanía española y el título de Conde","Los títulos de Almirante, Capitán General y Adelantado","Los títulos de Almirante, Virrey y Gobernador","La autorización de utilizar el título de Duque"],
+    correcta:3, exp:"Por la Capitulación de Santa Fe, los Reyes Católicos otorgaron a Colón los títulos de Almirante, Virrey y Gobernador de las tierras que descubriera." },
+
+  { t:1, pregunta:"¿Qué establecía la Real Provisión del 12 de septiembre de 1537?",
+    opciones:["La fundación oficial de Asunción como capital","La supresión de las encomiendas indígenas","Que si el Adelantado no designaba lugarteniente, los pobladores podían elegir a la persona más indicada para el cargo","El reparto de tierras entre los conquistadores","La creación del Cabildo de Asunción"],
+    correcta:2, exp:"La Real Provisión de 1537 fue el primer antecedente democrático en América: permitía a los pobladores elegir autoridades si el Adelantado no había dejado sucesor designado." },
+
+  { t:1, pregunta:"¿Cuál fue una obra destacada de Domingo Martínez de Irala?",
+    opciones:["La fundación de Buenos Aires","La creación del Cabildo de Asunción","La fundación de Santa Cruz de la Sierra","La fundación del Fuerte Borbón","La realización del primer Censo Poblacional"],
+    correcta:2, exp:"Domingo Martínez de Irala fundó Santa Cruz de la Sierra (Bolivia) en 1561, además de organizar las encomiendas y consolidar el dominio español en la región." },
+
+  { t:1, pregunta:"¿Qué institución española del siglo XVI tenía funciones administrativas, judiciales y militares, con la suma de atribuciones incluyendo designar sucesor?",
+    opciones:["Tenientes Gobernadores","Virreyes","Gobernadores","El Adelantazgo","Capitanía General"],
+    correcta:3, exp:"El Adelantazgo fue una institución de origen medieval aplicada en América solo durante el siglo XVI. El adelantado acumulaba todo el poder y podía designar sucesor." },
+
+  { t:1, pregunta:"¿Qué gobernador promulgó ordenanzas de protección al indígena e impulsó la llegada de los jesuitas al Río de la Plata?",
+    opciones:["Domingo Martínez de Irala","Francisco de Alfaro","Joaquín Alos y Bru","Hernandarias (Hernando Arias de Saavedra)","Nufrio de Chávez"],
+    correcta:3, exp:"Hernandarias, electo gobernador interino en julio de 1592, promulgó ordenanzas de protección al indígena e impulsó la llegada de los jesuitas para evangelizar a los nativos." },
+
+  { t:1, pregunta:"¿Cuál fue la principal sanción económica impuesta al Paraguay tras la Revolución Comunera?",
+    opciones:["Se crearon nuevas instituciones educativas como castigo","Se introdujo por primera vez la moneda metálica","Fueron embargados todos los productos del Paraguay depositados en los puertos del Río de la Plata","Se abolió el derecho del pueblo de elegir Gobernador","Se mandó a ahorcar a los principales caudillos"],
+    correcta:2, exp:"Como sanción económica, se embargaron los productos paraguayos en los puertos rioplatenses, golpeando severamente el comercio de la provincia." },
+
+  { t:1, pregunta:"¿Cuál fue el producto más importante de la economía colonial paraguaya?",
+    opciones:["El algodón","El tabaco","La caña de azúcar","La yerba mate","El ganado vacuno"],
+    correcta:3, exp:"La yerba mate fue el principal producto de exportación del Paraguay colonial, base de su economía durante todo el período virreinal." },
+
+  { t:1, pregunta:"¿Cómo se organizaba políticamente la sociedad guaraní?",
+    opciones:["Bajo un rey hereditario con poder absoluto","En clanes liderados por un rubicha (jefe) cuya autoridad dependía del consenso de la comunidad","Por sacerdotes jesuitas que dirigían cada aldea","Bajo la autoridad del Adelantado español","En ciudades-estado independientes sin líder reconocido"],
+    correcta:1, exp:"Los guaraníes se organizaban en tekohá (comunidades) lideradas por un rubicha. No existía monarquía hereditaria; la autoridad se basaba en el prestigio y el consenso." },
+
+  // ── TEMARIO 2 ──
+  { t:2, pregunta:"El Tratado del 7 de junio de 1494 fijó una línea a 370 leguas de la Isla del Cabo Verde, otorgando a Portugal derecho sobre lo que hoy es Brasil. ¿Cómo se llamó?",
+    opciones:["Tratado de San Ildefonso","Tratado de Tordesillas","Tratado de Permuta","Bula Inter Caetera — Alejandro VI","Real Provisión"],
+    correcta:1, exp:"El Tratado de Tordesillas (1494) acordó correr la línea divisoria a 370 leguas al oeste de Cabo Verde, lo que permitió a Portugal reclamar el territorio de Brasil." },
+
+  { t:2, pregunta:"¿Cuál era el rol del 'Doctrinero' en la estructura de las misiones jesuíticas?",
+    opciones:["Administraba los bienes y alimentos de la misión","Era el superior máximo de la reducción","Estaba a las órdenes del Rector para tratar directamente con los indios","Era el encargado de la defensa militar","Representaba a la misión ante las autoridades civiles"],
+    correcta:2, exp:"El Doctrinero era el sacerdote jesuita que, bajo las órdenes del Rector, tenía contacto directo con los indígenas para su evangelización y gestión cotidiana." },
+
+  { t:2, pregunta:"¿Qué resolvió el Congreso del 24 de julio de 1810 en el Paraguay?",
+    opciones:["La conformación de un Triunvirato de gobierno","Guardar armonía con la Junta de Buenos Aires pero sin reconocer su superioridad","Reconocer a la Junta de Buenos Aires como máxima autoridad","Instaurar la Dictadura del Dr. Francia","Designar a Fulgencio Yegros como presidente"],
+    correcta:1, exp:"El Congreso del 24 de julio de 1810 resolvió mantener relaciones de amistad con Buenos Aires, pero sin reconocerle superioridad política sobre el Paraguay." },
+
+  { t:2, pregunta:"¿Quiénes integraron el primer Triunvirato del 16 de mayo de 1811?",
+    opciones:["Francia, Yegros y Velazco","Caballero, Velazco y Zaballos","Francia, Caballero y Yegros","Yegros, Velazco y Zaballos","Francia, Velazco y Zaballos"],
+    correcta:2, exp:"El primer gobierno provisorio del 16 de mayo de 1811 fue el Triunvirato integrado por José Gaspar Rodríguez de Francia, Pedro Juan Caballero y Fulgencio Yegros." },
+
+  { t:2, pregunta:"El Tratado del 1° de octubre de 1777 entre España y Portugal hizo que Paraguay perdiera el territorio del Mato Grosso. ¿Cómo se llamó?",
+    opciones:["Tratado de Tordesillas","Tratado de San Ildefonso","Tratado Benítez-Ichazo","Tratado de Permuta","Tratado López-De Oliveira"],
+    correcta:1, exp:"El Tratado de San Ildefonso (1777) definió límites en Sudamérica: España recuperó la Colonia del Sacramento y las 7 reducciones jesuíticas, pero Paraguay cedió el Mato Grosso." },
+
+  { t:2, pregunta:"¿Qué gobernador realizó el primer Censo Poblacional del Paraguay?",
+    opciones:["Agustín Fernando de Pinedo","Pedro Melo de Portugal","Joaquín Alos y Bru","Lázaro de Rivera","Francisco Vergara"],
+    correcta:3, exp:"Lázaro de Rivera (1796–1806) realizó el primer Censo Poblacional del Paraguay y además fundó San Juan Nepomuceno y estableció escuelas primarias obligatorias." },
+
+  { t:2, pregunta:"¿Qué gobernador inauguró el Real Colegio Seminario San Carlos y erigió a la provincia como Intendencia?",
+    opciones:["Hernandarias","Agustín Fernando de Pinedo","Domingo Martínez de Irala","Joaquín Alos y Bru","Pedro Melo de Portugal"],
+    correcta:4, exp:"Pedro Melo de Portugal (1778–1787) inauguró el Real Colegio Seminario San Carlos y convirtió al Paraguay en Intendencia, modernizando la estructura administrativa colonial." },
+
+  { t:2, pregunta:"¿Cuál fue una disposición de la Junta Superior Gubernativa del Paraguay?",
+    opciones:["Nombrar a Espínola y Peña como mediador ante Buenos Aires","Reconocimiento y jura al Supremo Consejo de Regencia","El Colegio San Carlos fue declarado Cuartel General","Separación definitiva de Velazco y prohibición a españoles de ocupar cargos públicos","Enviar una nota a Buenos Aires del 20/7/1811 expresando la resolución de conservar la independencia nacional"],
+    correcta:4, exp:"La Junta Superior Gubernativa envió a Buenos Aires la nota del 20 de julio de 1811 expresando la firme resolución del Paraguay de conservar su independencia nacional." },
+
+  { t:2, pregunta:"El 9 de febrero de 1841, la Comandancia General de Armas designó como Secretario a:",
+    opciones:["Mariano Roque Alonso","José Gaspar Rodríguez de Francia","Carlos Antonio López","Juan José Medina","José Domingo Campos"],
+    correcta:2, exp:"Carlos Antonio López fue designado Secretario de la Comandancia General de Armas el 9 de febrero de 1841, iniciando así su ascenso al poder en el Paraguay." },
+
+  { t:2, pregunta:"Entre la organización religiosa de los guaraníes se destaca que practicaban:",
+    opciones:["El monoteísmo bajo un dios creador llamado Ñamandú únicamente","Vivir en tabas con no más de 7 cabañas","Casarse solo luego de participar en una guerra","La antropofagia ritual como un modo de heredar las cualidades heroicas del enemigo","Organizarse en tribus permanentes con sacerdotes como líderes supremos"],
+    correcta:3, exp:"Los guaraníes practicaban la antropofagia ritual como forma de apropiarse simbólicamente de las virtudes del enemigo vencido, práctica vinculada a sus creencias religiosas y guerreras." }
+];
+
+let etRespuestas = [];
+
+function mostrarExaTemarios() {
+  clearInterval(timerInterval);
+  ['pantalla-inicio','pantalla-examen','pantalla-resultado','pantalla-cartillas','pantalla-prof']
+    .forEach(id => { const el = document.getElementById(id); if(el) el.style.display='none'; });
+  document.querySelectorAll('.footer-tab').forEach(b => b.classList.remove('activo'));
+  document.getElementById('tab-exa-temarios').classList.add('activo');
+  document.getElementById('pantalla-exa-temarios').style.display = 'block';
+  renderizarExaTemarios();
+  window.scrollTo(0,0);
+}
+
+function renderizarExaTemarios() {
+  etRespuestas = new Array(bancoTemarios.length).fill(null);
+  const cont = document.getElementById('et-contenedor');
+  cont.innerHTML = '';
+  document.getElementById('et-puntaje-bar').style.display = 'none';
+  document.getElementById('et-btn-reiniciar').style.display = 'none';
+
+  bancoTemarios.forEach((q, idx) => {
+    const badge = q.t===1
+      ? '<span class="et-badge-t1">Tem. 1</span>'
+      : '<span class="et-badge-t2">Tem. 2</span>';
+    const ops = q.opciones.map((op,oi) =>
+      `<li onclick="responderEt(${idx},${oi})" id="et-op-${idx}-${oi}">${'abcde'[oi]}) ${op}</li>`
+    ).join('');
+    const div = document.createElement('div');
+    div.className = 'et-pregunta';
+    div.id = 'et-q-'+idx;
+    div.innerHTML = `
+      <div class="et-num">Pregunta ${idx+1} de ${bancoTemarios.length} ${badge}</div>
+      <div class="et-texto">${q.pregunta}</div>
+      <ul class="et-opciones">${ops}</ul>
+      <div class="et-explicacion" id="et-exp-${idx}">💡 ${q.exp}</div>`;
+    cont.appendChild(div);
+  });
+}
+
+function responderEt(qIdx, opIdx) {
+  if (etRespuestas[qIdx] !== null) return;
+  etRespuestas[qIdx] = opIdx;
+  const correcta = bancoTemarios[qIdx].correcta;
+  document.querySelectorAll(`#et-q-${qIdx} .et-opciones li`).forEach((li,i) => {
+    li.classList.add('deshabilitada');
+    if (i===correcta) li.classList.add('correcta');
+    else if (i===opIdx) li.classList.add('incorrecta');
+  });
+  document.getElementById(`et-exp-${qIdx}`).style.display = 'block';
+  if (etRespuestas.every(r => r!==null)) mostrarPuntajeEt();
+}
+
+function mostrarPuntajeEt() {
+  const ok = etRespuestas.filter((r,i) => r===bancoTemarios[i].correcta).length;
+  const total = bancoTemarios.length;
+  const pct = Math.round(ok/total*100);
+  const bar = document.getElementById('et-puntaje-bar');
+  bar.textContent = `✅ Resultado: ${ok} / ${total} correctas (${pct}%)`;
+  bar.style.background = pct>=70 ? '#2e7d32' : pct>=50 ? '#e65100' : '#c62828';
+  bar.style.display = 'block';
+  document.getElementById('et-btn-reiniciar').style.display = 'block';
+  bar.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function reiniciarExaTemarios() {
+  renderizarExaTemarios();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
 </script>
 <script data-pplx-inline-edit>
 (function(){

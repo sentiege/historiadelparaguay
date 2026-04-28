@@ -201,7 +201,234 @@
     .badge.u10{background:var(--color-u10-light);color:var(--color-u10);}
     .badge.u11{background:var(--color-u11-light);color:var(--color-u11);}
     .badge.u12{background:var(--color-u12-light);color:var(--color-u12);}
-  </style>
+  
+    /* TEMARIO BADGE */
+    .temario-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: #fff;
+      background: linear-gradient(135deg, #b8860b, #d4a843);
+      padding: .22rem .75rem;
+      border-radius: var(--radius-full);
+      margin-top: var(--space-2);
+      box-shadow: 0 2px 6px oklch(0.2 0.05 80 / .25);
+    }
+
+    /* EXERCISE SECTION */
+    .exercise-section {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: var(--space-6) var(--space-6) var(--space-16);
+    }
+    .exercise-title {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 700;
+      color: var(--color-u12);
+      margin-bottom: var(--space-2);
+    }
+    .exercise-subtitle {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-6);
+    }
+    .match-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6);
+    }
+    @media (max-width: 700px) {
+      .match-container { grid-template-columns: 1fr; }
+    }
+    .match-col-title {
+      font-family: var(--font-display);
+      font-size: var(--text-sm);
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-3);
+    }
+    .match-item {
+      background: var(--color-surface);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-3) var(--space-4);
+      margin-bottom: var(--space-3);
+      font-size: var(--text-sm);
+      cursor: pointer;
+      transition: all var(--transition);
+      user-select: none;
+    }
+    .match-item:hover { border-color: var(--color-u12); background: var(--color-u12-light); }
+    .match-item.selected { border-color: var(--color-u12); background: var(--color-u12-light); box-shadow: 0 0 0 3px oklch(from var(--color-u12) l c h / .25); }
+    .match-item.correct { border-color: var(--color-accent); background: var(--color-accent-light); cursor: default; }
+    .match-item.incorrect { border-color: #c0392b; background: #fadbd8; animation: shake .35s; cursor: default; }
+    .match-item.correct::after { content: " ✓"; color: var(--color-accent); font-weight: 700; }
+    .match-item.incorrect::after { content: " ✗"; color: #c0392b; font-weight: 700; }
+    @keyframes shake {
+      0%,100%{ transform:translateX(0) } 25%{ transform:translateX(-6px) } 75%{ transform:translateX(6px) }
+    }
+    .exercise-score {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      color: var(--color-u12);
+      text-align: center;
+      margin-top: var(--space-6);
+      min-height: 2rem;
+    }
+    .exercise-reset {
+      display: block;
+      margin: var(--space-4) auto 0;
+      padding: var(--space-2) var(--space-8);
+      background: var(--color-u12);
+      color: var(--color-text-inverse);
+      border: none;
+      border-radius: var(--radius-full);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 700;
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    .exercise-reset:hover { background: var(--color-accent); }
+    .exercise-instructions {
+      background: var(--color-u12-light);
+      color: var(--color-u12);
+      border-radius: var(--radius-md);
+      padding: var(--space-3) var(--space-5);
+      font-size: var(--text-sm);
+      margin-bottom: var(--space-5);
+      border-left: 4px solid var(--color-u12);
+    }
+
+    
+    /* ── FLASHCARDS ── */
+    .fc-section { max-width:1140px; margin:0 auto; padding:0 var(--space-6) var(--space-10); }
+    .fc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr)); gap:var(--space-5); }
+    .fc-card { perspective:900px; height:160px; cursor:pointer; }
+    .fc-inner { position:relative; width:100%; height:100%; transition:transform .55s cubic-bezier(.4,0,.2,1); transform-style:preserve-3d; }
+    .fc-card.flipped .fc-inner { transform:rotateY(180deg); }
+    .fc-front, .fc-back {
+      position:absolute; inset:0;
+      backface-visibility:hidden; -webkit-backface-visibility:hidden;
+      border-radius:var(--radius-lg);
+      display:flex; align-items:center; justify-content:center;
+      padding:var(--space-4); text-align:center;
+      border:2px solid var(--color-border);
+      box-shadow:var(--shadow-sm);
+    }
+    .fc-front { background:var(--color-surface); }
+    .fc-back  { background:var(--color-u12-light); border-color:var(--color-u12); transform:rotateY(180deg); }
+    .fc-front p { font-family:var(--font-display); font-size:var(--text-sm); font-weight:700; color:var(--color-text); line-height:1.4; }
+    .fc-back  p { font-size:var(--text-xs); color:var(--color-u12); font-weight:600; line-height:1.55; }
+    .fc-hint  { font-size:.65rem; color:var(--color-text-faint); margin-top:var(--space-2); letter-spacing:.04em; }
+    .fc-progress { text-align:right; font-size:var(--text-xs); color:var(--color-text-muted); margin-bottom:var(--space-3); }
+    .fc-reset-btn {
+      display:block; margin:var(--space-5) auto 0;
+      padding:var(--space-2) var(--space-8);
+      background:var(--color-u12); color:var(--color-text-inverse);
+      border:none; border-radius:var(--radius-full);
+      font-family:var(--font-body); font-size:var(--text-sm); font-weight:700;
+      cursor:pointer; transition:background var(--transition);
+    }
+    .fc-reset-btn:hover { filter:brightness(1.15); }
+
+    /* ── MULTIPLE CHOICE QUIZ ── */
+    .quiz-section { max-width:1140px; margin:0 auto; padding:0 var(--space-6) var(--space-16); }
+    .quiz-question-block { background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-xl); padding:var(--space-5) var(--space-6); margin-bottom:var(--space-5); box-shadow:var(--shadow-sm); }
+    .quiz-q-num { font-size:var(--text-xs); font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--color-u12); margin-bottom:var(--space-2); }
+    .quiz-q-text { font-family:var(--font-display); font-size:var(--text-base); font-weight:700; color:var(--color-text); margin-bottom:var(--space-4); line-height:1.4; }
+    .quiz-options { display:flex; flex-direction:column; gap:var(--space-2); }
+    .quiz-opt {
+      padding:var(--space-3) var(--space-4);
+      border:1.5px solid var(--color-border);
+      border-radius:var(--radius-md);
+      font-size:var(--text-sm); cursor:pointer;
+      transition:all var(--transition); text-align:left;
+      background:var(--color-surface-2); color:var(--color-text-muted);
+    }
+    .quiz-opt:hover:not([disabled]) { border-color:var(--color-u12); background:var(--color-u12-light); color:var(--color-u12); }
+    .quiz-opt.correct  { border-color:var(--color-accent); background:var(--color-accent-light); color:var(--color-accent); font-weight:600; }
+    .quiz-opt.wrong    { border-color:#c0392b; background:#fadbd8; color:#c0392b; }
+    .quiz-opt.reveal   { border-color:var(--color-accent); background:var(--color-accent-light); color:var(--color-accent); opacity:.7; }
+    .quiz-feedback { margin-top:var(--space-3); font-size:var(--text-sm); font-weight:600; min-height:1.2rem; }
+    .quiz-feedback.ok  { color:var(--color-accent); }
+    .quiz-feedback.err { color:#c0392b; }
+    .quiz-final { text-align:center; font-family:var(--font-display); font-size:var(--text-xl); color:var(--color-u12); margin:var(--space-6) 0 var(--space-3); }
+    .quiz-final-sub { text-align:center; font-size:var(--text-sm); color:var(--color-text-muted); margin-bottom:var(--space-6); }
+    .quiz-reset-btn {
+      display:block; margin:0 auto;
+      padding:var(--space-2) var(--space-8);
+      background:var(--color-u12); color:var(--color-text-inverse);
+      border:none; border-radius:var(--radius-full);
+      font-family:var(--font-body); font-size:var(--text-sm); font-weight:700;
+      cursor:pointer; transition:background var(--transition);
+    }
+    .quiz-reset-btn:hover { filter:brightness(1.15); }
+    .quiz-counter { font-size:var(--text-sm); color:var(--color-text-muted); text-align:right; margin-bottom:var(--space-4); }
+
+    
+    /* ── FLASHCARDS ── */
+    .fc-section{max-width:1140px;margin:0 auto;padding:0 var(--space-6) var(--space-10);}
+    .fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr));gap:var(--space-5);}
+    .fc-card{perspective:900px;height:170px;cursor:pointer;}
+    .fc-inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d;}
+    .fc-card.flipped .fc-inner{transform:rotateY(180deg);}
+    .fc-front,.fc-back{
+      position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+      border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;
+      padding:var(--space-4);text-align:center;border:2px solid var(--color-border);box-shadow:var(--shadow-sm);}
+    .fc-front{background:var(--color-surface);}
+    .fc-back{background:var(--color-u12-light);border-color:var(--color-u12);transform:rotateY(180deg);}
+    .fc-front p{font-family:var(--font-display);font-size:var(--text-sm);font-weight:700;color:var(--color-text);line-height:1.4;}
+    .fc-back p{font-size:var(--text-xs);color:var(--color-u12);font-weight:600;line-height:1.55;}
+    .fc-hint{display:block;font-size:.65rem;color:var(--color-text-faint);margin-top:var(--space-2);letter-spacing:.04em;}
+    .fc-progress{text-align:right;font-size:var(--text-xs);color:var(--color-text-muted);margin-bottom:var(--space-3);}
+    .fc-reset-btn,.quiz-reset-btn{
+      display:block;margin:var(--space-5) auto 0;padding:var(--space-2) var(--space-8);
+      background:var(--color-u12);color:#fff;border:none;border-radius:var(--radius-full);
+      font-family:var(--font-body);font-size:var(--text-sm);font-weight:700;cursor:pointer;}
+    .fc-reset-btn:hover,.quiz-reset-btn:hover{filter:brightness(1.15);}
+
+    /* ── QUIZ ── */
+    .quiz-section{max-width:1140px;margin:0 auto;padding:0 var(--space-6) var(--space-16);}
+    .quiz-block{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);
+      padding:var(--space-5) var(--space-6);margin-bottom:var(--space-5);box-shadow:var(--shadow-sm);}
+    .quiz-q-num{font-size:var(--text-xs);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-u12);margin-bottom:var(--space-2);}
+    .quiz-q-text{font-family:var(--font-display);font-size:var(--text-base);font-weight:700;color:var(--color-text);margin-bottom:var(--space-4);line-height:1.4;}
+    .quiz-options{display:flex;flex-direction:column;gap:var(--space-2);}
+    .quiz-opt{
+      padding:var(--space-3) var(--space-4);border:1.5px solid var(--color-border);
+      border-radius:var(--radius-md);font-size:var(--text-sm);cursor:pointer;
+      text-align:left;background:var(--color-surface-2);color:var(--color-text-muted);
+      transition:all var(--transition);}
+    .quiz-opt:hover:not(:disabled){border-color:var(--color-u12);background:var(--color-u12-light);color:var(--color-u12);}
+    .quiz-opt.q-correct{border-color:var(--color-accent)!important;background:var(--color-accent-light)!important;color:var(--color-accent)!important;font-weight:600;}
+    .quiz-opt.q-wrong{border-color:#c0392b!important;background:#fadbd8!important;color:#c0392b!important;}
+    .quiz-opt.q-reveal{border-color:var(--color-accent)!important;background:var(--color-accent-light)!important;color:var(--color-accent)!important;opacity:.75;}
+    .quiz-feedback{margin-top:var(--space-3);font-size:var(--text-sm);font-weight:600;min-height:1.2rem;}
+    .quiz-feedback.fb-ok{color:var(--color-accent);}
+    .quiz-feedback.fb-err{color:#c0392b;}
+    .quiz-final{text-align:center;font-family:var(--font-display);font-size:var(--text-xl);color:var(--color-u12);margin:var(--space-6) 0 var(--space-2);}
+    .quiz-final-sub{text-align:center;font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-5);}
+    .quiz-counter{font-size:var(--text-sm);color:var(--color-text-muted);text-align:right;margin-bottom:var(--space-4);}
+
+    
+    .quiz-dif-badge{
+      display:inline-flex;align-items:center;gap:.4rem;
+      font-size:var(--text-xs);font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+      padding:.25rem .9rem;border-radius:var(--radius-full);margin-bottom:var(--space-3);}
+    .quiz-dif-medio  {background:#fef9c3;color:#854d0e;}
+    .quiz-dif-extremo{background:#fce7f3;color:#9d174d;}
+
+    </style>
 </head>
 <body>
 
@@ -1038,6 +1265,7 @@
           <div class="card-header-text">
             <div class="card-unit-tag u11">Unidad XI</div>
             <h2 class="card-title">Congreso del 16 de Octubre de 1862 — Asunción al poder</h2>
+      <div class="temario-badge">📋 MENCIONADO EN EL TEMARIO — Unidad 11 · Cómo asume Francisco Solano López</div>
           </div>
         </div>
         <div class="card-divider"></div>
@@ -1136,6 +1364,7 @@
           <div class="card-header-text">
             <div class="card-unit-tag u11">Unidad XI</div>
             <h2 class="card-title">Crisis con Argentina, Campaña de Corrientes y el Tratado de la Triple Alianza</h2>
+      <div class="temario-badge">📋 MENCIONADO EN EL TEMARIO — Unidad 11 · Tratado Secreto 1° mayo 1865</div>
           </div>
         </div>
         <div class="card-divider"></div>
@@ -1162,6 +1391,7 @@
           <div class="card-header-text">
             <div class="card-unit-tag u11">Unidad XI</div>
             <h2 class="card-title">Esquema de las Campañas de la Guerra</h2>
+      <div class="temario-badge">📋 MENCIONADO EN EL TEMARIO — Unidad 11 · Campañas ofensivas y defensivas</div>
           </div>
         </div>
         <div class="card-divider"></div>
@@ -1288,6 +1518,7 @@
           <div class="card-header-text">
             <div class="card-unit-tag u11">Unidad XI</div>
             <h2 class="card-title">Gobierno Provisional y Argentina Ocupa el Chaco</h2>
+      <div class="temario-badge">📋 MENCIONADO EN EL TEMARIO — Unidad 11/12 · Triunvirato post-guerra</div>
           </div>
         </div>
         <div class="card-divider"></div>
@@ -1307,6 +1538,7 @@
           <div class="card-header-text">
             <div class="card-unit-tag u11">Unidad XI</div>
             <h2 class="card-title">Cerro Corá — Última Batalla (1° de marzo de 1870)</h2>
+      <div class="temario-badge">📋 MENCIONADO EN EL TEMARIO — Unidad 11/12 · Muerte del Mariscal — 1° marzo 1870</div>
           </div>
         </div>
         <div class="card-divider"></div>
@@ -1384,6 +1616,7 @@
           <div class="card-header-text">
             <div class="card-unit-tag u12">Unidad XII</div>
             <h2 class="card-title">Convención Nacional Constituyente y Constitución de 1870</h2>
+      <div class="temario-badge">📋 MENCIONADO EN EL TEMARIO — Unidad 12 · Constitución de 1870</div>
           </div>
         </div>
         <div class="card-divider"></div>
@@ -1413,6 +1646,7 @@
           <div class="card-header-text">
             <div class="card-unit-tag u12">Unidad XII</div>
             <h2 class="card-title">Solución Jurídica de la Guerra — Los Tres Tratados de Paz</h2>
+      <div class="temario-badge">📋 MENCIONADO EN EL TEMARIO — Unidad 12 · Tratados con vecinos</div>
           </div>
         </div>
         <div class="card-divider"></div>
@@ -1435,6 +1669,7 @@
           <div class="card-header-text">
             <div class="card-unit-tag u12">Unidad XII</div>
             <h2 class="card-title">Gobiernos de la Post-Guerra — Realizaciones</h2>
+      <div class="temario-badge">📋 MENCIONADO EN EL TEMARIO — Unidad 12 · Gobiernos posteriores</div>
           </div>
         </div>
         <div class="card-divider"></div>
@@ -1476,6 +1711,7 @@
           <div class="card-header-text">
             <div class="card-unit-tag u12">Unidad XII</div>
             <h2 class="card-title">Apertura de la Hegemonía Republicana — Bernardino Caballero (1880–1886)</h2>
+      <div class="temario-badge">📋 MENCIONADO EN EL TEMARIO — Unidad 12 · Bernardino Caballero</div>
           </div>
         </div>
         <div class="card-divider"></div>
@@ -1511,6 +1747,7 @@
           <div class="card-header-text">
             <div class="card-unit-tag u12">Unidad XII</div>
             <h2 class="card-title">Gobiernos Post-Caballero (1886–1904)</h2>
+      <div class="temario-badge">📋 MENCIONADO EN EL TEMARIO — Unidad 12 · Patricio Escobar y siguientes</div>
           </div>
         </div>
         <div class="card-divider"></div>
@@ -1552,6 +1789,8 @@
           <div class="card-header-text">
             <div class="card-unit-tag u12">Unidad XII</div>
             <h2 class="card-title">Los Partidos Políticos</h2>
+      <div class="temario-badge">📋 MENCIONADO EN EL TEMARIO — Unidad 12 · UNA — 3 facultades</div>
+      <div class="temario-badge">📋 MENCIONADO EN EL TEMARIO — Unidad 12 · Partidos Liberal y Colorado</div>
           </div>
         </div>
         <div class="card-divider"></div>
@@ -1586,6 +1825,7 @@
           <div class="card-header-text">
             <div class="card-unit-tag u12">Unidad XII</div>
             <h2 class="card-title">Colegios Nacionales y Florecimiento Intelectual</h2>
+      <div class="temario-badge">📋 MENCIONADO EN EL TEMARIO — Unidad 12 · Colegio Nacional / Benjamín Aceval</div>
           </div>
         </div>
         <div class="card-divider"></div>
@@ -1621,5 +1861,373 @@
       items.forEach(el=>io.observe(el));
     })();
   </script>
+
+<!-- EJERCICIO INTERACTIVO -->
+<div id="ejercicio" class="exercise-section">
+  <div class="unit-divider" style="max-width:100%;padding:0 0 var(--space-4)">
+    <hr>
+    <div class="unit-label u12">🎯 Ejercicio Interactivo — Post Guerra</div>
+    <hr>
+  </div>
+
+  <p class="exercise-title">¿Quién hizo qué? — Presidentes de la Post Guerra</p>
+  <p class="exercise-subtitle">
+    Hacé clic en un presidente (izquierda) y luego en su logro correspondiente (derecha) para unirlos.
+    Cada presidente tiene exactamente un logro principal.
+  </p>
+  <div class="exercise-instructions">
+    💡 <strong>Instrucciones:</strong> Primero seleccioná un <strong>presidente</strong> de la columna izquierda,
+    luego hacé clic en el <strong>logro</strong> que le corresponde. Verde = correcto · Rojo = incorrecto.
+  </div>
+
+  <div class="match-container">
+    <div>
+      <p class="match-col-title">👤 Presidentes</p>
+      <div class="match-item" data-id="rivarola" onclick="selectPres(this)">Cirilo Antonio Rivarola</div>
+      <div class="match-item" data-id="jovellanos" onclick="selectPres(this)">Salvador Jovellanos</div>
+      <div class="match-item" data-id="gill" onclick="selectPres(this)">Juan Bautista Gill</div>
+      <div class="match-item" data-id="uriarte" onclick="selectPres(this)">Higinio Uriarte</div>
+      <div class="match-item" data-id="bareiro" onclick="selectPres(this)">Cándido Bareiro</div>
+      <div class="match-item" data-id="caballero" onclick="selectPres(this)">Gral. Bernardino Caballero</div>
+      <div class="match-item" data-id="escobar" onclick="selectPres(this)">Patricio Escobar</div>
+    </div>
+    <div>
+      <p class="match-col-title">🏆 Logro Principal</p>
+      <div class="match-item" data-match="escobar" onclick="selectLogro(this)">Fundó la Universidad Nacional de Asunción con 3 facultades y se constituyeron los partidos Liberal y Colorado</div>
+      <div class="match-item" data-match="uriarte" onclick="selectLogro(this)">Creó el Banco del Paraguay y logró el fallo del Presidente Hayes a favor del Chaco paraguayo</div>
+      <div class="match-item" data-match="caballero" onclick="selectLogro(this)">Inició la primera hegemonía Republicana e inauguró la Escuela de Derecho</div>
+      <div class="match-item" data-match="gill" onclick="selectLogro(this)">Creó el Colegio Nacional de la Capital — primera institución secundaria, por iniciativa de Benjamín Aceval</div>
+      <div class="match-item" data-match="bareiro" onclick="selectLogro(this)">Bajo su gobierno inició el Seminario Conciliar del Paraguay; falleció durante su presidencia</div>
+      <div class="match-item" data-match="rivarola" onclick="selectLogro(this)">Primer presidente designado en 1870; su gobierno enfrentó escándalo de préstamo y malversación de fondos</div>
+      <div class="match-item" data-match="jovellanos" onclick="selectLogro(this)">Firmó los tratados de paz con Brasil y Uruguay durante su mandato</div>
+    </div>
+  </div>
+
+  <p class="exercise-score" id="score-msg"></p>
+  <button class="exercise-reset" onclick="resetExercise()">🔄 Reiniciar ejercicio</button>
+</div>
+
+<script>
+(function(){
+  let selectedPres = null;
+  let score = 0;
+  let total = 7;
+  let matched = 0;
+
+  window.selectPres = function(el) {
+    if (el.classList.contains('correct') || el.classList.contains('incorrect')) return;
+    document.querySelectorAll('.match-item[data-id]').forEach(e => e.classList.remove('selected'));
+    selectedPres = el;
+    el.classList.add('selected');
+  };
+
+  window.selectLogro = function(el) {
+    if (!selectedPres) return;
+    if (el.classList.contains('correct') || el.classList.contains('incorrect')) return;
+    const presId = selectedPres.dataset.id;
+    const logroMatch = el.dataset.match;
+    if (presId === logroMatch) {
+      el.classList.add('correct');
+      selectedPres.classList.remove('selected');
+      selectedPres.classList.add('correct');
+      matched++;
+      score++;
+      if (matched === total) {
+        document.getElementById('score-msg').textContent = '🎉 ¡Perfecto! Completaste todos los pares correctamente (' + score + '/' + total + ')';
+      } else {
+        document.getElementById('score-msg').textContent = '✅ ¡Correcto! Llevas ' + score + '/' + total;
+      }
+    } else {
+      el.classList.add('incorrect');
+      selectedPres.classList.add('incorrect');
+      setTimeout(() => {
+        if (!el.classList.contains('correct')) el.classList.remove('incorrect');
+        if (!selectedPres.classList.contains('correct')) selectedPres.classList.remove('incorrect');
+        selectedPres.classList.remove('selected');
+      }, 900);
+      document.getElementById('score-msg').textContent = '❌ Incorrecto — intentá de nuevo. Vas ' + score + '/' + total;
+    }
+    selectedPres = null;
+  };
+
+  window.resetExercise = function() {
+    document.querySelectorAll('.match-item').forEach(e => {
+      e.classList.remove('correct','incorrect','selected');
+    });
+    selectedPres = null;
+    score = 0;
+    matched = 0;
+    document.getElementById('score-msg').textContent = '';
+  };
+})();
+</script>
+
+
+
+<!-- ══ FLASHCARDS ══════════════════════════════════════════════════════════ -->
+<div class="unit-divider" style="max-width:1140px;margin:var(--space-10) auto 0;padding:0 var(--space-6) var(--space-4)">
+  <hr>
+  <div class="unit-label u12">🎴 Flashcards — Presidentes Post-Guerra</div>
+  <hr>
+</div>
+<div class="fc-section">
+  <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-2)">
+    Hacé clic en cada tarjeta para ver la respuesta. Un contador te muestra cuántas repasaste.
+  </p>
+  <p class="fc-progress" id="fc-prog">0 / 14 repasadas</p>
+  <div class="fc-grid" id="fc-grid"></div>
+  <button class="fc-reset-btn" onclick="fcReset()">🔄 Reiniciar tarjetas</button>
+</div>
+
+<!-- ══ QUIZ SELECCIÓN MÚLTIPLE ════════════════════════════════════════════ -->
+<div class="unit-divider" style="max-width:1140px;margin:var(--space-10) auto 0;padding:0 var(--space-6) var(--space-4)">
+  <hr>
+  <div class="unit-label u12">📝 Quiz — Selección Múltiple</div>
+  <hr>
+</div>
+<div class="quiz-section">
+  <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-4)">
+    Una sola respuesta correcta por pregunta. Si errás, se revela la correcta con su explicación.
+  </p>
+  <p class="quiz-counter" id="quiz-ctr">0 / 14 respondidas · Puntaje: 0</p>
+  <div id="quiz-wrap"></div>
+  <div class="quiz-final"  id="quiz-final"  style="display:none"></div>
+  <div class="quiz-final-sub" id="quiz-fsub" style="display:none"></div>
+  <button class="quiz-reset-btn" id="quiz-rbtn" style="display:none" onclick="quizReset()">🔄 Reiniciar quiz</button>
+</div>
+
+<script>
+(function(){
+
+/* ── DATA ── */
+var FC   = [["¿Quién fue el primer presidente designado del Paraguay post-guerra?", "Cirilo Antonio Rivarola — designado el 25 de noviembre de 1870 por la Convención Constituyente."], ["¿Quién fue el primer vicepresidente del Paraguay post-guerra?", "Sotero Cayo Miltos — acompañó a Rivarola en 1870."], ["¿Qué escándalo marcó el gobierno de Rivarola?", "Préstamo externo con malversación de fondos públicos."], ["¿Bajo qué presidente se firmaron los tratados de paz con Brasil y Uruguay?", "Salvador Jovellanos — firmó los tratados durante su mandato."], ["¿Cuál fue el tratado de paz con Brasil y quiénes lo firmaron?", "Tratado Loizaga–Cotegipe (9 ene. 1872): Barón de Cotegipe (Brasil) y Carlos Loizaga (Paraguay)."], ["¿Cuál fue el tratado con Argentina y quiénes lo firmaron?", "Tratado Machain–Irigoyen (3 feb. 1876): Facundo Machain (Py) y Bernardo de Irigoyen (Arg)."], ["¿Cuál fue el tratado con Uruguay y quiénes lo firmaron?", "Tratado Miranda–Sierra Carranza (13 dic. 1873): José del Rosario Miranda (Py) y José Sierra Carranza (Uy)."], ["¿Qué institución educativa se creó bajo Juan Bautista Gill?", "El Colegio Nacional de la Capital — primera institución secundaria, por iniciativa de Benjamín Aceval."], ["¿Qué institución financiera se creó bajo Higinio Uriarte?", "El Banco del Paraguay — primer banco del país post-guerra."], ["¿Qué hecho notable ocurrió durante la presidencia de Cándido Bareiro?", "Inició el Seminario Conciliar del Paraguay; falleció durante su presidencia."], ["¿Qué hegemonía política inició Bernardino Caballero?", "La primera hegemonía del Partido Colorado (Asociación Nacional Republicana)."], ["¿Qué institución educativa inauguró Bernardino Caballero?", "La Escuela de Derecho — antecesora de la Facultad de Derecho de la UNA."], ["¿Qué universidad fundó Patricio Escobar y con qué facultades?", "La Universidad Nacional de Asunción (UNA) — Facultades de Derecho, Medicina y Matemáticas (1889)."], ["¿Qué partidos políticos surgieron bajo Patricio Escobar?", "La Asociación Nacional Republicana (Colorado) y el Centro Democrático (luego Partido Liberal)."]];
+var QUIZ = [["¿En qué año fue jurada la Constitución paraguaya post-guerra?", ["1868", "1870", "1872", "1876"], 1, "La Constitución fue jurada el 25 de noviembre de 1870."], ["¿Cuántos artículos tenía la Constitución de 1870?", ["100", "110", "118", "125"], 2, "Tenía exactamente 118 artículos."], ["¿Cuántos años duraba el mandato presidencial según la Constitución de 1870?", ["2 años", "4 años", "6 años", "10 años"], 1, "El mandato era de 4 años (la Constitución de 1844 establecía 10 años)."], ["¿Quién fue designado presidente provisional por la Convención Constituyente de 1870?", ["Carlos Loizaga", "Cirilo Antonio Rivarola", "Salvador Jovellanos", "Juan Bautista Gill"], 1, "Cirilo Antonio Rivarola fue designado el 25 de noviembre de 1870."], ["¿Quiénes integraban el Triunvirato provisional de agosto de 1869?", ["Rivarola, Gill y Bareiro", "Rivarola, Loizaga y Díaz de Bedoya", "Jovellanos, Caballero y Escobar", "Francia, López y Caballero"], 1, "El triunvirato fue: Cirilo Antonio Rivarola, Carlos Loizaga y José Díaz de Bedoya."], ["¿Bajo cuál presidente se creó el Colegio Nacional de la Capital?", ["Higinio Uriarte", "Patricio Escobar", "Juan Bautista Gill", "Cándido Bareiro"], 2, "Fue bajo Juan Bautista Gill, por iniciativa de Benjamín Aceval."], ["¿Cuántas facultades tuvo la UNA al fundarse en 1889?", ["2", "3", "4", "5"], 1, "La UNA se fundó con 3 facultades: Derecho, Medicina y Matemáticas."], ["¿Qué tratado definió los límites entre Paraguay y Argentina?", ["Tratado Loizaga–Cotegipe", "Tratado Miranda–Sierra Carranza", "Tratado Machain–Irigoyen", "Tratado de la Triple Alianza"], 2, "El Tratado Machain–Irigoyen (3 feb. 1876) reguló los límites con Argentina."], ["¿Cuántos miembros tenía el Superior Tribunal de Justicia según la Constitución de 1870?", ["2", "3", "5", "7"], 1, "Estaba integrado por 3 miembros nombrados por el Poder Ejecutivo."], ["¿Qué partido político surgió como contraparte al Colorado bajo Escobar?", ["Partido Febrerista", "Centro Democrático (luego Liberal)", "Partido Encuentro Nacional", "UNACE"], 1, "Se constituyó el Centro Democrático, que luego pasó a llamarse Partido Liberal."], ["¿Quién firmó el tratado de paz con Brasil por parte del Paraguay?", ["Facundo Machain", "José del Rosario Miranda", "Carlos Loizaga", "Cándido Bareiro"], 2, "Carlos Loizaga firmó el Tratado Loizaga–Cotegipe con el Barón de Cotegipe de Brasil."], ["¿Qué presidente paraguayo inició la primera hegemonía Republicana?", ["Patricio Escobar", "Juan Bautista Gill", "Higinio Uriarte", "Bernardino Caballero"], 3, "El Gral. Bernardino Caballero inició la primera hegemonía Republicana a partir de 1880."], ["¿Cuántos miembros tenía la Cámara de Senadores según la Constitución de 1870?", ["10", "13", "20", "26"], 1, "La Cámara de Senadores tenía 13 miembros."], ["¿Qué requisito establecía la Constitución de 1870 para ser presidente?", ["Ciudadano natural, mayor de 25 años", "Ciudadano natural, mayor de 30 años", "Naturalizado, mayor de 35 años", "Ciudadano natural, mayor de 40 años"], 1, "Debía ser ciudadano natural y mayor de 30 años."]];
+
+/* ══ FLASHCARDS ══════════════════════════════════════════════════════════ */
+var fcSeen = 0;
+
+function fcBuild(){
+  fcSeen = 0;
+  document.getElementById('fc-prog').textContent = '0 / ' + FC.length + ' repasadas';
+  var grid = document.getElementById('fc-grid');
+  grid.innerHTML = '';
+  FC.forEach(function(pair){
+    var q = pair[0], a = pair[1];
+    var card = document.createElement('div');
+    card.className = 'fc-card';
+    var inner = document.createElement('div');
+    inner.className = 'fc-inner';
+    var front = document.createElement('div');
+    front.className = 'fc-front';
+    front.innerHTML = '<p>' + q + '</p><span class="fc-hint">👆 Clic para ver respuesta</span>';
+    var back = document.createElement('div');
+    back.className = 'fc-back';
+    back.innerHTML = '<p>' + a + '</p>';
+    inner.appendChild(front);
+    inner.appendChild(back);
+    card.appendChild(inner);
+    card.addEventListener('click', function(){
+      var wasFlipped = card.classList.contains('flipped');
+      card.classList.toggle('flipped');
+      if(!wasFlipped){
+        fcSeen++;
+        document.getElementById('fc-prog').textContent = fcSeen + ' / ' + FC.length + ' repasadas';
+      }
+    });
+    grid.appendChild(card);
+  });
+}
+
+window.fcReset = function(){ fcBuild(); };
+fcBuild();
+
+/* ══ QUIZ ════════════════════════════════════════════════════════════════ */
+var qScore = 0, qDone = 0;
+
+function quizBuild(){
+  qScore = 0; qDone = 0;
+  document.getElementById('quiz-ctr').textContent   = '0 / ' + QUIZ.length + ' respondidas · Puntaje: 0';
+  document.getElementById('quiz-final').style.display  = 'none';
+  document.getElementById('quiz-fsub').style.display   = 'none';
+  document.getElementById('quiz-rbtn').style.display   = 'none';
+  var wrap = document.getElementById('quiz-wrap');
+  wrap.innerHTML = '';
+
+  QUIZ.forEach(function(item, qi){
+    var question = item[0], options = item[1], correct = item[2], hint = item[3];
+    var block = document.createElement('div');
+    block.className = 'quiz-block';
+
+    var num = document.createElement('p');
+    num.className = 'quiz-q-num';
+    num.textContent = 'Pregunta ' + (qi+1) + ' de ' + QUIZ.length;
+
+    var qtext = document.createElement('p');
+    qtext.className = 'quiz-q-text';
+    qtext.textContent = question;
+
+    var optWrap = document.createElement('div');
+    optWrap.className = 'quiz-options';
+
+    var fb = document.createElement('p');
+    fb.className = 'quiz-feedback';
+
+    options.forEach(function(opt, oi){
+      var btn = document.createElement('button');
+      btn.className = 'quiz-opt';
+      btn.innerHTML = '<strong>' + 'ABCD'[oi] + '.</strong> ' + opt;
+      btn.addEventListener('click', function(){
+        if(block.dataset.done) return;
+        block.dataset.done = '1';
+        var allBtns = optWrap.querySelectorAll('.quiz-opt');
+        allBtns.forEach(function(b){ b.disabled = true; });
+        if(oi === correct){
+          btn.classList.add('q-correct');
+          fb.textContent = '✅ ¡Correcto!';
+          fb.className = 'quiz-feedback fb-ok';
+          qScore++;
+        } else {
+          btn.classList.add('q-wrong');
+          allBtns[correct].classList.add('q-reveal');
+          fb.textContent = '❌ ' + hint;
+          fb.className = 'quiz-feedback fb-err';
+        }
+        qDone++;
+        document.getElementById('quiz-ctr').textContent =
+          qDone + ' / ' + QUIZ.length + ' respondidas · Puntaje: ' + qScore;
+        if(qDone === QUIZ.length){
+          var pct = Math.round(qScore / QUIZ.length * 100);
+          var em = pct>=85 ? '🏆' : pct>=60 ? '👍' : '📖';
+          var msg = pct>=85 ? '¡Excelente! Dominás el tema.' :
+                    pct>=60 ? 'Bien encaminado. Repasá las flashcards.' :
+                               'Seguí estudiando — ¡podés lograrlo!';
+          document.getElementById('quiz-final').textContent =
+            em + ' Resultado: ' + qScore + ' / ' + QUIZ.length + ' (' + pct + '%)';
+          document.getElementById('quiz-fsub').textContent = msg;
+          document.getElementById('quiz-final').style.display  = 'block';
+          document.getElementById('quiz-fsub').style.display   = 'block';
+          document.getElementById('quiz-rbtn').style.display   = 'block';
+          document.getElementById('quiz-final').scrollIntoView({behavior:'smooth',block:'center'});
+        }
+      });
+      optWrap.appendChild(btn);
+    });
+
+    block.appendChild(num);
+    block.appendChild(qtext);
+    block.appendChild(optWrap);
+    block.appendChild(fb);
+    wrap.appendChild(block);
+  });
+}
+
+window.quizReset = function(){ quizBuild(); };
+quizBuild();
+
+})();
+</script>
+
+
+<script>
+function buildQuizInstance(data, wrapId, ctrId, finalId, fsubId, rbtnId){
+  var qScore=0, qDone=0;
+  document.getElementById(ctrId).textContent   = '0 / '+data.length+' respondidas · Puntaje: 0';
+  document.getElementById(finalId).style.display = 'none';
+  document.getElementById(fsubId).style.display  = 'none';
+  document.getElementById(rbtnId).style.display  = 'none';
+  var wrap = document.getElementById(wrapId);
+  wrap.innerHTML = '';
+  data.forEach(function(item,qi){
+    var question=item[0], options=item[1], correct=item[2], hint=item[3];
+    var block=document.createElement('div'); block.className='quiz-block';
+    var num=document.createElement('p');   num.className='quiz-q-num';   num.textContent='Pregunta '+(qi+1)+' de '+data.length;
+    var qt=document.createElement('p');    qt.className='quiz-q-text';   qt.textContent=question;
+    var ow=document.createElement('div'); ow.className='quiz-options';
+    var fb=document.createElement('p');   fb.className='quiz-feedback';
+    options.forEach(function(opt,oi){
+      var btn=document.createElement('button'); btn.className='quiz-opt';
+      btn.innerHTML='<strong>'+'ABCD'[oi]+'.</strong> '+opt;
+      btn.addEventListener('click',function(){
+        if(block.dataset.done) return;
+        block.dataset.done='1';
+        ow.querySelectorAll('.quiz-opt').forEach(function(b){b.disabled=true;});
+        if(oi===correct){
+          btn.classList.add('q-correct'); fb.textContent='✅ ¡Correcto!'; fb.className='quiz-feedback fb-ok'; qScore++;
+        } else {
+          btn.classList.add('q-wrong');
+          ow.querySelectorAll('.quiz-opt')[correct].classList.add('q-reveal');
+          fb.textContent='❌ '+hint; fb.className='quiz-feedback fb-err';
+        }
+        qDone++;
+        document.getElementById(ctrId).textContent=qDone+' / '+data.length+' respondidas · Puntaje: '+qScore;
+        if(qDone===data.length){
+          var pct=Math.round(qScore/data.length*100);
+          var em=pct>=85?'🏆':pct>=60?'👍':'📖';
+          var msg=pct>=85?'¡Excelente! Dominás este nivel.':pct>=60?'Buen intento. Repasá los errores.':'Seguí estudiando — ¡podés lograrlo!';
+          document.getElementById(finalId).textContent=em+' Resultado: '+qScore+' / '+data.length+' ('+pct+'%)';
+          document.getElementById(fsubId).textContent=msg;
+          document.getElementById(finalId).style.display='block';
+          document.getElementById(fsubId).style.display='block';
+          document.getElementById(rbtnId).style.display='block';
+          document.getElementById(finalId).scrollIntoView({behavior:'smooth',block:'center'});
+        }
+      });
+      ow.appendChild(btn);
+    });
+    block.appendChild(num); block.appendChild(qt); block.appendChild(ow); block.appendChild(fb);
+    wrap.appendChild(block);
+  });
+}
+</script>
+
+<!-- ══ QUIZ MEDIO ══════════════════════════════════════════════════════════ -->
+<div class="unit-divider" style="max-width:1140px;margin:var(--space-10) auto 0;padding:0 var(--space-6) var(--space-4)">
+  <hr>
+  <div class="unit-label u12">🟡 Quiz Nivel Medio</div>
+  <hr>
+</div>
+<div class="quiz-section">
+  <span class="quiz-dif-badge quiz-dif-medio">⚡ Dificultad Media</span>
+  <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-4)">
+    Preguntas más específicas: fechas exactas, nombres de firmantes, detalles institucionales.
+  </p>
+  <p class="quiz-counter" id="ctr-medio">0 / 14 respondidas · Puntaje: 0</p>
+  <div id="wrap-medio"></div>
+  <div class="quiz-final"     id="final-medio" style="display:none"></div>
+  <div class="quiz-final-sub" id="fsub-medio"  style="display:none"></div>
+  <button class="quiz-reset-btn" id="rbtn-medio" style="display:none"
+    onclick="buildQuizInstance(QUIZ_MEDIO,'wrap-medio','ctr-medio','final-medio','fsub-medio','rbtn-medio')">
+    🔄 Reiniciar
+  </button>
+</div>
+
+<!-- ══ QUIZ EXTREMO ════════════════════════════════════════════════════════ -->
+<div class="unit-divider" style="max-width:1140px;margin:var(--space-10) auto 0;padding:0 var(--space-6) var(--space-4)">
+  <hr>
+  <div class="unit-label u12">🔴 Quiz Nivel Extremo</div>
+  <hr>
+</div>
+<div class="quiz-section">
+  <span class="quiz-dif-badge quiz-dif-extremo">💀 Dificultad Extrema</span>
+  <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-4)">
+    Detalles muy específicos, opciones similares y cruces entre unidades. Solo para quienes dominan el tema.
+  </p>
+  <p class="quiz-counter" id="ctr-extremo">0 / 14 respondidas · Puntaje: 0</p>
+  <div id="wrap-extremo"></div>
+  <div class="quiz-final"     id="final-extremo" style="display:none"></div>
+  <div class="quiz-final-sub" id="fsub-extremo"  style="display:none"></div>
+  <button class="quiz-reset-btn" id="rbtn-extremo" style="display:none"
+    onclick="buildQuizInstance(QUIZ_EXTREMO,'wrap-extremo','ctr-extremo','final-extremo','fsub-extremo','rbtn-extremo')">
+    🔄 Reiniciar
+  </button>
+</div>
+
+<script>
+var QUIZ_MEDIO   = [["¿Qué tres juristas redactaron el proyecto de la Constitución de 1870?", ["Francia, López y Caballero", "Decoud, Machain, Godoy y Palacios", "Loizaga, Bareiro y Gill", "Rivarola, Jovellanos y Uriarte"], 1, "El proyecto fue elaborado por Juan José Segundo Decoud, Facundo Machain, Juan Silvano Godoy y Miguel Palacios."], ["¿En qué constitución extranjera se inspiró principalmente la Constitución paraguaya de 1870?", ["Constitución de Francia de 1848", "Constitución de EE.UU. de 1787", "Constitución Argentina de 1853 y Declaración de Virginia de 1776", "Constitución española de 1869"], 2, "Se inspiró en la Declaración de Virginia de 1776 y la Constitución Argentina de 1853."], ["¿Cuántos miembros tenía la Cámara de Diputados según la Constitución de 1870?", ["13", "20", "26", "30"], 2, "La Cámara de Diputados tenía 26 miembros (la de Senadores tenía 13)."], ["¿Qué cargo ocupaba Cándido Bareiro antes de ser presidente?", ["Ministro de Guerra", "Secretario de Gobierno bajo Rivarola", "Jefe del Ejército", "Ministro de Hacienda"], 1, "Cándido Bareiro fue nombrado Secretario de Gobierno por el presidente Rivarola en 1870."], ["¿Cuál fue la fecha exacta de la firma del Tratado Loizaga-Cotegipe con Brasil?", ["15 agosto 1870", "9 enero 1872", "13 diciembre 1873", "3 febrero 1876"], 1, "El Tratado Loizaga–Cotegipe fue firmado el 9 de enero de 1872."], ["¿Qué institución fue el primer banco del Paraguay post-guerra?", ["Banco Central del Paraguay", "Banco Nacional", "Banco del Paraguay", "Banco de la República"], 2, "El Banco del Paraguay fue creado bajo el gobierno de Higinio Uriarte."], ["¿Quién fue el primer Decano de la Facultad de Derecho de la UNA?", ["Benjamín Aceval", "Cecilio Báez", "Ramón Zubizarreta", "José Segundo Decoud"], 2, "Ramón Zubizarreta fue el primer Decano de la Facultad de Derecho de la UNA."], ["¿En qué fecha fue dictada la ley que fundó la Universidad Nacional de Asunción?", ["25 agosto 1870", "15 septiembre 1880", "24 septiembre 1889", "1 enero 1890"], 2, "La UNA fue fundada por ley del 24 de septiembre de 1889."], ["¿Bajo qué presidente se dictó la Ley de Enseñanza Obligatoria?", ["Bernardino Caballero", "Juan Bautista Gill", "Patricio Escobar", "Higinio Uriarte"], 2, "La Ley de Enseñanza Obligatoria fue dictada bajo el gobierno de Patricio Escobar."], ["¿Quién fue el representante de Uruguay en el Tratado de paz con Paraguay de 1873?", ["Octavio de Almeidas Rosa", "Bernardo de Irigoyen", "José Sierra Carranza", "Carlos de Castro"], 2, "José Sierra Carranza representó a Uruguay en el Tratado Miranda–Sierra Carranza (13 dic. 1873)."], ["¿Cuántos años duraban los mandatos de senadores y diputados según la Constitución de 1870?", ["2 años", "3 años", "4 años", "6 años"], 2, "Los mandatos legislativos también duraban 4 años."], ["¿En qué ciudad se trasladó la capital provisional del Paraguay antes de caer Asunción en 1869?", ["Luque y luego Piribebuy", "Villarrica y luego Caacupé", "San Lorenzo y luego Itauguá", "Concepción y luego Pedro Juan Caballero"], 0, "La capital fue trasladada de Luque a Piribebuy antes de la ocupación aliada."], ["¿Qué nombre recibía el periódico oficial del gobierno de Carlos Antonio López que funcionó hasta 1868?", ["El Paraguayo Independiente", "La Aurora", "Semanario de Avisos y Conocimientos Útiles", "El Eco del Paraguay"], 2, "El Semanario de Avisos y Conocimientos Útiles fue el periódico oficial desde 1852 hasta 1868."], ["¿Cuál de estas NO era una de las 3 facultades originales de la UNA en 1889?", ["Derecho y Ciencias Sociales", "Ciencias Médicas", "Matemáticas", "Filosofía y Letras"], 3, "Las tres facultades originales eran Derecho, Ciencias Médicas y Matemáticas. Filosofía no existía aún."]];
+var QUIZ_EXTREMO = [["¿Cuál era el nombre completo del representante brasileño que firmó el tratado de paz con Paraguay en 1872?", ["Duque de Caxias", "Barón de Cotegipe", "Conde D'Eu", "Octavio de Almeidas Rosa"], 1, "El Barón de Cotegipe (João Maurício Wanderley) firmó el tratado en nombre del Brasil."], ["¿En qué fecha exacta fue ocupada Asunción por las fuerzas aliadas?", ["1 marzo 1869", "5 enero 1869", "15 agosto 1869", "25 noviembre 1869"], 1, "El ejército aliado ocupó Asunción desde el 5 de enero de 1869, sometiéndola a saqueo."], ["¿Quién firmó el tratado de paz con Argentina por parte del Paraguay?", ["Carlos Loizaga", "Cándido Bareiro", "Facundo Machain", "Juan Bautista Gill"], 2, "Facundo Machain firmó el Tratado Machain–Irigoyen en nombre del Paraguay el 3 de febrero de 1876."], ["¿Cuál fue el primer logro del Congreso de 1841 bajo el consulado de Alonso y López?", ["Declarar la independencia formal", "Crear la Academia Literaria bajo el P. Marco Antonio Maz", "Abolir la esclavitud", "Firmar tratados con Brasil"], 1, "Entre sus resoluciones, el Congreso de 1841 creó la Academia Literaria bajo dirección del P. Marco Antonio Maz."], ["¿Qué artículo de la Constitución de 1870 regulaba la edad mínima del presidente?", ["No se especifica en la Constitución", "Se establecía en el artículo 72", "Se establecía en el artículo 45", "Se establecía en el artículo 30"], 1, "Los requisitos presidenciales (ciudadano natural, mayor de 30 años) estaban en el artículo 72 de la Constitución de 1870."], ["¿Bajo qué mandato paraguayo ocurrió el fallo arbitral del presidente Hayes que otorgó el Chaco a Paraguay?", ["Cándido Bareiro", "Bernardino Caballero", "Higinio Uriarte", "Salvador Jovellanos"], 2, "El fallo del presidente Hayes fue en noviembre de 1878, durante el gobierno de Higinio Uriarte."], ["¿Cuántos hombres componían la expedición paraguaya hacia Uruguay en la etapa ofensiva de la guerra?", ["5.000", "8.000", "12.000", "20.000"], 2, "La expedición hacia Uruguay contaba con 12.000 hombres al mando del Tcnel. Antonio de la Cruz Estigarribia."], ["¿Qué batalla puso fin a la etapa ofensiva paraguaya en la guerra de la Triple Alianza?", ["Batalla de Riachuelo", "Batalla de Yatay y rendición de Uruguayana", "Batalla de Curupayty", "Batalla de Pikysyry"], 1, "Con las derrotas de Yatay (17 ago 1865) y la rendición de Uruguayana (18 set 1865) terminó la etapa ofensiva."], ["¿Cuáles eran los dos buques argentinos capturados por Paraguay en Corrientes al inicio de la guerra?", ["Independencia y Buenos Aires", "25 de Mayo y Gualeguay", "San Martín y Belgrano", "Libertad y Progreso"], 1, "La escuadra paraguaya se apoderó de los buques argentinos 25 de Mayo y Gualeguay en Corrientes."], ["¿Quién comandaba la columna fluvial paraguaya en la campaña de Mato Grosso?", ["Gral. Wenceslao Robles", "Tcnel. Estigarribia", "Cnel. Vicente Barrios", "Mayor Pedro Duarte"], 2, "La columna fluvial en Mato Grosso fue dirigida por el Cnel. Vicente Barrios; la terrestre por el Cnel. Isidoro Resquín."], ["¿Cuál fue la nota diplomática enviada por Paraguay a Brasil el 30 de agosto de 1864?", ["Una declaración de guerra formal", "Una advertencia de que la ocupación del Uruguay atentaría contra el equilibrio del Plata", "Un pedido de mediación ante Argentina", "Una propuesta de tratado comercial"], 1, "Paraguay advirtió que la ocupación del Uruguay atentaría contra el equilibrio de los Estados del Plata, garantía de seguridad paraguaya."], ["¿En qué congreso extraordinario Francisco Solano López fue designado presidente y por cuántos años?", ["Congreso de 1856, por 5 años", "Congreso del 16 de octubre de 1862, por 10 años", "Congreso de 1865, por 4 años", "Congreso de 1863, por 10 años"], 1, "El Congreso del 16 de octubre de 1862 designó a Francisco Solano López presidente por 10 años."], ["¿Cuál fue el Pacto firmado por Francisco Solano López en 1859 que reunificó las provincias argentinas?", ["Pacto de San José de Flores", "Pacto Federal de 1831", "Tratado de Amistad y Comercio", "Pacto de Pilar"], 0, "El Pacto de San José de Flores (11 nov. 1859) fue mediado por FSL y logró la reunificación de las provincias argentinas."], ["¿Quiénes firmaron el Tratado Secreto de la Triple Alianza el 1 de mayo de 1865?", ["Mitre, Pedro II y Flores", "Rufino de Elizalde (Arg), Octavio de Almeidas Rosa (Br) y Carlos de Castro (Uy)", "Bartolomé Mitre, Barón de Cotegipe y Venancio Flores", "Urquiza, Duque de Caxias y Berro"], 1, "Los firmantes fueron: Rufino de Elizalde (Argentina), Octavio de Almeidas Rosa (Brasil) y Carlos de Castro (Uruguay)."]];
+buildQuizInstance(QUIZ_MEDIO,   'wrap-medio',   'ctr-medio',   'final-medio',   'fsub-medio',   'rbtn-medio');
+buildQuizInstance(QUIZ_EXTREMO, 'wrap-extremo', 'ctr-extremo', 'final-extremo', 'fsub-extremo', 'rbtn-extremo');
+</script>
+
 </body>
 </html>

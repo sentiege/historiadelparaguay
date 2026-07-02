@@ -27,6 +27,27 @@ body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);c
 .xp-toast.show{opacity:1;transform:translateX(0)}
 @media(max-width:680px){.xp-bar-wrap{order:3;max-width:100%;width:100%}}
 
+.auth-overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,0.55);z-index:400;align-items:center;justify-content:center;padding:16px}
+.auth-overlay.open{display:flex}
+.auth-modal{background:#ffffff;border-radius:16px;max-width:400px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.3);padding:26px 28px}
+.auth-tabs{display:flex;gap:6px;margin-bottom:20px;background:#f1f5f9;border-radius:10px;padding:4px}
+.auth-tab{flex:1;background:transparent;border:none;padding:10px;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.88rem;color:#64748b}
+.auth-tab.active{background:#ffffff;color:var(--accent);box-shadow:0 1px 4px rgba(0,0,0,0.1)}
+.auth-form{display:flex;flex-direction:column;gap:10px}
+.auth-input{padding:11px 14px;border:1px solid #cbd5e1;border-radius:8px;font-size:0.9rem;font-family:inherit}
+.auth-input:focus{outline:none;border-color:var(--accent2)}
+.auth-msg{font-size:0.82rem;text-align:center;min-height:18px;margin:2px 0 0;color:#dc2626}
+.auth-msg.ok{color:#16a34a}
+.auth-skip{margin-top:14px;background:none;border:none;color:#94a3b8;font-size:0.78rem;text-decoration:underline;cursor:pointer;width:100%}
+
+.user-panel{display:none;position:absolute;top:64px;right:20px;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.15);padding:18px;width:260px;z-index:150}
+.user-panel.open{display:block}
+.user-panel-info p{margin:0 0 4px;font-size:0.88rem;color:#1e293b}
+.user-panel-info .up-sub{font-size:0.75rem;color:#94a3b8}
+.user-panel .qz-check,.user-panel .qz-reset{width:100%;margin-top:8px;font-size:0.82rem;padding:9px}
+@media(max-width:680px){.user-panel{right:8px;left:8px;width:auto}}
+
+
 .sim-overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,0.55);z-index:300;align-items:center;justify-content:center;padding:16px}
 .sim-overlay.open{display:flex}
 .sim-modal{background:#ffffff;border-radius:16px;max-width:720px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);padding:26px 28px}
@@ -155,9 +176,36 @@ body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);c
 .unit-list-text .meta { font-size: 11px; color: #94a3b8; font-style: italic; }
 .unit-list-arrow { flex-shrink: 0; font-size: 18px; color: var(--accent); opacity: 0.6; transition: opacity 0.2s, transform 0.2s; }
 .unit-list-item:hover .unit-list-arrow { opacity: 1; transform: translateX(4px); }
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 </style>
 </head>
 <body>
+
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-modal">
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Iniciar sesión</button>
+      <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">Registrarme</button>
+    </div>
+    <div id="authFormLogin" class="auth-form">
+      <input type="email" id="loginEmail" class="auth-input" placeholder="Correo electrónico" autocomplete="email">
+      <input type="password" id="loginPass" class="auth-input" placeholder="Contraseña" autocomplete="current-password">
+      <button class="qz-check" onclick="authLogin()">🔑 Entrar</button>
+      <p class="auth-msg" id="loginMsg"></p>
+    </div>
+    <div id="authFormRegister" class="auth-form" style="display:none">
+      <input type="text" id="regName" class="auth-input" placeholder="Nombre completo">
+      <input type="text" id="regCi" class="auth-input" placeholder="Cédula de Identidad (CI)">
+      <input type="email" id="regEmail" class="auth-input" placeholder="Correo electrónico" autocomplete="email">
+      <input type="password" id="regPass" class="auth-input" placeholder="Contraseña (mín. 6 caracteres)" autocomplete="new-password">
+      <button class="qz-check" onclick="authRegister()">✍️ Crear cuenta</button>
+      <p class="auth-msg" id="regMsg"></p>
+    </div>
+    <button class="auth-skip" onclick="closeAuthModal()">Continuar sin cuenta (progreso solo en este dispositivo)</button>
+  </div>
+</div>
 
 <div class="sim-overlay" id="simOverlay">
   <div class="sim-modal">
@@ -203,6 +251,15 @@ body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);c
   </div>
   <button class="home-btn" onclick="showHome()">🏠 Inicio</button>
   <button class="home-btn" id="simBtn" onclick="openSimulacro()">📋 Simulacro</button>
+  <button class="home-btn" id="userBtn" onclick="toggleUserPanel()">👤 Invitado</button>
+  <div class="user-panel" id="userPanel">
+    <div class="user-panel-info" id="userPanelInfo">
+      <p>No has iniciado sesión.</p>
+      <p class="up-sub">Tu progreso solo se guarda en este navegador.</p>
+    </div>
+    <button class="qz-check" id="userPanelAuthBtn" onclick="openAuthModal()">🔑 Iniciar sesión / Registrarme</button>
+    <button class="qz-reset" id="userPanelLogoutBtn" onclick="authLogout()" style="display:none">🚪 Cerrar sesión</button>
+  </div>
 </div>
 
 <div id="home">
@@ -2811,6 +2868,7 @@ function checkStreak(){
   }
   xpData.lastVisit = today;
   saveXpData(xpData);
+  scheduleCloudSave();
 }
 checkStreak();
 
@@ -2853,6 +2911,7 @@ function addXp(amount, reason){
   saveXpData(xpData);
   renderXpBar(true);
   showXpToast(`+${amount} XP — ${reason}`);
+  scheduleCloudSave();
 }
 function markSlideSeen(u, idx){
   const key = u+'-'+idx;
@@ -3133,6 +3192,158 @@ function submitSimulacro(){
   `;
   document.getElementById('simExam').style.display='none';
   resultsEl.style.display='block';
+}
+
+
+const firebaseConfig = {apiKey: "AIzaSyCbPKfwVkMrgCpS8x4OgXBjmgRE-iwwwhI",
+  authDomain: "historiadelparaguay-a1954.firebaseapp.com",
+  projectId: "historiadelparaguay-a1954",
+  storageBucket: "historiadelparaguay-a1954.firebasestorage.app",
+  messagingSenderId: "502343679130",
+  appId: "1:502343679130:web:79e6d416a273fe56f63323",
+  measurementId: "G-PHG2MGNRQM"
+};
+let fbApp, fbAuth, fbDb, currentUser = null, fbReady = false, fbSaveTimer = null;
+try{
+  fbApp = firebase.initializeApp(firebaseConfig);
+  fbAuth = firebase.auth();
+  fbDb = firebase.firestore();
+  fbReady = true;
+}catch(e){ console.error('Firebase init error', e); }
+
+function openAuthModal(){
+  document.getElementById('authOverlay').classList.add('open');
+  document.getElementById('userPanel').classList.remove('open');
+}
+function closeAuthModal(){
+  document.getElementById('authOverlay').classList.remove('open');
+}
+function switchAuthTab(tab){
+  const isLogin = tab === 'login';
+  document.getElementById('tabLogin').classList.toggle('active', isLogin);
+  document.getElementById('tabRegister').classList.toggle('active', !isLogin);
+  document.getElementById('authFormLogin').style.display = isLogin ? 'flex' : 'none';
+  document.getElementById('authFormRegister').style.display = isLogin ? 'none' : 'flex';
+}
+
+function toggleUserPanel(){
+  document.getElementById('userPanel').classList.toggle('open');
+}
+
+function setAuthMsg(id, text, ok){
+  const el = document.getElementById(id);
+  el.textContent = text;
+  el.className = 'auth-msg' + (ok ? ' ok' : '');
+}
+
+async function authRegister(){
+  if(!fbReady){ setAuthMsg('regMsg','Firebase aún cargando, intentá en un segundo.'); return; }
+  const name = document.getElementById('regName').value.trim();
+  const ci = document.getElementById('regCi').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const pass = document.getElementById('regPass').value;
+  if(!name || !ci || !email || !pass){ setAuthMsg('regMsg','Completá todos los campos.'); return; }
+  if(pass.length < 6){ setAuthMsg('regMsg','La contraseña debe tener al menos 6 caracteres.'); return; }
+  setAuthMsg('regMsg','Creando cuenta...');
+  try{
+    const cred = await fbAuth.createUserWithEmailAndPassword(email, pass);
+    await cred.user.updateProfile({ displayName: name });
+    await fbDb.collection('usuarios').doc(cred.user.uid).set({
+      name, ci, email,
+      xp: xpData.xp||0, streak: xpData.streak||0, lastVisit: xpData.lastVisit||null,
+      seenSlides: xpData.seenSlides||{}, passedQuizzes: xpData.passedQuizzes||{},
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    setAuthMsg('regMsg','¡Cuenta creada con éxito!', true);
+    setTimeout(closeAuthModal, 900);
+  }catch(e){
+    setAuthMsg('regMsg', friendlyAuthError(e));
+  }
+}
+
+async function authLogin(){
+  if(!fbReady){ setAuthMsg('loginMsg','Firebase aún cargando, intentá en un segundo.'); return; }
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass = document.getElementById('loginPass').value;
+  if(!email || !pass){ setAuthMsg('loginMsg','Completá correo y contraseña.'); return; }
+  setAuthMsg('loginMsg','Ingresando...');
+  try{
+    await fbAuth.signInWithEmailAndPassword(email, pass);
+    setAuthMsg('loginMsg','¡Bienvenido de nuevo!', true);
+    setTimeout(closeAuthModal, 700);
+  }catch(e){
+    setAuthMsg('loginMsg', friendlyAuthError(e));
+  }
+}
+
+async function authLogout(){
+  try{ await fbAuth.signOut(); }catch(e){}
+  document.getElementById('userPanel').classList.remove('open');
+}
+
+function friendlyAuthError(e){
+  const code = e.code || '';
+  if(code.includes('email-already-in-use')) return 'Ese correo ya está registrado.';
+  if(code.includes('invalid-email')) return 'El correo no es válido.';
+  if(code.includes('weak-password')) return 'La contraseña es muy débil.';
+  if(code.includes('user-not-found') || code.includes('wrong-password') || code.includes('invalid-credential')) return 'Correo o contraseña incorrectos.';
+  if(code.includes('too-many-requests')) return 'Demasiados intentos. Probá más tarde.';
+  return 'Ocurrió un error. Intentá de nuevo.';
+}
+
+function updateUserUI(){
+  const btn = document.getElementById('userBtn');
+  const info = document.getElementById('userPanelInfo');
+  const authBtn = document.getElementById('userPanelAuthBtn');
+  const logoutBtn = document.getElementById('userPanelLogoutBtn');
+  if(currentUser){
+    const name = currentUser.displayName || currentUser.email || 'Usuario';
+    btn.textContent = '👤 ' + name.split(' ')[0];
+    info.innerHTML = `<p><strong>${name}</strong></p><p class="up-sub">${currentUser.email}</p><p class="up-sub">Progreso sincronizado en la nube ☁️</p>`;
+    authBtn.style.display = 'none';
+    logoutBtn.style.display = 'block';
+  } else {
+    btn.textContent = '👤 Invitado';
+    info.innerHTML = `<p>No has iniciado sesión.</p><p class="up-sub">Tu progreso solo se guarda en este navegador.</p>`;
+    authBtn.style.display = 'block';
+    logoutBtn.style.display = 'none';
+  }
+}
+
+function scheduleCloudSave(){
+  if(!currentUser || !fbReady) return;
+  clearTimeout(fbSaveTimer);
+  fbSaveTimer = setTimeout(() => {
+    fbDb.collection('usuarios').doc(currentUser.uid).set({
+      xp: xpData.xp||0, streak: xpData.streak||0, lastVisit: xpData.lastVisit||null,
+      seenSlides: xpData.seenSlides||{}, passedQuizzes: xpData.passedQuizzes||{},
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true }).catch(e => console.error('Cloud save error', e));
+  }, 1200);
+}
+
+if(fbReady){
+  fbAuth.onAuthStateChanged(async (user) => {
+    currentUser = user;
+    updateUserUI();
+    if(user){
+      try{
+        const doc = await fbDb.collection('usuarios').doc(user.uid).get();
+        if(doc.exists){
+          const d = doc.data();
+          xpData.xp = Math.max(xpData.xp||0, d.xp||0);
+          xpData.streak = d.streak || xpData.streak || 0;
+          xpData.lastVisit = d.lastVisit || xpData.lastVisit;
+          xpData.seenSlides = Object.assign({}, d.seenSlides||{}, xpData.seenSlides);
+          xpData.passedQuizzes = Object.assign({}, d.passedQuizzes||{}, xpData.passedQuizzes);
+          saveXpData(xpData);
+          renderXpBar(false);
+        } else {
+          scheduleCloudSave();
+        }
+      }catch(e){ console.error('Fetch profile error', e); }
+    }
+  });
 }
 
 renderXpBar(false);

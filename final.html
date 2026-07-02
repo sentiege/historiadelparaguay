@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Historia del Paraguay — Unidades I a XV</title>
+<title>Material de Estudio de Historia del Paraguay — Unidades I a XV</title>
 <style>
 :root{
   --bg:#ffffff; --bg2:#f5f7fa; --card:#ffffff; --accent:#c0392b; --accent2:#2980b9;
@@ -26,66 +26,6 @@ body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);c
 .xp-toast{position:fixed;top:80px;right:20px;z-index:200;background:#ffffff;border:1px solid #ea580c;border-left:5px solid #ea580c;border-radius:10px;padding:12px 18px;box-shadow:0 6px 20px rgba(0,0,0,0.15);font-size:0.9rem;font-weight:600;color:#1a1a2e;opacity:0;transform:translateX(30px);transition:all .3s ease}
 .xp-toast.show{opacity:1;transform:translateX(0)}
 @media(max-width:680px){.xp-bar-wrap{order:3;max-width:100%;width:100%}}
-
-.auth-overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,0.55);z-index:400;align-items:center;justify-content:center;padding:16px}
-.auth-overlay.open{display:flex}
-.auth-modal{background:#ffffff;border-radius:16px;max-width:400px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.3);padding:26px 28px}
-.auth-tabs{display:flex;gap:6px;margin-bottom:20px;background:#f1f5f9;border-radius:10px;padding:4px}
-.auth-tab{flex:1;background:transparent;border:none;padding:10px;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.88rem;color:#64748b}
-.auth-tab.active{background:#ffffff;color:var(--accent);box-shadow:0 1px 4px rgba(0,0,0,0.1)}
-.auth-form{display:flex;flex-direction:column;gap:10px}
-.auth-input{padding:11px 14px;border:1px solid #cbd5e1;border-radius:8px;font-size:0.9rem;font-family:inherit}
-.auth-input:focus{outline:none;border-color:var(--accent2)}
-.auth-msg{font-size:0.82rem;text-align:center;min-height:18px;margin:2px 0 0;color:#dc2626}
-.auth-msg.ok{color:#16a34a}
-.auth-skip{margin-top:14px;background:none;border:none;color:#94a3b8;font-size:0.78rem;text-decoration:underline;cursor:pointer;width:100%}
-
-.user-panel{display:none;position:absolute;top:64px;right:20px;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.15);padding:18px;width:260px;z-index:150}
-.user-panel.open{display:block}
-.user-panel-info p{margin:0 0 4px;font-size:0.88rem;color:#1e293b}
-.user-panel-info .up-sub{font-size:0.75rem;color:#94a3b8}
-.user-panel .qz-check,.user-panel .qz-reset{width:100%;margin-top:8px;font-size:0.82rem;padding:9px}
-@media(max-width:680px){.user-panel{right:8px;left:8px;width:auto}}
-
-
-.sim-overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,0.55);z-index:300;align-items:center;justify-content:center;padding:16px}
-.sim-overlay.open{display:flex}
-.sim-modal{background:#ffffff;border-radius:16px;max-width:720px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);padding:26px 28px}
-.sim-intro h2{margin:0 0 8px;color:var(--accent);font-size:1.4rem}
-.sim-intro p{color:#64748b;margin:0 0 16px}
-.sim-rules{list-style:none;padding:0;margin:0 0 22px;display:flex;flex-direction:column;gap:8px;font-size:0.9rem;color:#334155}
-.sim-intro-actions{display:flex;gap:10px}
-.sim-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px;flex-wrap:wrap}
-.sim-timer{font-weight:800;font-size:1.15rem;color:#16a34a;background:#f0fdf4;border:1px solid #16a34a;padding:6px 14px;border-radius:20px;transition:all .2s}
-.sim-timer.warn{color:#dc2626;background:#fef2f2;border-color:#dc2626;animation:timerPulse 1s infinite}
-@keyframes timerPulse{0%,100%{opacity:1}50%{opacity:0.5}}
-.sim-close{background:#f1f5f9;border:1px solid #cbd5e1;color:#334155;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:0.95rem}
-.sim-close:hover{background:#e2e8f0}
-.sim-dots{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;flex:1}
-.sim-dot{width:11px;height:11px;border-radius:50%;background:#e2e8f0;border:2px solid #cbd5e1;cursor:pointer;padding:0}
-.sim-dot.current{border-color:var(--accent2);transform:scale(1.2)}
-.sim-dot.answered{background:#16a34a;border-color:#16a34a}
-.sim-qwrap{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:20px;margin-bottom:16px;min-height:160px}
-.sim-qnum{font-size:0.72rem;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
-.sim-qtxt{font-size:1rem;font-weight:600;color:#1e293b;margin-bottom:14px}
-.sim-opts{display:flex;flex-direction:column;gap:8px}
-.sim-opt{background:#ffffff;border:1px solid #cbd5e1;color:#1e293b;padding:10px 14px;border-radius:8px;text-align:left;cursor:pointer;font-size:0.9rem}
-.sim-opt:hover{border-color:var(--accent2)}
-.sim-opt.picked{border-color:var(--accent2);background:rgba(41,128,185,0.08);font-weight:600}
-.sim-nav{display:flex;align-items:center;gap:12px}
-.sim-nav .qz-check{flex:1}
-.sim-results{text-align:center}
-.sim-score-circle{width:150px;height:150px;border-radius:50%;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;flex-direction:column;border:8px solid #16a34a;color:#16a34a}
-.sim-score-circle.fail{border-color:#dc2626;color:#dc2626}
-.sim-score-circle .big{font-size:2rem;font-weight:800}
-.sim-score-circle .small{font-size:0.75rem;color:#64748b}
-.sim-breakdown{text-align:left;max-height:260px;overflow-y:auto;margin:16px 0;border:1px solid #e2e8f0;border-radius:10px}
-.sim-break-item{display:flex;justify-content:space-between;padding:9px 14px;border-bottom:1px solid #f1f5f9;font-size:0.88rem}
-.sim-break-item:last-child{border-bottom:none}
-.sim-break-item .ok{color:#16a34a;font-weight:700}
-.sim-break-item .bad{color:#dc2626;font-weight:700}
-.sim-results-actions{display:flex;gap:10px;justify-content:center;margin-top:10px}
-
 #home{max-width:1000px;margin:0 auto;padding:40px 20px}
 #home h2{text-align:center;color:var(--accent);font-size:1.8rem;margin-bottom:6px}
 #home p.lead{text-align:center;color:var(--muted);margin-bottom:34px}
@@ -176,70 +116,9 @@ body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);c
 .unit-list-text .meta { font-size: 11px; color: #94a3b8; font-style: italic; }
 .unit-list-arrow { flex-shrink: 0; font-size: 18px; color: var(--accent); opacity: 0.6; transition: opacity 0.2s, transform 0.2s; }
 .unit-list-item:hover .unit-list-arrow { opacity: 1; transform: translateX(4px); }
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 </style>
 </head>
 <body>
-
-<div class="auth-overlay" id="authOverlay">
-  <div class="auth-modal">
-    <div class="auth-tabs">
-      <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Iniciar sesión</button>
-      <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">Registrarme</button>
-    </div>
-    <div id="authFormLogin" class="auth-form">
-      <input type="email" id="loginEmail" class="auth-input" placeholder="Correo electrónico" autocomplete="email">
-      <input type="password" id="loginPass" class="auth-input" placeholder="Contraseña" autocomplete="current-password">
-      <button class="qz-check" onclick="authLogin()">🔑 Entrar</button>
-      <p class="auth-msg" id="loginMsg"></p>
-    </div>
-    <div id="authFormRegister" class="auth-form" style="display:none">
-      <input type="text" id="regName" class="auth-input" placeholder="Nombre completo">
-      <input type="text" id="regCi" class="auth-input" placeholder="Cédula de Identidad (CI)">
-      <input type="email" id="regEmail" class="auth-input" placeholder="Correo electrónico" autocomplete="email">
-      <input type="password" id="regPass" class="auth-input" placeholder="Contraseña (mín. 6 caracteres)" autocomplete="new-password">
-      <button class="qz-check" onclick="authRegister()">✍️ Crear cuenta</button>
-      <p class="auth-msg" id="regMsg"></p>
-    </div>
-    <button class="auth-skip" onclick="closeAuthModal()">Continuar sin cuenta (progreso solo en este dispositivo)</button>
-  </div>
-</div>
-
-<div class="sim-overlay" id="simOverlay">
-  <div class="sim-modal">
-    <div class="sim-intro" id="simIntro">
-      <h2>📋 Simulacro de Examen</h2>
-      <p>20 preguntas aleatorias de las 15 unidades · Tiempo límite: 15 minutos</p>
-      <ul class="sim-rules">
-        <li>✅ Podés navegar libremente entre preguntas antes de entregar</li>
-        <li>⏱️ El tiempo se muestra en la parte superior y se pone rojo en el último minuto</li>
-        <li>📊 Al entregar verás tu nota, tiempo usado y desglose por unidad</li>
-        <li>🏆 Aprobar (≥60%) otorga XP extra; sacar 100% otorga un logro especial</li>
-      </ul>
-      <div class="sim-intro-actions">
-        <button class="qz-check" onclick="startSimulacro()">🚀 Comenzar Simulacro</button>
-        <button class="qz-reset" onclick="closeSimulacro()">Cancelar</button>
-      </div>
-    </div>
-    <div class="sim-exam" id="simExam" style="display:none">
-      <div class="sim-head">
-        <span class="sim-timer" id="simTimer">15:00</span>
-        <div class="sim-dots" id="simDots"></div>
-        <button class="sim-close" onclick="confirmCloseExam()">✕</button>
-      </div>
-      <div class="sim-qwrap" id="simQwrap"></div>
-      <div class="sim-nav">
-        <button class="ctrl-btn" onclick="simPrev()">&#8592;</button>
-        <button class="qz-check" id="simSubmitBtn" onclick="confirmSubmitSimulacro()">📤 Entregar Examen</button>
-        <button class="ctrl-btn" onclick="simNext()">&#8594;</button>
-      </div>
-    </div>
-    <div class="sim-results" id="simResults" style="display:none"></div>
-  </div>
-</div>
-
 <div class="topbar">
   <h1>📚 Material de Estudio de Historia del Paraguay</h1>
   <div class="xp-bar-wrap" id="xpBarWrap" title="Tu progreso de experiencia">
@@ -250,16 +129,6 @@ body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);c
     </div>
   </div>
   <button class="home-btn" onclick="showHome()">🏠 Inicio</button>
-  <button class="home-btn" id="simBtn" onclick="openSimulacro()">📋 Simulacro</button>
-  <button class="home-btn" id="userBtn" onclick="toggleUserPanel()">👤 Invitado</button>
-  <div class="user-panel" id="userPanel">
-    <div class="user-panel-info" id="userPanelInfo">
-      <p>No has iniciado sesión.</p>
-      <p class="up-sub">Tu progreso solo se guarda en este navegador.</p>
-    </div>
-    <button class="qz-check" id="userPanelAuthBtn" onclick="openAuthModal()">🔑 Iniciar sesión / Registrarme</button>
-    <button class="qz-reset" id="userPanelLogoutBtn" onclick="authLogout()" style="display:none">🚪 Cerrar sesión</button>
-  </div>
 </div>
 
 <div id="home">
@@ -2868,7 +2737,6 @@ function checkStreak(){
   }
   xpData.lastVisit = today;
   saveXpData(xpData);
-  scheduleCloudSave();
 }
 checkStreak();
 
@@ -2911,7 +2779,6 @@ function addXp(amount, reason){
   saveXpData(xpData);
   renderXpBar(true);
   showXpToast(`+${amount} XP — ${reason}`);
-  scheduleCloudSave();
 }
 function markSlideSeen(u, idx){
   const key = u+'-'+idx;
@@ -2993,23 +2860,6 @@ function checkQuiz(u){
   result.className = 'qresult show';
   result.textContent = `Resultado: ${correct}/${answers.length} (${pct}%) ${pct>=80?'\ud83c\udf89 \u00a1Excelente!':pct>=60?'\ud83d\udc4d Bien':'\ud83d\udcd6 Repas\u00e1 el contenido'}`;
   document.getElementById('qbadge-'+u).textContent = pct+'%';
-  awardQuizXp(u, pct);
-}
-function awardQuizXp(u, pct){
-  if(pct < 60) return;
-  const key = 'u'+u;
-  const already = xpData.passedQuizzes[key];
-  if(pct === 100){
-    if(already !== 'perfect'){
-      xpData.passedQuizzes[key] = 'perfect';
-      saveXpData(xpData);
-      addXp(XP_PER_QUIZ_PERFECT, 'Quiz perfecto Unidad '+u);
-    }
-  } else if(!already){
-    xpData.passedQuizzes[key] = 'passed';
-    saveXpData(xpData);
-    addXp(XP_PER_QUIZ_PASS, 'Quiz aprobado Unidad '+u);
-  }
 }
 function resetQuiz(u){
   const answers = QUIZ_ANSWERS[u];
@@ -3026,327 +2876,6 @@ function resetQuiz(u){
   result.textContent = '';
   document.getElementById('qbadge-'+u).textContent = '';
 }
-
-const QUIZ_BANK = {"1": [{"q": "¿Cuál fue la principal causa económica que impulsó las exploraciones europeas en el siglo XV?", "opts": ["La necesidad de poblar nuevos territorios", "El deseo de evangelizar pueblos africanos", "La búsqueda de rutas alternativas a Asia tras el bloqueo otomano", "La expansión del feudalismo europeo"], "a": 2}, {"q": "¿Qué institución fundó Enrique el Navegante para impulsar las exploraciones?", "opts": ["Una universidad de geografía en Lisboa", "Una escuela de navegación en el Cabo de San Vicente", "Un observatorio astronómico en las Azores", "Una compañía comercial para el comercio africano"], "a": 1}, {"q": "¿Cómo llamó originalmente Bartolomé Díaz al extremo sur de África?", "opts": ["Cabo Tormentoso", "Cabo de Buena Esperanza", "Cabo Verde", "Cabo Africano"], "a": 0}, {"q": "En el Tratado de Alcazobas-Toledo, ¿qué obtuvo Castilla?", "opts": ["Las islas Azores", "El control de Guinea y Cabo Verde", "Las Islas Canarias", "La isla de Madeira"], "a": 2}, {"q": "¿En qué fecha salió Colón de Puerto de Palos en su primer viaje?", "opts": ["3 de agosto de 1492", "12 de octubre de 1492", "1 de enero de 1493", "15 de agosto de 1492"], "a": 0}, {"q": "¿Qué nombre le dio Colón a la primera tierra que avistó el 12 de octubre de 1492?", "opts": ["La Española", "San Salvador", "Cuba", "La Navidad"], "a": 1}, {"q": "¿En qué viaje fue la primera vez que Colón pisó tierra firme del continente americano?", "opts": ["Primer viaje", "Segundo viaje", "Tercer viaje (Venezuela/Orinoco)", "Cuarto viaje"], "a": 2}, {"q": "¿A cuántas leguas al oeste de Cabo Verde fijó el Tratado de Tordesillas la línea divisoria?", "opts": ["100 leguas", "370 leguas", "250 leguas", "500 leguas"], "a": 1}], "2": [{"q": "¿Qué periodo comprende la etapa \"Precolonial\" de la Historia Paraguaya?", "opts": ["Desde la fundación de Asunción hasta la independencia", "Comprende el periodo de los aborígenes hasta la fundación de Asunción", "Desde Carlos A. López hasta la Guerra de la Triple Alianza", "Desde el Tratado de Paz del Chaco hasta la actualidad"], "a": 1}, {"q": "¿En qué dos grandes periodos se divide la Prehistoria?", "opts": ["Edad Antigua y Edad Media", "Edad de Piedra y Edad de los Metales", "Paleolítico y Neolítico solamente", "Edad del Bronce y Edad del Hierro"], "a": 1}, {"q": "¿Cuál es la característica principal del Neolítico?", "opts": ["El uso exclusivo del fuego", "El nomadismo cazador-recolector", "La aparición de la agricultura, la ganadería y el sedentarismo", "El descubrimiento de los metales"], "a": 2}, {"q": "¿Cuáles son las tres etnias/grupos chaqueños mencionados en el programa?", "opts": ["Guaraníes, Carios e Itatines", "Guaycurúes, Mataco y Zámucos", "Chiriguanos, Tupíes y Guarayos", "Mbayá, Toba y Chiripás únicamente"], "a": 1}, {"q": "¿Cómo se llamaba la aldea guaraní y cuántas familias la componían?", "opts": ["El tekoha, con 10 familias", "La taba, con 50 o más familias", "El aty, con 100 familias", "La comunidad, con 20 familias"], "a": 1}, {"q": "¿Cómo se llamaba el jefe de la taba guaraní?", "opts": ["El avá pajé", "El rubicha", "El cacique general", "El tuvicha ruvicha real hereditario"], "a": 1}, {"q": "¿Cuál era el Ser Supremo de la religión guaraní?", "opts": ["Tupá", "Añaretã", "Yvaga", "Ñamandú exclusivamente"], "a": 0}, {"q": "¿Cuál era el propósito de la antropofagia ritual guaraní?", "opts": ["Saciar el hambre en épocas de escasez", "Heredar las cualidades heroicas del enemigo capturado en guerra", "Castigar a los miembros débiles de la tribu", "Una práctica cotidiana sin significado religioso"], "a": 1}], "3": [{"q": "¿Quién descubrió el Mar del Sur (Océano Pacífico) en 1513?", "opts": ["Juan Díaz de Solís", "Vasco Núñez de Balboa", "Fernando de Magallanes", "Sebastián Gaboto"], "a": 1}, {"q": "¿En qué año llegó Juan Díaz de Solís al Río de la Plata?", "opts": ["1513", "1516", "1520", "1526"], "a": 1}, {"q": "¿Quién completó la primera vuelta al mundo tras la muerte de Magallanes?", "opts": ["Pedro de Mendoza", "Juan Sebastián El Cano", "Domingo de Irala", "Sebastián Gaboto"], "a": 1}, {"q": "¿Cuál fue el aporte de Alejo García a la conquista del Paraguay?", "opts": ["Fundó Asunción", "Fue el primer europeo en llegar al territorio paraguayo", "Fundó el Fuerte Sancti Spiritu", "Fue el primer gobernador electo"], "a": 1}, {"q": "¿En qué fecha exacta fue fundada la ciudad de Asunción?", "opts": ["12 de octubre de 1537", "15 de agosto de 1537", "1 de agosto de 1536", "25 de julio de 1537"], "a": 1}, {"q": "¿Qué estableció la Real Provisión de 1537?", "opts": ["La creación del Virreinato del Río de la Plata", "El derecho de los vecinos a elegir gobernador", "La abolición de la encomienda", "La fundación de un tribunal de la Audiencia"], "a": 1}, {"q": "¿Por qué se llama a Asunción \"Madre de Ciudades\"?", "opts": ["Porque fue la primera ciudad fundada en América", "Porque desde ella partieron expediciones que fundaron otras ciudades", "Porque tuvo la mayor población colonial", "Porque fue sede del primer virreinato"], "a": 1}, {"q": "¿Quién fundó la segunda y definitiva Buenos Aires en 1580?", "opts": ["Pedro de Mendoza", "Domingo de Irala", "Juan de Garay", "Juan de Salazar y Espinosa"], "a": 2}], "4": [{"q": "¿Por qué Hernandarias fue una figura histórica única en América colonial?", "opts": ["Fue el primer virrey de América", "Fue el primer gobernador criollo de América", "Fue el fundador de Asunción", "Fue el primer obispo del Paraguay"], "a": 1}, {"q": "¿Qué se decidió en el Sínodo Asunceno de 1603?", "opts": ["Prohibir el idioma guaraní", "Utilizar el guaraní como idioma de evangelización", "Expulsar a los jesuitas", "Crear la Audiencia de Asunción"], "a": 1}, {"q": "¿Quién fundó el Colegio Máximo de Córdoba?", "opts": ["Hernandarias", "Hernando de Trejo y Sanabria", "Francisco de Alfaro", "Francisca de Bocanegra"], "a": 1}, {"q": "¿Qué perdió Paraguay con la división provincial de 1617?", "opts": ["Su capital, Asunción", "Su litoral marítimo y acceso al Atlántico", "Todo su territorio", "Su autonomía religiosa"], "a": 1}, {"q": "¿Cuánto debía pagar el indígena como tasa anual según las Ordenanzas de Alfaro?", "opts": ["Un peso", "Cinco pesos", "Diez pesos", "Ningún pago en dinero"], "a": 1}, {"q": "¿Cuál fue el producto más valorado para la exportación en el Paraguay colonial?", "opts": ["El tabaco", "La yerba mate", "El algodón", "El azúcar"], "a": 1}, {"q": "¿Por qué el comercio interno del Paraguay colonial era precario?", "opts": ["Por la abundancia de moneda metálica", "Por la población dispersa y falta de transporte", "Por la prohibición total del comercio", "Por la ausencia de productos agrícolas"], "a": 1}, {"q": "¿Qué importancia tuvo el Estanco del Tabaco de 1779?", "opts": ["Prohibió el cultivo de tabaco", "Introdujo por primera vez la moneda metálica", "Eliminó el monopolio estatal", "Impuso el trueque como único sistema"], "a": 1}], "5": [{"q": "¿Cuál fue la primera orden religiosa en llegar al Río de la Plata?", "opts": ["Los Dominicos", "Los Mercedarios", "Los Franciscanos", "Los Jesuitas"], "a": 1}, {"q": "¿Con qué expedición llegaron los Franciscanos al Paraguay?", "opts": ["Con Pedro de Mendoza en 1535", "Con Juan Ortiz de Zárate en 1575", "Con Alonso Guerra en 1583", "Con Hernandarias en 1608"], "a": 1}, {"q": "¿Cuál fue el aporte más importante de Fray Luis de Bolaños?", "opts": ["Fundó Asunción", "Creó la grafía guaraní y el primer catecismo", "Organizó el Estanco del Tabaco", "Fue el primer gobernador criollo"], "a": 1}, {"q": "¿Quién fundó la Compañía de Jesús y en qué año?", "opts": ["Francisco de Alfaro en 1611", "Ignacio de Loyola en 1534", "Diego de Torres en 1608", "Hernandarias en 1592"], "a": 1}, {"q": "¿Qué era el Tupá-Mbaé?", "opts": ["La parcela individual de cada familia", "La tierra común trabajada dos días por semana", "El impuesto de los indígenas", "El nombre del cabildo indígena"], "a": 1}, {"q": "¿Quién tenía la máxima autoridad en una reducción jesuítica?", "opts": ["El Alcalde indígena", "El Corregidor español", "El Rector", "El Capitán"], "a": 2}, {"q": "¿En qué ciudad se instaló la primera imprenta misionera del Paraguay?", "opts": ["Asunción", "Santa María", "Loreto", "Itapúa"], "a": 1}, {"q": "¿Quién decretó la expulsión de los jesuitas y en qué año?", "opts": ["El Papa Alejandro VI, en 1608", "El Rey Carlos III, en 1767", "Hernandarias, en 1611", "El Virrey Cevallos, en 1776"], "a": 1}], "6": [{"q": "¿Qué documento de 1537 fue clave como antecedente legal del movimiento comunero?", "opts": ["Las Ordenanzas de Alfaro", "La Real Provisión del 12 de septiembre de 1537", "El Tratado de Tordesillas", "Las Bulas Alejandrinas"], "a": 1}, {"q": "¿Qué acción tomó el obispo Cárdenas al ser proclamado gobernador?", "opts": ["Restituyó a los jesuitas", "Expulsó a los jesuitas", "Fundó nuevas reducciones", "Renunció inmediatamente"], "a": 1}, {"q": "¿Cuál NO fue una acusación contra Reyes Balmaceda?", "opts": ["Imponer el servicio personal de los indios", "Poner trabas al comercio", "Encerrar los caminos a Charcas", "Fundar nuevas ciudades en el Chaco"], "a": 3}, {"q": "¿Quién asumió el gobierno comunero tras ser enviado como juez pesquisidor?", "opts": ["Fernando de Mompox", "José de Antequera y Castro", "Baltazar García Ros", "Bruno Mauricio de Zavala"], "a": 1}, {"q": "¿En qué batalla fueron derrotadas las tropas de García Ros?", "opts": ["Batalla de Tabapy", "Batalla del río Tebicuary", "Batalla de Asunción", "Batalla de Charcas"], "a": 1}, {"q": "¿Quién fue el principal ideólogo del ideal comunero?", "opts": ["José de Antequera y Castro", "Fernando de Mompox", "Juan de Mena", "José Luis Bareiro"], "a": 1}, {"q": "¿Qué afirmaba el ideal comunero sobre el \"poder común\"?", "opts": ["Que debía estar subordinado al rey", "Que era más poderoso que el rey y no reconocía superior", "Que solo aplicaba a lo religioso", "Que debía ser controlado por los jesuitas"], "a": 1}, {"q": "¿Cuál fue una sanción política tras la Revolución Comunera?", "opts": ["Mayor autonomía comercial", "Se abolió el derecho del pueblo a elegir gobernador", "Se devolvió el litoral marítimo", "Se estableció una nueva universidad"], "a": 1}], "7": [{"q": "¿Cuál fue uno de los principales objetivos de las Reformas Borbónicas en América?", "opts": ["Otorgar independencia a las colonias", "Centralizar el poder y reforzar la autoridad real", "Eliminar completamente el comercio colonial", "Fortalecer el poder de los cabildos criollos"], "a": 1}, {"q": "¿En qué año se creó el Virreinato del Río de la Plata y quién fue su primer virrey?", "opts": ["1776, Pedro de Cevallos", "1783, Carlos III", "1750, Manuel Lobo", "1611, Francisco de Alfaro"], "a": 0}, {"q": "¿Qué característica principal tuvieron las Intendencias en el Virreinato del Río de la Plata?", "opts": ["Eran completamente independientes del virrey", "Concentraban poder político, judicial, militar y financiero, dependiendo del virrey", "Solo tenían funciones religiosas", "Fueron abolidas en 1782"], "a": 1}, {"q": "¿Qué establecía el Tratado de Permuta de 1750 entre España y Portugal?", "opts": ["La devolución total de Matto Grosso a España", "La entrega de 7 reducciones jesuíticas a Portugal a cambio de la Colonia del Sacramento", "La creación del Virreinato del Río de la Plata", "La fundación de la Audiencia de Buenos Aires"], "a": 1}, {"q": "¿Qué recuperó España con el Tratado de San Ildefonso de 1777?", "opts": ["Matto Grosso", "La Colonia del Sacramento y las 7 reducciones jesuíticas", "La Isla de Santa Catalina", "El puerto de Buenos Aires"], "a": 1}, {"q": "¿Qué fue \"El Memorial\" enviado por Agustín Fernando de Pinedo en 1777?", "opts": ["Un tratado de límites con Portugal", "Un documento que describía los males que aquejaban a la provincia", "Una ley de protección indígena", "Un censo poblacional"], "a": 1}, {"q": "¿Qué medida educativa importante tomó Lázaro de Rivera?", "opts": ["Fundó la primera universidad del Paraguay", "Redactó una Cartilla Real y estableció escuelas primarias", "Prohibió la educación de los indígenas", "Creó el Colegio Máximo de Córdoba"], "a": 1}, {"q": "¿Quién fue Félix de Azara y qué misión cumplió en el Río de la Plata?", "opts": ["Fue gobernador colonial encargado de fundar ciudades", "Fue oficial de marina y naturalista que demarcó límites según el Tratado de San Ildefonso", "Fue el primer virrey del Río de la Plata", "Fue el ideólogo de la Revolución Comunera"], "a": 1}], "8": [{"q": "¿Bajo la presidencia de quién se reunió el Cabildo Abierto de Asunción en 1810?", "opts": ["José Gaspar Rodríguez de Francia", "Bernardo de Velazco", "Fulgencio Yegros", "Pedro Juan Caballero"], "a": 1}, {"q": "¿Quién fue enviado por la Junta de Buenos Aires para obtener la obediencia del Paraguay?", "opts": ["Manuel Belgrano", "José Espínola y Peña", "Vicente Ignacio Iturbe", "Mauricio José Troche"], "a": 1}, {"q": "¿Con cuántos hombres participó el Paraguay en la resistencia contra la expedición de Buenos Aires?", "opts": ["Más de 300", "Más de 500", "Más de 900", "Más de 1500"], "a": 2}, {"q": "¿Quién asumió el mando revolucionario en ausencia del Capitán Fulgencio Yegros?", "opts": ["Vicente Ignacio Iturbe", "Mauricio José Troche", "Pedro Juan Caballero", "Fernando de la Mora"], "a": 2}, {"q": "¿Qué fecha se reconoce como la de la independencia del Paraguay?", "opts": ["25 de mayo de 1810", "14 de mayo de 1811", "15 de mayo de 1811", "16 de mayo de 1811"], "a": 2}, {"q": "¿Cuántos cañonazos sonaron tras la rendición del Gobernador Velazco?", "opts": ["15", "18", "21", "25"], "a": 2}, {"q": "¿Quién presidió la Junta Superior Gubernativa de 1811?", "opts": ["José Gaspar Rodríguez de Francia", "Fulgencio Yegros", "Pedro Juan Caballero", "Francisco Javier Bogarín"], "a": 1}, {"q": "¿Qué estableció el primer tratado firmado con los enviados de Buenos Aires?", "opts": ["Solo límites territoriales", "Comercio, límites y alianza", "Solo alianza militar", "La anexión del Paraguay"], "a": 1}], "9": [{"q": "¿En qué universidad obtuvo el Dr. Francia su Doctorado en Derecho?", "opts": ["Universidad de Buenos Aires", "Universidad de Córdoba", "Universidad de Charcas", "Real Colegio San Carlos"], "a": 1}, {"q": "¿Qué título le otorgó el Congreso de 1816 al Dr. Francia?", "opts": ["Cónsul", "Dictador Supremo", "Dictador Vitalicio", "Presidente Constitucional"], "a": 2}, {"q": "¿Cuándo se descubrió la tentativa de asesinato contra el Dr. Francia?", "opts": ["Navidad de 1819", "Semana Santa de 1820", "Año Nuevo de 1821", "Semana Santa de 1822"], "a": 1}, {"q": "¿En qué se basó principalmente el modelo económico impulsado por Francia?", "opts": ["El libre comercio internacional", "La autosuficiencia y el aislamiento comercial", "La dependencia de Buenos Aires", "Las alianzas comerciales con Brasil"], "a": 1}, {"q": "¿Cómo fueron las relaciones entre el Estado francista y la Iglesia Católica?", "opts": ["De estrecha colaboración", "Marcadamente tensas", "Inexistentes", "De total independencia mutua"], "a": 1}, {"q": "¿Hasta cuándo vivió exiliado en Paraguay José Gervasio Artigas?", "opts": ["Hasta 1840", "Hasta 1850", "Hasta 1860", "Hasta 1870"], "a": 1}, {"q": "¿Cómo se describía la situación del Paraguay a la muerte de Francia en 1840?", "opts": ["Pobre pero educado", "Materialmente rico pero sin educación cívica", "En bancarrota total", "Con instituciones democráticas sólidas"], "a": 1}, {"q": "¿Quiénes fueron los cónsules designados tras la muerte de Francia?", "opts": ["Carlos A. López y Fulgencio Yegros", "Mariano Roque Alonso y Carlos A. López", "Pedro Juan Caballero y Mariano Roque Alonso", "Francisco Solano López y Carlos A. López"], "a": 1}], "10": [{"q": "¿En qué fecha se reunió el Congreso que marcó el inicio de la apertura post-Francia?", "opts": ["25 de noviembre de 1842", "30 de septiembre de 1843", "15 de agosto de 1844", "11 de noviembre de 1845"], "a": 0}, {"q": "¿Por cuántos años fue nombrado Presidente Carlos A. López en 1844?", "opts": ["5 años", "8 años", "10 años", "15 años"], "a": 2}, {"q": "¿Cómo se llamó la primera Constitución Nacional aprobada en 1844?", "opts": ["Carta Política de la Nación", "Ley que establece la administración política de la República", "Constitución Republicana del Paraguay", "Ley Fundamental del Estado"], "a": 1}, {"q": "¿Qué país reconoció primero la independencia del Paraguay durante el gobierno de Carlos A. López?", "opts": ["Estados Unidos", "Gran Bretaña", "Argentina", "Brasil"], "a": 2}, {"q": "¿Quién presidió la misión diplomática a Europa de 1853?", "opts": ["Carlos Antonio López", "Francisco Solano López", "Fray Basilio Antonio López", "Mariano Roque Alonso"], "a": 1}, {"q": "¿Cuál es el nombre actual de la colonia Nueva Burdeos?", "opts": ["Villa Hayes", "Villa del Rosario", "Villarrica", "Concepción"], "a": 0}, {"q": "¿Qué se firmó el 11 de noviembre de 1859 gracias a la mediación de Francisco Solano López?", "opts": ["Tratado de comercio con Brasil", "Pacto de San José de Flores", "Tratado de límites con Bolivia", "Constitución de la Confederación"], "a": 1}, {"q": "¿Quién fue el primer Obispo paraguayo y hermano mayor de Carlos A. López?", "opts": ["Fray Basilio Antonio López", "Fray Fernando de la Mora", "Fray Francisco Javier Bogarín", "Fray Mariano Roque Alonso"], "a": 0}], "11": [{"q": "¿Cuándo fue designado Francisco Solano López Presidente por 10 años?", "opts": ["16 de octubre de 1862", "10 de septiembre de 1862", "15 de agosto de 1862", "4 de noviembre de 1862"], "a": 0}, {"q": "¿Qué facciones se enfrentaban en Uruguay antes de la guerra?", "opts": ["Liberales y Conservadores", "Colorados y Blancos", "Federales y Unitarios", "Republicanos y Monárquicos"], "a": 1}, {"q": "¿Quién lideraba a los Colorados uruguayos que iniciaron la revolución de 1863?", "opts": ["Bernardo Berro", "Venancio Flores", "Bartolomé Mitre", "Justo José de Urquiza"], "a": 1}, {"q": "¿Qué provincia brasileña ocupó Paraguay en su primera acción militar?", "opts": ["Río Grande do Sul", "Santa Catarina", "Mato Grosso", "Paraná"], "a": 2}, {"q": "¿Quién negó a Paraguay el permiso para cruzar territorio argentino?", "opts": ["Justo José de Urquiza", "Bartolomé Mitre", "Venancio Flores", "Bernardo Berro"], "a": 1}, {"q": "¿En qué mes de 1865 el Congreso paraguayo declaró la guerra a Argentina?", "opts": ["Enero", "Marzo", "Junio", "Agosto"], "a": 1}, {"q": "¿Qué batalla marcó el fin de la etapa ofensiva paraguaya en territorio uruguayo?", "opts": ["Batalla de Riachuelo", "Batalla de Yatay", "Batalla de Uruguayana", "Batalla de Curupayty"], "a": 2}, {"q": "¿Cuánto duró la primera campaña defensiva paraguaya tras el repliegue de 1865?", "opts": ["1 año", "2 años", "3 años", "5 años"], "a": 2}], "12": [{"q": "¿En qué arroyo se estableció la última línea defensiva organizada antes de la caída de Asunción?", "opts": ["Arroyo Tebicuary", "Arroyo Pikysyry", "Arroyo Ñeembucú", "Arroyo Aguapey"], "a": 1}, {"q": "¿Desde cuándo fue ocupada Asunción por las fuerzas aliadas?", "opts": ["5 de enero de 1869", "1 de marzo de 1870", "15 de agosto de 1869", "9 de enero de 1872"], "a": 0}, {"q": "¿Quiénes integraron el triunvirato del gobierno provisorio de 1869?", "opts": ["Cirilo A. Rivarola, Carlos Loizaga y José Díaz de Bedoya", "Carlos A. López, Mariano Roque Alonso y Fulgencio Yegros", "Facundo Machaín, Juan Silvano Godoy y Miguel Palacios", "Cándido Bareiro, Sotero Cayo Miltos y Juan José Decoud"], "a": 0}, {"q": "¿En qué fecha se libró la batalla de Cerro Corá?", "opts": ["15 de agosto de 1869", "1 de marzo de 1870", "25 de noviembre de 1870", "9 de enero de 1872"], "a": 1}, {"q": "¿En qué documentos se inspiró la Constitución de 1870?", "opts": ["La Declaración de Virginia y la Constitución Argentina de 1853", "La Constitución de Cádiz y el Código Napoleónico", "La Constitución de EE.UU. y la de Chile", "La Constitución Francesa y la de Brasil"], "a": 0}, {"q": "¿Cuántos artículos tenía la Constitución de 1870?", "opts": ["98", "105", "118", "130"], "a": 2}, {"q": "¿Quién firmó el Tratado Loizaga-Cotegipe con Brasil?", "opts": ["Facundo Machaín", "Carlos Loizaga", "José del Rosario Miranda", "Cirilo A. Rivarola"], "a": 1}, {"q": "¿En qué año fue fundada la Universidad Nacional de Asunción?", "opts": ["1870", "1876", "1889", "1904"], "a": 2}], "13": [{"q": "¿Qué acuerdo entregó el poder al Partido Liberal en 1904?", "opts": ["Pacto de San José de Flores", "Pacto de Pilcomayo", "Tratado de Villa Hayes", "Acuerdo de Isla Poí"], "a": 1}, {"q": "¿Cuántos presidentes hubo entre 1904 y 1922 durante la anarquía liberal?", "opts": ["5", "7", "9", "12"], "a": 2}, {"q": "¿Qué reforma electoral se estableció en 1918?", "opts": ["El voto femenino", "El Registro Cívico Permanente y el voto secreto", "La eliminación del sufragio censitario", "El voto obligatorio"], "a": 1}, {"q": "¿Quién autorizó a los menonitas a colonizar el Chaco?", "opts": ["Eduardo Schaerer", "Manuel Gondra", "Eligio Ayala", "Eusebio Ayala"], "a": 1}, {"q": "¿Por qué se conoce a Eusebio Ayala como el \"Presidente de la Victoria\"?", "opts": ["Por ganar las elecciones de 1928", "Por su liderazgo durante la Guerra del Chaco", "Por firmar el Pacto de Pilcomayo", "Por fundar la Universidad Nacional"], "a": 1}, {"q": "¿Qué batalla marcó la primera gran victoria paraguaya de la Guerra del Chaco en 1932?", "opts": ["Batalla de Nanawa", "Batalla de Boquerón", "Batalla de Campo Vía", "Batalla de Ingavi"], "a": 1}, {"q": "¿Cuántos prisioneros bolivianos cayeron en la rendición de Campo Vía?", "opts": ["2.000", "5.000", "8.000 soldados y 250 jefes", "15.000"], "a": 2}, {"q": "¿Quién asumió como presidente tras la Revolución Febrerista de 1936?", "opts": ["José Félix Estigarribia", "Rafael Franco", "Félix Paiva", "Higinio Morínigo"], "a": 1}], "14": [{"q": "¿Quién asumió la presidencia tras la muerte de Estigarribia en 1940?", "opts": ["Rafael Franco", "Higinio Morínigo", "Federico Chaves", "Juan Natalicio González"], "a": 1}, {"q": "¿Qué bloque internacional apoyó inicialmente Morínigo antes de romper relaciones por presión de EE.UU.?", "opts": ["Los Aliados", "El Eje totalitario", "La Liga de Naciones", "El bloque no alineado"], "a": 1}, {"q": "¿Cómo se llamó el breve periodo de apertura política de 1946?", "opts": ["La Reconstrucción Nacional", "La Primavera Democrática", "El Renacimiento Cívico", "La Apertura Colorada"], "a": 1}, {"q": "¿Qué partido retomó el poder tras la Guerra Civil de 1947, iniciando su hegemonía hasta 2007?", "opts": ["Partido Liberal", "Partido Febrerista", "Partido Colorado", "Partido Comunista"], "a": 2}, {"q": "¿Quién derrocó a Federico Chaves en 1954?", "opts": ["Juan Natalicio González", "Alfredo Stroessner", "Raimundo Rolón", "Tomás Romero Pereira"], "a": 1}, {"q": "¿Qué movimiento disidente juvenil surgió en 1959 dentro del Partido Colorado?", "opts": ["MOPOCO", "Unión Nacional Revolucionaria", "Movimiento Febrerista", "Frente Democrático"], "a": 0}, {"q": "¿Qué ley de 1970 autorizaba disposiciones represivas contra la oposición?", "opts": ["Ley 1/90", "Ley 209", "Estatuto Agrario", "Carta Política de 1940"], "a": 1}, {"q": "¿Quién dirigió el golpe de estado del 2 y 3 de febrero de 1989?", "opts": ["Lino Oviedo", "Andrés Rodríguez", "Juan Carlos Wasmosy", "Raúl Cubas Grau"], "a": 1}], "15": [{"q": "¿Qué tratado firmado en 1991 dio origen al Mercosur?", "opts": ["Tratado de Asunción", "Tratado de Montevideo", "Tratado de Brasilia", "Tratado de Buenos Aires"], "a": 0}, {"q": "¿En qué fecha fue sancionada la Constitución Nacional vigente?", "opts": ["26 de marzo de 1991", "20 de junio de 1992", "15 de agosto de 1993", "9 de mayo de 1993"], "a": 1}, {"q": "¿Quién fue electo intendente de Asunción en las primeras elecciones municipales de 1991?", "opts": ["Carlos Filizzola", "Juan Carlos Wasmosy", "Martín Burt", "Enrique Riera"], "a": 0}, {"q": "¿Qué militar fue apartado del Ejército por Wasmosy en 1996 bajo acusación de golpismo?", "opts": ["Andrés Rodríguez", "Lino Oviedo", "Raúl Cubas Grau", "Bartolomé Mitre"], "a": 1}, {"q": "¿Qué episodio de 1999 se inició con el asesinato del vicepresidente Luis María Argaña?", "opts": ["La Primavera Democrática", "El Marzo Paraguayo", "La Guerra Civil", "El Autogolpe"], "a": 1}, {"q": "¿Qué programa social lanzó el gobierno de Nicanor Duarte Frutos?", "opts": ["Tekoporã", "Ñopytyvõ", "Tekove Pyahu", "Pytyvõ"], "a": 0}, {"q": "¿En qué año fue electo Fernando Lugo, poniendo fin a la hegemonía colorada?", "opts": ["2003", "2008", "2012", "2013"], "a": 1}, {"q": "¿Quiénes fueron electos Presidente y Vicepresidente en las elecciones de 2023?", "opts": ["Mario Abdo Benítez y Hugo Velázquez", "Horacio Cartes y Juan Afara", "Santiago Peña y Pedro Alliana", "Fernando Lugo y Federico Franco"], "a": 2}]};
-const UNIT_TITLES = {"1": "Exploraciones y Descubrimientos", "2": "Población Precolombina y Guaraníes", "3": "Conquista y Exploración del Río de la Plata", "4": "Paraguay Colonial", "5": "Labor Misionera Jesuítica", "6": "Revolución Comunera", "7": "Reformas Borbónicas", "8": "La Revolución de la Independencia", "9": "El Dr. Francia y la Dictadura", "10": "Carlos Antonio López y la Modernización", "11": "Camino a la Guerra Grande", "12": "Cerro Corá y la Reconstrucción", "13": "Inicio de la Era Liberal", "14": "Segunda Hegemonía Republicana", "15": "Transición a la Democracia"};
-const SIM_DURATION = 15*60;
-const SIM_XP_PASS = 50;
-const SIM_XP_PERFECT = 80;
-
-let simQuestions = [];
-let simAnswers = [];
-let simCurrent = 0;
-let simTimeLeft = SIM_DURATION;
-let simTimerId = null;
-let simActive = false;
-
-function buildSimQuestions(){
-  const pool = [];
-  Object.keys(QUIZ_BANK).forEach(u => {
-    QUIZ_BANK[u].forEach((q, qi) => pool.push({u: parseInt(u), qi, ...q}));
-  });
-  for(let i=pool.length-1;i>0;i--){
-    const j = Math.floor(Math.random()*(i+1));
-    [pool[i],pool[j]] = [pool[j],pool[i]];
-  }
-  return pool.slice(0,20);
-}
-
-function openSimulacro(){
-  document.getElementById('simOverlay').classList.add('open');
-  document.getElementById('simIntro').style.display='block';
-  document.getElementById('simExam').style.display='none';
-  document.getElementById('simResults').style.display='none';
-}
-function closeSimulacro(){
-  if(simActive){ if(!confirm('¿Seguro que querés salir? Perderás el progreso del simulacro.')) return; }
-  stopSimTimer();
-  simActive = false;
-  document.getElementById('simOverlay').classList.remove('open');
-}
-function confirmCloseExam(){ closeSimulacro(); }
-
-function startSimulacro(){
-  simQuestions = buildSimQuestions();
-  simAnswers = new Array(simQuestions.length).fill(null);
-  simCurrent = 0;
-  simTimeLeft = SIM_DURATION;
-  simActive = true;
-  document.getElementById('simIntro').style.display='none';
-  document.getElementById('simExam').style.display='block';
-  renderSimDots();
-  renderSimQuestion();
-  startSimTimer();
-}
-
-function startSimTimer(){
-  stopSimTimer();
-  updateSimTimerDisplay();
-  simTimerId = setInterval(() => {
-    simTimeLeft--;
-    updateSimTimerDisplay();
-    if(simTimeLeft <= 0){
-      stopSimTimer();
-      submitSimulacro();
-    }
-  }, 1000);
-}
-function stopSimTimer(){
-  if(simTimerId){ clearInterval(simTimerId); simTimerId = null; }
-}
-function updateSimTimerDisplay(){
-  const m = Math.floor(simTimeLeft/60);
-  const s = simTimeLeft%60;
-  const el = document.getElementById('simTimer');
-  if(!el) return;
-  el.textContent = `${m}:${s.toString().padStart(2,'0')}`;
-  el.classList.toggle('warn', simTimeLeft <= 120);
-}
-
-function renderSimDots(){
-  const wrap = document.getElementById('simDots');
-  wrap.innerHTML = simQuestions.map((q,i) =>
-    `<button class="sim-dot ${i===simCurrent?'current':''} ${simAnswers[i]!==null?'answered':''}" onclick="simGoTo(${i})"></button>`
-  ).join('');
-}
-function simGoTo(i){
-  simCurrent = i;
-  renderSimQuestion();
-  renderSimDots();
-}
-function simNext(){
-  if(simCurrent < simQuestions.length-1){ simCurrent++; renderSimQuestion(); renderSimDots(); }
-}
-function simPrev(){
-  if(simCurrent > 0){ simCurrent--; renderSimQuestion(); renderSimDots(); }
-}
-
-function renderSimQuestion(){
-  const q = simQuestions[simCurrent];
-  const wrap = document.getElementById('simQwrap');
-  wrap.innerHTML = `
-    <div class="sim-qnum">Pregunta ${simCurrent+1} / ${simQuestions.length} · Unidad ${q.u}</div>
-    <div class="sim-qtxt">${q.q}</div>
-    <div class="sim-opts">
-      ${q.opts.map((o,oi) => `<button class="sim-opt ${simAnswers[simCurrent]===oi?'picked':''}" onclick="simPick(${oi})">${o}</button>`).join('')}
-    </div>
-  `;
-}
-function simPick(oi){
-  simAnswers[simCurrent] = oi;
-  renderSimQuestion();
-  renderSimDots();
-}
-
-function confirmSubmitSimulacro(){
-  const unanswered = simAnswers.filter(a => a===null).length;
-  if(unanswered > 0){
-    if(!confirm(`Tenés ${unanswered} pregunta(s) sin responder. ¿Entregar igual?`)) return;
-  }
-  submitSimulacro();
-}
-
-function submitSimulacro(){
-  stopSimTimer();
-  simActive = false;
-  let correct = 0;
-  const byUnit = {};
-  const detail = [];
-  simQuestions.forEach((q,i) => {
-    const isOk = simAnswers[i] === q.a;
-    if(isOk) correct++;
-    if(!byUnit[q.u]) byUnit[q.u] = {ok:0, total:0};
-    byUnit[q.u].total++;
-    if(isOk) byUnit[q.u].ok++;
-    detail.push({u:q.u, ok:isOk});
-  });
-  const pct = Math.round(correct/simQuestions.length*100);
-  const nota = (pct/100*5).toFixed(1);
-  const timeUsed = SIM_DURATION - simTimeLeft;
-  const tm = Math.floor(timeUsed/60), ts = timeUsed%60;
-
-  if(pct >= 60){
-    if(pct === 100) addXp(SIM_XP_PERFECT, 'Simulacro perfecto 🏆');
-    else addXp(SIM_XP_PASS, 'Simulacro aprobado');
-  }
-
-  const breakdownHtml = Object.keys(byUnit).sort((a,b)=>a-b).map(u => {
-    const d = byUnit[u];
-    const p = Math.round(d.ok/d.total*100);
-    return `<div class="sim-break-item"><span>Unidad ${u} — ${UNIT_TITLES[u]||''}</span><span class="${p>=60?'ok':'bad'}">${d.ok}/${d.total} (${p}%)</span></div>`;
-  }).join('');
-
-  const resultsEl = document.getElementById('simResults');
-  resultsEl.innerHTML = `
-    <h2 style="color:var(--accent);margin-top:0">📊 Resultado del Simulacro</h2>
-    <div class="sim-score-circle ${pct<60?'fail':''}">
-      <span class="big">${pct}%</span>
-      <span class="small">Nota: ${nota}/5</span>
-    </div>
-    <p style="color:#64748b">Correctas: <strong>${correct}/${simQuestions.length}</strong> · Tiempo usado: <strong>${tm}:${ts.toString().padStart(2,'0')}</strong></p>
-    <div class="sim-breakdown">${breakdownHtml}</div>
-    <div class="sim-results-actions">
-      <button class="qz-check" onclick="openSimulacro()">🔄 Reintentar</button>
-      <button class="qz-reset" onclick="closeSimulacro()">Cerrar</button>
-    </div>
-  `;
-  document.getElementById('simExam').style.display='none';
-  resultsEl.style.display='block';
-}
-
-
-const firebaseConfig = {apiKey: "AIzaSyCbPKfwVkMrgCpS8x4OgXBjmgRE-iwwwhI",
-  authDomain: "historiadelparaguay-a1954.firebaseapp.com",
-  projectId: "historiadelparaguay-a1954",
-  storageBucket: "historiadelparaguay-a1954.firebasestorage.app",
-  messagingSenderId: "502343679130",
-  appId: "1:502343679130:web:79e6d416a273fe56f63323",
-  measurementId: "G-PHG2MGNRQM"
-};
-let fbApp, fbAuth, fbDb, currentUser = null, fbReady = false, fbSaveTimer = null;
-try{
-  fbApp = firebase.initializeApp(firebaseConfig);
-  fbAuth = firebase.auth();
-  fbDb = firebase.firestore();
-  fbReady = true;
-}catch(e){ console.error('Firebase init error', e); }
-
-function openAuthModal(){
-  document.getElementById('authOverlay').classList.add('open');
-  document.getElementById('userPanel').classList.remove('open');
-}
-function closeAuthModal(){
-  document.getElementById('authOverlay').classList.remove('open');
-}
-function switchAuthTab(tab){
-  const isLogin = tab === 'login';
-  document.getElementById('tabLogin').classList.toggle('active', isLogin);
-  document.getElementById('tabRegister').classList.toggle('active', !isLogin);
-  document.getElementById('authFormLogin').style.display = isLogin ? 'flex' : 'none';
-  document.getElementById('authFormRegister').style.display = isLogin ? 'none' : 'flex';
-}
-
-function toggleUserPanel(){
-  document.getElementById('userPanel').classList.toggle('open');
-}
-
-function setAuthMsg(id, text, ok){
-  const el = document.getElementById(id);
-  el.textContent = text;
-  el.className = 'auth-msg' + (ok ? ' ok' : '');
-}
-
-async function authRegister(){
-  if(!fbReady){ setAuthMsg('regMsg','Firebase aún cargando, intentá en un segundo.'); return; }
-  const name = document.getElementById('regName').value.trim();
-  const ci = document.getElementById('regCi').value.trim();
-  const email = document.getElementById('regEmail').value.trim();
-  const pass = document.getElementById('regPass').value;
-  if(!name || !ci || !email || !pass){ setAuthMsg('regMsg','Completá todos los campos.'); return; }
-  if(pass.length < 6){ setAuthMsg('regMsg','La contraseña debe tener al menos 6 caracteres.'); return; }
-  setAuthMsg('regMsg','Creando cuenta...');
-  try{
-    const cred = await fbAuth.createUserWithEmailAndPassword(email, pass);
-    await cred.user.updateProfile({ displayName: name });
-    await fbDb.collection('usuarios').doc(cred.user.uid).set({
-      name, ci, email,
-      xp: xpData.xp||0, streak: xpData.streak||0, lastVisit: xpData.lastVisit||null,
-      seenSlides: xpData.seenSlides||{}, passedQuizzes: xpData.passedQuizzes||{},
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    setAuthMsg('regMsg','¡Cuenta creada con éxito!', true);
-    setTimeout(closeAuthModal, 900);
-  }catch(e){
-    setAuthMsg('regMsg', friendlyAuthError(e));
-  }
-}
-
-async function authLogin(){
-  if(!fbReady){ setAuthMsg('loginMsg','Firebase aún cargando, intentá en un segundo.'); return; }
-  const email = document.getElementById('loginEmail').value.trim();
-  const pass = document.getElementById('loginPass').value;
-  if(!email || !pass){ setAuthMsg('loginMsg','Completá correo y contraseña.'); return; }
-  setAuthMsg('loginMsg','Ingresando...');
-  try{
-    await fbAuth.signInWithEmailAndPassword(email, pass);
-    setAuthMsg('loginMsg','¡Bienvenido de nuevo!', true);
-    setTimeout(closeAuthModal, 700);
-  }catch(e){
-    setAuthMsg('loginMsg', friendlyAuthError(e));
-  }
-}
-
-async function authLogout(){
-  try{ await fbAuth.signOut(); }catch(e){}
-  document.getElementById('userPanel').classList.remove('open');
-}
-
-function friendlyAuthError(e){
-  const code = e.code || '';
-  if(code.includes('email-already-in-use')) return 'Ese correo ya está registrado.';
-  if(code.includes('invalid-email')) return 'El correo no es válido.';
-  if(code.includes('weak-password')) return 'La contraseña es muy débil.';
-  if(code.includes('user-not-found') || code.includes('wrong-password') || code.includes('invalid-credential')) return 'Correo o contraseña incorrectos.';
-  if(code.includes('too-many-requests')) return 'Demasiados intentos. Probá más tarde.';
-  return 'Ocurrió un error. Intentá de nuevo.';
-}
-
-function updateUserUI(){
-  const btn = document.getElementById('userBtn');
-  const info = document.getElementById('userPanelInfo');
-  const authBtn = document.getElementById('userPanelAuthBtn');
-  const logoutBtn = document.getElementById('userPanelLogoutBtn');
-  if(currentUser){
-    const name = currentUser.displayName || currentUser.email || 'Usuario';
-    btn.textContent = '👤 ' + name.split(' ')[0];
-    info.innerHTML = `<p><strong>${name}</strong></p><p class="up-sub">${currentUser.email}</p><p class="up-sub">Progreso sincronizado en la nube ☁️</p>`;
-    authBtn.style.display = 'none';
-    logoutBtn.style.display = 'block';
-  } else {
-    btn.textContent = '👤 Invitado';
-    info.innerHTML = `<p>No has iniciado sesión.</p><p class="up-sub">Tu progreso solo se guarda en este navegador.</p>`;
-    authBtn.style.display = 'block';
-    logoutBtn.style.display = 'none';
-  }
-}
-
-function scheduleCloudSave(){
-  if(!currentUser || !fbReady) return;
-  clearTimeout(fbSaveTimer);
-  fbSaveTimer = setTimeout(() => {
-    fbDb.collection('usuarios').doc(currentUser.uid).set({
-      xp: xpData.xp||0, streak: xpData.streak||0, lastVisit: xpData.lastVisit||null,
-      seenSlides: xpData.seenSlides||{}, passedQuizzes: xpData.passedQuizzes||{},
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-    }, { merge: true }).catch(e => console.error('Cloud save error', e));
-  }, 1200);
-}
-
-if(fbReady){
-  fbAuth.onAuthStateChanged(async (user) => {
-    currentUser = user;
-    updateUserUI();
-    if(user){
-      try{
-        const doc = await fbDb.collection('usuarios').doc(user.uid).get();
-        if(doc.exists){
-          const d = doc.data();
-          xpData.xp = Math.max(xpData.xp||0, d.xp||0);
-          xpData.streak = d.streak || xpData.streak || 0;
-          xpData.lastVisit = d.lastVisit || xpData.lastVisit;
-          xpData.seenSlides = Object.assign({}, d.seenSlides||{}, xpData.seenSlides);
-          xpData.passedQuizzes = Object.assign({}, d.passedQuizzes||{}, xpData.passedQuizzes);
-          saveXpData(xpData);
-          renderXpBar(false);
-        } else {
-          scheduleCloudSave();
-        }
-      }catch(e){ console.error('Fetch profile error', e); }
-    }
-  });
-}
-
-renderXpBar(false);
 </script>
 </body>
 </html>

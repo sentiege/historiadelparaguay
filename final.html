@@ -15,6 +15,17 @@ body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);c
 .topbar h1{font-size:1.05rem;margin:0;color:var(--accent)}
 .home-btn{background:rgba(255,152,0,0.12);border:1px solid var(--accent);color:#ffb74d;padding:6px 14px;border-radius:8px;cursor:pointer;font-size:0.85rem}
 .home-btn:hover{background:rgba(192,57,43,0.15)}
+
+.xp-bar-wrap{display:flex;align-items:center;gap:10px;flex:1;max-width:340px;min-width:180px}
+.xp-streak{font-size:0.85rem;font-weight:700;color:#ea580c;background:rgba(234,88,12,0.1);border:1px solid rgba(234,88,12,0.3);padding:4px 10px;border-radius:20px;white-space:nowrap;transition:transform .2s}
+.xp-streak.pulse{animation:streakPulse .5s ease}
+@keyframes streakPulse{0%{transform:scale(1)}50%{transform:scale(1.25)}100%{transform:scale(1)}}
+.xp-track{position:relative;flex:1;height:20px;background:#e2e8f0;border-radius:20px;overflow:hidden;border:1px solid #cbd5e1}
+.xp-fill{height:100%;background:linear-gradient(90deg,#f59e0b,#ea580c);border-radius:20px;transition:width .5s ease;box-shadow:0 0 8px rgba(234,88,12,0.4)}
+.xp-label{position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;font-size:0.68rem;font-weight:700;color:#1a1a2e;letter-spacing:0.3px}
+.xp-toast{position:fixed;top:80px;right:20px;z-index:200;background:#ffffff;border:1px solid #ea580c;border-left:5px solid #ea580c;border-radius:10px;padding:12px 18px;box-shadow:0 6px 20px rgba(0,0,0,0.15);font-size:0.9rem;font-weight:600;color:#1a1a2e;opacity:0;transform:translateX(30px);transition:all .3s ease}
+.xp-toast.show{opacity:1;transform:translateX(0)}
+@media(max-width:680px){.xp-bar-wrap{order:3;max-width:100%;width:100%}}
 #home{max-width:1000px;margin:0 auto;padding:40px 20px}
 #home h2{text-align:center;color:var(--accent);font-size:1.8rem;margin-bottom:6px}
 #home p.lead{text-align:center;color:var(--muted);margin-bottom:34px}
@@ -110,6 +121,13 @@ body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);c
 <body>
 <div class="topbar">
   <h1>📚 Material de Estudio de Historia del Paraguay</h1>
+  <div class="xp-bar-wrap" id="xpBarWrap" title="Tu progreso de experiencia">
+    <span class="xp-streak" id="xpStreak">🔥 0</span>
+    <div class="xp-track">
+      <div class="xp-fill" id="xpFill" style="width:0%"></div>
+      <span class="xp-label" id="xpLabel">Nv.1 · 0 XP</span>
+    </div>
+  </div>
   <button class="home-btn" onclick="showHome()">🏠 Inicio</button>
 </div>
 
@@ -2687,6 +2705,89 @@ const QUIZ_ANSWERS = {
 const state = {};
 Object.keys(TOTAL).forEach(k => state[k] = 0);
 
+const XP_KEY = 'hp_xp_data_v1';
+const XP_PER_SLIDE = 2;
+const XP_PER_QUIZ_PASS = 15;
+const XP_PER_QUIZ_PERFECT = 25;
+const LEVEL_STEP = 100;
+
+function loadXpData(){
+  try{
+    const raw = localStorage.getItem(XP_KEY);
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  return { xp: 0, seenSlides: {}, passedQuizzes: {}, lastVisit: null, streak: 0 };
+}
+function saveXpData(d){
+  try{ localStorage.setItem(XP_KEY, JSON.stringify(d)); }catch(e){}
+}
+let xpData = loadXpData();
+
+function checkStreak(){
+  const today = new Date().toISOString().slice(0,10);
+  if(xpData.lastVisit === today) return;
+  if(xpData.lastVisit){
+    const prev = new Date(xpData.lastVisit);
+    const cur = new Date(today);
+    const diffDays = Math.round((cur - prev) / 86400000);
+    if(diffDays === 1){ xpData.streak = (xpData.streak||0) + 1; }
+    else if(diffDays > 1){ xpData.streak = 1; }
+  } else {
+    xpData.streak = 1;
+  }
+  xpData.lastVisit = today;
+  saveXpData(xpData);
+}
+checkStreak();
+
+function levelFromXp(xp){
+  return Math.floor(xp / LEVEL_STEP) + 1;
+}
+function renderXpBar(animateStreak){
+  const lvl = levelFromXp(xpData.xp);
+  const pctInLevel = ((xpData.xp % LEVEL_STEP) / LEVEL_STEP) * 100;
+  const fill = document.getElementById('xpFill');
+  const label = document.getElementById('xpLabel');
+  const streakEl = document.getElementById('xpStreak');
+  if(fill) fill.style.width = pctInLevel + '%';
+  if(label) label.textContent = `Nv.${lvl} · ${xpData.xp} XP`;
+  if(streakEl){
+    streakEl.textContent = `🔥 ${xpData.streak||0}`;
+    if(animateStreak){
+      streakEl.classList.remove('pulse');
+      requestAnimationFrame(() => streakEl.classList.add('pulse'));
+    }
+  }
+}
+function showXpToast(msg){
+  let toast = document.getElementById('xpToast');
+  if(!toast){
+    toast = document.createElement('div');
+    toast.id = 'xpToast';
+    toast.className = 'xp-toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.classList.remove('show');
+  requestAnimationFrame(() => toast.classList.add('show'));
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => toast.classList.remove('show'), 2600);
+}
+function addXp(amount, reason){
+  if(amount <= 0) return;
+  xpData.xp += amount;
+  saveXpData(xpData);
+  renderXpBar(true);
+  showXpToast(`+${amount} XP — ${reason}`);
+}
+function markSlideSeen(u, idx){
+  const key = u+'-'+idx;
+  if(xpData.seenSlides[key]) return;
+  xpData.seenSlides[key] = true;
+  saveXpData(xpData);
+  addXp(XP_PER_SLIDE, 'Slide completado');
+}
+
 function showHome(){
   document.getElementById('home').style.display = 'block';
   document.querySelectorAll('.lesson').forEach(s => s.classList.remove('active'));
@@ -2698,6 +2799,7 @@ function showLesson(u){
   document.getElementById('lesson-'+u).classList.add('active');
   window.scrollTo(0,0);
   updateProgress(u);
+  markSlideSeen(u, state[u]||0);
 }
 function goSlide(u, idx){
   const container = document.getElementById('slides-'+u);
@@ -2709,6 +2811,7 @@ function goSlide(u, idx){
   dots[idx].classList.add('active');
   state[u] = idx;
   updateProgress(u);
+  markSlideSeen(u, idx);
 }
 function nextSlide(u){
   const total = TOTAL[u];
@@ -2757,6 +2860,23 @@ function checkQuiz(u){
   result.className = 'qresult show';
   result.textContent = `Resultado: ${correct}/${answers.length} (${pct}%) ${pct>=80?'\ud83c\udf89 \u00a1Excelente!':pct>=60?'\ud83d\udc4d Bien':'\ud83d\udcd6 Repas\u00e1 el contenido'}`;
   document.getElementById('qbadge-'+u).textContent = pct+'%';
+  awardQuizXp(u, pct);
+}
+function awardQuizXp(u, pct){
+  if(pct < 60) return;
+  const key = 'u'+u;
+  const already = xpData.passedQuizzes[key];
+  if(pct === 100){
+    if(already !== 'perfect'){
+      xpData.passedQuizzes[key] = 'perfect';
+      saveXpData(xpData);
+      addXp(XP_PER_QUIZ_PERFECT, 'Quiz perfecto Unidad '+u);
+    }
+  } else if(!already){
+    xpData.passedQuizzes[key] = 'passed';
+    saveXpData(xpData);
+    addXp(XP_PER_QUIZ_PASS, 'Quiz aprobado Unidad '+u);
+  }
 }
 function resetQuiz(u){
   const answers = QUIZ_ANSWERS[u];
@@ -2773,6 +2893,7 @@ function resetQuiz(u){
   result.textContent = '';
   document.getElementById('qbadge-'+u).textContent = '';
 }
+renderXpBar(false);
 </script>
 </body>
 </html>

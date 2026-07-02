@@ -6,15 +6,15 @@
 <title>Material de Estudio de Historia del Paraguay — Unidades I a XV</title>
 <style>
 :root{
-  --bg:#0b0f1a; --bg2:#131a2b; --card:#161d2e; --accent:#ff9800; --accent2:#4fc3f7;
-  --text:#e8ecf5; --muted:#8b93a8; --good:#4caf50; --bad:#f44336; --border:rgba(255,152,0,0.25);
+  --bg:#ffffff; --bg2:#f5f7fa; --card:#ffffff; --accent:#c0392b; --accent2:#2980b9;
+  --text:#1a1a2e; --muted:#64748b; --good:#16a34a; --bad:#dc2626; --border:rgba(192,57,43,0.2);
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text);line-height:1.6}
-.topbar{position:sticky;top:0;z-index:50;background:rgba(11,15,26,0.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.topbar{position:sticky;top:0;z-index:50;background:#ffffff;backdrop-filter:blur(6px);border-bottom:2px solid var(--accent);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;box-shadow:0 2px 12px rgba(0,0,0,0.08)}
 .topbar h1{font-size:1.05rem;margin:0;color:var(--accent)}
 .home-btn{background:rgba(255,152,0,0.12);border:1px solid var(--accent);color:#ffb74d;padding:6px 14px;border-radius:8px;cursor:pointer;font-size:0.85rem}
-.home-btn:hover{background:rgba(255,152,0,0.25)}
+.home-btn:hover{background:rgba(192,57,43,0.15)}
 #home{max-width:1000px;margin:0 auto;padding:40px 20px}
 #home h2{text-align:center;color:var(--accent);font-size:1.8rem;margin-bottom:6px}
 #home p.lead{text-align:center;color:var(--muted);margin-bottom:34px}
@@ -29,23 +29,23 @@ body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:linear-grad
 .lesson.active{display:block}
 .lesson-head{display:flex;align-items:center;gap:12px;margin-bottom:6px;flex-wrap:wrap}
 .badge{background:rgba(255,152,0,0.15);border:1px solid var(--accent);color:#ffb74d;padding:4px 12px;border-radius:20px;font-size:0.8rem}
-.lesson h1{font-size:1.5rem;margin:10px 0 2px;color:#fff}
+.lesson h1{font-size:1.5rem;margin:10px 0 2px;color:#1a1a2e}
 .lesson .sub{color:var(--muted);margin-bottom:20px;font-style:italic}
-.progress-wrap{background:rgba(255,255,255,0.06);border-radius:20px;height:8px;margin-bottom:24px;overflow:hidden}
+.progress-wrap{background:#e2e8f0;border-radius:20px;height:8px;margin-bottom:24px;overflow:hidden}
 .progress-fill{background:linear-gradient(90deg,var(--accent),var(--accent2));height:100%;width:0%;transition:width .3s}
-.slide{display:none;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px 24px;animation:fade .25s}
+.slide{display:none;background:var(--card);border:1px solid #e2e8f0;border-radius:16px;padding:26px 24px;animation:fade .25s;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
 .slide.active{display:block}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .slide-num{font-size:0.75rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
 .slide h2{color:var(--accent2);font-size:1.25rem;margin:0 0 14px}
-.slide-content{font-size:0.98rem;color:#d7dcea}
-.slide-content strong{color:#ffcc80}
-.slide-content em{color:#80deea}
+.slide-content{font-size:0.98rem;color:#334155}
+.slide-content strong{color:#b91c1c}
+.slide-content em{color:#0369a1}
 .controls{display:flex;align-items:center;justify-content:space-between;margin-top:20px;gap:10px}
-.ctrl-btn{background:var(--card);border:1px solid var(--border);color:var(--text);width:42px;height:42px;border-radius:50%;font-size:1.1rem;cursor:pointer}
+.ctrl-btn{background:#ffffff;border:1px solid #e2e8f0;color:var(--text);width:42px;height:42px;border-radius:50%;font-size:1.1rem;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.08)}
 .ctrl-btn:hover{border-color:var(--accent)}
 .dots{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
-.dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,0.15);border:none;cursor:pointer;padding:0}
+.dot{width:9px;height:9px;border-radius:50%;background:#e2e8f0;border:none;cursor:pointer;padding:0}
 .dot.active{background:var(--accent)}
 .quiz-toggle{margin-top:26px;width:100%;background:rgba(79,195,247,0.12);border:1px solid var(--accent2);color:#81d4fa;padding:12px;border-radius:10px;font-size:0.95rem;cursor:pointer}
 .quiz-toggle:hover{background:rgba(79,195,247,0.22)}
@@ -53,11 +53,11 @@ body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:linear-grad
 .quiz-panel.open{display:block}
 .qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
 .qhead .qtitle{color:var(--accent2);font-weight:600}
-.qblock{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px}
+.qblock{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin-bottom:14px}
 .qnum{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
 .qtxt{margin-bottom:12px;font-size:0.95rem}
 .qopts{display:flex;flex-direction:column;gap:8px}
-.qopt{background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:8px;text-align:left;cursor:pointer;font-size:0.9rem}
+.qopt{background:#ffffff;border:1px solid #cbd5e1;color:var(--text);padding:10px 14px;border-radius:8px;text-align:left;cursor:pointer;font-size:0.9rem}
 .qopt:hover{border-color:var(--accent2)}
 .qopt.selected{border-color:var(--accent2);background:rgba(79,195,247,0.1)}
 .qopt.correct{border-color:var(--good);background:rgba(76,175,80,0.15)}
@@ -66,31 +66,45 @@ body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:linear-grad
 .qz-actions{display:flex;gap:10px;margin-top:6px}
 .qz-check,.qz-reset{flex:1;padding:12px;border-radius:10px;border:none;cursor:pointer;font-size:0.9rem;font-weight:600}
 .qz-check{background:var(--accent);color:#1a0f00}
-.qz-reset{background:rgba(255,255,255,0.08);color:var(--text)}
+.qz-reset{background:#e2e8f0;color:var(--text)}
 .qresult{margin-top:14px;text-align:center;font-size:1rem;font-weight:600;padding:12px;border-radius:10px;display:none}
 .qresult.show{display:block}
 .back-top{display:inline-block;margin-top:30px;color:var(--muted);cursor:pointer;font-size:0.85rem}
 .back-top:hover{color:var(--accent)}
 @media(max-width:600px){.lesson{padding:16px 12px 50px}.slide{padding:20px 16px}}
 
-.unit-list { display: flex; flex-direction: column; gap: 12px; max-width: 900px; margin: 0 auto; }
+.unit-list { display: flex; flex-direction: column; gap: 10px; max-width: 860px; margin: 0 auto; }
 .unit-list-item {
-  display: flex; align-items: center; gap: 20px;
-  background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px;
-  padding: 18px 22px; cursor: pointer; transition: all 0.2s ease;
+  display: flex; align-items: center; gap: 18px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid var(--accent);
+  border-radius: 12px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
-.unit-list-item:hover { border-color: #6366f1; box-shadow: 0 4px 14px rgba(99,102,241,0.12); transform: translateX(4px); }
+.unit-list-item:hover {
+  border-left-color: var(--accent2);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  transform: translateX(5px);
+  background: #f8faff;
+}
 .unit-list-num {
-  flex-shrink: 0; width: 52px; height: 52px; border-radius: 10px;
-  background: linear-gradient(135deg,#6366f1,#8b5cf6); color: #fff;
+  flex-shrink: 0; width: 48px; height: 48px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), #e74c3c);
+  color: #fff;
   display: flex; align-items: center; justify-content: center;
-  font-weight: 700; font-size: 15px;
+  font-weight: 800; font-size: 13px; letter-spacing: 0.5px;
+  box-shadow: 0 3px 8px rgba(192,57,43,0.3);
 }
 .unit-list-text { flex: 1; min-width: 0; }
-.unit-list-text h3 { margin: 0 0 4px 0; font-size: 16px; color: #1f2937; }
-.unit-list-text p { margin: 0 0 6px 0; font-size: 13px; color: #6b7280; }
-.unit-list-text .meta { font-size: 12px; color: #9ca3af; }
-.unit-list-arrow { flex-shrink: 0; font-size: 20px; color: #a5a6f6; }
+.unit-list-text h3 { margin: 0 0 3px 0; font-size: 15px; font-weight: 700; color: #1e293b; }
+.unit-list-text p { margin: 0 0 5px 0; font-size: 12.5px; color: #64748b; }
+.unit-list-text .meta { font-size: 11px; color: #94a3b8; font-style: italic; }
+.unit-list-arrow { flex-shrink: 0; font-size: 18px; color: var(--accent); opacity: 0.6; transition: opacity 0.2s, transform 0.2s; }
+.unit-list-item:hover .unit-list-arrow { opacity: 1; transform: translateX(4px); }
 </style>
 </head>
 <body>
